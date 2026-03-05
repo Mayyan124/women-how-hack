@@ -1,10 +1,9 @@
 from flask import Flask, render_template
 import os
 
-# הגדרת הנתיב המדויק לפי התיקיות שלך ב-GitHub
-app = Flask(__name__, 
-            template_folder='women who hack/frontend', 
-            static_folder='women who hack/frontend/static')
+app = Flask(__name__,
+            template_folder='frontend',
+            static_folder='frontend/static')
 
 @app.route('/')
 def home():
@@ -35,4 +34,4 @@ def register():
     return render_template('register.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
