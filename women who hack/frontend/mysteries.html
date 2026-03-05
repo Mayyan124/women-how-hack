@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Lab | מעבדת התנסות 🎀</title>
+    <style>
+        /* הגדרות צבעים: לבן, ורוד בייבי ושמנת בלבד */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #FFF5F7; /* ורוד בייבי עדין */
+            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); /* אפקט פפיונים/נקודות עדין */
+            margin: 0;
+            padding: 40px;
+            color: #5D4037;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+            .header h1 {
+                color: #F48FB1;
+                font-size: 3rem;
+                margin-bottom: 10px;
+            }
+
+            .header p {
+                background-color: #FFFDD0;
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 50px;
+                border: 2px solid #F8BBD0;
+            }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .challenge-card {
+            background: #FFFDD0; /* שמנת */
+            border: 3px solid #F8BBD0; /* ורוד בייבי */
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(244, 143, 177, 0.2);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+            .challenge-card:hover {
+                transform: translateY(-5px);
+            }
+
+        /* פפיונים בכל מקום */
+        .bow-decoration {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .status-tag {
+            background: white;
+            color: #F06292;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid #F8BBD0;
+        }
+
+        h2 {
+            color: #D81B60;
+            font-size: 1.5rem;
+        }
+
+        .input-box {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #F8BBD0;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+        }
+
+        .btn-check {
+            background-color: #F8BBD0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+            .btn-check:hover {
+                background-color: #F48FB1;
+            }
+    </style>
+</head>
+<body>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl;">
+        <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
+            <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
+            <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
+            <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
+            <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
+            <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>מעבדת הניסויים של מעיין 🎀</h1>
+            <p>כאן את לא רק לומדת – את מתנסה! פתרי את האתגרים וצברי נקודות.</p>
+        </div>
+
+        <div class="challenge-grid">
+
+            <div class="challenge-card">
+                <span class="bow-decoration">🎀</span>
+                <span class="status-tag">רמה: קל</span>
+                <h2>ההודעה המסתורית</h2>
+                <p>קיבלת לינק: <b>bit.ly/secure-login-🎀</b><br>האם תלחצי עליו?</p>
+                <button class="btn-check" onclick="alert('נכון! לינקים מקוצרים הם כלי נפוץ בפישינג. תמיד לבדוק את המקור! 🎀')">בדיקה</button>
+            </div>
+
+            <div class="challenge-card">
+                <span class="bow-decoration">🎀</span>
+                <span class="status-tag">רמה: בינוני</span>
+                <h2>קוד הדלת האחורית</h2>
+                <p>מהו התו המיוחד שמשמש האקרים כדי "לשבור" שאילתות SQL?</p>
+                <input type="text" id="q2" class="input-box" placeholder="הקלידי כאן...">
+                <button class="btn-check" onclick="checkQ2()">שלחי פתרון</button>
+            </div>
+
+            <div class="challenge-card">
+                <span class="bow-decoration">🎀</span>
+                <span class="status-tag">רמה: מומחית</span>
+                <h2>פיצוח הסיסמה</h2>
+                <p>כמה זמן ייקח למחשב לנחש את הסיסמה "123456"?</p>
+                <button class="btn-check" onclick="alert('פחות משנייה! לכן תמיד נשתמש בסיסמה מורכבת עם פפיונים... סתם, עם תווים מיוחדים! 🎀')">גלי את התשובה</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function checkQ2() {
+            var ans = document.getElementById('q2').value;
+            if (ans.includes("'")) {
+                alert("מדהים! גרש (') הוא באמת התו הקריטי במתקפת SQL Injection. את אלופה! 🎀");
+            } else {
+                alert("לא בדיוק... רמז: זה תו קטן שנמצא ליד האנטר! 🎀");
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Women Who Hack | עזרה ומשוב 🎀</title>
+    <style>
+        /* הגדרות צבעים ופונטים */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #FFF5F7; /* ורוד בייבי */
+            margin: 0;
+            padding: 40px;
+            color: #5D4037;
+            /* רקע פפיונים עדין */
+            background-image: radial-gradient(#F8BBD0 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #FFFDD0; /* שמנת */
+            border: 3px solid #F8BBD0;
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(244, 143, 177, 0.2);
+            position: relative;
+        }
+
+        /* פפיונים בפינות */
+        .bow-corner {
+            position: absolute;
+            font-size: 2.5rem;
+        }
+
+        .top-right {
+            top: 10px;
+            right: 15px;
+        }
+
+        .bottom-left {
+            bottom: 10px;
+            left: 15px;
+        }
+
+        h1 {
+            color: #F48FB1;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* אזור משוב - הניסוח החדש */
+        .feedback-section {
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            border: 2px dashed #F8BBD0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .feedback-section p {
+                font-size: 1.15rem;
+                line-height: 1.7;
+                color: #555;
+            }
+
+        .feedback-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #D81B60;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+            .feedback-link:hover {
+                transform: scale(1.1);
+            }
+
+        /* צ'אט בוט */
+        .chat-container {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            border: 2px solid #F8BBD0;
+        }
+
+        .bot-header {
+            color: #F06292;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-window {
+            min-height: 150px;
+            border-bottom: 1px solid #FCE4EC;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .bot-msg {
+            background: #FFF5F7;
+            padding: 12px 18px;
+            border-radius: 20px;
+            border-bottom-right-radius: 2px;
+            display: inline-block;
+            max-width: 80%;
+        }
+
+        .option-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .opt-btn {
+            background: #FFFDD0;
+            color: #D81B60;
+            border: 2px solid #F8BBD0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+            .opt-btn:hover {
+                background: #F8BBD0;
+                color: white;
+            }
+
+        /* טופס קשר */
+        .contact-form {
+            margin-top: 40px;
+        }
+
+            .contact-form h3 {
+                color: #F06292;
+                text-align: center;
+            }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #F8BBD0;
+            border-radius: 15px;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            background: #F48FB1;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.3);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0;">
+        <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
+            <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
+            <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
+            <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
+            <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
+            <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bow-corner top-right">🎀</div>
+        <div class="bow-corner bottom-left">🎀</div>
+
+        <h1>עזרה, קשר ומשוב 🎀</h1>
+
+        <div class="feedback-section">
+            <p>
+                יקירה, דעתך חשובה לי יותר מכל קוד! ✨<br>
+                אם משהו לא היה ברור, אם נתקלת בקושי או שיש לך רעיון איך להפוך את האתר שלנו ליותר קסום ומלמד – אני כאן כדי להקשיב.
+            </p>
+            <a href="https://forms.gle/KUB5gycqLyxgomUWA" target="_blank" class="feedback-link">
+                🎀 לחצי כאן למעבר למשוב האישי שלך 🎀
+            </a>
+        </div>
+
+        <div class="chat-container">
+            <div class="bot-header"><span>🎀</span> Maayan-Bot</div>
+            <div class="chat-window" id="chat">
+                <div class="bot-msg">היי אהובה! אני כאן לעזור. מה קרה?</div>
+            </div>
+            <div class="option-btns">
+                <button class="opt-btn" onclick="botReply('הרשמה')">בעיה בהרשמה</button>
+                <button class="opt-btn" onclick="botReply('אתגרים')">איפה האתגרים?</button>
+                <button class="opt-btn" onclick="botReply('תקלה')">דיווח על תקלה</button>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h3>שילחי לי הודעה אישית 🎀</h3>
+            <input type="text" placeholder="השם המהמם שלך">
+            <input type="email" placeholder="אימייל לחזרה">
+            <textarea rows="4" placeholder="ספרי לי מה קרה..."></textarea>
+            <button class="submit-btn">שלחי פנייה למעיין ✨</button>
+        </div>
+    </div>
+
+    <script>
+        function botReply(type) {
+            const chat = document.getElementById('chat');
+            let text = "";
+
+            if (type === 'הרשמה') text = "ודאי שהסיסמה שלך מכילה לפחות 8 תווים, אות גדולה ומספר! 🎀";
+            else if (type === 'אתגרים') text =

@@ -1,0 +1,46 @@
+/* רקע של פפיונים וצבעי בייבי פינק */
+body {
+    background-color: #fffaf0; /* שמנת עדין */
+    /* כאן אנחנו מוסיפות את הפפיונים שביקשת ברקע */
+    background-image: url('https://www.transparenttextures.com/patterns/pinstripe.png'); 
+    color: #ffb6c1; /* בייבי פינק לטקסט */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: right; /* כי האתר בעברית */
+}
+
+/* כותרות ורודות עם פפיונים */
+h1, h2 {
+    color: #ff69b4; 
+    text-shadow: 1px 1px 2px white;
+    text-align: center;
+}
+
+h1::before, h1::after {
+    content: " 🎀 ";
+}
+
+/* עיצוב לתפריט הניווט */
+nav {
+    background-color: #ffe4e1; /* לבן-ורדרד */
+    padding: 15px;
+    border-radius: 50px;
+    border: 2px solid #ffb6c1;
+    margin-bottom: 30px;
+}
+
+/* קישורים בתפריט */
+nav a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+nav a:hover {
+    color: white;
+    background-color: #ffb6c1;
+    border-radius: 10px;
+    padding: 5px;
+}

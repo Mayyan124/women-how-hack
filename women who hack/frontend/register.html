@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Women Who Hack | הרשמה</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #FFF5F7;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .reg-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            border-top: 5px solid #FF69B4;
+        }
+
+        h2 {
+            color: #D81B60;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #FFB6C1;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .btn-reg {
+            width: 100%;
+            background: #FF69B4;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+            .btn-reg:hover {
+                background: #FF1493;
+            }
+
+        .error-msg {
+            color: red;
+            font-size: 0.8rem;
+            display: none;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl;">
+        <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
+            <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
+            <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
+            <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
+            <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
+            <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
+        </div>
+    </nav>
+
+    <div class="reg-card">
+        <h2>הצטרפי לנבחרת 🎀</h2>
+        <form id="registerForm">
+            <label>שם מלא בעברית</label>
+            <input type="text" id="nameHeb" required>
+
+            <label>שם מלא באנגלית</label>
+            <input type="text" id="nameEng" required>
+
+            <label>מייל</label>
+            <input type="email" id="email" required>
+
+            <label>טלפון</label>
+            <input type="tel" id="phone" required>
+
+            <label>שם משתמש (מינימום 8 תווים)</label>
+            <input type="text" id="username" minlength="8" required>
+            <p id="userError" class="error-msg">שם המשתמש חייב להיות לפחות 8 תווים</p>
+
+            <label>סיסמה (8+ תווים, אות גדולה וספרה)</label>
+            <input type="password" id="password" required>
+            <p id="passError" class="error-msg">הסיסמה חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
+
+            <button type="submit" class="btn-reg">שלחי לי מייל ברוכה הבאה 📩</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').onsubmit = function (e) {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            const user = document.getElementById('username').value;
+
+            // בדיקת חוקי הסיסמה שביקשת
+            const hasUpperCase = /[A-Z]/.test(pass);
+            const hasNumber = /[0-9]/.test(pass);
+            const isValidPass = pass.length >= 8 && hasUpperCase && hasNumber;
+
+            if (user.length < 8) {
+                document.getElementById('userError').style.display = 'block';
+                return;
+            }
+
+            if (!isValidPass) {
+                document.getElementById('passError').style.display = 'block';
+                return;
+            }
+
+            alert("נרשמת בהצלחה! מייל ברוכה הבאה יישלח אלייך ברגע שנחבר את ה-Backend 🎀");
+        };
+    </script>
+
+</body>
+</html>
