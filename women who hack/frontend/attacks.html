@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -8,12 +8,50 @@
             font-family: 'Segoe UI', sans-serif;
             background-color: #FFF5F7;
             margin: 0;
-            padding: 40px;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: #FFFDD0;
+            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #F8BBD0;
+            direction: rtl;
+        }
+
+        nav a.logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #D81B60;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        .nav-links a.join-btn {
+            background: #F8BBD0;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: 1px solid white;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin: 50px 0 40px;
+            padding: 0 20px;
         }
 
         h1 {
@@ -27,6 +65,7 @@
             gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 40px 60px;
         }
 
         .attack-card {
@@ -38,9 +77,9 @@
             transition: transform 0.3s ease;
         }
 
-            .attack-card:hover {
-                transform: translateY(-10px);
-            }
+        .attack-card:hover {
+            transform: translateY(-10px);
+        }
 
         .bow-icon {
             color: #FF69B4;
@@ -80,12 +119,25 @@
 </head>
 <body>
 
+    <nav>
+        <a href="/" class="logo">Women Who Hack 🎀</a>
+        <div class="nav-links">
+            <a href="/">בית</a>
+            <a href="/about">המייסדת</a>
+            <a href="/attacks">מתקפות</a>
+            <a href="/mysteries">תעלומות</a>
+            <a href="/contact">צור קשר</a>
+            <a href="/register" class="join-btn">הצטרפות 🎀</a>
+        </div>
+    </nav>
+
     <div class="header">
         <h1>מרכז הלמידה: מתקפות סייבר 🎀</h1>
         <p>ידע הוא כוח. ככל שתביני איך המתקפה עובדת, כך תדעי להגן טוב יותר.</p>
     </div>
 
     <div class="grid">
+
         <div class="attack-card">
             <div class="bow-icon">🎀</div>
             <span class="tag">Social Engineering</span>
@@ -119,55 +171,46 @@
             <span class="section-title">איך זה עובד?</span>
             <p>תוכנה אוטומטית מריצה אלפי סיסמאות בשנייה. אם הסיסמה קצרה או נפוצה - היא תיפרץ מהר.</p>
             <span class="section-title">איך מתגוננות?</span>
-            <p>סיסמאות מורכבות (כמו שדרשנו בדף ההרשמה!), הגבלת מספר ניסיונות התחברות ונעילת חשבון.</p>
+            <p>סיסמאות מורכבות, הגבלת מספר ניסיונות התחברות ונעילת חשבון.</p>
         </div>
+
+        <div class="attack-card">
+            <div class="bow-icon">🎀</div>
+            <span class="tag">Network Attack</span>
+            <h2>Man in the Middle</h2>
+            <span class="section-title">מה זה?</span>
+            <p>מתקפת "האדם שבאמצע" – מצב שבו התוקף מצליח להשתחל לתקשורת בין שני צדדים בלי שהם ידעו.</p>
+            <span class="section-title">איך זה עובד?</span>
+            <p>כשאת מתחברת ל-Wi-Fi ציבורי לא מאובטח, האקר יכול לשבת "בנתיב" של המידע שלך ולקרוא כל הודעה או סיסמה שאת שולחת.</p>
+            <span class="section-title">איך מתגוננות?</span>
+            <p>משתמשות ב-VPN, גולשות רק באתרים עם HTTPS ונמנעות מביצוע פעולות רגישות ברשתות זרות.</p>
+        </div>
+
+        <div class="attack-card">
+            <div class="bow-icon">🎀</div>
+            <span class="tag">Availability Attack</span>
+            <h2>DDoS (מניעת שירות)</h2>
+            <span class="section-title">מה זה?</span>
+            <p>מתקפה שמטרתה להפיל אתר או שירות על ידי הצפתו בכמות אדירה של בקשות מזויפות.</p>
+            <span class="section-title">איך זה עובד?</span>
+            <p>התוקף משתמש ברשת של מחשבים נגועים (Botnet) שכולם פונים לאותו אתר בבת אחת, עד שהשרת קורס מהעומס.</p>
+            <span class="section-title">איך מתגוננות?</span>
+            <p>שימוש בשירותי סינון תעבורה (כמו Cloudflare) והגדרת חומות אש חכמות שיודעות לזהות עומס חריג.</p>
+        </div>
+
+        <div class="attack-card" style="border-top-color: #3498db;">
+            <div class="bow-icon">🔍</div>
+            <span class="tag">Analysis Tool</span>
+            <h2>Wireshark</h2>
+            <span class="section-title">מה זה?</span>
+            <p>ה"רנטגן" של הרשת. כלי שמאפשר לנתח חבילות מידע (Packets) שעוברות ברשת בזמן אמת.</p>
+            <span class="section-title">שימוש בסייבר:</span>
+            <p>אנשי סייבר משתמשים בו כדי לזהות תנועה חשודה, להבין פרוטוקולים ולראות בדיוק מה עובר ב"צינורות" של האינטרנט.</p>
+            <span class="section-title">טיפ מהמייסדת 🎀</span>
+            <p>זה הכלי הכי טוב ללמוד איתו איך האינטרנט באמת עובד. מומלץ להתחיל לנתח תעבורת HTTP פשוטה.</p>
+        </div>
+
     </div>
 
 </body>
-<nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl;">
-    <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
-    <div class="nav-links">
-        <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
-        <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
-        <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
-        <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
-        <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
-        <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
-    </div>
-</nav>
 </html>
-<div class="attack-card">
-    <div class="bow-icon">🎀</div>
-    <span class="tag">Network Attack</span>
-    <h2>Man in the Middle</h2>
-    <span class="section-title">מה זה?</span>
-    <p>מתקפת "האדם שבאמצע" – מצב שבו התוקף מצליח להשתחל לתקשורת בין שני צדדים בלי שהם ידעו.</p>
-    <span class="section-title">איך זה עובד?</span>
-    <p>כשאת מתחברת ל-Wi-Fi ציבורי לא מאובטח, האקר יכול לשבת "בנתיב" של המידע שלך ולקרוא כל הודעה או סיסמה שאת שולחת.</p>
-    <span class="section-title">איך מתגוננות?</span>
-    <p>משתמשות ב-VPN, גולשות רק באתרים עם HTTPS (המנעול הירוק) ונמנעות מביצוע פעולות רגישות ברשתות זרות.</p>
-</div>
-
-<div class="attack-card">
-    <div class="bow-icon">🎀</div>
-    <span class="tag">Availability Attack</span>
-    <h2>DDoS (מניעת שירות)</h2>
-    <span class="section-title">מה זה?</span>
-    <p>מתקפה שמטרתה להפיל אתר או שירות על ידי הצפתו בכמות אדירה של בקשות מזויפות.</p>
-    <span class="section-title">איך זה עובד?</span>
-    <p>התוקף משתמש ברשת של מחשבים נגועים (Botnet) שכולם פונים לאותו אתר בבת אחת, עד שהשרת קורס מהעומס.</p>
-    <span class="section-title">איך מתגוננות?</span>
-    <p>שימוש בשירותי סינון תעבורה (כמו Cloudflare) והגדרת חומות אש (Firewalls) חכמות שיודעות לזהות עומס חריג.</p>
-</div>
-
-<div class="attack-card" style="border-top-color: #3498db;">
-    <div class="bow-icon">🔍</div>
-    <span class="tag">Analysis Tool</span>
-    <h2>Wireshark</h2>
-    <span class="section-title">מה זה?</span>
-    <p>ה"רנטגן" של הרשת. כלי שמאפשר לנתח חבילות מידע (Packets) שעוברות ברשת בזמן אמת.</p>
-    <span class="section-title">שימוש בסייבר:</span>
-    <p>אנשי סייבר משתמשים בו כדי לזהות תנועה חשודה, להבין פרוטוקולים ולראות בדיוק מה עובר ב"צינורות" של האינטרנט.</p>
-    <span class="section-title">טיפ מהמייסדת 🎀</span>
-    <p>זה הכלי הכי טוב ללמוד איתו איך האינטרנט באמת עובד. מומלץ להתחיל לנתח תעבורת HTTP פשוטה.</p>
-</div>
