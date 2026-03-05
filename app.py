@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import os
 
-# התיקון כאן - הוספנו את שם התיקייה עם הרווחים כמו שזה ב-GitHub שלך
+# הגדרת הנתיב המדויק לפי התיקיות שלך ב-GitHub
 app = Flask(__name__, 
             template_folder='women who hack/frontend', 
             static_folder='women who hack/frontend/static')
