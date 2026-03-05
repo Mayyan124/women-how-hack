@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women How Hack | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        :root {
+            --baby-pink: #f4c2c2;
+            --cream: #fffdd0;
+            --pure-white: #ffffff;
+            --dark-pink: #ff91a4;
+        }
+
+        body {
+            background-color: var(--cream);
+            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); /* רקע עדין */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* רקע של פפיונים מרחפים */
+        .bow-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.1;
+            font-size: 2rem;
+        }
+
+        header {
+            background-color: var(--pure-white);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--baby-pink);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark-pink);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffb6c1;
+            text-shadow: 0 0 5px var(--baby-pink);
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--dark-pink);
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .bow-icon {
+            font-size: 3rem;
+            color: var(--baby-pink);
+            margin: 20px 0;
+        }
+
+        .btn {
+            background-color: var(--baby-pink);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid var(--pure-white);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--baby-pink);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-pink);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bow-background">
+        🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀
+        🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀 🎀
+    </div>
+
+    <header>
+        <nav>
+            <a href="/">בית</a>
+            <a href="/about">עלינו</a>
+            <a href="/attacks">התקפות סייבר</a>
+            <a href="/mysteries">תעלומות</a>
+            <a href="/blog">בלוג</a>
+            <a href="/register">הרשמה</a>
+            <a href="/contact">צור קשר</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="bow-icon">🎀</div>
+        <h1>Women How Hack</h1>
+        <p>ברוכות הבאות לקהילת ההאקריות הכי חזקה (והכי יפה) ברשת. כאן תלמדי הכל על סייבר, הגנה וקוד – בסטייל שלך.</p>
+        <br>
+        <a href="/register" class="btn">הצטרפי לנבחרת 🎀</a>
+    </div>
+
+    <footer>
+        &copy; 2026 Women How Hack | Made with 🎀 by Mayyan
+    </footer>
+
+</body>
+</html>
