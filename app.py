@@ -1,14 +1,13 @@
 from flask import Flask, render_template
 import os
 
-# הגדרת האפליקציה - אומרים לה איפה נמצאים דפי ה-HTML והעיצוב
+# התיקון כאן - הוספנו את שם התיקייה עם הרווחים כמו שזה ב-GitHub שלך
 app = Flask(__name__, 
-            template_folder='frontend', 
-            static_folder='frontend/static')
+            template_folder='women who hack/frontend', 
+            static_folder='women who hack/frontend/static')
 
 @app.route('/')
 def home():
-    # שולח את המשתמש לדף הבית
     return render_template('index.html')
 
 @app.route('/about')
@@ -36,5 +35,4 @@ def register():
     return render_template('register.html')
 
 if __name__ == '__main__':
-    # הרצה במצב בדיקה
     app.run(debug=True)
