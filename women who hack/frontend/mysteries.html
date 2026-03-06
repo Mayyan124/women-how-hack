@@ -1,171 +1,180 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Cyber Lab | מעבדת התנסות 🎀</title>
+    <title>Women Who Hack | Hack Lab 🎀</title>
     <style>
-        /* הגדרות צבעים: לבן, ורוד בייבי ושמנת בלבד */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #FFF5F7; /* ורוד בייבי עדין */
-            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); /* אפקט פפיונים/נקודות עדין */
-            margin: 0;
-            padding: 40px;
-            color: #5D4037;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-            .header h1 {
-                color: #F48FB1;
-                font-size: 3rem;
-                margin-bottom: 10px;
-            }
-
-            .header p {
-                background-color: #FFFDD0;
-                display: inline-block;
-                padding: 10px 20px;
-                border-radius: 50px;
-                border: 2px solid #F8BBD0;
-            }
-
-        .challenge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .challenge-card {
-            background: #FFFDD0; /* שמנת */
-            border: 3px solid #F8BBD0; /* ורוד בייבי */
-            border-radius: 25px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(244, 143, 177, 0.2);
-            transition: transform 0.3s;
-            position: relative;
-        }
-
-            .challenge-card:hover {
-                transform: translateY(-5px);
-            }
-
-        /* פפיונים בכל מקום */
-        .bow-decoration {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .status-tag {
-            background: white;
-            color: #F06292;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: 1px solid #F8BBD0;
-        }
-
-        h2 {
-            color: #D81B60;
-            font-size: 1.5rem;
-        }
-
-        .input-box {
-            width: 80%;
-            padding: 10px;
-            margin: 15px 0;
-            border: 2px solid #F8BBD0;
-            border-radius: 10px;
-            outline: none;
-            text-align: center;
-        }
-
-        .btn-check {
-            background-color: #F8BBD0;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-            .btn-check:hover {
-                background-color: #F48FB1;
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #FFF5F7; color: #5D4037; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
+        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+        .header { text-align: center; margin-bottom: 50px; }
+        .header h1 { color: #D81B60; font-size: 3rem; margin-bottom: 12px; }
+        .header p { background-color: #FFFDD0; display: inline-block; padding: 10px 25px; border-radius: 50px; border: 2px solid #F8BBD0; font-size: 1.05rem; color: #555; }
+        .score-bar { background: #FFFDD0; border: 2px solid #F8BBD0; border-radius: 20px; padding: 15px 25px; display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 40px; font-size: 1.1rem; font-weight: bold; color: #D81B60; }
+        .score-num { font-size: 2rem; color: #F48FB1; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .game-card { background: white; border: 3px solid #F8BBD0; border-radius: 25px; padding: 30px; box-shadow: 0 8px 25px rgba(244,143,177,0.15); transition: transform 0.3s; }
+        .game-card:hover { transform: translateY(-5px); }
+        .game-card.solved { border-color: #81C784; background: #F1F8F1; }
+        .game-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .game-icon { font-size: 2.2rem; }
+        .game-title { color: #D81B60; font-size: 1.3rem; font-weight: bold; }
+        .level-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: bold; margin-bottom: 12px; }
+        .level-easy { background: #E8F5E9; color: #388E3C; }
+        .level-medium { background: #FFF8E1; color: #F57F17; }
+        .level-hard { background: #FCE4EC; color: #C62828; }
+        .game-desc { color: #666; line-height: 1.7; font-size: 0.97rem; margin-bottom: 20px; }
+        .points-badge { display: inline-block; background: #F8BBD0; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-right: 8px; }
+        .email-box { background: #FFF5F7; border: 2px solid #F8BBD0; border-radius: 15px; padding: 15px; margin-bottom: 15px; font-size: 0.9rem; line-height: 1.7; }
+        .from { color: #888; font-size: 0.82rem; margin-bottom: 5px; }
+        .subject { font-weight: bold; color: #D81B60; margin-bottom: 8px; }
+        .body-txt { color: #444; }
+        .link { color: #3498db; text-decoration: underline; }
+        .choice-btns { display: flex; gap: 10px; }
+        .btn-real { flex: 1; background: #E8F5E9; color: #388E3C; border: 2px solid #A5D6A7; padding: 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; }
+        .btn-fake { flex: 1; background: #FCE4EC; color: #C62828; border: 2px solid #EF9A9A; padding: 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; }
+        .text-input { width: 100%; padding: 12px 15px; border: 2px solid #F8BBD0; border-radius: 12px; font-size: 1rem; font-family: 'Segoe UI', sans-serif; outline: none; margin-bottom: 10px; direction: ltr; }
+        .strength-bar { height: 10px; background: #eee; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+        .strength-fill { height: 100%; border-radius: 10px; transition: width 0.4s, background 0.4s; width: 0%; }
+        .strength-label { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+        .terminal { background: #1a1a2e; border-radius: 12px; padding: 15px; font-family: monospace; font-size: 0.88rem; margin-bottom: 15px; min-height: 80px; }
+        .t-prompt { color: #F48FB1; }
+        .t-output { color: #a8ff78; margin-top: 8px; }
+        .t-error { color: #ff6b6b; margin-top: 8px; }
+        .cipher-display { background: #FFFDD0; border: 2px solid #F8BBD0; border-radius: 12px; padding: 15px; text-align: center; font-family: monospace; font-size: 1.3rem; letter-spacing: 5px; color: #D81B60; font-weight: bold; margin-bottom: 15px; }
+        .btn-action { background: #F8BBD0; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; transition: 0.3s; width: 100%; margin-top: 5px; }
+        .btn-action:hover { background: #F48FB1; }
+        .result-msg { margin-top: 12px; padding: 12px 15px; border-radius: 12px; font-weight: bold; text-align: center; display: none; font-size: 0.92rem; line-height: 1.5; }
+        .result-msg.success { background: #E8F5E9; color: #388E3C; border: 2px solid #A5D6A7; display: block; }
+        .result-msg.fail { background: #FCE4EC; color: #C62828; border: 2px solid #EF9A9A; display: block; }
     </style>
 </head>
 <body>
-    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl;">
-        <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
+    <nav>
+        <a href="/" class="logo">Women Who Hack 🎀</a>
         <div class="nav-links">
-            <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
-            <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
-            <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
-            <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
-            <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
-            <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
+            <a href="/">בית</a>
+            <a href="/about">המייסדת</a>
+            <a href="/attacks">מתקפות</a>
+            <a href="/mysteries">תעלומות</a>
+            <a href="/blog">בלוג</a>
+            <a href="/contact">צור קשר</a>
+            <a href="/register" class="join-btn">הצטרפות 🎀</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="header">
-            <h1>מעבדת הניסויים של מעיין 🎀</h1>
-            <p>כאן את לא רק לומדת – את מתנסה! פתרי את האתגרים וצברי נקודות.</p>
+            <h1>🎀 Hack Lab</h1>
+            <p>כאן את לא רק לומדת — את חווה! שחקי, פתרי אתגרים וצברי נקודות.</p>
         </div>
 
-        <div class="challenge-grid">
+        <div class="score-bar">🎀 הניקוד שלך: <span class="score-num" id="total-score">0</span> נקודות</div>
 
-            <div class="challenge-card">
-                <span class="bow-decoration">🎀</span>
-                <span class="status-tag">רמה: קל</span>
-                <h2>ההודעה המסתורית</h2>
-                <p>קיבלת לינק: <b>bit.ly/secure-login-🎀</b><br>האם תלחצי עליו?</p>
-                <button class="btn-check" onclick="alert('נכון! לינקים מקוצרים הם כלי נפוץ בפישינג. תמיד לבדוק את המקור! 🎀')">בדיקה</button>
+        <div class="games-grid">
+
+            <div class="game-card" id="card-phishing">
+                <div class="game-header"><span class="game-icon">📧</span><span class="game-title">זיהוי פישינג</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+10</span></span>
+                <p class="game-desc">קיבלת מייל. האם זה אמיתי או ניסיון פישינג? שימי לב לפרטים הקטנים!</p>
+                <div class="email-box">
+                    <div class="from">מאת: security@paypa1.com</div>
+                    <div class="subject">⚠️ חשבונך ננעל – פעולה נדרשת</div>
+                    <div class="body-txt">שלום לקוחה יקרה, זיהינו פעילות חשודה. לחצי לאימות:</div>
+                    <div class="link">http://secure-paypal-verify.xyz/login</div>
+                </div>
+                <div class="choice-btns">
+                    <button class="btn-real" onclick="checkPhishing(false)">✅ מייל אמיתי</button>
+                    <button class="btn-fake" onclick="checkPhishing(true)">🚨 פישינג!</button>
+                </div>
+                <div class="result-msg" id="phishing-result"></div>
             </div>
 
-            <div class="challenge-card">
-                <span class="bow-decoration">🎀</span>
-                <span class="status-tag">רמה: בינוני</span>
-                <h2>קוד הדלת האחורית</h2>
-                <p>מהו התו המיוחד שמשמש האקרים כדי "לשבור" שאילתות SQL?</p>
-                <input type="text" id="q2" class="input-box" placeholder="הקלידי כאן...">
-                <button class="btn-check" onclick="checkQ2()">שלחי פתרון</button>
+            <div class="game-card" id="card-password">
+                <div class="game-header"><span class="game-icon">🔐</span><span class="game-title">בוחן חוזק סיסמא</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+15</span></span>
+                <p class="game-desc">הקלידי סיסמא וראי כמה היא חזקה. האתגר: הגיעי לרמת "מאובטחת" 🔒</p>
+                <input type="text" class="text-input" id="pw-input" placeholder="הקלידי סיסמא..." oninput="checkPassword(this.value)">
+                <div class="strength-bar"><div class="strength-fill" id="pw-bar"></div></div>
+                <div class="strength-label" id="pw-label">הקלידי סיסמא...</div>
+                <button class="btn-action" onclick="submitPassword()">בדיקה 🎀</button>
+                <div class="result-msg" id="pw-result"></div>
             </div>
 
-            <div class="challenge-card">
-                <span class="bow-decoration">🎀</span>
-                <span class="status-tag">רמה: מומחית</span>
-                <h2>פיצוח הסיסמה</h2>
-                <p>כמה זמן ייקח למחשב לנחש את הסיסמה "123456"?</p>
-                <button class="btn-check" onclick="alert('פחות משנייה! לכן תמיד נשתמש בסיסמה מורכבת עם פפיונים... סתם, עם תווים מיוחדים! 🎀')">גלי את התשובה</button>
+            <div class="game-card" id="card-sql">
+                <div class="game-header"><span class="game-icon">💉</span><span class="game-title">SQL Injection</span></div>
+                <span class="level-tag level-medium">בינוני <span class="points-badge">+20</span></span>
+                <p class="game-desc">יש לך שדה התחברות. נסי "לשבור" אותו עם SQL Injection ולהיכנס בלי סיסמא!</p>
+                <div class="terminal">
+                    <div class="t-prompt">SELECT * FROM users WHERE username='<span id="sql-preview">...</span>'</div>
+                    <div id="sql-output"></div>
+                </div>
+                <input type="text" class="text-input" id="sql-input" placeholder="הקלידי שם משתמש..." oninput="previewSQL(this.value)">
+                <button class="btn-action" onclick="submitSQL()">נסי לפרוץ 💉</button>
+                <div class="result-msg" id="sql-result"></div>
+            </div>
+
+            <div class="game-card" id="card-cipher">
+                <div class="game-header"><span class="game-icon">🔑</span><span class="game-title">פענוח קוד קיסר</span></div>
+                <span class="level-tag level-medium">בינוני <span class="points-badge">+25</span></span>
+                <p class="game-desc">ההאקרית השאירה הודעה מוצפנת בהזזה של 3 אותיות. פענחי אותה!</p>
+                <div class="cipher-display">KDFN WKH ZRUOG</div>
+                <p style="font-size:0.85rem;color:#999;text-align:center;margin-bottom:12px;">רמז: כל אות הוזזה ב-3 מקומות קדימה באלפבית האנגלי</p>
+                <input type="text" class="text-input" id="cipher-input" placeholder="התשובה המפוענחת...">
+                <button class="btn-action" onclick="checkCipher()">פענחי 🔑</button>
+                <div class="result-msg" id="cipher-result"></div>
+            </div>
+
+            <div class="game-card" id="card-brute">
+                <div class="game-header"><span class="game-icon">💪</span><span class="game-title">Brute Force סימולציה</span></div>
+                <span class="level-tag level-hard">מומחית <span class="points-badge">+30</span></span>
+                <p class="game-desc">הסיסמא היא מספר בין 1 ל-100. נחשי אותה! כמה ניסיונות ייקח לך?</p>
+                <input type="number" class="text-input" id="brute-input" placeholder="נחשי מספר בין 1-100..." min="1" max="100">
+                <button class="btn-action" onclick="checkBrute()">נחשי 💪</button>
+                <div class="result-msg" id="brute-result"></div>
+                <div style="margin-top:10px;font-size:0.85rem;color:#999;text-align:center;">ניסיונות: <span id="brute-attempts">0</span></div>
+            </div>
+
+            <div class="game-card" id="card-https">
+                <div class="game-header"><span class="game-icon">🌐</span><span class="game-title">בדיקת אתרים בטוחים</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+10</span></span>
+                <p class="game-desc">האם כתובות האתרים הבאות בטוחות? בחרי נכון ב-3 מתוך 3!</p>
+                <div class="email-box" id="https-url" style="text-align:center;font-size:1rem;font-weight:bold;color:#333;">http://mybank-secure.xyz/login</div>
+                <div class="choice-btns">
+                    <button class="btn-real" onclick="checkHTTPS(false)">✅ בטוח</button>
+                    <button class="btn-fake" onclick="checkHTTPS(true)">🚨 מסוכן!</button>
+                </div>
+                <div class="result-msg" id="https-result"></div>
             </div>
 
         </div>
     </div>
 
     <script>
-        function checkQ2() {
-            var ans = document.getElementById('q2').value;
-            if (ans.includes("'")) {
-                alert("מדהים! גרש (') הוא באמת התו הקריטי במתקפת SQL Injection. את אלופה! 🎀");
-            } else {
-                alert("לא בדיוק... רמז: זה תו קטן שנמצא ליד האנטר! 🎀");
-            }
-        }
+        let score = 0;
+        let bruteSecret = Math.floor(Math.random() * 100) + 1;
+        let bruteAttempts = 0;
+        let httpsRound = 0;
+        let httpsScore = 0;
+        const httpsUrls = [
+            { url: "http://mybank-secure.xyz/login", dangerous: true },
+            { url: "https://www.google.com", dangerous: false },
+            { url: "http://192.168.1.1/admin", dangerous: true },
+        ];
+        function addScore(pts, id) { score += pts; document.getElementById('total-score').textContent = score; document.getElementById(id).classList.add('solved'); }
+        function showResult(id, msg, ok) { const e = document.getElementById(id); e.textContent = msg; e.className = 'result-msg ' + (ok ? 'success' : 'fail'); }
+        function checkPhishing(fake) { if (fake) { showResult('phishing-result', '🎀 נכון! paypa1.com עם ספרה 1 במקום l, ודומיין .xyz חשוד. כל הכבוד!', true); addScore(10, 'card-phishing'); } else showResult('phishing-result', '❌ זה פישינג! paypa1.com + .xyz = ספק ברור.', false); }
+        function checkPassword(v) { let s=0; if(v.length>=8)s++; if(v.length>=12)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++; const c=['#ff6b6b','#ffa94d','#ffd43b','#a9e34b','#40c057']; const l=['חלשה מאוד 😬','חלשה','בינונית','חזקה 💪','מאובטחת 🔒']; document.getElementById('pw-bar').style.width=(s*20)+'%'; document.getElementById('pw-bar').style.background=c[s-1]||'#eee'; document.getElementById('pw-label').textContent=s>0?l[s-1]:'הקלידי סיסמא...'; }
+        function submitPassword() { const v=document.getElementById('pw-input').value; let s=0; if(v.length>=8)s++; if(v.length>=12)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++; if(s>=4){showResult('pw-result','🔒 סיסמא חזקה! כל הכבוד!',true);addScore(15,'card-password');}else showResult('pw-result','😬 עדיין חלשה. נסי אותיות גדולות, מספרים ותווים מיוחדים!',false); }
+        function previewSQL(v){document.getElementById('sql-preview').textContent=v||'...';}
+        function submitSQL(){const v=document.getElementById('sql-input').value;const o=document.getElementById('sql-output');if(v.includes("'")||v.toLowerCase().includes('or')||v.includes('--')){o.className='t-output';o.textContent="✓ ברוכה הבאה, admin! גישה הושגה 🎉";showResult('sql-result','🎀 הצלחת! זו בדיקה למה משתמשים ב-Parameterized Queries!',true);addScore(20,'card-sql');}else{o.className='t-error';o.textContent="✗ שגיאה: שם משתמש לא נמצא";showResult('sql-result',"'רמז: נסי להוסיף גרש (') או OR...",false);}}
+        function checkCipher(){const v=document.getElementById('cipher-input').value.trim().toUpperCase();if(v==='HACK THE WORLD'){showResult('cipher-result','🔑 נכון! KDFN WKH ZRUOG = HACK THE WORLD. מפענחת מקצועית!',true);addScore(25,'card-cipher');}else showResult('cipher-result','❌ לא נכון. רמז: K→H, D→A, F→C, N→K...',false);}
+        function checkBrute(){const g=parseInt(document.getElementById('brute-input').value);bruteAttempts++;document.getElementById('brute-attempts').textContent=bruteAttempts;if(isNaN(g)){showResult('brute-result','הקלידי מספר!',false);return;}if(g===bruteSecret){showResult('brute-result',`🎀 מצאת! ${bruteSecret} ב-${bruteAttempts} ניסיונות! מחשב היה עושה זאת בשבריר שנייה...`,true);addScore(30,'card-brute');}else if(g<bruteSecret)showResult('brute-result','📈 גבוהה יותר!',false);else showResult('brute-result','📉 נמוכה יותר!',false);}
+        function checkHTTPS(d){const c=httpsUrls[httpsRound];if(d===c.dangerous){httpsScore++;showResult('https-result','✅ נכון! '+(c.dangerous?'HTTP בלי S + דומיין חשוד = סכנה.':' HTTPS + דומיין מוכר = בטוח!'),true);}else showResult('https-result','❌ לא נכון. '+(c.dangerous?'http (בלי S) + .xyz = מסוכן!':'זה בטוח — HTTPS + גוגל.'),false);httpsRound++;if(httpsRound<httpsUrls.length){setTimeout(()=>{document.getElementById('https-url').textContent=httpsUrls[httpsRound].url;document.getElementById('https-result').className='result-msg';},1500);}else{setTimeout(()=>{if(httpsScore>=2){showResult('https-result',`🎀 סיימת! ${httpsScore}/3 נכון!`,true);addScore(10,'card-https');}else showResult('https-result',`סיימת עם ${httpsScore}/3. כדאי לקרוא עוד על HTTPS!`,false);},1500);}}
     </script>
-
 </body>
 </html>
