@@ -10,744 +10,84 @@
       --deep: #D81B60;
       --soft: #FFF0F5;
       --cream: #FFFDD0;
-      --green: #2ECC71;
-      --yellow: #F1C40F;
-      --red: #E74C3C;
-      --card: #ffffff;
       --text: #2c2c2c;
       --muted: #888;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Heebo', sans-serif;
-      background: var(--soft);
-      background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 50px;
-      background: var(--cream);
-      box-shadow: 0 2px 15px rgba(255,182,193,0.4);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 2px solid #F8BBD0;
-    }
+    body { font-family: 'Heebo', sans-serif; background: var(--soft); background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); color: var(--text); min-height: 100vh; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: var(--cream); box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; }
     nav a.logo { font-size: 1.6rem; font-weight: 900; color: var(--deep); text-decoration: none; }
     .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
-    .nav-links a.join-btn {
-      background: var(--pink);
-      color: white;
-      padding: 8px 22px;
-      border-radius: 50px;
-      font-weight: bold;
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 60px 20px 30px;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--deep);
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto 30px;
-      line-height: 1.7;
-    }
-
-    /* LEVEL TABS */
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-      padding: 0 20px;
-    }
-    .tab-btn {
-      padding: 12px 28px;
-      border-radius: 50px;
-      border: 2px solid transparent;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: 'Heebo', sans-serif;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .tab-btn.beginner  { background: #E8F5E9; color: #27AE60; border-color: #A5D6A7; }
-    .tab-btn.medium    { background: #FFF9C4; color: #F39C12; border-color: #FFE082; }
-    .tab-btn.advanced  { background: #FCE4EC; color: var(--deep); border-color: #F48FB1; }
+    .nav-links a.join-btn { background: var(--pink); color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
+    .hero { text-align: center; padding: 60px 20px 30px; }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--deep); margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin: 0 auto 30px; line-height: 1.7; }
+    .tabs { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; padding: 0 20px; }
+    .tab-btn { padding: 12px 28px; border-radius: 50px; border: 2px solid transparent; font-size: 1rem; font-weight: 700; font-family: 'Heebo', sans-serif; cursor: pointer; transition: all 0.25s; }
+    .tab-btn.beginner { background: #E8F5E9; color: #27AE60; border-color: #A5D6A7; }
+    .tab-btn.medium { background: #FFF9C4; color: #F39C12; border-color: #FFE082; }
+    .tab-btn.advanced { background: #FCE4EC; color: var(--deep); border-color: #F48FB1; }
     .tab-btn.active, .tab-btn:hover { transform: scale(1.05); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
-    .tab-btn.beginner.active  { background: #27AE60; color: white; }
-    .tab-btn.medium.active    { background: #F39C12; color: white; }
-    .tab-btn.advanced.active  { background: var(--deep); color: white; }
-
-    /* LEVEL BADGE */
-    .level-badge {
-      display: inline-block;
-      padding: 4px 14px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .badge-beginner  { background: #E8F5E9; color: #27AE60; }
-    .badge-medium    { background: #FFF9C4; color: #F39C12; }
-    .badge-advanced  { background: #FCE4EC; color: var(--deep); }
-
-    /* PROJECTS GRID */
+    .tab-btn.beginner.active { background: #27AE60; color: white; }
+    .tab-btn.medium.active { background: #F39C12; color: white; }
+    .tab-btn.advanced.active { background: var(--deep); color: white; }
+    .level-badge { display: inline-block; padding: 4px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; }
+    .badge-beginner { background: #E8F5E9; color: #27AE60; }
+    .badge-medium { background: #FFF9C4; color: #F39C12; }
+    .badge-advanced { background: #FCE4EC; color: var(--deep); }
     .projects-section { display: none; padding: 0 40px 80px; max-width: 1100px; margin: 0 auto; }
     .projects-section.active { display: block; }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--deep);
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    /* PROJECT CARD */
-    .project-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(255,105,180,0.1);
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border-top: 5px solid var(--pink);
-    }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .project-card { background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(255,105,180,0.1); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border-top: 5px solid var(--pink); }
     .project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(255,105,180,0.2); }
     .project-card.defense { border-top-color: #27AE60; }
-    .project-card.attack  { border-top-color: #E74C3C; }
-
-    .card-header {
-      padding: 22px 24px 12px;
-    }
-    .card-type {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-    .type-attack  { color: #E74C3C; }
+    .project-card.attack { border-top-color: #E74C3C; }
+    .card-header { padding: 22px 24px 12px; }
+    .card-type { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .type-attack { color: #E74C3C; }
     .type-defense { color: #27AE60; }
-
-    .card-title {
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ACCORDION STEPS */
+    .card-title { font-size: 1.2rem; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+    .card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
     .card-body { padding: 0 24px 20px; }
-
-    .accordion-btn {
-      width: 100%;
-      background: var(--soft);
-      border: none;
-      border-radius: 10px;
-      padding: 11px 16px;
-      text-align: right;
-      font-family: 'Heebo', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--deep);
-      cursor: pointer;
-      margin-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.2s;
-    }
+    .accordion-btn { width: 100%; background: var(--soft); border: none; border-radius: 10px; padding: 11px 16px; text-align: right; font-family: 'Heebo', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--deep); cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
     .accordion-btn:hover { background: #FFE0EE; }
-    .accordion-btn .arrow { transition: transform 0.3s; font-style: normal; }
+    .accordion-btn .arrow { transition: transform 0.3s; }
     .accordion-btn.open .arrow { transform: rotate(180deg); }
-
-    .accordion-content {
-      display: none;
-      background: #FAFAFA;
-      border-radius: 0 0 10px 10px;
-      padding: 14px 16px;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: #444;
-      border: 1px solid #F8BBD0;
-      border-top: none;
-    }
+    .accordion-content { display: none; background: #FAFAFA; border-radius: 0 0 10px 10px; padding: 14px 16px; font-size: 0.88rem; line-height: 1.8; color: #444; border: 1px solid #F8BBD0; border-top: none; }
     .accordion-content.open { display: block; }
-
     .step-list { list-style: none; padding: 0; }
-    .step-list li {
-      padding: 6px 0;
-      padding-right: 22px;
-      position: relative;
-    }
-    .step-list li::before {
-      content: "🎀";
-      position: absolute;
-      right: 0;
-      font-size: 0.8rem;
-    }
-
-    /* CODE BLOCK */
-    .code-block {
-      background: #1e1e2e;
-      color: #cdd6f4;
-      border-radius: 10px;
-      padding: 16px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.82rem;
-      line-height: 1.7;
-      overflow-x: auto;
-      margin-top: 8px;
-      position: relative;
-    }
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #313244;
-      color: #cdd6f4;
-      border: none;
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      font-family: 'Heebo', sans-serif;
-    }
+    .step-list li { padding: 6px 0; padding-right: 22px; position: relative; }
+    .step-list li::before { content: "🎀"; position: absolute; right: 0; font-size: 0.8rem; }
+    .code-block { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.7; overflow-x: auto; margin-top: 8px; position: relative; }
+    .copy-btn { position: absolute; top: 10px; left: 10px; background: #313244; color: #cdd6f4; border: none; border-radius: 6px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; font-family: 'Heebo', sans-serif; }
     .copy-btn:hover { background: var(--pink); color: white; }
-
-    .keyword  { color: #cba6f7; }
-    .string   { color: #a6e3a1; }
-    .comment  { color: #6c7086; font-style: italic; }
-    .fn       { color: #89b4fa; }
-    .num      { color: #fab387; }
-
-    /* SUBMIT BTN */
-    .submit-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: calc(100% - 48px);
-      margin: 0 24px 24px;
-      background: linear-gradient(135deg, #FF69B4, #D81B60);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 14px 20px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: 'Heebo', sans-serif;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 5px 20px rgba(255,105,180,0.4);
-      letter-spacing: 0.3px;
-      position: relative;
-      overflow: hidden;
-    }
-    .submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      transition: left 0.4s;
-    }
+    .keyword { color: #cba6f7; } .string { color: #a6e3a1; } .comment { color: #6c7086; font-style: italic; } .fn { color: #89b4fa; } .num { color: #fab387; }
+    .submit-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: calc(100% - 48px); margin: 0 24px 24px; background: linear-gradient(135deg, #FF69B4, #D81B60); color: white; border: none; border-radius: 50px; padding: 14px 20px; font-size: 1rem; font-weight: 700; font-family: 'Heebo', sans-serif; cursor: pointer; text-decoration: none; text-align: center; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 5px 20px rgba(255,105,180,0.4); position: relative; overflow: hidden; }
+    .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transition: left 0.4s; }
     .submit-btn:hover::before { left: 100%; }
-    .submit-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 10px 28px rgba(255,105,180,0.5);
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid #F8BBD0;
-      background: var(--cream);
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 12px 20px; }
-      .nav-links { display: none; }
-      .hero h1 { font-size: 2rem; }
-      .projects-section { padding: 0 16px 60px; }
-    }
+    .submit-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 10px 28px rgba(255,105,180,0.5); }
+    footer { text-align: center; padding: 30px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid #F8BBD0; background: var(--cream); }
+    @media (max-width: 600px) { nav { padding: 12px 20px; } .nav-links { display: none; } .hero h1 { font-size: 2rem; } .projects-section { padding: 0 16px 60px; } }
   </style>
 </head>
 <body>
-
 <nav>
   <a href="/" class="logo">Women Who Hack 🎀</a>
   <div class="nav-links">
-    <a href="/">בית</a>
-    <a href="/about">המייסדת</a>
-    <a href="/attacks">מתקפות</a>
-    <a href="/mysteries">תעלומות</a>
-    <a href="/blog">בלוג</a>
-    <a href="/contact">צור קשר</a>
+    <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+    <a href="/mysteries">תעלומות</a><a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
     <a href="/register" class="join-btn">הצטרפות 🎀</a>
   </div>
 </nav>
-
-<!-- HERO -->
 <div class="hero">
   <h1>🛡️ פרויקטים לימודיים 🎀</h1>
   <p>בחרי את הרמה שלך, עברי שלב אחר שלב, וכשתסיימי – שלחי לנו את הקוד שלך 💪</p>
-
   <div class="tabs">
     <button class="tab-btn beginner active" onclick="showLevel('beginner')">🌱 מתחילות</button>
-    <button class="tab-btn medium"   onclick="showLevel('medium')">⚡ יודעות קצת קוד</button>
+    <button class="tab-btn medium" onclick="showLevel('medium')">⚡ יודעות קצת קוד</button>
     <button class="tab-btn advanced" onclick="showLevel('advanced')">🔥 מתקדמות</button>
   </div>
 </div>
 
-<!-- ===================== BEGINNER ===================== -->
-<div class="projects-section active" id="level-beginner">
-  <div class="projects-grid">
-
-    <!-- PROJECT 1 -->
-    <div class="project-card defense">
-      <div class="card-header">
-        <span class="level-badge badge-beginner">🌱 מתחילות</span>
-        <div class="card-type type-defense">🛡️ הגנת סייבר</div>
-        <div class="card-title">בודקת חוזק סיסמא</div>
-        <div class="card-desc">כתבי תוכנית Python שבודקת אם סיסמא חזקה מספיק – לפי אורך, אותיות גדולות וספרות.</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>פתחי קובץ Python חדש בשם <strong>password_checker.py</strong></li>
-            <li>בקשי מהמשתמשת להזין סיסמא עם <code>input()</code></li>
-            <li>בדקי: האם האורך מעל 8 תווים?</li>
-            <li>בדקי: האם יש לפחות אות גדולה אחת? (השתמשי ב-<code>any(c.isupper())</code>)</li>
-            <li>בדקי: האם יש לפחות ספרה אחת? (השתמשי ב-<code>any(c.isdigit())</code>)</li>
-            <li>הדפיסי: "סיסמא חזקה ✅" או "סיסמא חלשה ❌" בהתאם לתוצאות</li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment"># בודקת חוזק סיסמא - Women Who Hack 🎀</span>
-
-<span class="fn">def</span> <span class="fn">check_password</span>(password):
-    <span class="keyword">if</span> <span class="fn">len</span>(password) &lt; <span class="num">8</span>:
-        <span class="keyword">return</span> <span class="string">"❌ סיסמא קצרה מדי (מינימום 8 תווים)"</span>
-    <span class="keyword">if not</span> <span class="fn">any</span>(c.isupper() <span class="keyword">for</span> c <span class="keyword">in</span> password):
-        <span class="keyword">return</span> <span class="string">"❌ חסרה אות גדולה"</span>
-    <span class="keyword">if not</span> <span class="fn">any</span>(c.isdigit() <span class="keyword">for</span> c <span class="keyword">in</span> password):
-        <span class="keyword">return</span> <span class="string">"❌ חסרה ספרה"</span>
-    <span class="keyword">return</span> <span class="string">"✅ סיסמא חזקה! כל הכבוד 🎀"</span>
-
-password = <span class="fn">input</span>(<span class="string">"הכניסי סיסמא: "</span>)
-<span class="fn">print</span>(<span class="fn">check_password</span>(password))</pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-    <!-- PROJECT 2 -->
-    <div class="project-card attack">
-      <div class="card-header">
-        <span class="level-badge badge-beginner">🌱 מתחילות</span>
-        <div class="card-type type-attack">⚔️ מתקפת סייבר לימודית</div>
-        <div class="card-title">סימולציית Phishing</div>
-        <div class="card-desc">צרי דף HTML שנראה כמו דף כניסה מזויף – ותראי איך האקריות מרמות משתמשים (לצורכי לימוד בלבד!).</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>צרי קובץ <strong>fake_login.html</strong></li>
-            <li>הוסיפי טופס HTML עם שדות: מייל + סיסמא</li>
-            <li>עצבי אותו כך שייראה כמו דף Gmail (צבעים, לוגו בצבע אדום)</li>
-            <li>כשמישהי לוחצת "כניסה" – הציגי הודעה: "⚠️ זה היה phishing! הסיסמא שלך נגנבה!"</li>
-            <li>הוסיפי הסבר קצר: "ככה האקרים גונבים פרטים – תמיד בדקי את ה-URL!"</li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment">&lt;!-- fake_login.html - לצורכי לימוד בלבד! --&gt;</span>
-<span class="keyword">&lt;!DOCTYPE html&gt;</span>
-<span class="keyword">&lt;html&gt;&lt;head&gt;</span>
-  <span class="keyword">&lt;title&gt;</span><span class="string">Google - Sign In</span><span class="keyword">&lt;/title&gt;</span>
-  <span class="keyword">&lt;style&gt;</span>
-    body { font-family: Arial; text-align: center; padding: 60px; }
-    input { display: block; margin: 10px auto; padding: 12px;
-            width: 300px; border: 1px solid #ccc; border-radius: 4px; }
-    button { background: #1a73e8; color: white; border: none;
-             padding: 12px 40px; border-radius: 4px; cursor: pointer; }
-    #warning { color: red; font-weight: bold; display: none; margin-top: 20px; }
-  <span class="keyword">&lt;/style&gt;</span>
-<span class="keyword">&lt;/head&gt;&lt;body&gt;</span>
-  <span class="keyword">&lt;h2</span> style=<span class="string">"color:#EA4335"</span><span class="keyword">&gt;</span>Google<span class="keyword">&lt;/h2&gt;</span>
-  <span class="keyword">&lt;input</span> type=<span class="string">"email"</span> placeholder=<span class="string">"מייל"</span><span class="keyword">&gt;</span>
-  <span class="keyword">&lt;input</span> type=<span class="string">"password"</span> placeholder=<span class="string">"סיסמא"</span><span class="keyword">&gt;</span>
-  <span class="keyword">&lt;button</span> onclick=<span class="string">"showWarning()"</span><span class="keyword">&gt;</span>כניסה<span class="keyword">&lt;/button&gt;</span>
-  <span class="keyword">&lt;div</span> id=<span class="string">"warning"</span><span class="keyword">&gt;</span>
-    ⚠️ זה היה phishing! הסיסמא שלך "נגנבה"!&lt;br&gt;
-    תמיד בדקי את ה-URL לפני שאת מזינה פרטים!
-  <span class="keyword">&lt;/div&gt;</span>
-  <span class="keyword">&lt;script&gt;</span>
-    <span class="fn">function</span> <span class="fn">showWarning</span>() {
-      document.getElementById(<span class="string">'warning'</span>).style.display = <span class="string">'block'</span>;
-    }
-  <span class="keyword">&lt;/script&gt;</span>
-<span class="keyword">&lt;/body&gt;&lt;/html&gt;</span></pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-  </div>
-</div>
-
-<!-- ===================== MEDIUM ===================== -->
-<div class="projects-section" id="level-medium">
-  <div class="projects-grid">
-
-    <!-- PROJECT 3 -->
-    <div class="project-card defense">
-      <div class="card-header">
-        <span class="level-badge badge-medium">⚡ יודעות קצת קוד</span>
-        <div class="card-type type-defense">🛡️ הגנת סייבר</div>
-        <div class="card-title">סורקת פורטים</div>
-        <div class="card-desc">כתבי סקריפט Python שסורק פורטים פתוחים בכתובת IP – כלי בסיסי שכל מגנת סייבר צריכה.</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>ייבאי את המודול <code>socket</code> מ-Python</li>
-            <li>בקשי מהמשתמשת להזין כתובת IP (השתמשי ב-<code>127.0.0.1</code> לבדיקה)</li>
-            <li>כתבי לולאה שעוברת על פורטים 1 עד 1024</li>
-            <li>לכל פורט – נסי לחבר בעזרת <code>socket.connect_ex()</code></li>
-            <li>אם הפונקציה מחזירה 0 – הפורט פתוח! הדפיסי אותו</li>
-            <li>הוסיפי <code>try/except</code> לטיפול בשגיאות</li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment"># סורקת פורטים - Women Who Hack 🎀</span>
-<span class="keyword">import</span> socket
-
-target = <span class="fn">input</span>(<span class="string">"הכניסי IP לסריקה (לדוגמא 127.0.0.1): "</span>)
-<span class="fn">print</span>(<span class="string">f"\n🔍 סורקת פורטים ב-{target}...\n"</span>)
-
-open_ports = []
-
-<span class="keyword">for</span> port <span class="keyword">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">1025</span>):
-    <span class="keyword">try</span>:
-        sock = socket.<span class="fn">socket</span>(socket.AF_INET, socket.SOCK_STREAM)
-        sock.<span class="fn">settimeout</span>(<span class="num">0.5</span>)
-        result = sock.<span class="fn">connect_ex</span>((target, port))
-        <span class="keyword">if</span> result == <span class="num">0</span>:
-            <span class="fn">print</span>(<span class="string">f"✅ פורט {port} - פתוח!"</span>)
-            open_ports.<span class="fn">append</span>(port)
-        sock.<span class="fn">close</span>()
-    <span class="keyword">except</span>:
-        <span class="keyword">pass</span>
-
-<span class="fn">print</span>(<span class="string">f"\n🎀 סריקה הושלמה! נמצאו {len(open_ports)} פורטים פתוחים"</span>)</pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-    <!-- PROJECT 4 -->
-    <div class="project-card attack">
-      <div class="card-header">
-        <span class="level-badge badge-medium">⚡ יודעות קצת קוד</span>
-        <div class="card-type type-attack">⚔️ מתקפת סייבר לימודית</div>
-        <div class="card-title">Brute Force על סיסמא</div>
-        <div class="card-desc">כתבי סקריפט שמנסה לפצח סיסמא על ידי ניסיון של כל הצירופים – ותראי למה סיסמא ארוכה כל כך חשובה.</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>ייבאי <code>itertools</code> ו-<code>string</code> מ-Python</li>
-            <li>הגדירי סיסמא קצרה (3 תווים) לבדיקה – לדוגמא "abc"</li>
-            <li>כתבי לולאה עם <code>itertools.product</code> שמנסה כל צירוף</li>
-            <li>ספרי כמה ניסיונות לקח למצוא את הסיסמא</li>
-            <li>הדפיסי את התוצאה: "נמצאה אחרי X ניסיונות!"</li>
-            <li>נסי עם סיסמא של 4 תווים – שימי לב כמה זמן לוקח יותר!</li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment"># Brute Force לימודי - Women Who Hack 🎀</span>
-<span class="keyword">import</span> itertools
-<span class="keyword">import</span> string
-
-secret = <span class="string">"abc"</span>  <span class="comment"># שני הסיסמא כאן</span>
-chars = string.ascii_lowercase
-attempts = <span class="num">0</span>
-
-<span class="fn">print</span>(<span class="string">f"🔓 מנסה לפצח סיסמא של {len(secret)} תווים...\n"</span>)
-
-<span class="keyword">for</span> length <span class="keyword">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="fn">len</span>(secret) + <span class="num">2</span>):
-    <span class="keyword">for</span> combo <span class="keyword">in</span> itertools.<span class="fn">product</span>(chars, repeat=length):
-        attempts += <span class="num">1</span>
-        guess = <span class="string">""</span>.<span class="fn">join</span>(combo)
-        <span class="keyword">if</span> guess == secret:
-            <span class="fn">print</span>(<span class="string">f"✅ נמצאה! הסיסמא: '{guess}'"</span>)
-            <span class="fn">print</span>(<span class="string">f"⏱️ לקח {attempts:,} ניסיונות"</span>)
-            <span class="fn">print</span>(<span class="string">"💡 לכן סיסמא ארוכה = הרבה יותר בטוחה! 🎀"</span>)
-            exit()</pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-  </div>
-</div>
-
-<!-- ===================== ADVANCED ===================== -->
-<div class="projects-section" id="level-advanced">
-  <div class="projects-grid">
-
-    <!-- PROJECT 5 -->
-    <div class="project-card defense">
-      <div class="card-header">
-        <span class="level-badge badge-advanced">🔥 מתקדמות</span>
-        <div class="card-type type-defense">🛡️ הגנת סייבר</div>
-        <div class="card-title">מערכת זיהוי חדירות (IDS)</div>
-        <div class="card-desc">כתבי סקריפט Python שמנטר קבצי לוג ומתריע כשיש כניסות כושלות חוזרות – בדיוק כמו מערכות IDS אמיתיות.</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>צרי קובץ לוג מדומה: <code>auth.log</code> עם שורות של "Failed login from IP"</li>
-            <li>קראי את הקובץ עם Python וחלצי כתובות IP</li>
-            <li>השתמשי ב-<code>collections.Counter</code> לספור כמה פעמים כל IP נכשל</li>
-            <li>אם IP מופיע יותר מ-5 פעמים – הדפיסי התראה: "🚨 חשד ל-Brute Force!"</li>
-            <li>שמרי את הרשימה השחורה לקובץ <code>blacklist.txt</code></li>
-            <li>בונוס: הוסיפי תאריך ושעה לכל התראה עם <code>datetime</code></li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment"># מערכת IDS - Women Who Hack 🎀</span>
-<span class="keyword">import</span> re
-<span class="keyword">from</span> collections <span class="keyword">import</span> Counter
-<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
-
-<span class="comment"># יצירת לוג מדומה</span>
-fake_log = <span class="string">"""
-Failed login from 192.168.1.10
-Failed login from 10.0.0.5
-Failed login from 192.168.1.10
-Failed login from 192.168.1.10
-Failed login from 10.0.0.5
-Failed login from 192.168.1.10
-Failed login from 192.168.1.10
-Failed login from 192.168.1.10
-Successful login from 10.0.0.1
-"""</span>
-
-THRESHOLD = <span class="num">5</span>
-pattern = <span class="fn">re.compile</span>(<span class="string">r'Failed login from (\d+\.\d+\.\d+\.\d+)'</span>)
-ips = pattern.<span class="fn">findall</span>(fake_log)
-counts = <span class="fn">Counter</span>(ips)
-blacklist = []
-
-<span class="fn">print</span>(<span class="string">"🔍 מנתחת לוגים...\n"</span>)
-<span class="keyword">for</span> ip, count <span class="keyword">in</span> counts.<span class="fn">items</span>():
-    <span class="keyword">if</span> count >= THRESHOLD:
-        now = datetime.<span class="fn">now</span>().<span class="fn">strftime</span>(<span class="string">"%H:%M:%S"</span>)
-        <span class="fn">print</span>(<span class="string">f"🚨 [{now}] חשד ל-Brute Force! IP: {ip} ({count} ניסיונות)"</span>)
-        blacklist.<span class="fn">append</span>(ip)
-
-<span class="keyword">with</span> <span class="fn">open</span>(<span class="string">"blacklist.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:
-    f.<span class="fn">write</span>(<span class="string">"\n"</span>.<span class="fn">join</span>(blacklist))
-
-<span class="fn">print</span>(<span class="string">f"\n🎀 {len(blacklist)} כתובות IP נוספו לרשימה השחורה!"</span>)</pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-    <!-- PROJECT 6 -->
-    <div class="project-card attack">
-      <div class="card-header">
-        <span class="level-badge badge-advanced">🔥 מתקדמות</span>
-        <div class="card-type type-attack">⚔️ מתקפת סייבר לימודית</div>
-        <div class="card-title">SQL Injection – הדגמה</div>
-        <div class="card-desc">הבני בסיס נתונים מדומה וכתבי קוד שמדגים איך SQL Injection עובד – ואיך מגינים מפניה.</div>
-      </div>
-      <div class="card-body">
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          📋 שלבים לביצוע <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <ul class="step-list">
-            <li>ייבאי <code>sqlite3</code> וצרי DB מדומה עם טבלת משתמשים</li>
-            <li>כתבי פונקציית login פגיעה שמרכיבה SQL ישירות מהקלט</li>
-            <li>הדגימי את המתקפה עם הקלט: <code>' OR '1'='1</code></li>
-            <li>הראי שהמתקפה עובדת – המשתמשת מתחברת ללא סיסמא!</li>
-            <li>כתבי פונקציית login מאובטחת עם Parameterized Queries</li>
-            <li>הראי שעכשיו המתקפה נכשלת – ותסבירי למה</li>
-          </ul>
-        </div>
-
-        <button class="accordion-btn" onclick="toggleAccordion(this)">
-          💡 פתרון מלא <span class="arrow">▼</span>
-        </button>
-        <div class="accordion-content">
-          <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
-<pre><span class="comment"># SQL Injection הדגמה - Women Who Hack 🎀</span>
-<span class="keyword">import</span> sqlite3
-
-conn = sqlite3.<span class="fn">connect</span>(<span class="string">":memory:"</span>)
-conn.<span class="fn">execute</span>(<span class="string">"CREATE TABLE users (name TEXT, password TEXT)"</span>)
-conn.<span class="fn">execute</span>(<span class="string">"INSERT INTO users VALUES ('admin', 'secret123')"</span>)
-
-<span class="comment"># ❌ פונקציה פגיעה</span>
-<span class="fn">def</span> <span class="fn">login_vulnerable</span>(user, pwd):
-    query = <span class="string">f"SELECT * FROM users WHERE name='{user}' AND password='{pwd}'"</span>
-    result = conn.<span class="fn">execute</span>(query).<span class="fn">fetchone</span>()
-    <span class="keyword">return</span> <span class="string">"✅ התחברת!"</span> <span class="keyword">if</span> result <span class="keyword">else</span> <span class="string">"❌ שגיאה"</span>
-
-<span class="comment"># ✅ פונקציה מאובטחת</span>
-<span class="fn">def</span> <span class="fn">login_safe</span>(user, pwd):
-    query = <span class="string">"SELECT * FROM users WHERE name=? AND password=?"</span>
-    result = conn.<span class="fn">execute</span>(query, (user, pwd)).<span class="fn">fetchone</span>()
-    <span class="keyword">return</span> <span class="string">"✅ התחברת!"</span> <span class="keyword">if</span> result <span class="keyword">else</span> <span class="string">"❌ שגיאה"</span>
-
-attack = <span class="string">"' OR '1'='1"</span>
-
-<span class="fn">print</span>(<span class="string">"=== מתקפת SQL Injection ==="</span>)
-<span class="fn">print</span>(<span class="string">f"פגיע:    {login_vulnerable(attack, attack)}"</span>)
-<span class="fn">print</span>(<span class="string">f"מאובטח: {login_safe(attack, attack)}"</span>)
-<span class="fn">print</span>(<span class="string">"\n🎀 Parameterized Queries מציל את היום!"</span>)</pre>
-          </div>
-        </div>
-
-      </div>
-      <a href="https://forms.gle/K6Fg4UkjuU7WbBz17" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
-    </div>
-
-  </div>
-</div>
-
-<footer>© 2026 Women Who Hack | Made with 🎀 by Mayyan</footer>
-
-<script>
-  function showLevel(level) {
-    document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('level-' + level).classList.add('active');
-    document.querySelector('.tab-btn.' + level).classList.add('active');
-    window.scrollTo({ top: 200, behavior: 'smooth' });
-  }
-
-  function toggleAccordion(btn) {
-    const content = btn.nextElementSibling;
-    const isOpen = content.classList.contains('open');
-    // Close all in same card
-    btn.closest('.card-body').querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-    btn.closest('.card-body').querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('open'));
-    if (!isOpen) {
-      content.classList.add('open');
-      btn.classList.add('open');
-    }
-  }
-
-  function copyCode(btn) {
-    const code = btn.nextElementSibling.innerText;
-    navigator.clipboard.writeText(code).then(() => {
-      btn.textContent = '✅ הועתק!';
-      setTimeout(() => btn.textContent = 'העתק', 2000);
-    });
-  }
-</script>
-
-</body>
-</html>
+<!-- BEGINNER -->
+<div class=
