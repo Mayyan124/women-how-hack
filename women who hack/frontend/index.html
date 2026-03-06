@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women How Hack | Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Women Who Hack | Home</title>
     <style>
         :root {
             --baby-pink: #f4c2c2;
@@ -13,16 +12,16 @@
             --dark-pink: #ff91a4;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             background-color: var(--cream);
-            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); /* רקע עדין */
+            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
             color: #333;
             overflow-x: hidden;
         }
 
-        /* רקע של פפיונים מרחפים */
         .bow-background {
             position: fixed;
             top: 0;
@@ -33,6 +32,8 @@
             pointer-events: none;
             opacity: 0.1;
             font-size: 2rem;
+            line-height: 3rem;
+            word-break: break-all;
         }
 
         header {
@@ -98,6 +99,8 @@
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s;
             border: 2px solid var(--pure-white);
+            margin-top: 20px;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -128,8 +131,8 @@
     <header>
         <nav>
             <a href="/">בית</a>
-            <a href="/about">עלינו</a>
-            <a href="/attacks">התקפות סייבר</a>
+            <a href="/about">המייסדת</a>
+            <a href="/attacks">מתקפות סייבר</a>
             <a href="/mysteries">תעלומות</a>
             <a href="/blog">בלוג</a>
             <a href="/register">הרשמה</a>
@@ -139,15 +142,15 @@
 
     <div class="hero">
         <div class="bow-icon">🎀</div>
-        <h1>Women How Hack</h1>
+        <h1>Women Who Hack</h1>
         <p>ברוכות הבאות לקהילת ההאקריות הכי חזקה (והכי יפה) ברשת. כאן תלמדי הכל על סייבר, הגנה וקוד – בסטייל שלך.</p>
-        <br>
         <a href="/register" class="btn">הצטרפי לנבחרת 🎀</a>
     </div>
 
     <footer>
-        &copy; 2026 Women How Hack | Made with 🎀 by Mayyan
+        &copy; 2026 Women Who Hack | Made with 🎀 by Mayyan
     </footer>
 
 </body>
 </html>
+
