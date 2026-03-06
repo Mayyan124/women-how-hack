@@ -1,135 +1,239 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <title>Women Who Hack | הרשמה</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #FFF5F7;
+            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: #FFFDD0;
+            box-shadow: 0 2px 15px rgba(255,182,193,0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #F8BBD0;
+            direction: rtl;
+        }
+
+        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
+        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+
+        .page-body {
             display: flex;
             justify-content: center;
-            padding: 20px;
+            padding: 50px 20px 80px;
         }
 
         .reg-card {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(255,105,180,0.15);
             width: 100%;
-            max-width: 400px;
-            border-top: 5px solid #FF69B4;
+            max-width: 460px;
+            border-top: 6px solid #FF69B4;
         }
 
-        h2 {
+        .reg-card h2 {
             color: #D81B60;
             text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .reg-card .subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
         }
 
         label {
             display: block;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #555;
             font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #FFB6C1;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .btn-reg {
-            width: 100%;
-            background: #FF69B4;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 25px;
-            margin-top: 20px;
-            cursor: pointer;
+            padding: 12px 15px;
+            border: 2px solid #F8BBD0;
+            border-radius: 12px;
             font-size: 1rem;
+            font-family: 'Segoe UI', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            direction: rtl;
         }
 
-            .btn-reg:hover {
-                background: #FF1493;
-            }
+        input:focus { border-color: #FF69B4; }
 
         .error-msg {
-            color: red;
+            color: #e53935;
             font-size: 0.8rem;
             display: none;
             margin-top: 5px;
         }
+
+        .strength-wrap { margin-top: 8px; }
+        .strength-bar { height: 8px; background: #eee; border-radius: 10px; overflow: hidden; }
+        .strength-fill { height: 100%; border-radius: 10px; transition: width 0.4s, background 0.4s; width: 0%; }
+        .strength-label { font-size: 0.78rem; color: #aaa; margin-top: 4px; }
+
+        .btn-reg {
+            width: 100%;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            margin-top: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255,105,180,0.3);
+        }
+
+        .btn-reg:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255,105,180,0.4); }
+
+        .success-msg {
+            display: none;
+            background: #E8F5E9;
+            border: 2px solid #A5D6A7;
+            color: #2E7D32;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
-    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl;">
-        <a href="index.html" style="font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none;">Women Who Hack 🎀</a>
+
+    <nav>
+        <a href="/" class="logo">Women Who Hack 🎀</a>
         <div class="nav-links">
-            <a href="index.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">בית</a>
-            <a href="about.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">המייסדת</a>
-            <a href="attacks.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">מתקפות</a>
-            <a href="mysteries.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">תעלומות</a>
-            <a href="contact.html" style="text-decoration: none; color: #555; margin: 0 15px; font-weight: 600;">צור קשר</a>
-            <a href="register.html" style="text-decoration: none; background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white;">הצטרפות 🎀</a>
+            <a href="/">בית</a>
+            <a href="/about">המייסדת</a>
+            <a href="/attacks">מתקפות</a>
+            <a href="/mysteries">תעלומות</a>
+            <a href="/blog">בלוג</a>
+            <a href="/contact">צור קשר</a>
+            <a href="/register" class="join-btn">הצטרפות 🎀</a>
         </div>
     </nav>
 
-    <div class="reg-card">
-        <h2>הצטרפי לנבחרת 🎀</h2>
-        <form id="registerForm">
-            <label>שם מלא בעברית</label>
-            <input type="text" id="nameHeb" required>
+    <div class="page-body">
+        <div class="reg-card">
+            <h2>הצטרפי לנבחרת 🎀</h2>
+            <p class="subtitle">יוצרת חשבון ומקבלת מייל אישור 📩</p>
 
-            <label>שם מלא באנגלית</label>
-            <input type="text" id="nameEng" required>
+            <div id="registerForm">
+                <label>שם מלא בעברית</label>
+                <input type="text" id="nameHeb" placeholder="לדוגמא: מעיין כהן" required>
 
-            <label>מייל</label>
-            <input type="email" id="email" required>
+                <label>שם מלא באנגלית</label>
+                <input type="text" id="nameEng" placeholder="e.g. Mayyan Cohen" required>
 
-            <label>טלפון</label>
-            <input type="tel" id="phone" required>
+                <label>מייל</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
 
-            <label>שם משתמש (מינימום 8 תווים)</label>
-            <input type="text" id="username" minlength="8" required>
-            <p id="userError" class="error-msg">שם המשתמש חייב להיות לפחות 8 תווים</p>
+                <label>טלפון</label>
+                <input type="tel" id="phone" placeholder="05X-XXXXXXX" required>
 
-            <label>סיסמה (8+ תווים, אות גדולה וספרה)</label>
-            <input type="password" id="password" required>
-            <p id="passError" class="error-msg">הסיסמה חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
+                <label>תאריך לידה</label>
+                <input type="date" id="birthday" required>
 
-            <button type="submit" class="btn-reg">שלחי לי מייל ברוכה הבאה 📩</button>
-        </form>
+                <label>שם משתמש (מינימום 8 תווים)</label>
+                <input type="text" id="username" minlength="8" placeholder="לדוגמא: hackqueen99" required>
+                <p id="userError" class="error-msg">שם המשתמש חייב להיות לפחות 8 תווים</p>
+
+                <label>סיסמא (8+ תווים, אות גדולה וספרה)</label>
+                <input type="password" id="password" placeholder="לדוגמא: Hacker123!" required oninput="checkPwStrength(this.value)">
+                <div class="strength-wrap">
+                    <div class="strength-bar"><div class="strength-fill" id="pw-bar"></div></div>
+                    <div class="strength-label" id="pw-label"></div>
+                </div>
+                <p id="passError" class="error-msg">הסיסמא חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
+
+                <button class="btn-reg" onclick="submitForm()">צרי חשבון 🎀</button>
+
+                <div class="success-msg" id="success-msg">
+                    🎀 ברוכה הבאה לנבחרת!<br><br>
+                    שלחנו לך מייל אישור 📩<br>
+                    <small>אם לא קיבלת, בדקי את תיבת ה-Spam</small>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('registerForm').onsubmit = function (e) {
-            e.preventDefault();
+        function checkPwStrength(v) {
+            let s = 0;
+            if (v.length >= 8) s++;
+            if (v.length >= 12) s++;
+            if (/[A-Z]/.test(v)) s++;
+            if (/[0-9]/.test(v)) s++;
+            if (/[^A-Za-z0-9]/.test(v)) s++;
+            const colors = ['#ff6b6b','#ffa94d','#ffd43b','#a9e34b','#40c057'];
+            const labels = ['חלשה מאוד 😬','חלשה','בינונית','חזקה 💪','מאובטחת 🔒'];
+            document.getElementById('pw-bar').style.width = (s * 20) + '%';
+            document.getElementById('pw-bar').style.background = s > 0 ? colors[s-1] : '#eee';
+            document.getElementById('pw-label').textContent = s > 0 ? labels[s-1] : '';
+        }
+
+        function submitForm() {
+            const nameHeb = document.getElementById('nameHeb').value.trim();
+            const nameEng = document.getElementById('nameEng').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const birthday = document.getElementById('birthday').value;
+            const username = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value;
-            const user = document.getElementById('username').value;
 
-            // בדיקת חוקי הסיסמה שביקשת
-            const hasUpperCase = /[A-Z]/.test(pass);
-            const hasNumber = /[0-9]/.test(pass);
-            const isValidPass = pass.length >= 8 && hasUpperCase && hasNumber;
+            document.getElementById('userError').style.display = 'none';
+            document.getElementById('passError').style.display = 'none';
 
-            if (user.length < 8) {
+            if (!nameHeb || !nameEng || !email || !phone || !birthday) {
+                alert('אנא מלאי את כל השדות 🎀');
+                return;
+            }
+
+            if (username.length < 8) {
                 document.getElementById('userError').style.display = 'block';
                 return;
             }
 
-            if (!isValidPass) {
+            const hasUpper = /[A-Z]/.test(pass);
+            const hasNum = /[0-9]/.test(pass);
+            if (pass.length < 8 || !hasUpper || !hasNum) {
                 document.getElementById('passError').style.display = 'block';
                 return;
             }
 
-            alert("נרשמת בהצלחה! מייל ברוכה הבאה יישלח אלייך ברגע שנחבר את ה-Backend 🎀");
-        };
+            document.getElementById('success-msg').style.display = 'block';
+            document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
 
 </body>
