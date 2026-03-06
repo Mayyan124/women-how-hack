@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Women Who Hack | הרשמה</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -113,6 +114,7 @@
         }
 
         .btn-reg:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255,105,180,0.4); }
+        .btn-reg:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         .success-msg {
             display: none;
@@ -125,6 +127,14 @@
             margin-top: 20px;
             font-size: 1rem;
             line-height: 1.6;
+        }
+
+        .sending-msg {
+            display: none;
+            text-align: center;
+            color: #FF69B4;
+            margin-top: 15px;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -176,7 +186,9 @@
                 </div>
                 <p id="passError" class="error-msg">הסיסמא חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
 
-                <button class="btn-reg" onclick="submitForm()">צרי חשבון 🎀</button>
+                <button class="btn-reg" id="submitBtn" onclick="submitForm()">צרי חשבון 🎀</button>
+
+                <p class="sending-msg" id="sending-msg">⏳ שולחת מייל אישור...</p>
 
                 <div class="success-msg" id="success-msg">
                     🎀 ברוכה הבאה לנבחרת!<br><br>
@@ -188,6 +200,9 @@
     </div>
 
     <script>
+        // אתחול EmailJS
+        emailjs.init("kV3rx5xXAjFmxoKr8");
+
         function checkPwStrength(v) {
             let s = 0;
             if (v.length >= 8) s++;
@@ -231,10 +246,33 @@
                 return;
             }
 
-            document.getElementById('success-msg').style.display = 'block';
-            document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth' });
+            // נעל את הכפתור בזמן שליחה
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = '🎀 שולחת...';
+            document.getElementById('sending-msg').style.display = 'block';
+
+            // שליחת מייל דרך EmailJS
+            emailjs.send("service_7f11yj8", "template_9topr2a", {
+                name: nameHeb,       // {{name}} בתבנית
+                email: email         // {{email}} בתבנית
+            })
+            .then(function() {
+                document.getElementById('sending-msg').style.display = 'none';
+                document.getElementById('success-msg').style.display = 'block';
+                document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth' });
+                btn.textContent = '✅ נרשמת בהצלחה!';
+            })
+            .catch(function(error) {
+                document.getElementById('sending-msg').style.display = 'none';
+                btn.disabled = false;
+                btn.textContent = 'צרי חשבון 🎀';
+                alert('שגיאה בשליחת המייל 😢 נסי שוב');
+                console.error('EmailJS error:', error);
+            });
         }
     </script>
 
 </body>
 </html>
+
