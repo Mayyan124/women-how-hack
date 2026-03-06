@@ -1,93 +1,41 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <title>Women Who Hack | פרויקטים</title>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --pink: #FF69B4;
-      --deep: #D81B60;
-      --soft: #FFF0F5;
-      --cream: #FFFDD0;
-      --text: #2c2c2c;
-      --muted: #888;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Heebo', sans-serif; background: var(--soft); background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png'); color: var(--text); min-height: 100vh; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: var(--cream); box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; }
-    nav a.logo { font-size: 1.6rem; font-weight: 900; color: var(--deep); text-decoration: none; }
-    .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
-    .nav-links a.join-btn { background: var(--pink); color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
-    .hero { text-align: center; padding: 60px 20px 30px; }
-    .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--deep); margin-bottom: 10px; }
-    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin: 0 auto 30px; line-height: 1.7; }
-    .tabs { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; padding: 0 20px; }
-    .tab-btn { padding: 12px 28px; border-radius: 50px; border: 2px solid transparent; font-size: 1rem; font-weight: 700; font-family: 'Heebo', sans-serif; cursor: pointer; transition: all 0.25s; }
-    .tab-btn.beginner { background: #E8F5E9; color: #27AE60; border-color: #A5D6A7; }
-    .tab-btn.medium { background: #FFF9C4; color: #F39C12; border-color: #FFE082; }
-    .tab-btn.advanced { background: #FCE4EC; color: var(--deep); border-color: #F48FB1; }
-    .tab-btn.active, .tab-btn:hover { transform: scale(1.05); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
-    .tab-btn.beginner.active { background: #27AE60; color: white; }
-    .tab-btn.medium.active { background: #F39C12; color: white; }
-    .tab-btn.advanced.active { background: var(--deep); color: white; }
-    .level-badge { display: inline-block; padding: 4px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; }
-    .badge-beginner { background: #E8F5E9; color: #27AE60; }
-    .badge-medium { background: #FFF9C4; color: #F39C12; }
-    .badge-advanced { background: #FCE4EC; color: var(--deep); }
-    .projects-section { display: none; padding: 0 40px 80px; max-width: 1100px; margin: 0 auto; }
-    .projects-section.active { display: block; }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-    .project-card { background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(255,105,180,0.1); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border-top: 5px solid var(--pink); }
-    .project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(255,105,180,0.2); }
-    .project-card.defense { border-top-color: #27AE60; }
-    .project-card.attack { border-top-color: #E74C3C; }
-    .card-header { padding: 22px 24px 12px; }
-    .card-type { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .type-attack { color: #E74C3C; }
-    .type-defense { color: #27AE60; }
-    .card-title { font-size: 1.2rem; font-weight: 900; color: var(--text); margin-bottom: 8px; }
-    .card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .card-body { padding: 0 24px 20px; }
-    .accordion-btn { width: 100%; background: var(--soft); border: none; border-radius: 10px; padding: 11px 16px; text-align: right; font-family: 'Heebo', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--deep); cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
-    .accordion-btn:hover { background: #FFE0EE; }
-    .accordion-btn .arrow { transition: transform 0.3s; }
-    .accordion-btn.open .arrow { transform: rotate(180deg); }
-    .accordion-content { display: none; background: #FAFAFA; border-radius: 0 0 10px 10px; padding: 14px 16px; font-size: 0.88rem; line-height: 1.8; color: #444; border: 1px solid #F8BBD0; border-top: none; }
-    .accordion-content.open { display: block; }
-    .step-list { list-style: none; padding: 0; }
-    .step-list li { padding: 6px 0; padding-right: 22px; position: relative; }
-    .step-list li::before { content: "🎀"; position: absolute; right: 0; font-size: 0.8rem; }
-    .code-block { background: #1e1e2e; color: #cdd6f4; border-radius: 10px; padding: 16px; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.7; overflow-x: auto; margin-top: 8px; position: relative; }
-    .copy-btn { position: absolute; top: 10px; left: 10px; background: #313244; color: #cdd6f4; border: none; border-radius: 6px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; font-family: 'Heebo', sans-serif; }
-    .copy-btn:hover { background: var(--pink); color: white; }
-    .keyword { color: #cba6f7; } .string { color: #a6e3a1; } .comment { color: #6c7086; font-style: italic; } .fn { color: #89b4fa; } .num { color: #fab387; }
-    .submit-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: calc(100% - 48px); margin: 0 24px 24px; background: linear-gradient(135deg, #FF69B4, #D81B60); color: white; border: none; border-radius: 50px; padding: 14px 20px; font-size: 1rem; font-weight: 700; font-family: 'Heebo', sans-serif; cursor: pointer; text-decoration: none; text-align: center; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 5px 20px rgba(255,105,180,0.4); position: relative; overflow: hidden; }
-    .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transition: left 0.4s; }
-    .submit-btn:hover::before { left: 100%; }
-    .submit-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 10px 28px rgba(255,105,180,0.5); }
-    footer { text-align: center; padding: 30px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid #F8BBD0; background: var(--cream); }
-    @media (max-width: 600px) { nav { padding: 12px 20px; } .nav-links { display: none; } .hero h1 { font-size: 2rem; } .projects-section { padding: 0 16px 60px; } }
-  </style>
-</head>
-<body>
-<nav>
-  <a href="/" class="logo">Women Who Hack 🎀</a>
-  <div class="nav-links">
-    <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
-    <a href="/mysteries">תעלומות</a><a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
-    <a href="/register" class="join-btn">הצטרפות 🎀</a>
-  </div>
-</nav>
-<div class="hero">
-  <h1>🛡️ פרויקטים לימודיים 🎀</h1>
-  <p>בחרי את הרמה שלך, עברי שלב אחר שלב, וכשתסיימי – שלחי לנו את הקוד שלך 💪</p>
-  <div class="tabs">
-    <button class="tab-btn beginner active" onclick="showLevel('beginner')">🌱 מתחילות</button>
-    <button class="tab-btn medium" onclick="showLevel('medium')">⚡ יודעות קצת קוד</button>
-    <button class="tab-btn advanced" onclick="showLevel('advanced')">🔥 מתקדמות</button>
-  </div>
-</div>
+from flask import Flask, render_template
+import os
 
-<!-- BEGINNER -->
-<div class=
+app = Flask(__name__,
+            template_folder='women who hack/frontend',
+            static_folder='women who hack/frontend/static')
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/attacks')
+def attacks():
+    return render_template('attacks.html')
+
+@app.route('/mysteries')
+def mysteries():
+    return render_template('mysteries.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/projects')
+def projects():
+    return render_template('projects.html')
+
+if __name__ == '__main__':
+    app.run(debug=False)
