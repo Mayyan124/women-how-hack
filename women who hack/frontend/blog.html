@@ -5,172 +5,33 @@
     <title>Women Who Hack | הבלוג 🎀</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #FFF5F7;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: #FFFDD0;
-            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #F8BBD0;
-            direction: rtl;
-        }
-
-        nav a.logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #D81B60;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            margin: 0 15px;
-            font-weight: 600;
-        }
-
-        .nav-links a.join-btn {
-            background: #F8BBD0;
-            color: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            border: 1px solid white;
-        }
-
-        .page-header {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
-
-        .page-header h1 {
-            color: #F48FB1;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .page-header p {
-            color: #888;
-            font-size: 1rem;
-        }
-
-        .blog-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px 80px;
-        }
-
-        .blog-card {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1);
-            border: 1px solid #FFD1DC;
-            margin-bottom: 40px;
-        }
-
-        .blog-tag {
-            background: #FCE4EC;
-            color: #D81B60;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .blog-card h2 {
-            color: #D81B60;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .blog-card p {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 18px;
-        }
-
-        .blog-card h3 {
-            color: #3498db;
-            font-size: 1.1rem;
-            margin: 25px 0 10px;
-        }
-
-        .tip-box {
-            background: #F0F9FF;
-            border-right: 5px solid #3498db;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            color: #2c3e50;
-            font-size: 0.98rem;
-            line-height: 1.7;
-        }
-
-        .tip-list {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 20px;
-        }
-
-        .tip-list li {
-            padding: 10px 0;
-            border-bottom: 1px dashed #FFD1DC;
-            color: #555;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; background-color: #FFF5F7; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
+        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+        .page-header { text-align: center; padding: 50px 20px 30px; }
+        .page-header h1 { color: #F48FB1; font-size: 2.5rem; margin-bottom: 10px; }
+        .page-header p { color: #888; font-size: 1rem; }
+        .blog-container { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+        .blog-card { background: white; border-radius: 30px; padding: 40px; box-shadow: 0 10px 30px rgba(255,105,180,0.1); border: 1px solid #FFD1DC; margin-bottom: 40px; }
+        .blog-tag { background: #FCE4EC; color: #D81B60; padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .blog-card h2 { color: #D81B60; font-size: 1.5rem; margin-bottom: 6px; line-height: 1.4; }
+        .blog-subtitle { color: #3498db; font-size: 0.93rem; margin-bottom: 18px; font-style: italic; }
+        .blog-card p { color: #555; line-height: 1.8; font-size: 1.02rem; margin-bottom: 16px; }
+        .blog-card h3 { color: #3498db; font-size: 1.05rem; margin: 22px 0 10px; }
+        .tip-box { background: #F0F9FF; border-right: 5px solid #3498db; padding: 15px 20px; border-radius: 10px; margin: 15px 0; color: #2c3e50; font-size: 0.97rem; line-height: 1.7; }
+        .tip-list { list-style: none; padding: 0; margin: 10px 0 20px; }
+        .tip-list li { padding: 10px 0; border-bottom: 1px dashed #FFD1DC; color: #555; line-height: 1.7; font-size: 0.98rem; }
         .tip-list li:last-child { border-bottom: none; }
         .tip-list li::before { content: "🎀 "; }
-
-        .quote-box {
-            background: linear-gradient(135deg, #FFF0F5, #FFF5F7);
-            border: 2px solid #F8BBD0;
-            border-radius: 20px;
-            padding: 25px 30px;
-            text-align: center;
-            margin: 30px 0 10px;
-        }
-
-        .quote-box p {
-            color: #D81B60;
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-style: italic;
-            margin: 0;
-        }
-
-        .blog-meta {
-            color: #bbb;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .emoji-divider {
-            text-align: center;
-            font-size: 1.5rem;
-            margin: 20px 0;
-            letter-spacing: 8px;
-        }
+        .quote-box { background: linear-gradient(135deg, #FFF0F5, #FFF5F7); border: 2px solid #F8BBD0; border-radius: 20px; padding: 22px 28px; text-align: center; margin: 25px 0 10px; }
+        .quote-box p { color: #D81B60; font-size: 1.15rem; font-weight: bold; font-style: italic; margin: 0; }
+        .blog-meta { color: #bbb; font-size: 0.85rem; margin-bottom: 18px; }
+        .emoji-divider { text-align: center; font-size: 1.4rem; margin: 18px 0; letter-spacing: 8px; }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
         <div class="nav-links">
@@ -190,47 +51,122 @@
     </div>
 
     <div class="blog-container">
+
         <div class="blog-card">
             <span class="blog-tag">השראה & מציאות</span>
-            <p class="blog-meta">פוסט ראשון | מאת מעיין מיכלשוילי</p>
-            <h2>🎀 המסלול ליחידה טכנולוגית: זה לא תמיד ורוד (וזה בסדר גמור) 🎀</h2>
-
-            <p>היי בנות, בואו נדבר רגע דוגרי. ☕ בפינטרסט ואינסטגרם הכל נראה מושלם – עמדת עבודה נקייה, כוס קפה פוטוגנית וקוד שרץ חלק מהפעם הראשונה. אבל מי שבאמת רוצה להגיע רחוק, למיונים של 8200, ליחידות הסייבר או למשרה הראשונה בפיתוח, יודעת שהמציאות היא אחרת.</p>
-
+            <p class="blog-meta">פוסט 1 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 המסלול ליחידה טכנולוגית: זה לא תמיד ורוד (וזה בסדר גמור)</h2>
+            <p class="blog-subtitle">למה יצירתיות נשית היא נשק סודי בעולם הסייבר</p>
+            <p>היי בנות, בואו נדבר רגע דוגרי. ☕ בפינטרסט ואינסטגרם הכל נראה מושלם – עמדת עבודה נקייה, כוס קפה פוטוגנית וקוד שרץ חלק מהפעם הראשונה. אבל מי שבאמת רוצה להגיע רחוק, יודעת שהמציאות היא אחרת.</p>
             <p>הדרך להצלחה טכנולוגית רצופה בלילות לבנים, תסכול מול שגיאות בקוד שלא נגמרות, ותחושה של "מה אני עושה כאן?" כשכולם מסביב נראים כאילו הם מבינים הכל.</p>
-
             <div class="emoji-divider">🎀 🎀 🎀</div>
-
-            <h3>🧠 שלוש תובנות שחשוב להכיר לפני שמתחילים</h3>
-
-            <div class="tip-box">
-                <strong>1. הקושי הוא חלק מהתהליך, לא סימן לעצור</strong><br><br>
-                כשאת יושבת על תרגיל בסייבר או מנסה להבין מבנה נתונים מסובך וזה לא הולך – את לא "פחות טובה". את פשוט בשלב הלמידה. ביחידות הטכנולוגיות בצבא מחפשים בדיוק את זה: את היכולת שלך לא להישבר כשקשה.
-            </div>
-
-            <div class="tip-box">
-                <strong>2. הייטק זה מרתון, לא ספרינט</strong><br><br>
-                אי אפשר ללמוד סייבר בשבוע. זה דורש משמעת עצמית מטורפת. ביום שאין לך כוח לפתוח את המחשב? זה היום שבו את נבחנת באמת. התמדה היא "כוח העל" האמיתי בטכנולוגיה.
-            </div>
-
-            <div class="tip-box">
-                <strong>3. "תסמונת המתחזה" היא אמיתית – נצחי אותה</strong><br><br>
-                הרבה בנות מרגישות שהן "פחות טכנולוגיות" או שהן הגיעו לזה בטעות. אל תתני לקול הזה לעצור אותך. גם המומחיות הכי גדולות בעולם התחילו מאפס, עם אותן חששות בדיוק.
-            </div>
-
-            <h3>🛠️ טיפים פרקטיים למי שרוצה להגיע ליחידות טכנולוגיות</h3>
-
-            <ul class="tip-list">
-                <li><strong>אל תלמדי לבד:</strong> תמצאי קהילה של בנות (כמו הבלוג הזה!). למידה משותפת מקלה על הקושי ומייצרת נטוורקינג כבר מההתחלה.</li>
-                <li><strong>פרויקט אישי הוא כרטיס הכניסה שלך:</strong> אל תסתפקי רק בקריאה. תבני משהו. אתר, אפליקציה, כלי קטן בסביבה בטוחה. זה מה שמרשים במיונים.</li>
-                <li><strong>משמעת זה ה-Bow החדש:</strong> פפיונים הם יפים, אבל משמעת עצמית היא האקססורי הכי חזק שלך. תקבעי שעות למידה קבועות ביומן ואל תוותרי לעצמך.</li>
-            </ul>
-
-            <div class="quote-box">
-                <p>"אל תורידי מהשאיפות שלך רק כדי שיהיה לך קל יותר.<br>תעלי את המאמץ שלך כדי שיהיה לך שווה יותר." 🎀</p>
-            </div>
+            <div class="tip-box"><strong>1. הקושי הוא חלק מהתהליך, לא סימן לעצור</strong><br><br>כשאת יושבת על תרגיל בסייבר וזה לא הולך – את לא "פחות טובה". את פשוט בשלב הלמידה.</div>
+            <div class="tip-box"><strong>2. הייטק זה מרתון, לא ספרינט</strong><br><br>אי אפשר ללמוד סייבר בשבוע. זה דורש משמעת עצמית מטורפת. התמדה היא "כוח העל" האמיתי.</div>
+            <div class="tip-box"><strong>3. "תסמונת המתחזה" היא אמיתית – נצחי אותה</strong><br><br>גם המומחיות הכי גדולות בעולם התחילו מאפס, עם אותן חששות בדיוק.</div>
+            <div class="quote-box"><p>"אל תורידי מהשאיפות שלך רק כדי שיהיה לך קל יותר.<br>תעלי את המאמץ שלך כדי שיהיה לך שווה יותר." 🎀</p></div>
         </div>
-    </div>
 
+        <div class="blog-card">
+            <span class="blog-tag">מיונים & צבא</span>
+            <p class="blog-meta">פוסט 2 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 המיונים לצבא – לנפץ את תקרת הזכוכית (הוורודה)</h2>
+            <p class="blog-subtitle">למה את לא צריכה להיות "גאון מחשבים" כדי להגיע ליחידות הכי נחשקות</p>
+            <p>היי בנות, בואו נדבר על הפיל שבחדר המיונים: הפחד שלא נולדנו עם מקלדת ביד. הרבה בנות מוותרות מראש על מיונים ליחידות טכנולוגיות כמו 8200, אופק או יחידות הסייבר של תקשוב, כי הן בטוחות שזה מועדון סגור לבנים שתכנתו מגיל 5 במרתף חשוך.</p>
+            <p>המציאות בשטח: הצבא לא מחפש רק ידע קודם יבש. הוא מחפש פוטנציאל ולמידה עצמית. בעולם שבו הטכנולוגיה משתנה כל חודשיים, היכולת שלך ללמוד משהו חדש מאפס תוך לילה היא הנכס הכי יקר שלך. במיונים יבחנו את הלוגיקה שלך, את הדרך שבה את מפרקת בעיה גדולה לחלקים קטנים – ובעיקר, איך את מגיבה כשאת נתקלת במשהו שאת לא מכירה.</p>
+            <div class="tip-box"><strong>הטיפ שלי:</strong> כשאתן מגיעות למיון, אל תנסו להרשים בידע שאין לכן. תראו סקרנות. תשאלו שאלות חכמות. אם נתנו לכן משימה בשפה שאתן לא מכירות – תגידו "אני אקרא את הדוקומנטציה ואבין איך זה עובד". זה מה שיגרום למאבחנים לסמן עליכן וי ענק.</div>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">מנטליות & צמיחה</span>
+            <p class="blog-meta">פוסט 3 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 הדיבאג של החיים – למה להיכשל זה סטייל</h2>
+            <p class="blog-subtitle">איך להפוך תסכול מהודעת שגיאה לכוח על טכנולוגי</p>
+            <p>כל מי שהתחילה לכתוב קוד מכירה את הרגע הזה: את יושבת שעות, בטוחה שהכל מושלם, לוחצת על Run – והמסך מתמלא בטקסט אדום מאיים. באותו רגע, הדחף הכי חזק הוא לסגור את הלפטופ ולזרוק אותו מהחלון.</p>
+            <p>אבל בואו נגלה לכן סוד מקצועי: סייבר זה 90% "למה זה לא עובד?!" ו-10% של הצלחה מתוקה. מי שמצליחה בתחום היא לא זו שיודעת הכל, אלא זו שיש לה את החוסן המנטלי לא להישבר. הדיבאג הוא לא תקלה בדרך – הוא הדרך עצמה.</p>
+            <h3>🛠️ איך בונים חוסן של Cyber Girlie?</h3>
+            <ul class="tip-list">
+                <li><strong>קחי נשימה:</strong> אם את תקועה יותר מחצי שעה, קומי מהכיסא. תכיני מאצ'ה, תסדרי את הפפיונים על השולחן, וחזרי למסך בעיניים רעננות.</li>
+                <li><strong>גוגל הוא החבר הכי טוב:</strong> רוב הסיכויים שמישהי בעולם כבר נתקלה באותה שגיאה לפנייך. ללמוד לחפש ב-Stack Overflow זו מיומנות של מקצועניות.</li>
+                <li><strong>אל תילחמי לבד:</strong> לפעמים להסביר את הבעיה לחברה (או אפילו לבובה על השולחן!) עוזר למוח למצוא את הטעות לבד.</li>
+            </ul>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">כלים & מיומנויות</span>
+            <p class="blog-meta">פוסט 4 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 אנגלית טכנית – השפה שפותחת דלתות</h2>
+            <p class="blog-subtitle">איך להפסיק לפחד מדוקומנטציה ולהתחיל לדבר "הייטקית"</p>
+            <p>אני יודעת, שיעורי אנגלית בבית הספר יכולים להיות מייגעים. אבל בעולם הסייבר והפיתוח, אנגלית היא לא עוד מקצוע – היא מערכת ההפעלה שלך. כמעט כל קוד שנכתב, כל פורום חשוב וכל פריצה שמתועדת בעולם – כולם באנגלית.</p>
+            <p>זה לא אומר שאת צריכה מבטא מושלם. זה אומר "אנגלית טכנית" – היכולת לקרוא הוראות ולהבין מה המחשב רוצה ממך. זה כלי שייתן לך יתרון מטורף על פני אחרים במיונים ובחיי היומיום בהייטק.</p>
+            <h3>📚 כך תשפרי את האנגלית בסטייל</h3>
+            <ul class="tip-list">
+                <li><strong>תכניסי את האנגלית ללו"ז:</strong> תתחילי לצפות בסרטוני הדרכה ביוטיוב בלי כתוביות בעברית. האוזן מתרגלת מהר יותר ממה שאת חושבת.</li>
+                <li><strong>שיני את שפת הממשק:</strong> העבירי את הטלפון והמחשב לאנגלית. זה מכריח את המוח להכיר מונחים טכניים בסיסיים בלי מאמץ.</li>
+                <li><strong>לקרוא בלוגים:</strong> תעקבי אחרי נשים משפיעות בטכנולוגיה מחו"ל. זה ייתן לך השראה וחשיפה לדרך שבה מדברים בתעשייה הגלובלית.</li>
+            </ul>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">קהילה & נטוורקינג</span>
+            <p class="blog-meta">פוסט 5 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 נטוורקינג נשי – בניית ה-Dream Team שלך</h2>
+            <p class="blog-subtitle">למה חברה טובה היא הכלי הכי חזק בארגז הכלים הטכנולוגי שלך</p>
+            <p>עולם הטכנולוגיה יכול להרגיש קצת מבודד לפעמים, במיוחד כשיש סביבך בעיקר בנים. אבל הכוח הסודי של בנות בתחום הזה הוא הקהילתיות. נטוורקינג הוא לא רק מילה יפה ל"קשרים" – הוא היכולת לבנות סביבך רשת תמיכה של נשים שדוחפות אחת את השנייה למעלה.</p>
+            <p>כשאת חלק מקהילה, הקושי הופך לקל יותר. יש לך את מי לשאול שאלות בלי להרגיש "טיפשה", יש לך מי שתשלח לך לינק לקורס מעולה, ויש לך מי שתחזיק לך את היד לפני יום מיונים מלחיץ.</p>
+            <h3>🤝 איך בונים נטוורקינג מההתחלה?</h3>
+            <ul class="tip-list">
+                <li><strong>תמצאי מנטורית:</strong> אל תפחדי לפנות בלינקדאין לנשים שכבר נמצאות בתפקידים שאת חולמת עליהם. רובן ישמחו לענות על שאלה קטנה.</li>
+                <li><strong>קבוצות בנות:</strong> חפשי קהילות כמו CyberLadies או קבוצות של בנות במגמות טכנולוגיות.</li>
+                <li><strong>תהיי נדיבה:</strong> עזרת למישהי לפתור באג? הסברת לחברה נושא שהיא לא הבינה? מזל טוב, בנית לעצמך שם של מקצוענית ושותפה לדרך.</li>
+            </ul>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">פרויקטים & פורטפוליו</span>
+            <p class="blog-meta">פוסט 6 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 הפרויקט האישי – מאיפה מתחילים?</h2>
+            <p class="blog-subtitle">אל תחכי שיגידו לך מה לעשות, פשוט תבני משהו (בסטייל)</p>
+            <p>קורות חיים בלי פרויקט מעשי הם כמו פפיון בלי קשר – הם פשוט לא מחזיקים. כשאת מגיעה למיון צבאי או לראיון עבודה, הציון במבחן הוא נחמד, אבל מה שבאמת יגרום למראיינים להגיד "וואו" זה פרויקט שבנית בעצמך בבית, כי פשוט רצית לדעת איך זה עובד.</p>
+            <p>הפרויקט האישי שלך הוא ההוכחה שאת לא רק לומדת תיאוריה. זה יכול להיות כל דבר – מאתר אישי מהמם (כמו זה שאת בונה עכשיו!) ועד בוט לטלגרם שבודק את אבטחת ה-Wi-Fi שלך.</p>
+            <h3>🚀 הצעדים לפרויקט הראשון</h3>
+            <ul class="tip-list">
+                <li><strong>תבחרי בעיה קטנה:</strong> משהו שמעצבן אותך ביומיום ושאפשר לפתור בעזרת קוד.</li>
+                <li><strong>תשתמשי ב-GitHub:</strong> זה ה"פייסבוק" של המפתחים. תעלי לשם את הקוד שלך – זה נראה מקצועי בטירוף ומאפשר להראות את ההתקדמות שלך לאורך זמן.</li>
+                <li><strong>אל תפחדי מ"מושלם":</strong> הפרויקט לא חייב להיות מושלם. הוא חייב לעבוד ולהראות שהבנת את הלוגיקה.</li>
+            </ul>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">ניהול זמן & איזון</span>
+            <p class="blog-meta">פוסט 7 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 ניהול זמן של Boss Girl</h2>
+            <p class="blog-subtitle">איך לשלב בגרויות, חיי חברה וסייבר בלי להישרף</p>
+            <p>אחת השאלות הכי קשות היא: "איך יש לך זמן לזה?". בין לימודים בבית הספר, חברות, משפחה ותחביבים, קשה למצוא זמן ללמוד סייבר. הסוד הוא לא ב"כמות" הזמן, אלא בניהול שלו. משמעת עצמית היא האקססורי הכי חזק שלך – יותר מכל פפיון ורוד.</p>
+            <h3>⏱️ כלים לניהול זמן בסטייל</h3>
+            <ul class="tip-list">
+                <li><strong>Notion:</strong> תבני לעצמך לוח משימות אסתטי. זה עושה סדר בראש וכיף לסמן "וי" על משימות שביצעת.</li>
+                <li><strong>שיטת הפומודורו:</strong> 25 דקות של למידה מרוכזת, 5 דקות של הפסקת פפיון. זה שומר על המוח ערני.</li>
+                <li><strong>סדרי עדיפויות:</strong> עדיף ללמוד חצי שעה כל יום מאשר 10 שעות פעם בחודש. התמדה מנצחת עצימות.</li>
+            </ul>
+            <div class="quote-box"><p>"משמעת עצמית היא האקססורי הכי חזק שלך." 🎀</p></div>
+        </div>
+
+        <div class="blog-card">
+            <span class="blog-tag">אבטחה יומיומית</span>
+            <p class="blog-meta">פוסט 8 | מאת מעיין מיכלשוילי</p>
+            <h2>🎀 להיות ה-Security של הבית</h2>
+            <p class="blog-subtitle">איך לקחת את מה שאת לומדת ולהפוך אותו לשימושי כבר היום</p>
+            <p>לפעמים כשמתחילים ללמוד סייבר, זה מרגיש נורא תיאורטי ורחוק. אבל האמת היא שסייבר מתחיל במודעות בסיסית ובהגנה על מה שיקר לנו. הידע שאת צוברת יכול להפוך אותך ל"מומחית האבטחה" של המשפחה והחברות שלך.</p>
+            <p>אבטחת מידע היא לא רק עניין של ממשלות – היא עניין של כל אחת שרוצה לשמור על הפרטיות שלה ברשת.</p>
+            <h3>🛡️ איך תהיי ה-Protector של הסביבה שלך?</h3>
+            <ul class="tip-list">
+                <li><strong>בדיקת סיסמאות:</strong> תסבירי לאמא שלך למה הסיסמה שלה בבנק לא יכולה להיות תאריך הלידה שלך. תלמדי אותן על מנהלי סיסמאות.</li>
+                <li><strong>אימות דו-שלבי (2FA):</strong> תוודאי שלכל החברות שלך יש אימות כפול באינסטגרם ובטיקטוק. זה הצעד הכי פשוט שמונע 90% מהפריצות.</li>
+                <li><strong>פישינג:</strong> תראי להם איך לזהות לינקים חשודים שנשלחים ב-SMS. כשאת מלמדת אחרות, את מטמיעה את החומר אצלך בצורה הכי טובה שיש.</li>
+            </ul>
+            <div class="quote-box"><p>"אבטחת מידע היא לא רק עניין של ממשלות –<br>היא עניין של כל אחת שרוצה לשמור על הפרטיות שלה." 🎀</p></div>
+        </div>
+
+    </div>
 </body>
 </html>
