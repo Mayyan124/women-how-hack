@@ -326,10 +326,11 @@
 
             <div class="contact-form">
                 <h3>שלחי לי הודעה אישית 🎀</h3>
-                <input type="text" placeholder="השם המהמם שלך">
-                <input type="email" placeholder="אימייל לחזרה">
-                <textarea rows="4" placeholder="ספרי לי מה קרה..."></textarea>
-                <button class="submit-btn">שלחי פנייה למעיין ✨</button>
+                <input type="text" id="contact-name" placeholder="השם המהמם שלך">
+                <input type="email" id="contact-email" placeholder="אימייל לחזרה">
+                <textarea rows="4" id="contact-message" placeholder="ספרי לי מה קרה..."></textarea>
+                <button class="submit-btn" id="contact-btn" onclick="sendContact()">שלחי פנייה למעיין ✨</button>
+                <p id="contact-status" style="text-align:center; margin-top:15px; font-weight:bold; color:#D81B60; display:none;"></p>
             </div>
         </div>
     </div>
@@ -365,6 +366,45 @@
             const btn = document.getElementById('hamburger');
             nav.classList.toggle('open');
             btn.classList.toggle('open');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init("kV3rx5xXAjFmxoKr8");
+
+        function sendContact() {
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+            const btn = document.getElementById('contact-btn');
+            const status = document.getElementById('contact-status');
+
+            if (!name || !email || !message) {
+                status.style.display = 'block';
+                status.textContent = '⚠️ אנא מלאי את כל השדות';
+                return;
+            }
+
+            btn.textContent = 'שולחת... 🎀';
+            btn.disabled = true;
+
+            emailjs.send("service_f27devf", "template_uqzzlfb", {
+                from_name: name,
+                from_email: email,
+                message: message
+            }).then(() => {
+                status.style.display = 'block';
+                status.textContent = '✅ הפנייה נשלחה! אחזור אלייך בהקדם 💕';
+                btn.textContent = 'נשלח! 🎀';
+                document.getElementById('contact-name').value = '';
+                document.getElementById('contact-email').value = '';
+                document.getElementById('contact-message').value = '';
+            }).catch(() => {
+                status.style.display = 'block';
+                status.textContent = '❌ משהו השתבש, נסי שוב';
+                btn.textContent = 'שלחי פנייה למעיין ✨';
+                btn.disabled = false;
+            });
         }
     </script>
 </body>
