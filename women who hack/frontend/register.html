@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Women Who Hack | הרשמה</title>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #FFF5F7;
+            background-color: #F2C4CE;
+        background-image: url('/static/images/background.png');
+        background-size: 400px auto;
+        background-repeat: repeat;
             background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
             min-height: 100vh;
         }
@@ -114,7 +116,6 @@
         }
 
         .btn-reg:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255,105,180,0.4); }
-        .btn-reg:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         .success-msg {
             display: none;
@@ -129,20 +130,67 @@
             line-height: 1.6;
         }
 
-        .sending-msg {
+        /* ========== MOBILE NAV ========== */
+        .hamburger {
             display: none;
-            text-align: center;
-            color: #FF69B4;
-            margin-top: 15px;
-            font-size: 0.95rem;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
         }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #D81B60;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; position: relative; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                background: #FFFDD0;
+                padding: 15px 0;
+                border-top: 1px solid #F8BBD0;
+                margin-top: 10px;
+                gap: 5px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                padding: 10px 20px;
+                margin: 0;
+                border-radius: 10px;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover { background: #FCE4EC; }
+            .nav-links a.join-btn {
+                margin: 10px 20px 0;
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+        /* ================================ */
     </style>
 </head>
 <body>
 
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
-        <div class="nav-links">
+        
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט">
+        <span></span><span></span><span></span>
+    </button>
+        <div class="nav-links" id="nav-links">
             <a href="/">בית</a>
             <a href="/about">המייסדת</a>
             <a href="/attacks">מתקפות</a>
@@ -186,9 +234,7 @@
                 </div>
                 <p id="passError" class="error-msg">הסיסמא חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
 
-                <button class="btn-reg" id="submitBtn" onclick="submitForm()">צרי חשבון 🎀</button>
-
-                <p class="sending-msg" id="sending-msg">⏳ שולחת מייל אישור...</p>
+                <button class="btn-reg" onclick="submitForm()">צרי חשבון 🎀</button>
 
                 <div class="success-msg" id="success-msg">
                     🎀 ברוכה הבאה לנבחרת!<br><br>
@@ -200,9 +246,6 @@
     </div>
 
     <script>
-        // אתחול EmailJS
-        emailjs.init("kV3rx5xXAjFmxoKr8");
-
         function checkPwStrength(v) {
             let s = 0;
             if (v.length >= 8) s++;
@@ -217,7 +260,7 @@
             document.getElementById('pw-label').textContent = s > 0 ? labels[s-1] : '';
         }
 
-        function submitForm() {
+        async function submitForm() {
             const nameHeb = document.getElementById('nameHeb').value.trim();
             const nameEng = document.getElementById('nameEng').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -246,33 +289,59 @@
                 return;
             }
 
-            // נעל את הכפתור בזמן שליחה
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.textContent = '🎀 שולחת...';
-            document.getElementById('sending-msg').style.display = 'block';
+            // שמירה ב-Firebase
+            try {
+                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+                const { getFirestore, collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
 
-            // שליחת מייל דרך EmailJS
-            emailjs.send("service_7f11yj8", "template_9topr2a", {
-                name: nameHeb,       // {{name}} בתבנית
-                email: email         // {{email}} בתבנית
-            })
-            .then(function() {
-                document.getElementById('sending-msg').style.display = 'none';
-                document.getElementById('success-msg').style.display = 'block';
-                document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth' });
-                btn.textContent = '✅ נרשמת בהצלחה!';
-            })
-            .catch(function(error) {
-                document.getElementById('sending-msg').style.display = 'none';
-                btn.disabled = false;
-                btn.textContent = 'צרי חשבון 🎀';
-                alert('שגיאה בשליחת המייל 😢 נסי שוב');
-                console.error('EmailJS error:', error);
-            });
+                const firebaseConfig = {
+                    apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
+                    authDomain: "women-who-hack-40840.firebaseapp.com",
+                    projectId: "women-who-hack-40840",
+                    storageBucket: "women-who-hack-40840.firebasestorage.app",
+                    messagingSenderId: "180448551855",
+                    appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app);
+
+                await addDoc(collection(db, "users"), {
+                    nameHeb,
+                    nameEng,
+                    email,
+                    phone,
+                    birthday,
+                    username,
+                    bows: 10, // 🎀 פפיונים על הרשמה!
+                    joinDate: new Date().toISOString()
+                });
+
+                const successMsg = document.getElementById('success-msg');
+                successMsg.innerHTML = `
+                    <div style="font-size:2rem">🎀🎀🎀</div>
+                    <strong>ברוכה הבאה ${nameHeb}!</strong><br>
+                    החשבון שלך נוצר בהצלחה!<br>
+                    <span style="color:#D81B60; font-size:1.1rem">🎀 קיבלת 10 פפיונים על ההרשמה!</span>
+                `;
+                successMsg.style.display = 'block';
+                successMsg.scrollIntoView({ behavior: 'smooth' });
+
+            } catch(e) {
+                console.error(e);
+                alert('משהו השתבש, נסי שוב 😅');
+            }
         }
     </script>
 
+
+    <script>
+        function toggleNav() {
+            const nav = document.querySelector('.nav-links');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
-
