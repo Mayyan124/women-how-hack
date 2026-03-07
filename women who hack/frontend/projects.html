@@ -1,41 +1,888 @@
-from flask import Flask, render_template
-import os
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women Who Hack | פרויקטים</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #FF69B4;
+      --deep: #C2185B;
+      --rose: #F8BBD0;
+      --cream: #FFFDD0;
+      --soft: #FFF5F7;
+      --green: #2ECC71;
+      --orange: #F39C12;
+      --red: #E74C3C;
+      --text: #2c2c2c;
+      --muted: #999;
+    }
 
-app = Flask(__name__,
-            template_folder='women who hack/frontend',
-            static_folder='women who hack/frontend/static')
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--soft);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+    /* ===== NAV ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background: var(--cream);
+      box-shadow: 0 2px 15px rgba(255,182,193,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #F8BBD0;
+      direction: rtl;
+    }
+    nav a.logo { font-size: 1.6rem; font-weight: 900; color: var(--deep); text-decoration: none; }
+    .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--deep); }
+    .nav-links a.join-btn { background: var(--pink); color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
 
-@app.route('/blog')
-def blog():
-    return render_template('blog.html')
+    /* Mobile nav */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+    .hamburger span { display: block; width: 25px; height: 3px; background: var(--deep); border-radius: 3px; transition: 0.3s; }
+    @media (max-width: 768px) {
+      nav { padding: 15px 20px; flex-wrap: wrap; }
+      .hamburger { display: flex; }
+      .nav-links { display: none; width: 100%; flex-direction: column; background: var(--cream); padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; gap: 5px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 20px; margin: 0; }
+    }
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px 50px;
+      overflow: hidden;
+    }
 
-@app.route('/attacks')
-def attacks():
-    return render_template('attacks.html')
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,105,180,0.15), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-@app.route('/mysteries')
-def mysteries():
-    return render_template('mysteries.html')
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,182,193,0.2), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,105,180,0.12);
+      color: var(--deep);
+      border: 1.5px solid rgba(255,105,180,0.3);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
 
-@app.route('/projects')
-def projects():
-    return render_template('projects.html')
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--deep);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
 
-if __name__ == '__main__':
-    app.run(debug=False)
+    .hero h1 span {
+      background: linear-gradient(135deg, #FF69B4, #C2185B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--deep);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ===== TABS ===== */
+    .tabs-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+      margin-bottom: 50px;
+    }
+
+    .tab-btn {
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: 2px solid transparent;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Heebo', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .tab-btn.beginner { background: #F0FBF4; color: #27AE60; border-color: #A5D6A7; }
+    .tab-btn.medium { background: #FFFDE7; color: #E67E22; border-color: #FFE082; }
+    .tab-btn.advanced { background: #FCE4EC; color: var(--deep); border-color: var(--rose); }
+
+    .tab-btn:hover { transform: translateY(-3px) scale(1.03); }
+    .tab-btn.beginner.active { background: linear-gradient(135deg, #27AE60, #2ECC71); color: white; border-color: transparent; box-shadow: 0 8px 25px rgba(39,174,96,0.35); }
+    .tab-btn.medium.active { background: linear-gradient(135deg, #E67E22, #F39C12); color: white; border-color: transparent; box-shadow: 0 8px 25px rgba(243,156,18,0.35); }
+    .tab-btn.advanced.active { background: linear-gradient(135deg, var(--deep), var(--pink)); color: white; border-color: transparent; box-shadow: 0 8px 25px rgba(194,24,91,0.35); }
+
+    /* ===== SECTION ===== */
+    .projects-section { display: none; max-width: 1150px; margin: 0 auto; padding: 0 30px 100px; }
+    .projects-section.active { display: block; animation: fadeUp 0.4s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--deep);
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+
+    /* ===== CARD ===== */
+    .project-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(255,105,180,0.08);
+      border: 1px solid rgba(255,182,193,0.3);
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pink), #FF1493);
+    }
+
+    .project-card.defense::before { background: linear-gradient(90deg, #27AE60, #2ECC71); }
+    .project-card.attack::before { background: linear-gradient(90deg, #E74C3C, #FF6B6B); }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(255,105,180,0.18);
+    }
+
+    .card-top {
+      padding: 24px 24px 16px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .level-pill {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .pill-beginner { background: #E8F5E9; color: #27AE60; }
+    .pill-medium { background: #FFF9C4; color: #E67E22; }
+    .pill-advanced { background: #FCE4EC; color: var(--deep); }
+
+    .type-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .type-attack { color: #E74C3C; }
+    .type-defense { color: #27AE60; }
+    .type-web { color: var(--deep); }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ===== ACCORDION ===== */
+    .card-body { padding: 0 20px 16px; }
+
+    .accordion-btn {
+      width: 100%;
+      background: var(--soft);
+      border: 1.5px solid rgba(255,182,193,0.4);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-align: right;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--deep);
+      cursor: pointer;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .accordion-btn:hover { background: #FFE8F0; border-color: var(--rose); }
+    .accordion-btn.open { background: linear-gradient(135deg, #FCE4EC, #FFF0F5); border-color: var(--pink); }
+    .accordion-btn .arrow { transition: transform 0.3s; font-style: normal; font-size: 0.8rem; }
+    .accordion-btn.open .arrow { transform: rotate(180deg); }
+
+    .accordion-content {
+      display: none;
+      border: 1.5px solid rgba(255,182,193,0.3);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 16px;
+      background: #FEFEFE;
+      font-size: 0.87rem;
+      line-height: 1.8;
+      color: #444;
+    }
+    .accordion-content.open { display: block; animation: slideDown 0.25s ease; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-list { list-style: none; padding: 0; }
+    .step-list li {
+      padding: 7px 28px 7px 0;
+      border-bottom: 1px dashed #FFD1DC;
+      position: relative;
+      color: #555;
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-list li::before { content: "🎀"; position: absolute; right: 0; font-size: 0.75rem; top: 9px; }
+
+    code {
+      background: #FCE4EC;
+      color: var(--deep);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+    }
+
+    /* ===== CODE BLOCK ===== */
+    .code-block {
+      background: #1a1b2e;
+      color: #cdd6f4;
+      border-radius: 14px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin-top: 10px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255,255,255,0.1);
+      color: #cdd6f4;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: 'Heebo', sans-serif;
+      transition: 0.2s;
+    }
+    .copy-btn:hover { background: var(--pink); color: white; border-color: var(--pink); }
+
+    .keyword { color: #cba6f7; }
+    .string { color: #a6e3a1; }
+    .comment { color: #585b70; font-style: italic; }
+    .fn { color: #89b4fa; }
+    .num { color: #fab387; }
+
+    /* ===== SUBMIT BTN ===== */
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 8px 20px 24px;
+      background: linear-gradient(135deg, #FF69B4, #C2185B);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Heebo', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(194,24,91,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(194,24,91,0.4);
+    }
+    .submit-btn:hover::after { opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid #F8BBD0;
+      background: var(--cream);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .projects-section { padding: 0 16px 60px; }
+      .stats-bar { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Women Who Hack 🎀</a>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="/">בית</a>
+    <a href="/about">המייסדת</a>
+    <a href="/attacks">מתקפות</a>
+    <a href="/mysteries">תעלומות</a>
+    <a href="/blog">בלוג</a>
+    <a href="/projects">פרויקטים</a>
+    <a href="/contact">צור קשר</a>
+    <a href="/register" class="join-btn">הצטרפות 🎀</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✨ למדי • בני • שלחי</div>
+  <h1>פרויקטים <span>לימודיים</span> 🛡️</h1>
+  <p>בחרי את הרמה שלך, עברי שלב אחר שלב, וכשתסיימי – שלחי לנו את הקוד שלך 💪</p>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">פרויקטים</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">רמות</div></div>
+    <div class="stat"><div class="stat-num">🎀</div><div class="stat-label">פפיונים על הגשה</div></div>
+  </div>
+
+  <div class="tabs-wrapper">
+    <button class="tab-btn beginner active" onclick="showLevel('beginner')">🌱 מתחילות</button>
+    <button class="tab-btn medium" onclick="showLevel('medium')">⚡ יודעות קצת קוד</button>
+    <button class="tab-btn advanced" onclick="showLevel('advanced')">🔥 מתקדמות</button>
+  </div>
+</div>
+
+<!-- ===== BEGINNER ===== -->
+<div class="projects-section active" id="level-beginner">
+  <div class="section-header">
+    <h2>🌱 רמת מתחילות</h2>
+    <p>אין צורך בניסיון קודם — רק סקרנות וחשק ללמוד!</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-beginner">🌱 מתחילות</span>
+          <span class="type-tag type-defense">🛡️ הגנה</span>
+        </div>
+        <div class="card-title">בודקת חוזק סיסמאות</div>
+        <div class="card-desc">כתבי פונקציית Python שמקבלת סיסמה ובודקת אם היא מספיק חזקה — שימוש מעשי בסייבר יומיומי.</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>צרי קובץ Python חדש בשם <code>password_checker.py</code></li>
+            <li>כתבי פונקציה שמקבלת סיסמה כארגומנט</li>
+            <li>בדקי: אורך מינימום 8 תווים</li>
+            <li>בדקי: יש לפחות אות גדולה אחת (<code>isupper()</code>)</li>
+            <li>בדקי: יש לפחות ספרה אחת (<code>isdigit()</code>)</li>
+            <li>החזירי ציון 0–3 בהתאם לחוזק + הסבר</li>
+            <li>בונוס: הוסיפי בדיקה לתווים מיוחדים</li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># בודקת חוזק סיסמאות - Women Who Hack 🎀</span>
+
+<span class="keyword">def</span> <span class="fn">check_password</span>(password):
+    score = <span class="num">0</span>
+    tips = []
+
+    <span class="keyword">if</span> <span class="fn">len</span>(password) >= <span class="num">8</span>:
+        score += <span class="num">1</span>
+    <span class="keyword">else</span>:
+        tips.<span class="fn">append</span>(<span class="string">"❌ לפחות 8 תווים"</span>)
+
+    <span class="keyword">if</span> <span class="fn">any</span>(c.<span class="fn">isupper</span>() <span class="keyword">for</span> c <span class="keyword">in</span> password):
+        score += <span class="num">1</span>
+    <span class="keyword">else</span>:
+        tips.<span class="fn">append</span>(<span class="string">"❌ לפחות אות גדולה אחת"</span>)
+
+    <span class="keyword">if</span> <span class="fn">any</span>(c.<span class="fn">isdigit</span>() <span class="keyword">for</span> c <span class="keyword">in</span> password):
+        score += <span class="num">1</span>
+    <span class="keyword">else</span>:
+        tips.<span class="fn">append</span>(<span class="string">"❌ לפחות ספרה אחת"</span>)
+
+    levels = [<span class="string">"חלשה 😬"</span>, <span class="string">"בינונית 🤔"</span>, <span class="string">"חזקה 💪"</span>, <span class="string">"מאובטחת 🔒"</span>]
+    <span class="fn">print</span>(<span class="string">f"חוזק: {levels[score]}"</span>)
+    <span class="keyword">if</span> tips:
+        <span class="fn">print</span>(<span class="string">"טיפים לשיפור:"</span>)
+        <span class="keyword">for</span> t <span class="keyword">in</span> tips: <span class="fn">print</span>(<span class="string">f"  {t}"</span>)
+    <span class="keyword">return</span> score
+
+<span class="comment"># בדיקה</span>
+<span class="fn">check_password</span>(<span class="string">"abc"</span>)
+<span class="fn">check_password</span>(<span class="string">"Hacker123!"</span>)</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+    <div class="project-card defense">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-beginner">🌱 מתחילות</span>
+          <span class="type-tag type-defense">🛡️ הגנה</span>
+        </div>
+        <div class="card-title">מזהה אימיילים חשודים</div>
+        <div class="card-desc">כתבי סקריפט שסורק רשימת אימיילים ומדגיש כאלה שנראים כמו Phishing — לפי סימנים מוכרים.</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>צרי רשימת אימיילים — חלקם אמיתיים, חלקם מזויפים</li>
+            <li>חפשי סימנים חשודים: ספרות במקום אותיות (<code>paypa1</code>), דומיינים כמו <code>.xyz</code></li>
+            <li>השתמשי ב-<code>in</code> ו-<code>endswith()</code> לבדיקה</li>
+            <li>הדפיסי "⚠️ חשוד!" לכל אימייל בעייתי</li>
+            <li>בונוס: השתמשי ב-<code>re</code> לביטויים רגולריים מתקדמים</li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># מזהה Phishing - Women Who Hack 🎀</span>
+
+emails = [
+    <span class="string">"support@paypal.com"</span>,
+    <span class="string">"security@paypa1.com"</span>,
+    <span class="string">"noreply@amazon.com"</span>,
+    <span class="string">"winner@free-prize.xyz"</span>,
+    <span class="string">"info@bank-secure.tk"</span>,
+]
+
+suspicious_domains = [<span class="string">".xyz"</span>, <span class="string">".tk"</span>, <span class="string">".ml"</span>, <span class="string">".ga"</span>]
+suspicious_words = [<span class="string">"paypa1"</span>, <span class="string">"arnazon"</span>, <span class="string">"g00gle"</span>]
+
+<span class="keyword">for</span> email <span class="keyword">in</span> emails:
+    flags = []
+    <span class="keyword">for</span> d <span class="keyword">in</span> suspicious_domains:
+        <span class="keyword">if</span> email.<span class="fn">endswith</span>(d): flags.<span class="fn">append</span>(<span class="string">f"דומיין חשוד: {d}"</span>)
+    <span class="keyword">for</span> w <span class="keyword">in</span> suspicious_words:
+        <span class="keyword">if</span> w <span class="keyword">in</span> email: flags.<span class="fn">append</span>(<span class="string">f"שם מזויף: {w}"</span>)
+
+    <span class="keyword">if</span> flags:
+        <span class="fn">print</span>(<span class="string">f"⚠️  {email} → {', '.join(flags)}"</span>)
+    <span class="keyword">else</span>:
+        <span class="fn">print</span>(<span class="string">f"✅ {email} — נראה תקין"</span>)</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== MEDIUM ===== -->
+<div class="projects-section" id="level-medium">
+  <div class="section-header">
+    <h2>⚡ רמת יודעות קצת קוד</h2>
+    <p>את כבר מכירה Python בסיסי — בואי נעמיק!</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-medium">⚡ בינוני</span>
+          <span class="type-tag type-web">🌐 רשת</span>
+        </div>
+        <div class="card-title">סורקת פורטים פשוטה</div>
+        <div class="card-desc">בני כלי שסורק פורטים נפוצים בכתובת IP ומציג אילו מהם פתוחים — בדיוק כמו Nmap!</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>ייבאי את ספריית <code>socket</code></li>
+            <li>הגדירי רשימת פורטים נפוצים: 80, 443, 22, 21, 3306</li>
+            <li>נסי להתחבר לכל פורט עם <code>connect_ex()</code></li>
+            <li>אם מחזיר 0 — הפורט פתוח!</li>
+            <li>הגדירי timeout של שנייה אחת כדי לא לחכות יותר מדי</li>
+            <li>בונוס: הוסיפי מילון שממפה פורט לשם השירות</li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># סורקת פורטים - Women Who Hack 🎀</span>
+<span class="keyword">import</span> socket
+
+target = <span class="string">"127.0.0.1"</span>  <span class="comment"># בדיקה על localhost</span>
+ports = {<span class="num">22</span>: <span class="string">"SSH"</span>, <span class="num">80</span>: <span class="string">"HTTP"</span>, <span class="num">443</span>: <span class="string">"HTTPS"</span>, <span class="num">21</span>: <span class="string">"FTP"</span>, <span class="num">3306</span>: <span class="string">"MySQL"</span>}
+
+<span class="fn">print</span>(<span class="string">f"🔍 סורקת {target}...\n"</span>)
+
+<span class="keyword">for</span> port, service <span class="keyword">in</span> ports.<span class="fn">items</span>():
+    sock = socket.<span class="fn">socket</span>(socket.AF_INET, socket.SOCK_STREAM)
+    sock.<span class="fn">settimeout</span>(<span class="num">1</span>)
+    result = sock.<span class="fn">connect_ex</span>((target, port))
+    <span class="keyword">if</span> result == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="string">f"✅ פורט {port} ({service}) — פתוח!"</span>)
+    <span class="keyword">else</span>:
+        <span class="fn">print</span>(<span class="string">f"❌ פורט {port} ({service}) — סגור"</span>)
+    sock.<span class="fn">close</span>()
+
+<span class="fn">print</span>(<span class="string">"\n🎀 סריקה הושלמה!"</span>)</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+    <div class="project-card attack">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-medium">⚡ בינוני</span>
+          <span class="type-tag type-attack">⚔️ התקפה לימודית</span>
+        </div>
+        <div class="card-title">Brute Force לימודי</div>
+        <div class="card-desc">הבני סימולציה של מתקפת Brute Force — ותגלי כמה מהר מחשב פורץ סיסמאות קצרות.</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>ייבאי <code>itertools</code> ו-<code>string</code></li>
+            <li>הגדירי סיסמא סודית קצרה (2-3 תווים)</li>
+            <li>השתמשי ב-<code>itertools.product</code> לכל הצירופים האפשריים</li>
+            <li>ספרי כמה ניסיונות עד שמצאת</li>
+            <li>מדדי את הזמן עם <code>time</code></li>
+            <li>הסיקי מסקנות: למה סיסמאות ארוכות חשובות?</li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># Brute Force לימודי - Women Who Hack 🎀</span>
+<span class="keyword">import</span> itertools
+<span class="keyword">import</span> string
+<span class="keyword">import</span> time
+
+secret = <span class="string">"ab3"</span>
+chars = string.ascii_lowercase + string.digits
+attempts = <span class="num">0</span>
+start = time.<span class="fn">time</span>()
+
+<span class="fn">print</span>(<span class="string">f"🔓 מנסה לפצח סיסמא של {len(secret)} תווים...\n"</span>)
+
+<span class="keyword">for</span> length <span class="keyword">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="fn">len</span>(secret) + <span class="num">2</span>):
+    <span class="keyword">for</span> combo <span class="keyword">in</span> itertools.<span class="fn">product</span>(chars, repeat=length):
+        attempts += <span class="num">1</span>
+        guess = <span class="string">""</span>.<span class="fn">join</span>(combo)
+        <span class="keyword">if</span> guess == secret:
+            elapsed = <span class="fn">round</span>(time.<span class="fn">time</span>() - start, <span class="num">3</span>)
+            <span class="fn">print</span>(<span class="string">f"✅ נמצאה! סיסמא: '{guess}'"</span>)
+            <span class="fn">print</span>(<span class="string">f"⏱️  {attempts:,} ניסיונות תוך {elapsed} שניות"</span>)
+            <span class="fn">print</span>(<span class="string">"💡 סיסמא ארוכה = מיליארדי ניסיונות נוספים! 🎀"</span>)
+            exit()</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== ADVANCED ===== -->
+<div class="projects-section" id="level-advanced">
+  <div class="section-header">
+    <h2>🔥 רמת מתקדמות</h2>
+    <p>פרויקטים שידגימו ידע אמיתי — מושלם לפורטפוליו ולמיונים!</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card defense">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-advanced">🔥 מתקדמות</span>
+          <span class="type-tag type-defense">🛡️ הגנת סייבר</span>
+        </div>
+        <div class="card-title">מערכת זיהוי חדירות (IDS)</div>
+        <div class="card-desc">כתבי סקריפט שמנטר קבצי לוג ומתריע כשיש כניסות כושלות חוזרות — בדיוק כמו מערכות IDS אמיתיות.</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>צרי קובץ לוג מדומה <code>auth.log</code> עם שורות "Failed login from IP"</li>
+            <li>קראי את הקובץ עם Python וחלצי כתובות IP</li>
+            <li>השתמשי ב-<code>collections.Counter</code> לספור כשלונות לכל IP</li>
+            <li>אם IP מופיע יותר מ-5 פעמים — הדפיסי "🚨 חשד ל-Brute Force!"</li>
+            <li>שמרי את הרשימה השחורה לקובץ <code>blacklist.txt</code></li>
+            <li>בונוס: הוסיפי תאריך ושעה לכל התראה עם <code>datetime</code></li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># מערכת IDS - Women Who Hack 🎀</span>
+<span class="keyword">import</span> re
+<span class="keyword">from</span> collections <span class="keyword">import</span> Counter
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+fake_log = <span class="string">"""
+Failed login from 192.168.1.10
+Failed login from 10.0.0.5
+Failed login from 192.168.1.10
+Failed login from 192.168.1.10
+Failed login from 10.0.0.5
+Failed login from 192.168.1.10
+Failed login from 192.168.1.10
+Failed login from 192.168.1.10
+Successful login from 10.0.0.1
+"""</span>
+
+THRESHOLD = <span class="num">5</span>
+pattern = re.<span class="fn">compile</span>(<span class="string">r'Failed login from (\d+\.\d+\.\d+\.\d+)'</span>)
+ips = pattern.<span class="fn">findall</span>(fake_log)
+counts = <span class="fn">Counter</span>(ips)
+blacklist = []
+
+<span class="fn">print</span>(<span class="string">"🔍 מנתחת לוגים...\n"</span>)
+<span class="keyword">for</span> ip, count <span class="keyword">in</span> counts.<span class="fn">items</span>():
+    <span class="keyword">if</span> count >= THRESHOLD:
+        now = datetime.<span class="fn">now</span>().<span class="fn">strftime</span>(<span class="string">"%H:%M:%S"</span>)
+        <span class="fn">print</span>(<span class="string">f"🚨 [{now}] חשד ל-Brute Force! IP: {ip} ({count} ניסיונות)"</span>)
+        blacklist.<span class="fn">append</span>(ip)
+
+<span class="keyword">with</span> <span class="fn">open</span>(<span class="string">"blacklist.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:
+    f.<span class="fn">write</span>(<span class="string">"\n"</span>.<span class="fn">join</span>(blacklist))
+
+<span class="fn">print</span>(<span class="string">f"\n🎀 {len(blacklist)} כתובות IP נוספו לרשימה השחורה!"</span>)</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+    <div class="project-card attack">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="level-pill pill-advanced">🔥 מתקדמות</span>
+          <span class="type-tag type-attack">⚔️ מתקפה לימודית</span>
+        </div>
+        <div class="card-title">SQL Injection – הדגמה</div>
+        <div class="card-desc">הבני בסיס נתונים מדומה וכתבי קוד שמדגים איך SQL Injection עובד — ואיך מגינים מפניה.</div>
+      </div>
+      <div class="card-body">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">📋 שלבים לביצוע <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <ul class="step-list">
+            <li>ייבאי <code>sqlite3</code> וצרי DB מדומה עם טבלת משתמשים</li>
+            <li>כתבי פונקציית login פגיעה שמרכיבה SQL ישירות מהקלט</li>
+            <li>הדגימי את המתקפה עם הקלט: <code>' OR '1'='1</code></li>
+            <li>הראי שהמתקפה עובדת — המשתמשת מתחברת ללא סיסמא!</li>
+            <li>כתבי פונקציית login מאובטחת עם Parameterized Queries</li>
+            <li>הראי שעכשיו המתקפה נכשלת ותסבירי למה</li>
+          </ul>
+        </div>
+        <button class="accordion-btn" onclick="toggleAccordion(this)">💡 פתרון מלא <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+          <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">העתק</button>
+<pre><span class="comment"># SQL Injection הדגמה - Women Who Hack 🎀</span>
+<span class="keyword">import</span> sqlite3
+
+conn = sqlite3.<span class="fn">connect</span>(<span class="string">":memory:"</span>)
+conn.<span class="fn">execute</span>(<span class="string">"CREATE TABLE users (name TEXT, password TEXT)"</span>)
+conn.<span class="fn">execute</span>(<span class="string">"INSERT INTO users VALUES ('admin', 'secret123')"</span>)
+
+<span class="comment"># ❌ פגיעה</span>
+<span class="keyword">def</span> <span class="fn">login_vulnerable</span>(user, pwd):
+    q = <span class="string">f"SELECT * FROM users WHERE name='{user}' AND password='{pwd}'"</span>
+    <span class="keyword">return</span> <span class="string">"✅ התחברת!"</span> <span class="keyword">if</span> conn.<span class="fn">execute</span>(q).<span class="fn">fetchone</span>() <span class="keyword">else</span> <span class="string">"❌ שגיאה"</span>
+
+<span class="comment"># ✅ מאובטחת</span>
+<span class="keyword">def</span> <span class="fn">login_safe</span>(user, pwd):
+    q = <span class="string">"SELECT * FROM users WHERE name=? AND password=?"</span>
+    <span class="keyword">return</span> <span class="string">"✅ התחברת!"</span> <span class="keyword">if</span> conn.<span class="fn">execute</span>(q, (user, pwd)).<span class="fn">fetchone</span>() <span class="keyword">else</span> <span class="string">"❌ שגיאה"</span>
+
+attack = <span class="string">"' OR '1'='1"</span>
+<span class="fn">print</span>(<span class="string">f"פגיע:    {login_vulnerable(attack, attack)}"</span>)
+<span class="fn">print</span>(<span class="string">f"מאובטח: {login_safe(attack, attack)}"</span>)
+<span class="fn">print</span>(<span class="string">"\n🎀 Parameterized Queries מציל את היום!"</span>)</pre>
+          </div>
+        </div>
+      </div>
+      <a href="https://forms.gle/FZDPF7pYRbuLxwoKA" target="_blank" class="submit-btn">📩 שלחי את הקוד שלך</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2026 Women Who Hack | Made with 🎀 by Mayyan</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+
+  function showLevel(level) {
+    document.querySelectorAll('.projects-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('level-' + level).classList.add('active');
+    document.querySelector('.tab-btn.' + level).classList.add('active');
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  }
+
+  function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    const isOpen = content.classList.contains('open');
+    btn.closest('.card-body').querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+    btn.closest('.card-body').querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) {
+      content.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  function copyCode(btn) {
+    const code = btn.nextElementSibling.innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = '✅ הועתק!';
+      setTimeout(() => btn.textContent = 'העתק', 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
