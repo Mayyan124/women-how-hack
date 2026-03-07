@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -9,11 +8,10 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #FFF5F7;
-            padding: 0;
-            color: #5D4037;
-            background-image: radial-gradient(#F8BBD0 0.5px, transparent 0.5px);
-            background-size: 30px 30px;
+            background-color: #F2C4CE;
+        background-image: url('/static/images/background.png');
+        background-size: 400px auto;
+        background-repeat: repeat;
         }
 
         nav {
@@ -53,7 +51,9 @@
             border: 1px solid white;
         }
 
-        .page-body { padding: 40px 20px; }
+        .page-body {
+            padding: 40px 20px;
+        }
 
         .container {
             max-width: 800px;
@@ -66,11 +66,20 @@
             position: relative;
         }
 
-        .bow-corner { position: absolute; font-size: 2.5rem; }
+        .bow-corner {
+            position: absolute;
+            font-size: 2.5rem;
+        }
+
         .top-right { top: 10px; right: 15px; }
         .bottom-left { bottom: 10px; left: 15px; }
 
-        h1 { color: #F48FB1; text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+        h1 {
+            color: #F48FB1;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
 
         .feedback-section {
             background: white;
@@ -81,8 +90,282 @@
             margin-bottom: 40px;
         }
 
-        .feedback-section p { font-size: 1.15rem; line-height: 1.7; color: #555; }
+        .feedback-section p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #555;
+        }
 
         .feedback-link {
             display: inline-block;
             margin-top: 15px;
+            color: #D81B60;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .feedback-link:hover { transform: scale(1.1); }
+
+        .chat-container {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            border: 2px solid #F8BBD0;
+        }
+
+        .bot-header {
+            color: #F06292;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-window {
+            min-height: 150px;
+            border-bottom: 1px solid #FCE4EC;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .bot-msg {
+            background: #FFF5F7;
+            padding: 12px 18px;
+            border-radius: 20px;
+            border-bottom-right-radius: 2px;
+            display: inline-block;
+            max-width: 80%;
+            margin-bottom: 8px;
+        }
+
+        .user-msg {
+            background: #FCE4EC;
+            padding: 10px 16px;
+            border-radius: 20px;
+            border-bottom-left-radius: 2px;
+            display: block;
+            max-width: 80%;
+            margin: 8px 0 8px auto;
+            text-align: left;
+            color: #D81B60;
+            font-weight: 600;
+        }
+
+        .option-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .opt-btn {
+            background: #FFFDD0;
+            color: #D81B60;
+            border: 2px solid #F8BBD0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .opt-btn:hover {
+            background: #F8BBD0;
+            color: white;
+        }
+
+        .contact-form {
+            margin-top: 40px;
+        }
+
+        .contact-form h3 {
+            color: #F06292;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #F8BBD0;
+            border-radius: 15px;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 1rem;
+            font-family: 'Segoe UI', sans-serif;
+            direction: rtl;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #F48FB1;
+        }
+
+        .submit-btn {
+            background: #F48FB1;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.3);
+            margin-top: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover { transform: scale(1.02); }
+
+        /* ========== MOBILE NAV ========== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #D81B60;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; position: relative; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                background: #FFFDD0;
+                padding: 15px 0;
+                border-top: 1px solid #F8BBD0;
+                margin-top: 10px;
+                gap: 5px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                padding: 10px 20px;
+                margin: 0;
+                border-radius: 10px;
+                transition: background 0.2s;
+            }
+            .nav-links a:hover { background: #FCE4EC; }
+            .nav-links a.join-btn {
+                margin: 10px 20px 0;
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+        /* ================================ */
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">Women Who Hack 🎀</a>
+        
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט">
+        <span></span><span></span><span></span>
+    </button>
+        <div class="nav-links" id="nav-links">
+            <a href="/">בית</a>
+            <a href="/about">המייסדת</a>
+            <a href="/attacks">מתקפות</a>
+            <a href="/mysteries">תעלומות</a>
+            <a href="/blog">בלוג</a>
+            <a href="/contact">צור קשר</a>
+            <a href="/register" class="join-btn">הצטרפות 🎀</a>
+        </div>
+    </nav>
+
+    <div class="page-body">
+        <div class="container">
+            <div class="bow-corner top-right">🎀</div>
+            <div class="bow-corner bottom-left">🎀</div>
+
+            <h1>עזרה, קשר ומשוב 🎀</h1>
+
+            <div class="feedback-section">
+                <p>
+                    יקירה, דעתך חשובה לי יותר מכל קוד! ✨<br>
+                    אם משהו לא היה ברור, אם נתקלת בקושי או שיש לך רעיון איך להפוך את האתר שלנו ליותר קסום ומלמד – אני כאן כדי להקשיב.
+                </p>
+                <a href="https://forms.gle/KUB5gycqLyxgomUWA" target="_blank" class="feedback-link">
+                    🎀 לחצי כאן למעבר למשוב האישי שלך 🎀
+                </a>
+            </div>
+
+            <div class="chat-container">
+                <div class="bot-header"><span>🎀</span> Maayan-Bot</div>
+                <div class="chat-window" id="chat">
+                    <div class="bot-msg">היי אהובה! אני כאן לעזור. מה קרה?</div>
+                </div>
+                <div class="option-btns">
+                    <button class="opt-btn" onclick="botReply('הרשמה')">בעיה בהרשמה</button>
+                    <button class="opt-btn" onclick="botReply('אתגרים')">איפה האתגרים?</button>
+                    <button class="opt-btn" onclick="botReply('תקלה')">דיווח על תקלה</button>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>שלחי לי הודעה אישית 🎀</h3>
+                <input type="text" placeholder="השם המהמם שלך">
+                <input type="email" placeholder="אימייל לחזרה">
+                <textarea rows="4" placeholder="ספרי לי מה קרה..."></textarea>
+                <button class="submit-btn">שלחי פנייה למעיין ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function botReply(type) {
+            const chat = document.getElementById('chat');
+            let text = "";
+
+            if (type === 'הרשמה') text = "ודאי שהסיסמה שלך מכילה לפחות 8 תווים, אות גדולה ומספר! 🎀";
+            else if (type === 'אתגרים') text = "האתגרים נמצאים בדף המתקפות! לחצי על 'מתקפות' בתפריט למעלה 🎀";
+            else if (type === 'תקלה') text = "תודה על הדיווח! מעיין תטפל בזה בהקדם. אפשר גם לשלוח פרטים בטופס למטה 🎀";
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user-msg';
+            userDiv.textContent = type;
+            chat.appendChild(userDiv);
+
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'bot-msg';
+                botDiv.textContent = text;
+                chat.appendChild(botDiv);
+                chat.scrollTop = chat.scrollHeight;
+            }, 500);
+        }
+    </script>
+
+
+    <script>
+        function toggleNav() {
+            const nav = document.querySelector('.nav-links');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
