@@ -37,5 +37,9 @@ def register():
 def projects():
     return render_template('projects.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 if __name__ == '__main__':
-    app.run(debug=False)lse)
+    app.run(debug=False)
