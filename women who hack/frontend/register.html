@@ -317,6 +317,12 @@
                     joinDate: new Date().toISOString()
                 });
 
+                // שליחת מייל ברוכה הבאה
+                emailjs.send("service_7f11yj8", "template_9topr2a", {
+                    to_name: nameHeb,
+                    to_email: email
+                });
+
                 const successMsg = document.getElementById('success-msg');
                 successMsg.innerHTML = `
                     <div style="font-size:2rem">🎀🎀🎀</div>
@@ -343,5 +349,7 @@
             btn.classList.toggle('open');
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init("kV3rx5xXAjFmxoKr8");</script>
 </body>
 </html>
