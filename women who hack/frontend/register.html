@@ -229,7 +229,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
@@ -288,14 +288,6 @@
                 return;
             }
 
-            // בדיקה ששם המשתמש לא תפוס
-            const q = query(collection(db, "users"), where("username", "==", username));
-            const existing = await getDocs(q);
-            if (!existing.empty) {
-                alert('שם המשתמש כבר תפוס, נסי שם אחר 🎀');
-                return;
-            }
-
             btn.textContent = 'יוצרת חשבון... 🎀';
             btn.disabled = true;
 
@@ -333,7 +325,7 @@
                 `;
                 successMsg.style.display = 'block';
                 successMsg.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => { window.location.href = '/'; }, 2500);
+                setTimeout(() => { window.location.href = '/Profile'; }, 2500);
 
             } catch(e) {
                 console.error(e);
