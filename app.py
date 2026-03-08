@@ -36,6 +36,10 @@ def register():
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
+            
+@app.route('/learn')
+def learn():
+    return render_template('learn.html')
 
 @app.route('/Profile')
 @app.route('/profile')
