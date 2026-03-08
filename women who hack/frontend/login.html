@@ -43,17 +43,8 @@
         h2 { color: #D81B60; font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
         .subtitle { color: #999; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
 
-        .input-group {
-            margin-bottom: 15px;
-            text-align: right;
-        }
-        .input-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #D81B60;
-            margin-bottom: 6px;
-        }
+        .input-group { margin-bottom: 15px; text-align: right; }
+        .input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #D81B60; margin-bottom: 6px; }
         .input-group input {
             width: 100%;
             padding: 13px 18px;
@@ -141,8 +132,8 @@
         <p class="subtitle">היי! שמחה שחזרת 💕<br>הכניסי את הפרטים שלך להמשך</p>
 
         <div class="input-group">
-            <label>שם משתמש</label>
-            <input type="text" id="username" placeholder="שם המשתמש שלך..." />
+            <label>מייל</label>
+            <input type="email" id="email" placeholder="your@email.com" />
         </div>
 
         <div class="input-group">
@@ -163,7 +154,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const app = initializeApp({
             apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
@@ -173,20 +165,24 @@
             messagingSenderId: "180448551855",
             appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
         });
+
+        const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // אם כבר מחוברת — עברי לבית
-        if (localStorage.getItem('wwh_user')) {
-            window.location.href = '/';
-        }
+        // ✅ Firebase Auth מנהל את הסשן בצורה מאובטחת — לא צריך localStorage
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = '/';
+            }
+        });
 
         window.doLogin = async function() {
-            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const btn = document.getElementById('login-btn');
             const err = document.getElementById('error-msg');
 
-            if (!username || !password) {
+            if (!email || !password) {
                 err.textContent = 'אנא מלאי את כל השדות 🎀';
                 err.style.display = 'block';
                 return;
@@ -197,48 +193,22 @@
             err.style.display = 'none';
 
             try {
-                const q = query(collection(db, "users"), where("username", "==", username));
-                const snap = await getDocs(q);
-
-                if (snap.empty) {
-                    err.textContent = 'שם משתמש לא נמצא 😕';
-                    err.style.display = 'block';
-                    btn.textContent = 'כניסה 🎀';
-                    btn.disabled = false;
-                    return;
-                }
-
-                const data = snap.docs[0].data();
-
-                // בדיקת סיסמא
-                if (data.password !== password) {
-                    err.textContent = 'סיסמא שגויה 😕';
-                    err.style.display = 'block';
-                    btn.textContent = 'כניסה 🎀';
-                    btn.disabled = false;
-                    return;
-                }
-
-                // שמירה ב-localStorage
-                localStorage.setItem('wwh_user', JSON.stringify({
-                    nameHeb: data.nameHeb,
-                    nameEng: data.nameEng,
-                    username: data.username,
-                    bows: data.bows || 10
-                }));
+                // ✅ הסיסמה נבדקת על ידי Firebase בצד השרת — לא בפרונטאנד
+                await signInWithEmailAndPassword(auth, email, password);
 
                 btn.textContent = '✅ מתחברת...';
                 window.location.href = '/';
 
             } catch(e) {
-                err.textContent = 'משהו השתבש, נסי שוב 😅';
+                let msg = 'שם משתמש או סיסמא שגויים 😕';
+                if (e.code === 'auth/too-many-requests') msg = 'יותר מדי ניסיונות, נסי שוב מאוחר יותר 😕';
+                err.textContent = msg;
                 err.style.display = 'block';
                 btn.textContent = 'כניסה 🎀';
                 btn.disabled = false;
             }
         };
 
-        // כניסה עם Enter
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') doLogin();
         });
