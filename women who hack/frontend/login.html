@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | התחברות 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #FFF5F7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: radial-gradient(#F8BBD0 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #D81B60;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #F8BBD0;
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 15px 50px rgba(255,105,180,0.12);
+        }
+
+        .icon { font-size: 3.5rem; margin-bottom: 15px; }
+        h2 { color: #D81B60; font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
+        .subtitle { color: #999; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #D81B60;
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 13px 18px;
+            border: 2px solid #F8BBD0;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-family: 'Heebo', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            direction: ltr;
+        }
+        .input-group input:focus { border-color: #FF69B4; }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #FF69B4, #D81B60);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Heebo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(194,24,91,0.3);
+            margin-top: 10px;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(194,24,91,0.4); }
+        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        .error-msg {
+            background: #FCE4EC;
+            color: #C62828;
+            border: 1.5px solid #EF9A9A;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #F8BBD0;
+        }
+
+        .btn-register {
+            width: 100%;
+            background: #FFF0F5;
+            color: #D81B60;
+            border: 2px solid #F8BBD0;
+            padding: 13px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Heebo', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+        .btn-register:hover { background: #FCE4EC; border-color: #FF69B4; }
+
+        footer { margin-top: 30px; color: #ccc; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+
+    <div class="card">
+        <div class="icon">🔐</div>
+        <h2>התחברות</h2>
+        <p class="subtitle">היי! שמחה שחזרת 💕<br>הכניסי את הפרטים שלך להמשך</p>
+
+        <div class="input-group">
+            <label>שם משתמש</label>
+            <input type="text" id="username" placeholder="שם המשתמש שלך..." />
+        </div>
+
+        <div class="input-group">
+            <label>סיסמא</label>
+            <input type="password" id="password" placeholder="הסיסמא שלך..." />
+        </div>
+
+        <button class="btn-login" id="login-btn" onclick="doLogin()">כניסה 🎀</button>
+
+        <div class="error-msg" id="error-msg">שם משתמש או סיסמא שגויים 😕</div>
+
+        <div class="divider">או</div>
+
+        <a href="/register" class="btn-register">הרשמה לקהילה 🎀</a>
+    </div>
+
+    <footer>© 2026 Women Who Hack | Made with 🎀 by Mayyan</footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const app = initializeApp({
+            apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
+            authDomain: "women-who-hack-40840.firebaseapp.com",
+            projectId: "women-who-hack-40840",
+            storageBucket: "women-who-hack-40840.firebasestorage.app",
+            messagingSenderId: "180448551855",
+            appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
+        });
+        const db = getFirestore(app);
+
+        // אם כבר מחוברת — עברי לבית
+        if (localStorage.getItem('wwh_user')) {
+            window.location.href = '/';
+        }
+
+        window.doLogin = async function() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('login-btn');
+            const err = document.getElementById('error-msg');
+
+            if (!username || !password) {
+                err.textContent = 'אנא מלאי את כל השדות 🎀';
+                err.style.display = 'block';
+                return;
+            }
+
+            btn.textContent = 'מתחברת... 🎀';
+            btn.disabled = true;
+            err.style.display = 'none';
+
+            try {
+                const q = query(collection(db, "users"), where("username", "==", username));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    err.textContent = 'שם משתמש לא נמצא 😕';
+                    err.style.display = 'block';
+                    btn.textContent = 'כניסה 🎀';
+                    btn.disabled = false;
+                    return;
+                }
+
+                const data = snap.docs[0].data();
+
+                // בדיקת סיסמא
+                if (data.password !== password) {
+                    err.textContent = 'סיסמא שגויה 😕';
+                    err.style.display = 'block';
+                    btn.textContent = 'כניסה 🎀';
+                    btn.disabled = false;
+                    return;
+                }
+
+                // שמירה ב-localStorage
+                localStorage.setItem('wwh_user', JSON.stringify({
+                    nameHeb: data.nameHeb,
+                    nameEng: data.nameEng,
+                    username: data.username,
+                    bows: data.bows || 10
+                }));
+
+                btn.textContent = '✅ מתחברת...';
+                window.location.href = '/';
+
+            } catch(e) {
+                err.textContent = 'משהו השתבש, נסי שוב 😅';
+                err.style.display = 'block';
+                btn.textContent = 'כניסה 🎀';
+                btn.disabled = false;
+            }
+        };
+
+        // כניסה עם Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') doLogin();
+        });
+    </script>
+</body>
+</html>
