@@ -37,9 +37,10 @@ def register():
 def projects():
     return render_template('projects.html')
 
+@app.route('/Profile')
 @app.route('/profile')
 def profile():
-    { "source": "/profile", "destination": "/profile.html" }
+    return render_template('profile.html')
 
 @app.route('/login')
 def login():
