@@ -2,288 +2,59 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women Who Hack | עזרה ומשוב 🎀</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #F2C4CE;
-        background-image: url('/static/images/background.png');
-        background-size: 400px auto;
-        background-repeat: repeat;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: #FFFDD0;
-            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #F8BBD0;
-            direction: rtl;
-        }
-
-        nav a.logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #D81B60;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            margin: 0 15px;
-            font-weight: 600;
-        }
-
-        .nav-links a.join-btn {
-            background: #F8BBD0;
-            color: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            border: 1px solid white;
-        }
-
-        .page-body {
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #FFFDD0;
-            border: 3px solid #F8BBD0;
-            border-radius: 40px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(244, 143, 177, 0.2);
-            position: relative;
-        }
-
-        .bow-corner {
-            position: absolute;
-            font-size: 2.5rem;
-        }
-
-        .top-right { top: 10px; right: 15px; }
-        .bottom-left { bottom: 10px; left: 15px; }
-
-        h1 {
-            color: #F48FB1;
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .feedback-section {
-            background: white;
-            padding: 25px;
-            border-radius: 25px;
-            border: 2px dashed #F8BBD0;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .feedback-section p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: #555;
-        }
-
-        .feedback-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: #D81B60;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1.25rem;
-            transition: transform 0.3s;
-        }
-
-        .feedback-link:hover { transform: scale(1.1); }
-
-        .chat-container {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            border: 2px solid #F8BBD0;
-        }
-
-        .bot-header {
-            color: #F06292;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .chat-window {
-            min-height: 150px;
-            border-bottom: 1px solid #FCE4EC;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
-
-        .bot-msg {
-            background: #FFF5F7;
-            padding: 12px 18px;
-            border-radius: 20px;
-            border-bottom-right-radius: 2px;
-            display: inline-block;
-            max-width: 80%;
-            margin-bottom: 8px;
-        }
-
-        .user-msg {
-            background: #FCE4EC;
-            padding: 10px 16px;
-            border-radius: 20px;
-            border-bottom-left-radius: 2px;
-            display: block;
-            max-width: 80%;
-            margin: 8px 0 8px auto;
-            text-align: left;
-            color: #D81B60;
-            font-weight: 600;
-        }
-
-        .option-btns {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .opt-btn {
-            background: #FFFDD0;
-            color: #D81B60;
-            border: 2px solid #F8BBD0;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 0.95rem;
-        }
-
-        .opt-btn:hover {
-            background: #F8BBD0;
-            color: white;
-        }
-
-        .contact-form {
-            margin-top: 40px;
-        }
-
-        .contact-form h3 {
-            color: #F06292;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #F8BBD0;
-            border-radius: 15px;
-            box-sizing: border-box;
-            outline: none;
-            font-size: 1rem;
-            font-family: 'Segoe UI', sans-serif;
-            direction: rtl;
-        }
-
-        input:focus, textarea:focus {
-            border-color: #F48FB1;
-        }
-
-        .submit-btn {
-            background: #F48FB1;
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 50px;
-            width: 100%;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.3);
-            margin-top: 10px;
-            font-family: 'Segoe UI', sans-serif;
-            transition: transform 0.2s;
-        }
-
-        .submit-btn:hover { transform: scale(1.02); }
-
-        /* ========== MOBILE NAV ========== */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: #D81B60;
-            border-radius: 3px;
-            transition: 0.3s;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #F2C4CE; background-image: url('/static/images/background.png'); background-size: 400px auto; background-repeat: repeat; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
+        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; transition: 0.3s; }
         .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-
         @media (max-width: 768px) {
             nav { padding: 15px 20px; position: relative; flex-wrap: wrap; }
             .hamburger { display: flex; }
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                background: #FFFDD0;
-                padding: 15px 0;
-                border-top: 1px solid #F8BBD0;
-                margin-top: 10px;
-                gap: 5px;
-            }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; gap: 5px; }
             .nav-links.open { display: flex; }
-            .nav-links a {
-                padding: 10px 20px;
-                margin: 0;
-                border-radius: 10px;
-                transition: background 0.2s;
-            }
-            .nav-links a:hover { background: #FCE4EC; }
-            .nav-links a.join-btn {
-                margin: 10px 20px 0;
-                text-align: center;
-                padding: 12px 20px;
-            }
+            .nav-links a { padding: 10px 20px; margin: 0; border-radius: 10px; }
+            .nav-links a.join-btn { margin: 10px 20px 0; text-align: center; padding: 12px 20px; }
         }
-        /* ================================ */
+        .page-body { padding: 40px 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #FFFDD0; border: 3px solid #F8BBD0; border-radius: 40px; padding: 40px; box-shadow: 0 15px 35px rgba(244,143,177,0.2); position: relative; }
+        .bow-corner { position: absolute; font-size: 2.5rem; }
+        .top-right { top: 10px; right: 15px; }
+        .bottom-left { bottom: 10px; left: 15px; }
+        h1 { color: #F48FB1; text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+        .feedback-section { background: white; padding: 25px; border-radius: 25px; border: 2px dashed #F8BBD0; text-align: center; margin-bottom: 40px; }
+        .feedback-section p { font-size: 1.15rem; line-height: 1.7; color: #555; }
+        .feedback-link { display: inline-block; margin-top: 15px; color: #D81B60; font-weight: bold; text-decoration: none; font-size: 1.25rem; transition: transform 0.3s; }
+        .feedback-link:hover { transform: scale(1.1); }
+        .chat-container { background: white; border-radius: 25px; padding: 25px; border: 2px solid #F8BBD0; }
+        .bot-header { color: #F06292; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .chat-window { min-height: 150px; border-bottom: 1px solid #FCE4EC; margin-bottom: 20px; padding: 10px; }
+        .bot-msg { background: #FFF5F7; padding: 12px 18px; border-radius: 20px; border-bottom-right-radius: 2px; display: inline-block; max-width: 80%; margin-bottom: 8px; }
+        .user-msg { background: #FCE4EC; padding: 10px 16px; border-radius: 20px; border-bottom-left-radius: 2px; display: block; max-width: 80%; margin: 8px 0 8px auto; text-align: left; color: #D81B60; font-weight: 600; }
+        .option-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .opt-btn { background: #FFFDD0; color: #D81B60; border: 2px solid #F8BBD0; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.3s; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; }
+        .opt-btn:hover { background: #F8BBD0; color: white; }
+        .contact-form { margin-top: 40px; }
+        .contact-form h3 { color: #F06292; text-align: center; margin-bottom: 15px; font-size: 1.3rem; }
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #F8BBD0; border-radius: 15px; box-sizing: border-box; outline: none; font-size: 1rem; font-family: 'Segoe UI', sans-serif; direction: rtl; }
+        input:focus, textarea:focus { border-color: #F48FB1; }
+        .submit-btn { background: #F48FB1; color: white; border: none; padding: 18px; border-radius: 50px; width: 100%; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(244,143,177,0.3); margin-top: 10px; font-family: 'Segoe UI', sans-serif; transition: transform 0.2s; }
+        .submit-btn:hover { transform: scale(1.02); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
-        
-    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט">
-        <span></span><span></span><span></span>
-    </button>
+        <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט"><span></span><span></span><span></span></button>
         <div class="nav-links" id="nav-links">
             <a href="/">בית</a>
             <a href="/about">המייסדת</a>
@@ -326,11 +97,11 @@
 
             <div class="contact-form">
                 <h3>שלחי לי הודעה אישית 🎀</h3>
-                <input type="text" id="contact-name" placeholder="השם המהמם שלך">
-                <input type="email" id="contact-email" placeholder="אימייל לחזרה">
-                <textarea rows="4" id="contact-message" placeholder="ספרי לי מה קרה..."></textarea>
+                <input type="text" id="contact-name" placeholder="השם המהמם שלך" maxlength="100">
+                <input type="email" id="contact-email" placeholder="אימייל לחזרה" maxlength="200">
+                <textarea rows="4" id="contact-message" placeholder="ספרי לי מה קרה..." maxlength="2000"></textarea>
                 <button class="submit-btn" id="contact-btn" onclick="sendContact()">שלחי פנייה למעיין ✨</button>
-                <p id="contact-status" style="text-align:center; margin-top:15px; font-weight:bold; color:#D81B60; display:none;"></p>
+                <p id="contact-status" style="text-align:center;margin-top:15px;font-weight:bold;color:#D81B60;display:none;"></p>
             </div>
         </div>
     </div>
@@ -339,16 +110,13 @@
         function botReply(type) {
             const chat = document.getElementById('chat');
             let text = "";
-
             if (type === 'הרשמה') text = "ודאי שהסיסמה שלך מכילה לפחות 8 תווים, אות גדולה ומספר! 🎀";
             else if (type === 'אתגרים') text = "האתגרים נמצאים בדף המתקפות! לחצי על 'מתקפות' בתפריט למעלה 🎀";
             else if (type === 'תקלה') text = "תודה על הדיווח! מעיין תטפל בזה בהקדם. אפשר גם לשלוח פרטים בטופס למטה 🎀";
-
             const userDiv = document.createElement('div');
             userDiv.className = 'user-msg';
             userDiv.textContent = type;
             chat.appendChild(userDiv);
-
             setTimeout(() => {
                 const botDiv = document.createElement('div');
                 botDiv.className = 'bot-msg';
@@ -357,21 +125,15 @@
                 chat.scrollTop = chat.scrollHeight;
             }, 500);
         }
-    </script>
-
-
-    <script>
         function toggleNav() {
-            const nav = document.querySelector('.nav-links');
-            const btn = document.getElementById('hamburger');
-            nav.classList.toggle('open');
-            btn.classList.toggle('open');
+            document.getElementById('nav-links').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('open');
         }
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         emailjs.init("kV3rx5xXAjFmxoKr8");
-
         function sendContact() {
             const name = document.getElementById('contact-name').value.trim();
             const email = document.getElementById('contact-email').value.trim();
@@ -384,9 +146,16 @@
                 status.textContent = '⚠️ אנא מלאי את כל השדות';
                 return;
             }
+            // ✅ basic email validation
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                status.style.display = 'block';
+                status.textContent = '⚠️ כתובת האימייל לא תקינה';
+                return;
+            }
 
             btn.textContent = 'שולחת... 🎀';
             btn.disabled = true;
+            status.style.display = 'none';
 
             emailjs.send("service_f27devf", "template_uqzzlfb", {
                 from_name: name,
