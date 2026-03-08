@@ -1,132 +1,78 @@
-<script>
-    if (!localStorage.getItem('wwh_user')) {
-        window.location.href = '/login';
-    }
-</script>
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Women Who Hack | קטלוג מתקפות</title>
+    <title>Women Who Hack | Hack Lab 🎀</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #FFF5F7;
-            margin: 0;
-            padding: 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #FFF5F7; color: #5D4037; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
+        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; transition: 0.3s; }
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; gap: 5px; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 10px 20px; margin: 0; }
         }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: #FFFDD0;
-            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.4);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #F8BBD0;
-            direction: rtl;
-        }
-
-        nav a.logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #D81B60;
-            text-decoration: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            margin: 0 15px;
-            font-weight: 600;
-        }
-
-        .nav-links a.join-btn {
-            background: #F8BBD0;
-            color: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            border: 1px solid white;
-        }
-
-        .header {
-            text-align: center;
-            margin: 50px 0 40px;
-            padding: 0 20px;
-        }
-
-        h1 {
-            color: #D81B60;
-            font-size: 2.5rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px 60px;
-        }
-
-        .attack-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border-top: 6px solid #FF69B4;
-            transition: transform 0.3s ease;
-        }
-
-        .attack-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .bow-icon {
-            color: #FF69B4;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #C2185B;
-            margin-top: 0;
-            border-bottom: 1px solid #FCE4EC;
-            padding-bottom: 10px;
-        }
-
-        .section-title {
-            font-weight: bold;
-            color: #3498db;
-            margin-top: 15px;
-            display: block;
-        }
-
-        p {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .tag {
-            background: #FCE4EC;
-            color: #D81B60;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { color: #D81B60; font-size: 3rem; margin-bottom: 12px; }
+        .header p { background-color: #FFFDD0; display: inline-block; padding: 10px 25px; border-radius: 50px; border: 2px solid #F8BBD0; font-size: 1.05rem; color: #555; }
+        .user-status { background: #E8F5E9; border: 2px solid #A5D6A7; border-radius: 20px; padding: 12px 20px; margin-bottom: 25px; text-align: center; color: #388E3C; font-weight: bold; font-size: 1rem; display: none; }
+        .score-bar { background: #FFFDD0; border: 2px solid #F8BBD0; border-radius: 20px; padding: 15px 25px; display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 40px; font-size: 1.1rem; font-weight: bold; color: #D81B60; flex-wrap: wrap; }
+        .score-num { font-size: 2rem; color: #F48FB1; }
+        .bows-num { color: #D81B60; font-size: 1.3rem; font-weight: bold; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .game-card { background: white; border: 3px solid #F8BBD0; border-radius: 25px; padding: 30px; box-shadow: 0 8px 25px rgba(244,143,177,0.15); transition: transform 0.3s; }
+        .game-card:hover { transform: translateY(-5px); }
+        .game-card.solved { border-color: #81C784; background: #F1F8F1; }
+        .game-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .game-icon { font-size: 2.2rem; }
+        .game-title { color: #D81B60; font-size: 1.3rem; font-weight: bold; }
+        .level-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: bold; margin-bottom: 12px; }
+        .level-easy { background: #E8F5E9; color: #388E3C; }
+        .level-medium { background: #FFF8E1; color: #F57F17; }
+        .level-hard { background: #FCE4EC; color: #C62828; }
+        .game-desc { color: #666; line-height: 1.7; font-size: 0.97rem; margin-bottom: 20px; }
+        .points-badge { display: inline-block; background: #F8BBD0; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-right: 8px; }
+        .email-box { background: #FFF5F7; border: 2px solid #F8BBD0; border-radius: 15px; padding: 15px; margin-bottom: 15px; font-size: 0.9rem; line-height: 1.7; }
+        .from { color: #888; font-size: 0.82rem; margin-bottom: 5px; }
+        .subject { font-weight: bold; color: #D81B60; margin-bottom: 8px; }
+        .body-txt { color: #444; }
+        .link { color: #3498db; text-decoration: underline; }
+        .choice-btns { display: flex; gap: 10px; }
+        .btn-real { flex: 1; background: #E8F5E9; color: #388E3C; border: 2px solid #A5D6A7; padding: 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; }
+        .btn-fake { flex: 1; background: #FCE4EC; color: #C62828; border: 2px solid #EF9A9A; padding: 10px; border-radius: 12px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.9rem; }
+        .text-input { width: 100%; padding: 12px 15px; border: 2px solid #F8BBD0; border-radius: 12px; font-size: 1rem; font-family: 'Segoe UI', sans-serif; outline: none; margin-bottom: 10px; direction: ltr; }
+        .strength-bar { height: 10px; background: #eee; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+        .strength-fill { height: 100%; border-radius: 10px; transition: width 0.4s, background 0.4s; width: 0%; }
+        .strength-label { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+        .terminal { background: #1a1a2e; border-radius: 12px; padding: 15px; font-family: monospace; font-size: 0.88rem; margin-bottom: 15px; min-height: 80px; }
+        .t-prompt { color: #F48FB1; }
+        .t-output { color: #a8ff78; margin-top: 8px; }
+        .t-error { color: #ff6b6b; margin-top: 8px; }
+        .cipher-display { background: #FFFDD0; border: 2px solid #F8BBD0; border-radius: 12px; padding: 15px; text-align: center; font-family: monospace; font-size: 1.3rem; letter-spacing: 5px; color: #D81B60; font-weight: bold; margin-bottom: 15px; }
+        .btn-action { background: #F8BBD0; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; transition: 0.3s; width: 100%; margin-top: 5px; }
+        .btn-action:hover { background: #F48FB1; }
+        .result-msg { margin-top: 12px; padding: 12px 15px; border-radius: 12px; font-weight: bold; text-align: center; display: none; font-size: 0.92rem; line-height: 1.5; }
+        .result-msg.success { background: #E8F5E9; color: #388E3C; border: 2px solid #A5D6A7; display: block; }
+        .result-msg.fail { background: #FCE4EC; color: #C62828; border: 2px solid #EF9A9A; display: block; }
+        .bows-popup { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #FF69B4, #D81B60); color: white; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 10px 30px rgba(255,105,180,0.4); z-index: 9999; display: none; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+        @keyframes popIn { from { transform: translateX(-50%) scale(0.5); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
-        <div class="nav-links">
+        <button class="hamburger" id="hamburger" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
             <a href="/">בית</a>
             <a href="/about">המייסדת</a>
             <a href="/attacks">מתקפות</a>
@@ -138,87 +84,187 @@
         </div>
     </nav>
 
-    <div class="header">
-        <h1>מרכז הלמידה: מתקפות סייבר 🎀</h1>
-        <p>ידע הוא כוח. ככל שתביני איך המתקפה עובדת, כך תדעי להגן טוב יותר.</p>
+    <div class="bows-popup" id="bows-popup"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎀 Hack Lab</h1>
+            <p>כאן את לא רק לומדת — את חווה! שחקי, פתרי אתגרים וצברי פפיונים.</p>
+        </div>
+
+        <div class="user-status" id="user-status"></div>
+
+        <div class="score-bar">
+            🎀 ניקוד הסשן: <span class="score-num" id="total-score">0</span> נקודות
+            &nbsp;|&nbsp;
+            סה"כ פפיונים: <span class="bows-num" id="total-bows">—</span> 🎀
+        </div>
+
+        <div class="games-grid">
+            <div class="game-card" id="card-phishing">
+                <div class="game-header"><span class="game-icon">📧</span><span class="game-title">זיהוי פישינג</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+10</span></span>
+                <p class="game-desc">קיבלת מייל. האם זה אמיתי או ניסיון פישינג? שימי לב לפרטים הקטנים!</p>
+                <div class="email-box">
+                    <div class="from">מאת: security@paypa1.com</div>
+                    <div class="subject">⚠️ חשבונך ננעל – פעולה נדרשת</div>
+                    <div class="body-txt">שלום לקוחה יקרה, זיהינו פעילות חשודה. לחצי לאימות:</div>
+                    <div class="link">http://secure-paypal-verify.xyz/login</div>
+                </div>
+                <div class="choice-btns">
+                    <button class="btn-real" onclick="checkPhishing(false)">✅ מייל אמיתי</button>
+                    <button class="btn-fake" onclick="checkPhishing(true)">🚨 פישינג!</button>
+                </div>
+                <div class="result-msg" id="phishing-result"></div>
+            </div>
+
+            <div class="game-card" id="card-password">
+                <div class="game-header"><span class="game-icon">🔐</span><span class="game-title">בוחן חוזק סיסמא</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+15</span></span>
+                <p class="game-desc">הקלידי סיסמא וראי כמה היא חזקה. האתגר: הגיעי לרמת "מאובטחת" 🔒</p>
+                <input type="text" class="text-input" id="pw-input" placeholder="הקלידי סיסמא..." oninput="checkPassword(this.value)">
+                <div class="strength-bar"><div class="strength-fill" id="pw-bar"></div></div>
+                <div class="strength-label" id="pw-label">הקלידי סיסמא...</div>
+                <button class="btn-action" onclick="submitPassword()">בדיקה 🎀</button>
+                <div class="result-msg" id="pw-result"></div>
+            </div>
+
+            <div class="game-card" id="card-sql">
+                <div class="game-header"><span class="game-icon">💉</span><span class="game-title">SQL Injection</span></div>
+                <span class="level-tag level-medium">בינוני <span class="points-badge">+20</span></span>
+                <p class="game-desc">יש לך שדה התחברות. נסי "לשבור" אותו עם SQL Injection ולהיכנס בלי סיסמא!</p>
+                <div class="terminal">
+                    <div class="t-prompt">SELECT * FROM users WHERE username='<span id="sql-preview">...</span>'</div>
+                    <div id="sql-output"></div>
+                </div>
+                <input type="text" class="text-input" id="sql-input" placeholder="הקלידי שם משתמש..." oninput="previewSQL(this.value)">
+                <button class="btn-action" onclick="submitSQL()">נסי לפרוץ 💉</button>
+                <div class="result-msg" id="sql-result"></div>
+            </div>
+
+            <div class="game-card" id="card-cipher">
+                <div class="game-header"><span class="game-icon">🔑</span><span class="game-title">פענוח קוד קיסר</span></div>
+                <span class="level-tag level-medium">בינוני <span class="points-badge">+25</span></span>
+                <p class="game-desc">ההאקרית השאירה הודעה מוצפנת בהזזה של 3 אותיות. פענחי אותה!</p>
+                <div class="cipher-display">KDFN WKH ZRUOG</div>
+                <p style="font-size:0.85rem;color:#999;text-align:center;margin-bottom:12px;">רמז: כל אות הוזזה ב-3 מקומות קדימה באלפבית האנגלי</p>
+                <input type="text" class="text-input" id="cipher-input" placeholder="התשובה המפוענחת...">
+                <button class="btn-action" onclick="checkCipher()">פענחי 🔑</button>
+                <div class="result-msg" id="cipher-result"></div>
+            </div>
+
+            <div class="game-card" id="card-brute">
+                <div class="game-header"><span class="game-icon">💪</span><span class="game-title">Brute Force סימולציה</span></div>
+                <span class="level-tag level-hard">מומחית <span class="points-badge">+30</span></span>
+                <p class="game-desc">הסיסמא היא מספר בין 1 ל-100. נחשי אותה! כמה ניסיונות ייקח לך?</p>
+                <input type="number" class="text-input" id="brute-input" placeholder="נחשי מספר בין 1-100..." min="1" max="100">
+                <button class="btn-action" onclick="checkBrute()">נחשי 💪</button>
+                <div class="result-msg" id="brute-result"></div>
+                <div style="margin-top:10px;font-size:0.85rem;color:#999;text-align:center;">ניסיונות: <span id="brute-attempts">0</span></div>
+            </div>
+
+            <div class="game-card" id="card-https">
+                <div class="game-header"><span class="game-icon">🌐</span><span class="game-title">בדיקת אתרים בטוחים</span></div>
+                <span class="level-tag level-easy">קל <span class="points-badge">+10</span></span>
+                <p class="game-desc">האם כתובות האתרים הבאות בטוחות? בחרי נכון ב-3 מתוך 3!</p>
+                <div class="email-box" id="https-url" style="text-align:center;font-size:1rem;font-weight:bold;color:#333;">http://mybank-secure.xyz/login</div>
+                <div class="choice-btns">
+                    <button class="btn-real" onclick="checkHTTPS(false)">✅ בטוח</button>
+                    <button class="btn-fake" onclick="checkHTTPS(true)">🚨 מסוכן!</button>
+                </div>
+                <div class="result-msg" id="https-result"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="grid">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        <div class="attack-card">
-            <div class="bow-icon">🎀</div>
-            <span class="tag">Social Engineering</span>
-            <h2>Phishing (דיוג)</h2>
-            <span class="section-title">מה זה?</span>
-            <p>ניסיון לגנוב מידע רגיש (סיסמאות, אשראי) על ידי התחזות לישות מוכרת ואמינה בהודעה אלקטרונית.</p>
-            <span class="section-title">איך זה עובד?</span>
-            <p>התוקף שולח מייל שנראה בדיוק כמו פייסבוק או הבנק, עם לינק לאתר מזויף שמקליט את הפרטים שלך.</p>
-            <span class="section-title">איך מתגוננות?</span>
-            <p>בודקות תמיד את כתובת השולח, לא לוחצות על לינקים חשודים ומפעילות אימות דו-שלבי (2FA).</p>
-        </div>
+        const app = initializeApp({
+            apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
+            authDomain: "women-who-hack-40840.firebaseapp.com",
+            projectId: "women-who-hack-40840",
+            storageBucket: "women-who-hack-40840.firebasestorage.app",
+            messagingSenderId: "180448551855",
+            appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
+        });
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        <div class="attack-card">
-            <div class="bow-icon">🎀</div>
-            <span class="tag">Database Attack</span>
-            <h2>SQL Injection</h2>
-            <span class="section-title">מה זה?</span>
-            <p>הזרקת קוד זדוני לשדות קלט באתר כדי "לעבוד" על מסד הנתונים ולשלוף ממנו מידע חסוי.</p>
-            <span class="section-title">איך זה עובד?</span>
-            <p>במקום שם משתמש, התוקף כותב פקודת SQL שגורמת לשרת לחשוב שהסיסמה נכונה או למחוק טבלאות.</p>
-            <span class="section-title">איך מתגוננות?</span>
-            <p>משתמשות בשאילתות מוכנות מראש (Parameterized Queries) ולא סומכות אף פעם על קלט מהמשתמש.</p>
-        </div>
+        let currentUserUID = null;
+        let currentBows = 0;
 
-        <div class="attack-card">
-            <div class="bow-icon">🎀</div>
-            <span class="tag">Password Cracking</span>
-            <h2>Brute Force</h2>
-            <span class="section-title">מה זה?</span>
-            <p>שיטת "כוח גס" שבה התוקף מנסה את כל שילובי הסיסמאות האפשריים עד שהוא מצליח להיכנס.</p>
-            <span class="section-title">איך זה עובד?</span>
-            <p>תוכנה אוטומטית מריצה אלפי סיסמאות בשנייה. אם הסיסמה קצרה או נפוצה - היא תיפרץ מהר.</p>
-            <span class="section-title">איך מתגוננות?</span>
-            <p>סיסמאות מורכבות, הגבלת מספר ניסיונות התחברות ונעילת חשבון.</p>
-        </div>
+        // ✅ בדיקת התחברות אמיתית — אם לא מחוברת, עוברת ל-login
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = '/login';
+                return;
+            }
+            currentUserUID = user.uid;
 
-        <div class="attack-card">
-            <div class="bow-icon">🎀</div>
-            <span class="tag">Network Attack</span>
-            <h2>Man in the Middle</h2>
-            <span class="section-title">מה זה?</span>
-            <p>מתקפת "האדם שבאמצע" – מצב שבו התוקף מצליח להשתחל לתקשורת בין שני צדדים בלי שהם ידעו.</p>
-            <span class="section-title">איך זה עובד?</span>
-            <p>כשאת מתחברת ל-Wi-Fi ציבורי לא מאובטח, האקר יכול לשבת "בנתיב" של המידע שלך ולקרוא כל הודעה או סיסמה שאת שולחת.</p>
-            <span class="section-title">איך מתגוננות?</span>
-            <p>משתמשות ב-VPN, גולשות רק באתרים עם HTTPS ונמנעות מביצוע פעולות רגישות ברשתות זרות.</p>
-        </div>
+            // ✅ טעינת נתונים לפי UID בלבד — אי אפשר לזייף
+            const snap = await getDoc(doc(db, "users", user.uid));
+            if (snap.exists()) {
+                const data = snap.data();
+                currentBows = data.bows || 0;
+                document.getElementById('total-bows').textContent = currentBows;
+                const status = document.getElementById('user-status');
+                status.style.display = 'block';
+                status.innerHTML = `✅ היי ${data.nameHeb || 'האקרית'}! יש לך ${currentBows} פפיונים 🎀`;
+            }
+        });
 
-        <div class="attack-card">
-            <div class="bow-icon">🎀</div>
-            <span class="tag">Availability Attack</span>
-            <h2>DDoS (מניעת שירות)</h2>
-            <span class="section-title">מה זה?</span>
-            <p>מתקפה שמטרתה להפיל אתר או שירות על ידי הצפתו בכמות אדירה של בקשות מזויפות.</p>
-            <span class="section-title">איך זה עובד?</span>
-            <p>התוקף משתמש ברשת של מחשבים נגועים (Botnet) שכולם פונים לאותו אתר בבת אחת, עד שהשרת קורס מהעומס.</p>
-            <span class="section-title">איך מתגוננות?</span>
-            <p>שימוש בשירותי סינון תעבורה (כמו Cloudflare) והגדרת חומות אש חכמות שיודעות לזהות עומס חריג.</p>
-        </div>
+        // ✅ הוספת פפיונים — רק למשתמש המחובר לפי UID, עם increment (לא replace)
+        window.addBowsToUser = async function(pts) {
+            if (!currentUserUID) return;
+            // ✅ increment מונע גישה לא מורשית — Firestore Rules מגנות
+            await updateDoc(doc(db, "users", currentUserUID), {
+                bows: increment(pts)
+            });
+            currentBows += pts;
+            document.getElementById('total-bows').textContent = currentBows;
+            const popup = document.getElementById('bows-popup');
+            popup.textContent = `+${pts} פפיונים! 🎀 סה"כ: ${currentBows}`;
+            popup.style.display = 'block';
+            setTimeout(() => popup.style.display = 'none', 2500);
+        };
+    </script>
 
-        <div class="attack-card" style="border-top-color: #3498db;">
-            <div class="bow-icon">🔍</div>
-            <span class="tag">Analysis Tool</span>
-            <h2>Wireshark</h2>
-            <span class="section-title">מה זה?</span>
-            <p>ה"רנטגן" של הרשת. כלי שמאפשר לנתח חבילות מידע (Packets) שעוברות ברשת בזמן אמת.</p>
-            <span class="section-title">שימוש בסייבר:</span>
-            <p>אנשי סייבר משתמשים בו כדי לזהות תנועה חשודה, להבין פרוטוקולים ולראות בדיוק מה עובר ב"צינורות" של האינטרנט.</p>
-            <span class="section-title">טיפ מהמייסדת 🎀</span>
-            <p>זה הכלי הכי טוב ללמוד איתו איך האינטרנט באמת עובד. מומלץ להתחיל לנתח תעבורת HTTP פשוטה.</p>
-        </div>
+    <script>
+        let score = 0;
+        const solvedChallenges = new Set(); // ✅ מונע צבירת פפיונים כפולה
+        let bruteSecret = Math.floor(Math.random() * 100) + 1;
+        let bruteAttempts = 0;
+        let httpsRound = 0;
+        let httpsScore = 0;
+        const httpsUrls = [
+            { url: "http://mybank-secure.xyz/login", dangerous: true },
+            { url: "https://www.google.com", dangerous: false },
+            { url: "http://192.168.1.1/admin", dangerous: true },
+        ];
 
-    </div>
+        function addScore(pts, id) {
+            // ✅ בדיקה שלא כבר נפתר — מונע כפל פפיונים
+            if (solvedChallenges.has(id)) return;
+            solvedChallenges.add(id);
+            score += pts;
+            document.getElementById('total-score').textContent = score;
+            document.getElementById(id).classList.add('solved');
+            if (window.addBowsToUser) window.addBowsToUser(pts);
+        }
 
+        function showResult(id, msg, ok) { const e = document.getElementById(id); e.textContent = msg; e.className = 'result-msg ' + (ok ? 'success' : 'fail'); }
+        function checkPhishing(fake) { if (fake) { showResult('phishing-result', '🎀 נכון! paypa1.com עם ספרה 1 במקום l, ודומיין .xyz חשוד. כל הכבוד!', true); addScore(10, 'card-phishing'); } else showResult('phishing-result', '❌ זה פישינג! paypa1.com + .xyz = ספק ברור.', false); }
+        function checkPassword(v) { let s=0; if(v.length>=8)s++; if(v.length>=12)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++; const c=['#ff6b6b','#ffa94d','#ffd43b','#a9e34b','#40c057']; const l=['חלשה מאוד 😬','חלשה','בינונית','חזקה 💪','מאובטחת 🔒']; document.getElementById('pw-bar').style.width=(s*20)+'%'; document.getElementById('pw-bar').style.background=c[s-1]||'#eee'; document.getElementById('pw-label').textContent=s>0?l[s-1]:'הקלידי סיסמא...'; }
+        function submitPassword() { const v=document.getElementById('pw-input').value; let s=0; if(v.length>=8)s++; if(v.length>=12)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++; if(s>=4){showResult('pw-result','🔒 סיסמא חזקה! כל הכבוד!',true);addScore(15,'card-password');}else showResult('pw-result','😬 עדיין חלשה. נסי אותיות גדולות, מספרים ותווים מיוחדים!',false); }
+        function previewSQL(v){document.getElementById('sql-preview').textContent=v||'...';}
+        function submitSQL(){const v=document.getElementById('sql-input').value;const o=document.getElementById('sql-output');if(v.includes("'")||v.toLowerCase().includes('or')||v.includes('--')){o.className='t-output';o.textContent="✓ ברוכה הבאה, admin! גישה הושגה 🎉";showResult('sql-result','🎀 הצלחת! זו בדיוק הסיבה שמשתמשים ב-Parameterized Queries!',true);addScore(20,'card-sql');}else{o.className='t-error';o.textContent="✗ שגיאה: שם משתמש לא נמצא";showResult('sql-result',"רמז: נסי להוסיף גרש (') או OR...",false);}}
+        function checkCipher(){const v=document.getElementById('cipher-input').value.trim().toUpperCase();if(v==='HACK THE WORLD'){showResult('cipher-result','🔑 נכון! KDFN WKH ZRUOG = HACK THE WORLD. מפענחת מקצועית!',true);addScore(25,'card-cipher');}else showResult('cipher-result','❌ לא נכון. רמז: K→H, D→A, F→C, N→K...',false);}
+        function checkBrute(){const g=parseInt(document.getElementById('brute-input').value);bruteAttempts++;document.getElementById('brute-attempts').textContent=bruteAttempts;if(isNaN(g)){showResult('brute-result','הקלידי מספר!',false);return;}if(g===bruteSecret){showResult('brute-result',`🎀 מצאת! ${bruteSecret} ב-${bruteAttempts} ניסיונות!`,true);addScore(30,'card-brute');}else if(g<bruteSecret)showResult('brute-result','📈 גבוהה יותר!',false);else showResult('brute-result','📉 נמוכה יותר!',false);}
+        function checkHTTPS(d){const c=httpsUrls[httpsRound];if(d===c.dangerous){httpsScore++;showResult('https-result','✅ נכון! '+(c.dangerous?'HTTP בלי S + דומיין חשוד = סכנה.':'HTTPS + דומיין מוכר = בטוח!'),true);}else showResult('https-result','❌ לא נכון. '+(c.dangerous?'http (בלי S) + .xyz = מסוכן!':'זה בטוח — HTTPS + גוגל.'),false);httpsRound++;if(httpsRound<httpsUrls.length){setTimeout(()=>{document.getElementById('https-url').textContent=httpsUrls[httpsRound].url;document.getElementById('https-result').className='result-msg';},1500);}else{setTimeout(()=>{if(httpsScore>=2){showResult('https-result',`🎀 סיימת! ${httpsScore}/3 נכון!`,true);addScore(10,'card-https');}else showResult('https-result',`סיימת עם ${httpsScore}/3. כדאי לקרוא עוד על HTTPS!`,false);},1500);}}
+        function toggleNav() { document.getElementById('nav-links').classList.toggle('open'); }
+    </script>
 </body>
 </html>
-
