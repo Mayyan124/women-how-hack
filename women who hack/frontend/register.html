@@ -313,7 +313,8 @@
                     phone,
                     birthday,
                     username,
-                    bows: 10, // 🎀 פפיונים על הרשמה!
+                    password: pass,
+                    bows: 10,
                     joinDate: new Date().toISOString()
                 });
 
@@ -322,6 +323,14 @@
                     to_name: nameHeb,
                     to_email: email
                 });
+
+                // שמירה ב-localStorage
+                localStorage.setItem('wwh_user', JSON.stringify({
+                    nameHeb,
+                    nameEng,
+                    username,
+                    bows: 10
+                }));
 
                 const successMsg = document.getElementById('success-msg');
                 successMsg.innerHTML = `
@@ -332,6 +341,7 @@
                 `;
                 successMsg.style.display = 'block';
                 successMsg.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => { window.location.href = '/'; }, 2500);
 
             } catch(e) {
                 console.error(e);
