@@ -3,7 +3,7 @@
     { "source": "/", "destination": "/women who hack/frontend/index.html" },
     { "source": "/login", "destination": "/women who hack/frontend/login.html" },
     { "source": "/register", "destination": "/women who hack/frontend/register.html" },
-    { "source": "/Profile", "destination": "/women who hack/frontend/Profile.html" },
+    { "source": "/profile", "destination": "/women who hack/frontend/profile.html" },
     { "source": "/about", "destination": "/women who hack/frontend/about.html" },
     { "source": "/attacks", "destination": "/women who hack/frontend/attacks.html" },
     { "source": "/blog", "destination": "/women who hack/frontend/blog.html" },
