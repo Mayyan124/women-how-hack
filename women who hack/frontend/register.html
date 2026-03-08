@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +8,6 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #F2C4CE;
-        background-image: url('/static/images/background.png');
-        background-size: 400px auto;
-        background-repeat: repeat;
             background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
             min-height: 100vh;
         }
@@ -116,6 +112,7 @@
         }
 
         .btn-reg:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255,105,180,0.4); }
+        .btn-reg:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
         .success-msg {
             display: none;
@@ -130,7 +127,6 @@
             line-height: 1.6;
         }
 
-        /* ========== MOBILE NAV ========== */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -166,30 +162,19 @@
                 gap: 5px;
             }
             .nav-links.open { display: flex; }
-            .nav-links a {
-                padding: 10px 20px;
-                margin: 0;
-                border-radius: 10px;
-                transition: background 0.2s;
-            }
+            .nav-links a { padding: 10px 20px; margin: 0; border-radius: 10px; transition: background 0.2s; }
             .nav-links a:hover { background: #FCE4EC; }
-            .nav-links a.join-btn {
-                margin: 10px 20px 0;
-                text-align: center;
-                padding: 12px 20px;
-            }
+            .nav-links a.join-btn { margin: 10px 20px 0; text-align: center; padding: 12px 20px; }
         }
-        /* ================================ */
     </style>
 </head>
 <body>
 
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
-        
-    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט">
-        <span></span><span></span><span></span>
-    </button>
+        <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="תפריט">
+            <span></span><span></span><span></span>
+        </button>
         <div class="nav-links" id="nav-links">
             <a href="/">בית</a>
             <a href="/about">המייסדת</a>
@@ -234,19 +219,32 @@
                 </div>
                 <p id="passError" class="error-msg">הסיסמא חייבת לכלול אות גדולה, ספרה ו-8 תווים לפחות</p>
 
-                <button class="btn-reg" onclick="submitForm()">צרי חשבון 🎀</button>
+                <button class="btn-reg" id="reg-btn" onclick="submitForm()">צרי חשבון 🎀</button>
 
-                <div class="success-msg" id="success-msg">
-                    🎀 ברוכה הבאה לנבחרת!<br><br>
-                    שלחנו לך מייל אישור 📩<br>
-                    <small>אם לא קיבלת, בדקי את תיבת ה-Spam</small>
-                </div>
+                <div class="success-msg" id="success-msg"></div>
             </div>
         </div>
     </div>
 
-    <script>
-        function checkPwStrength(v) {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
+            authDomain: "women-who-hack-40840.firebaseapp.com",
+            projectId: "women-who-hack-40840",
+            storageBucket: "women-who-hack-40840.firebasestorage.app",
+            messagingSenderId: "180448551855",
+            appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.checkPwStrength = function(v) {
             let s = 0;
             if (v.length >= 8) s++;
             if (v.length >= 12) s++;
@@ -258,9 +256,9 @@
             document.getElementById('pw-bar').style.width = (s * 20) + '%';
             document.getElementById('pw-bar').style.background = s > 0 ? colors[s-1] : '#eee';
             document.getElementById('pw-label').textContent = s > 0 ? labels[s-1] : '';
-        }
+        };
 
-        async function submitForm() {
+        window.submitForm = async function() {
             const nameHeb = document.getElementById('nameHeb').value.trim();
             const nameEng = document.getElementById('nameEng').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -268,6 +266,7 @@
             const birthday = document.getElementById('birthday').value;
             const username = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value;
+            const btn = document.getElementById('reg-btn');
 
             document.getElementById('userError').style.display = 'none';
             document.getElementById('passError').style.display = 'none';
@@ -289,48 +288,41 @@
                 return;
             }
 
-            // שמירה ב-Firebase
+            // בדיקה ששם המשתמש לא תפוס
+            const q = query(collection(db, "users"), where("username", "==", username));
+            const existing = await getDocs(q);
+            if (!existing.empty) {
+                alert('שם המשתמש כבר תפוס, נסי שם אחר 🎀');
+                return;
+            }
+
+            btn.textContent = 'יוצרת חשבון... 🎀';
+            btn.disabled = true;
+
             try {
-                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
-                const { getFirestore, collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+                // ✅ Firebase Auth מנהל את הסיסמה בצורה מאובטחת (hash אוטומטי)
+                const userCred = await createUserWithEmailAndPassword(auth, email, pass);
+                const uid = userCred.user.uid;
 
-                const firebaseConfig = {
-                    apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
-                    authDomain: "women-who-hack-40840.firebaseapp.com",
-                    projectId: "women-who-hack-40840",
-                    storageBucket: "women-who-hack-40840.firebasestorage.app",
-                    messagingSenderId: "180448551855",
-                    appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
-                };
-
-                const app = initializeApp(firebaseConfig);
-                const db = getFirestore(app);
-
-                await addDoc(collection(db, "users"), {
+                // שמירת פרטי המשתמש ב-Firestore — ללא סיסמה!
+                await setDoc(doc(db, "users", uid), {
                     nameHeb,
                     nameEng,
                     email,
                     phone,
                     birthday,
                     username,
-                    password: pass,
                     bows: 10,
                     joinDate: new Date().toISOString()
                 });
 
                 // שליחת מייל ברוכה הבאה
-                emailjs.send("service_7f11yj8", "template_9topr2a", {
-                    to_name: nameHeb,
-                    to_email: email
-                });
-
-                // שמירה ב-localStorage
-                localStorage.setItem('wwh_user', JSON.stringify({
-                    nameHeb,
-                    nameEng,
-                    username,
-                    bows: 10
-                }));
+                if (typeof emailjs !== 'undefined') {
+                    emailjs.send("service_7f11yj8", "template_9topr2a", {
+                        to_name: nameHeb,
+                        to_email: email
+                    });
+                }
 
                 const successMsg = document.getElementById('success-msg');
                 successMsg.innerHTML = `
@@ -345,11 +337,15 @@
 
             } catch(e) {
                 console.error(e);
-                alert('משהו השתבש, נסי שוב 😅');
+                let msg = 'משהו השתבש, נסי שוב 😅';
+                if (e.code === 'auth/email-already-in-use') msg = 'המייל הזה כבר רשום במערכת 😕';
+                if (e.code === 'auth/invalid-email') msg = 'כתובת המייל לא תקינה 😕';
+                alert(msg);
+                btn.textContent = 'צרי חשבון 🎀';
+                btn.disabled = false;
             }
-        }
+        };
     </script>
-
 
     <script>
         function toggleNav() {
