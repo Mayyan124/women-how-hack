@@ -172,7 +172,7 @@
         // ✅ Firebase Auth מנהל את הסשן בצורה מאובטחת — לא צריך localStorage
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                window.location.href = '/';
+                window.location.href = '/Profile';
             }
         });
 
@@ -197,7 +197,7 @@
                 await signInWithEmailAndPassword(auth, email, password);
 
                 btn.textContent = '✅ מתחברת...';
-                window.location.href = '/';
+                window.location.href = '/Profile';
 
             } catch(e) {
                 let msg = 'שם משתמש או סיסמא שגויים 😕';
