@@ -39,7 +39,7 @@ def projects():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    { "source": "/profile", "destination": "/profile.html" }
 
 @app.route('/login')
 def login():
