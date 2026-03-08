@@ -3,74 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women Who Hack | המייסדת</title>
+    <title>Women Who Hack | Home</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #FFF5F7; min-height: 100vh; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
-        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
-        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
-        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
-        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
-        @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-wrap: wrap; }
-            .hamburger { display: flex; }
-            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
-            .nav-links.open { display: flex; }
-            .nav-links a { padding: 10px 20px; margin: 0; }
+        :root {
+            --baby-pink: #f4c2c2;
+            --cream: #fffdd0;
+            --pure-white: #ffffff;
+            --dark-pink: #ff91a4;
         }
-        .page-content { display: flex; justify-content: center; align-items: center; padding: 60px 20px; }
-        .profile-card { background: white; padding: 50px 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(255,105,180,0.15); max-width: 700px; width: 100%; text-align: right; border: 1px solid #FFD1DC; position: relative; }
-        .accent-line { width: 80px; height: 6px; background: linear-gradient(to left, #FF69B4, #3498db); border-radius: 10px; margin-bottom: 30px; }
-        h1 { color: #D81B60; margin: 0; font-size: 2.5rem; }
-        h3 { color: #3498db; font-weight: 400; margin-top: 5px; margin-bottom: 30px; letter-spacing: 1px; }
-        p { color: #444; line-height: 1.9; font-size: 1.15rem; margin-bottom: 20px; }
-        .highlight-box { background: #F0F9FF; border-right: 5px solid #3498db; padding: 20px; margin: 30px 0; font-style: italic; color: #2c3e50; }
-        .quote { text-align: center; font-size: 1.4rem; font-weight: bold; color: #D81B60; margin-top: 40px; border-top: 1px dashed #FFB6C1; padding-top: 30px; }
-        .signature { text-align: left; font-weight: bold; color: #3498db; margin-top: 20px; font-size: 1.2rem; }
-        .ribbon { position: absolute; top: 20px; left: 30px; font-size: 2.5rem; }
-        .logout-btn { position: fixed; top: 80px; left: 20px; background: #FCE4EC; color: #D81B60; border: 2px solid #F8BBD0; padding: 8px 16px; border-radius: 50px; cursor: pointer; font-family: 'Segoe UI', sans-serif; font-size: 0.85rem; z-index: 999; display: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--cream);
+            background-image: url('https://www.transparenttextures.com/patterns/pink-dust.png');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: var(--pure-white);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--baby-pink);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        nav { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 5px; }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: var(--dark-pink);
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        nav a:hover { color: #ffb6c1; }
+        nav a.auth-btn {
+            background: var(--baby-pink);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        nav a.logout-btn {
+            background: #FCE4EC;
+            color: #D81B60;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: inherit;
+            border: 2px solid #F8BBD0;
+            display: none;
+        }
+        .user-greeting {
+            font-size: 0.85rem;
+            color: #D81B60;
+            font-weight: 600;
+            display: none;
+            margin: 0 10px;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 { font-size: 4rem; color: var(--dark-pink); margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+        .hero p { font-size: 1.5rem; max-width: 600px; background: rgba(255,255,255,0.7); padding: 10px 20px; border-radius: 20px; }
+        .bow-icon { font-size: 3rem; color: var(--baby-pink); margin: 20px 0; }
+        .btn { background-color: var(--baby-pink); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-size: 1.2rem; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid var(--pure-white); margin-top: 20px; display: inline-block; }
+        .btn:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--baby-pink); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        footer { text-align: center; padding: 20px; font-size: 0.9rem; color: var(--dark-pink); }
     </style>
 </head>
 <body>
-
-    <button class="logout-btn" id="logout-btn" onclick="doLogout()">← יציאה</button>
-
-    <nav>
-        <a href="/" class="logo">Women Who Hack 🎀</a>
-        <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
-        <div class="nav-links" id="nav-links">
+    <header>
+        <nav>
             <a href="/">בית</a>
             <a href="/about">המייסדת</a>
-            <a href="/attacks">מתקפות</a>
+            <a href="/attacks">מתקפות סייבר</a>
             <a href="/mysteries">תעלומות</a>
             <a href="/projects">פרויקטים</a>
             <a href="/blog">בלוג</a>
+            <a href="/Profile">הפרופיל שלי</a>
             <a href="/contact">צור קשר</a>
-            <a href="/register" class="join-btn">הצטרפות 🎀</a>
-        </div>
-    </nav>
+            <!-- ✅ מוצג לפי מצב התחברות -->
+            <span class="user-greeting" id="user-greeting"></span>
+            <a href="/register" class="auth-btn" id="btn-register">הרשמה 🎀</a>
+            <a href="/login" class="auth-btn" id="btn-login">כניסה</a>
+            <button class="logout-btn" id="btn-logout" onclick="doLogout()">יציאה ←</button>
+        </nav>
+    </header>
 
-    <div class="page-content">
-        <div class="profile-card">
-            <div class="ribbon">🎀</div>
-            <div class="accent-line"></div>
-            <h1>נעים להכיר, אני מעיין מיכלשוילי</h1>
-            <h3>בת 17 | מייסדת Women Who Hack</h3>
-            <p>אני תלמידת תיכון עם חיבור עמוק לעולם הסייבר, הרשתות והטכנולוגיה. מאז ומתמיד סיקרן אותי להבין איך דברים עובדים מאחורי הקלעים – איך אתרים נבנים, איך מידע עובר ברשת ואיך אפשר לקחת רעיון ולהפוך אותו למשהו אמיתי שקיים בעולם.</p>
-            <p>בתור בת שנכנסה לתחום בגיל צעיר יחסית, הבנתי שלא תמיד יש מספיק חשיפה ועידוד לבנות בעולם הטכנולוגי. לא כי הן לא מסוגלות – אלא כי לפעמים חסר להן מודל לחיקוי או מקום שמרגיש שייך. הקמתי את האתר מתוך אמונה ברורה:</p>
-            <div class="highlight-box">השאיפה שלי היא שכמה שיותר בנות ייכנסו לעולם הסייבר והטכנולוגיה, יגלו את היכולות שלהן, יבינו שהן חזקות מספיק – וידעו שהתחום הזה פתוח גם בשבילן.</div>
-            <p>אני מאמינה שטכנולוגיה היא כוח. היא לא רק מקצוע – היא דרך חשיבה שמלמדת אומץ, יצירתיות, התמדה וביטחון עצמי. כל שורת קוד היא עוד צעד קדימה, וכל אתגר הוא הזדמנות לצמוח. החזון שלי לחיים הוא לא רק להצליח בעצמי – אלא לפתוח דלתות לאחרות.</p>
-            <div class="quote">"אל תחכי שייתנו לך מקום בשולחן – תלמדי איך לבנות את השולחן בעצמך."</div>
-            <p style="text-align: center; margin-top: 20px;">אם את כאן, כנראה שיש בך סקרנות. וזה בדיוק המקום להתחיל. 💙</p>
-            <div class="signature">שלך - מעיין מיכלשוילי</div>
-        </div>
+    <div class="hero">
+        <div class="bow-icon">🎀</div>
+        <h1>Women Who Hack</h1>
+        <p>ברוכות הבאות לקהילת ההאקריות הכי חזקה (והכי יפה) ברשת. כאן תלמדי הכל על סייבר, הגנה וקוד – בסטייל שלך.</p>
+        <a href="/register" class="btn" id="cta-btn">הצטרפי לנבחרת 🎀</a>
     </div>
+
+    <footer>&copy; 2026 Women Who Hack | Made with 🎀 by Mayyan</footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const app = initializeApp({
             apiKey: "AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",
@@ -81,24 +124,36 @@
             appId: "1:180448551855:web:5a05c8deb44fcc2f7f055a"
         });
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // ✅ בדיקה אמיתית דרך Firebase Auth — לא localStorage
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.href = '/login';
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // ✅ מחוברת — הצג שם ממש מ-Firestore לפי UID
+                const snap = await getDoc(doc(db, "users", user.uid));
+                const name = snap.exists() ? snap.data().nameHeb : '';
+
+                document.getElementById('btn-register').style.display = 'none';
+                document.getElementById('btn-login').style.display = 'none';
+                document.getElementById('btn-logout').style.display = 'inline-block';
+                if (name) {
+                    const g = document.getElementById('user-greeting');
+                    g.textContent = `היי ${name} 🎀`;
+                    g.style.display = 'inline';
+                }
+                document.getElementById('cta-btn').textContent = 'לפרופיל שלי 🎀';
+                document.getElementById('cta-btn').href = '/Profile';
             } else {
-                document.getElementById('logout-btn').style.display = 'block';
+                // לא מחוברת — הצג כפתורי הרשמה/כניסה
+                document.getElementById('btn-register').style.display = 'inline-block';
+                document.getElementById('btn-login').style.display = 'inline-block';
+                document.getElementById('btn-logout').style.display = 'none';
             }
         });
 
         window.doLogout = async function() {
             await signOut(auth);
-            window.location.href = '/';
+            window.location.reload();
         };
-    </script>
-
-    <script>
-        function toggleNav() { document.getElementById('nav-links').classList.toggle('open'); }
     </script>
 </body>
 </html>
