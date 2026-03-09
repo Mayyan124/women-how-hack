@@ -92,6 +92,7 @@
             <a href="/mysteries">תעלומות</a>
             <a href="/projects">פרויקטים</a>
             <a href="/blog">בלוג</a>
+            <a href="/vision">החזון שלנו</a>
             <a href="/Profile">הפרופיל שלי</a>
             <a href="/contact">צור קשר</a>
             <!-- ✅ מוצג לפי מצב התחברות -->
@@ -129,7 +130,6 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // ✅ מחוברת — הצג שם ממש מ-Firestore לפי UID
                 const snap = await getDoc(doc(db, "users", user.uid));
                 const name = snap.exists() ? snap.data().nameHeb : '';
 
@@ -144,7 +144,6 @@
                 document.getElementById('cta-btn').textContent = 'לפרופיל שלי 🎀';
                 document.getElementById('cta-btn').href = '/Profile';
             } else {
-                // לא מחוברת — הצג כפתורי הרשמה/כניסה
                 document.getElementById('btn-register').style.display = 'inline-block';
                 document.getElementById('btn-login').style.display = 'inline-block';
                 document.getElementById('btn-logout').style.display = 'none';
@@ -158,4 +157,6 @@
     </script>
 </body>
 </html>
+</html>
+
 
