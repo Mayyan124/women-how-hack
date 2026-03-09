@@ -50,5 +50,9 @@ def profile():
 def login():
     return render_template('login.html')
 
+@app.route('/vision')
+def vision():
+    return render_template('vision.html')
+
 if __name__ == '__main__':
     app.run(debug=False)
