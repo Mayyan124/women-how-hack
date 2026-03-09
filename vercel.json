@@ -10,7 +10,7 @@
     { "source": "/projects", "destination": "/women who hack/frontend/projects.html" },
     { "source": "/learn", "destination": "/women who hack/frontend/learn.html" },
     { "source": "/mysteries", "destination": "/women who hack/frontend/mysteries.html" },
-    { "source": "/contact", "destination": "/women who hack/frontend/contact.html" }
-    {"source": "/vision", "destination": "/women who hack/frontend/vision.html"}
+    { "source": "/contact", "destination": "/women who hack/frontend/contact.html" },
+    { "source": "/vision", "destination": "/women who hack/frontend/vision.html" }
   ]
 }
