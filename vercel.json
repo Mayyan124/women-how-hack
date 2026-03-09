@@ -1,16 +1,16 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/women who hack/frontend/index.html" },
-    { "source": "/login", "destination": "/women who hack/frontend/login.html" },
-    { "source": "/register", "destination": "/women who hack/frontend/register.html" },
-    { "source": "/profile", "destination": "/women who hack/frontend/profile.html" },
-    { "source": "/about", "destination": "/women who hack/frontend/about.html" },
-    { "source": "/attacks", "destination": "/women who hack/frontend/attacks.html" },
-    { "source": "/blog", "destination": "/women who hack/frontend/blog.html" },
-    { "source": "/projects", "destination": "/women who hack/frontend/projects.html" },
-    { "source": "/learn", "destination": "/women who hack/frontend/learn.html" },
-    { "source": "/mysteries", "destination": "/women who hack/frontend/mysteries.html" },
-    { "source": "/contact", "destination": "/women who hack/frontend/contact.html" },
-    { "source": "/vision", "destination": "/women who hack/frontend/vision.html" }
+    { "source": "/", "destination": "/women%20who%20hack/frontend/index.html" },
+    { "source": "/login", "destination": "/women%20who%20hack/frontend/login.html" },
+    { "source": "/register", "destination": "/women%20who%20hack/frontend/register.html" },
+    { "source": "/profile", "destination": "/women%20who%20hack/frontend/profile.html" },
+    { "source": "/about", "destination": "/women%20who%20hack/frontend/about.html" },
+    { "source": "/attacks", "destination": "/women%20who%20hack/frontend/attacks.html" },
+    { "source": "/blog", "destination": "/women%20who%20hack/frontend/blog.html" },
+    { "source": "/projects", "destination": "/women%20who%20hack/frontend/projects.html" },
+    { "source": "/learn", "destination": "/women%20who%20hack/frontend/learn.html" },
+    { "source": "/mysteries", "destination": "/women%20who%20hack/frontend/mysteries.html" },
+    { "source": "/contact", "destination": "/women%20who%20hack/frontend/contact.html" },
+    { "source": "/vision", "destination": "/women%20who%20hack/frontend/vision.html" }
   ]
 }
