@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | שפות תכנות 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: #FFF5F7; color: #2c2c2c; }
+
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.6rem; font-weight: 900; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 10px 20px; margin: 0; }
+        }
+
+        .hero { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); padding: 70px 20px 80px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '</>'; position: absolute; font-size: 16rem; font-weight: 900; opacity: 0.04; top: -20px; left: -20px; font-family: monospace; }
+        .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; }
+        .hero-breadcrumb a { color: #FF69B4; text-decoration: none; }
+        .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 12px; }
+        .hero h1 span { color: #FF69B4; }
+        .hero p { font-size: 1.05rem; opacity: 0.8; max-width: 550px; margin: 0 auto; line-height: 1.7; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px 100px; }
+
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 1.8rem; font-weight: 900; color: #D81B60; margin-bottom: 8px; }
+        .section-title p { color: #999; font-size: 0.95rem; }
+
+        .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 70px; }
+
+        .lang-card { background: white; border: 2px solid #F8BBD0; border-radius: 24px; padding: 35px 28px; text-decoration: none; color: inherit; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(255,105,180,0.07); display: block; }
+        .lang-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--card-color); }
+        .lang-card:hover { transform: translateY(-6px); border-color: var(--card-color); box-shadow: 0 15px 40px rgba(255,105,180,0.15); }
+        .lang-card.coming-soon { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+
+        .lang-icon { width: 65px; height: 65px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 18px; background: var(--card-bg); }
+        .lang-card h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; color: #1a1a2e; }
+        .lang-card p { color: #777; font-size: 0.9rem; line-height: 1.6; margin-bottom: 18px; }
+
+        .lang-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .lang-tag { background: #FFF5F7; border: 1px solid #F8BBD0; border-radius: 50px; padding: 4px 12px; font-size: 0.78rem; font-weight: 700; color: #D81B60; }
+
+        .lang-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--card-color); color: white; padding: 10px 22px; border-radius: 50px; font-size: 0.88rem; font-weight: 700; }
+        .coming-badge { display: inline-block; background: #F5F5F5; color: #999; padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; }
+
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .topic-card { background: white; border: 2px solid #F8BBD0; border-radius: 20px; padding: 28px; text-decoration: none; color: inherit; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255,105,180,0.07); display: flex; align-items: center; gap: 18px; }
+        .topic-card:hover { transform: translateY(-4px); border-color: #FF69B4; box-shadow: 0 10px 30px rgba(255,105,180,0.15); }
+        .topic-card.coming-soon { opacity: 0.5; pointer-events: none; }
+        .topic-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .topic-info h3 { font-size: 1rem; font-weight: 900; color: #1a1a2e; margin-bottom: 4px; }
+        .topic-info p { font-size: 0.82rem; color: #999; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← שפות תכנות</div>
+    <h1>שפות <span>תכנות</span> 💻</h1>
+    <p>בחרי את השפה שמעניינת אותך ותתחילי ללמוד — מהבסיס ועד רמה מתקדמת</p>
+</div>
+
+<div class="container">
+
+    <div class="section-title">
+        <h2>🐍 שפות תכנות</h2>
+        <p>קורסים מלאים עם שיעורים, דוגמאות ופרויקטים</p>
+    </div>
+
+    <div class="lang-grid">
+        <a href="/courses/languages/python" class="lang-card" style="--card-color:#3776AB; --card-bg:#EBF4FF;">
+            <div class="lang-icon">🐍</div>
+            <h3>Python</h3>
+            <p>שפת תכנות מודרנית ופשוטה ללמידה. משמשת לסייבר, בינה מלאכותית, אתרים ועיבוד נתונים.</p>
+            <div class="lang-meta">
+                <span class="lang-tag">15 שיעורים</span>
+                <span class="lang-tag">3 רמות</span>
+                <span class="lang-tag">מתחילות</span>
+            </div>
+            <span class="lang-btn">התחילי ללמוד ←</span>
+        </a>
+
+        <a class="lang-card coming-soon" style="--card-color:#F7DF1E; --card-bg:#FFFDE7;">
+            <div class="lang-icon">🌐</div>
+            <h3>JavaScript</h3>
+            <p>שפת האינטרנט! בניית אתרים אינטראקטיביים, אפליקציות ועוד.</p>
+            <div class="lang-meta"><span class="lang-tag">בקרוב</span></div>
+            <span class="coming-badge">🔒 בקרוב</span>
+        </a>
+
+        <a class="lang-card coming-soon" style="--card-color:#E44D26; --card-bg:#FFF3EE;">
+            <div class="lang-icon">🎨</div>
+            <h3>HTML / CSS</h3>
+            <p>הבסיס של כל אתר. תלמדי לבנות דפים יפים ומעוצבים מאפס.</p>
+            <div class="lang-meta"><span class="lang-tag">בקרוב</span></div>
+            <span class="coming-badge">🔒 בקרוב</span>
+        </a>
+
+        <a class="lang-card coming-soon" style="--card-color:#D81B60; --card-bg:#FCE4EC;">
+            <div class="lang-icon">🔐</div>
+            <h3>סייבר</h3>
+            <p>מתקפות, הגנה, Ethical Hacking ואבטחת מידע — הכל בצורה אתית ובטוחה.</p>
+            <div class="lang-meta"><span class="lang-tag">בקרוב</span></div>
+            <span class="coming-badge">🔒 בקרוב</span>
+        </a>
+    </div>
+
+    <div class="section-title">
+        <h2>📚 נושאים נוספים</h2>
+        <p>תחומים חדשים בהייטק</p>
+    </div>
+
+    <div class="topic-grid">
+        <div class="topic-card coming-soon">
+            <div class="topic-icon" style="background:#F3E5F5;">🌐</div>
+            <div class="topic-info"><h3>רשתות (Network)</h3><p>IP, Port, Protocol — בקרוב</p></div>
+        </div>
+        <div class="topic-card coming-soon">
+            <div class="topic-icon" style="background:#E8F5E9;">🕸️</div>
+            <div class="topic-info"><h3>Web Development</h3><p>בניית אתרים — בקרוב</p></div>
+        </div>
+        <div class="topic-card coming-soon">
+            <div class="topic-icon" style="background:#FFF8E1;">🤖</div>
+            <div class="topic-info"><h3>בינה מלאכותית (AI)</h3><p>Machine Learning — בקרוב</p></div>
+        </div>
+        <div class="topic-card coming-soon">
+            <div class="topic-icon" style="background:#FCE4EC;">📊</div>
+            <div class="topic-info"><h3>Data Science</h3><p>עיבוד נתונים — בקרוב</p></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('hamburger').onclick = function() {
+        document.getElementById('nav-links').classList.toggle('open');
+    };
+</script>
+</body>
+</html>
