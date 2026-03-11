@@ -13,5 +13,6 @@
     { "source": "/mysteries", "destination": "/women%20who%20hack/frontend/mysteries.html" },
     { "source": "/contact", "destination": "/women%20who%20hack/frontend/contact.html" },
     { "source": "/vision", "destination": "/women%20who%20hack/frontend/vision.html" }
+    { "source": "/learn", "destination": "/women%20who%20hack/frontend/courses/index.html" },
   ]
 }
