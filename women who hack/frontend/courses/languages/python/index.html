@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | קורס Python 🐍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: #FFF5F7; color: #2c2c2c; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.6rem; font-weight: 900; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 10px 20px; margin: 0; }
+        }
+        .hero { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); padding: 70px 20px 80px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '🐍'; position: absolute; font-size: 18rem; opacity: 0.04; top: -40px; left: -40px; }
+        .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; }
+        .hero-breadcrumb a { color: #FF69B4; text-decoration: none; }
+        .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 12px; }
+        .hero h1 span { color: #FF69B4; }
+        .hero p { font-size: 1.05rem; opacity: 0.8; max-width: 550px; margin: 0 auto 25px; line-height: 1.7; }
+        .hero-stats { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .hero-stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 12px 22px; }
+        .hero-stat strong { display: block; font-size: 1.4rem; font-weight: 900; color: #FF69B4; }
+        .hero-stat span { font-size: 0.8rem; opacity: 0.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px 100px; }
+        .level-section { margin-bottom: 55px; }
+        .level-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding: 20px 25px; border-radius: 18px; border: 2px solid; }
+        .level-header.l1 { background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border-color: #A5D6A7; }
+        .level-header.l2 { background: linear-gradient(135deg, #E3F2FD, #EDE7F6); border-color: #90CAF9; }
+        .level-header.l3 { background: linear-gradient(135deg, #FCE4EC, #FFF5F7); border-color: #F48FB1; }
+        .level-badge { padding: 6px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 900; }
+        .l1 .level-badge { background: #2E7D32; color: white; }
+        .l2 .level-badge { background: #1565C0; color: white; }
+        .l3 .level-badge { background: #D81B60; color: white; }
+        .level-header h2 { font-size: 1.3rem; font-weight: 900; flex: 1; }
+        .l1 .level-header h2 { color: #2E7D32; }
+        .l2 .level-header h2 { color: #1565C0; }
+        .l3 .level-header h2 { color: #C62828; }
+        .level-count { font-size: 0.85rem; font-weight: 700; opacity: 0.6; }
+        .lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .lesson-card { background: white; border: 2px solid #F8BBD0; border-radius: 18px; padding: 22px; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: flex-start; gap: 16px; box-shadow: 0 3px 12px rgba(255,105,180,0.06); }
+        .lesson-card:hover { transform: translateY(-4px); border-color: #FF69B4; box-shadow: 0 10px 30px rgba(255,105,180,0.15); }
+        .lesson-card.coming-soon { opacity: 0.5; pointer-events: none; }
+        .lesson-num { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.95rem; flex-shrink: 0; }
+        .l1-num { background: #E8F5E9; color: #2E7D32; }
+        .l2-num { background: #E3F2FD; color: #1565C0; }
+        .l3-num { background: #FCE4EC; color: #C62828; }
+        .lesson-info { flex: 1; }
+        .lesson-info h3 { font-size: 0.97rem; font-weight: 900; color: #1a1a2e; margin-bottom: 5px; line-height: 1.4; }
+        .lesson-info p { font-size: 0.82rem; color: #999; line-height: 1.5; }
+        .lesson-status { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; flex-shrink: 0; align-self: flex-start; }
+        .status-available { background: #E8F5E9; color: #2E7D32; }
+        .status-soon { background: #F5F5F5; color: #999; }
+        .project-card { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFE082; border-radius: 16px; padding: 18px 22px; margin-top: 16px; display: flex; align-items: center; gap: 14px; }
+        .project-card.big { background: linear-gradient(135deg, #FCE4EC, #FFF5F7); border-color: #F48FB1; margin-top: 10px; }
+        .project-icon { font-size: 1.5rem; }
+        .project-info h4 { font-size: 0.92rem; font-weight: 900; color: #F57F17; margin-bottom: 3px; }
+        .project-card.big .project-info h4 { color: #C62828; }
+        .project-info p { font-size: 0.8rem; color: #999; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-breadcrumb">
+        <a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← Python
+    </div>
+    <h1>קורס <span>Python</span> 🐍</h1>
+    <p>מהיכרות ראשונה עם Python ועד פרויקטי סייבר אמיתיים — 15 שיעורים ב-3 רמות</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><strong>15</strong><span>שיעורים</span></div>
+        <div class="hero-stat"><strong>3</strong><span>רמות</span></div>
+        <div class="hero-stat"><strong>6</strong><span>פרויקטים</span></div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- LEVEL 1 -->
+    <div class="level-section">
+        <div class="level-header l1">
+            <span class="level-badge">Level 1</span>
+            <h2>🌱 Basics — יסודות Python</h2>
+            <span class="level-count">שיעורים 1–5</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/python/lesson1" class="lesson-card">
+                <div class="lesson-num l1-num">01</div>
+                <div class="lesson-info">
+                    <h3>היכרות עם Python 🐍</h3>
+                    <p>מהי שפת תכנות, פקודות, פונקציות ו-print()</p>
+                </div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l1-num">02</div>
+                <div class="lesson-info"><h3>משתנים וסוגי נתונים 📦</h3><p>int, float, str, bool</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l1-num">03</div>
+                <div class="lesson-info"><h3>קלט ופלט 🎤</h3><p>input() ו-print()</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l1-num">04</div>
+                <div class="lesson-info"><h3>אופרטורים ➕</h3><p>מתמטיים, השוואה ולוגיים</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l1-num">05</div>
+                <div class="lesson-info"><h3>מחרוזות (Strings) 💬</h3><p>len(), upper(), חיתוך</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט קטן — אחרי שיעורים 1–5</h4><p>תוכנית ברכה מותאמת אישית עם שם, גיל ותחביב</p></div></div>
+        <div class="project-card big"><div class="project-icon">🏆</div><div class="project-info"><h4>3 פרויקטים גדולים — סיום Level 1</h4><p>מחשבון | מערכת פרופילים | רשימת קניות</p></div></div>
+    </div>
+
+    <!-- LEVEL 2 -->
+    <div class="level-section">
+        <div class="level-header l2">
+            <span class="level-badge">Level 2</span>
+            <h2>⚡ Logic — לוגיקה ומבני נתונים</h2>
+            <span class="level-count">שיעורים 6–10</span>
+        </div>
+        <div class="lessons-grid">
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l2-num">06</div>
+                <div class="lesson-info"><h3>לולאות (Loops) 🔄</h3><p>for, while, break, continue</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l2-num">07</div>
+                <div class="lesson-info"><h3>רשימות (Lists) 📋</h3><p>יצירה, גישה, הוספה והסרה</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l2-num">08</div>
+                <div class="lesson-info"><h3>טיפול בשגיאות ⚠️</h3><p>try, except, ValueError</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l2-num">09</div>
+                <div class="lesson-info"><h3>מודולים (Modules) 📦</h3><p>import, math, Standard Library</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l2-num">10</div>
+                <div class="lesson-info"><h3>קבצים (File Handling) 📁</h3><p>open(), read(), write(), with</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט קטן — אחרי שיעורים 6–10</h4><p>מערכת שמירת חברים בקובץ</p></div></div>
+        <div class="project-card big"><div class="project-icon">🏆</div><div class="project-info"><h4>3 פרויקטים גדולים — סיום Level 2</h4><p>מערכת משתמשים | ניהול קבוצה | מערכת סיסמאות</p></div></div>
+    </div>
+
+    <!-- LEVEL 3 -->
+    <div class="level-section">
+        <div class="level-header l3">
+            <span class="level-badge">Level 3</span>
+            <h2>🔐 Hacker Challenges — אתגרי סייבר</h2>
+            <span class="level-count">שיעורים 11–15</span>
+        </div>
+        <div class="lessons-grid">
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">11</div>
+                <div class="lesson-info"><h3>קריפטוגרפיה 🔑</h3><p>Encryption, Decryption, מפתחות</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">12</div>
+                <div class="lesson-info"><h3>רשתות (Networks) 🌐</h3><p>IP, Port, Protocol</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">13</div>
+                <div class="lesson-info"><h3>חולשות אתרים 🕷️</h3><p>XSS, SQL Injection, Phishing</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">14</div>
+                <div class="lesson-info"><h3>Ethical Hacking 🛡️</h3><p>בדיקות אבטחה חוקיות</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+            <a class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">15</div>
+                <div class="lesson-info"><h3>פרויקטי אבטחה 🔓</h3><p>סימולציית מתקפות בסביבה בטוחה</p></div>
+                <span class="lesson-status status-soon">🔒 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט קטן — אחרי שיעורים 11–15</h4><p>מערכת בדיקת סיסמאות עם דוחות</p></div></div>
+        <div class="project-card big"><div class="project-icon">🏆</div><div class="project-info"><h4>3 פרויקטים גדולים — סיום Level 3</h4><p>מערכת הצפנה | סימולציית XSS/SQL | דוח Penetration Testing</p></div></div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('hamburger').onclick = function() {
+        document.getElementById('nav-links').classList.toggle('open');
+    };
+</script>
+</body>
+</html>
