@@ -21,13 +21,7 @@
         .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
         .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
-        @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-wrap: wrap; }
-            .hamburger { display: flex; }
-            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
-            .nav-links.open { display: flex; }
-            .nav-links a { padding: 10px 20px; margin: 0; }
-        }
+        @media (max-width: 768px) { nav { padding: 15px 20px; flex-wrap: wrap; } .hamburger { display: flex; } .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; } .nav-links.open { display: flex; } .nav-links a { padding: 10px 20px; margin: 0; } }
         .hero { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); padding: 70px 20px 80px; text-align: center; color: white; position: relative; overflow: hidden; }
         .hero::before { content: '🐍'; position: absolute; font-size: 18rem; opacity: 0.04; top: -40px; left: -40px; }
         .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; }
@@ -87,11 +81,8 @@
         <a href="/register" class="join-btn">הצטרפות 🎀</a>
     </div>
 </nav>
-
 <div class="hero">
-    <div class="hero-breadcrumb">
-        <a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← Python
-    </div>
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← Python</div>
     <h1>קורס <span>Python</span> 🐍</h1>
     <p>מהיכרות ראשונה עם Python ועד פרויקטי סייבר אמיתיים — 15 שיעורים ב-3 רמות</p>
     <div class="hero-stats">
@@ -100,7 +91,6 @@
         <div class="hero-stat"><strong>6</strong><span>פרויקטים</span></div>
     </div>
 </div>
-
 <div class="container">
 
     <!-- LEVEL 1 -->
@@ -187,30 +177,30 @@
             <span class="level-count">שיעורים 11–15</span>
         </div>
         <div class="lessons-grid">
-            <a class="lesson-card coming-soon">
+            <a href="/courses/languages/python/lesson11" class="lesson-card">
                 <div class="lesson-num l3-num">11</div>
                 <div class="lesson-info"><h3>קריפטוגרפיה 🔑</h3><p>Encryption, Decryption, מפתחות</p></div>
-                <span class="lesson-status status-soon">🔒 בקרוב</span>
+                <span class="lesson-status status-available">✅ זמין</span>
             </a>
-            <a class="lesson-card coming-soon">
+            <a href="/courses/languages/python/lesson12" class="lesson-card">
                 <div class="lesson-num l3-num">12</div>
                 <div class="lesson-info"><h3>רשתות (Networks) 🌐</h3><p>IP, Port, Protocol</p></div>
-                <span class="lesson-status status-soon">🔒 בקרוב</span>
+                <span class="lesson-status status-available">✅ זמין</span>
             </a>
-            <a class="lesson-card coming-soon">
+            <a href="/courses/languages/python/lesson13" class="lesson-card">
                 <div class="lesson-num l3-num">13</div>
                 <div class="lesson-info"><h3>חולשות אתרים 🕷️</h3><p>XSS, SQL Injection, Phishing</p></div>
-                <span class="lesson-status status-soon">🔒 בקרוב</span>
+                <span class="lesson-status status-available">✅ זמין</span>
             </a>
-            <a class="lesson-card coming-soon">
+            <a href="/courses/languages/python/lesson14" class="lesson-card">
                 <div class="lesson-num l3-num">14</div>
                 <div class="lesson-info"><h3>Ethical Hacking 🛡️</h3><p>בדיקות אבטחה חוקיות</p></div>
-                <span class="lesson-status status-soon">🔒 בקרוב</span>
+                <span class="lesson-status status-available">✅ זמין</span>
             </a>
-            <a class="lesson-card coming-soon">
+            <a href="/courses/languages/python/lesson15" class="lesson-card">
                 <div class="lesson-num l3-num">15</div>
-                <div class="lesson-info"><h3>פרויקטי אבטחה 🔓</h3><p>סימולציית מתקפות בסביבה בטוחה</p></div>
-                <span class="lesson-status status-soon">🔒 בקרוב</span>
+                <div class="lesson-info"><h3>פרויקט סיום 🏆</h3><p>Security Audit Tool מלא</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
             </a>
         </div>
         <div class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט קטן — אחרי שיעורים 11–15</h4><p>מערכת בדיקת סיסמאות עם דוחות</p></div></div>
@@ -218,11 +208,8 @@
     </div>
 
 </div>
-
 <script>
-    document.getElementById('hamburger').onclick = function() {
-        document.getElementById('nav-links').classList.toggle('open');
-    };
+    document.getElementById('hamburger').onclick = function() { document.getElementById('nav-links').classList.toggle('open'); };
 </script>
 </body>
 </html>
