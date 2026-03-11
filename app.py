@@ -63,14 +63,52 @@ def courses_languages():
 def python_course():
     return render_template('courses/languages/python/index.html')
 
+# ─── Level 1 ───────────────────────────────────────
 @app.route('/courses/languages/python/lesson1')
 def python_lesson1():
     return render_template('courses/languages/python/lesson1/index.html')
 
-# ─── שיעורים עתידיים (להוסיף כשיהיו מוכנים) ──────
-# @app.route('/courses/languages/python/lesson2')
-# def python_lesson2():
-#     return render_template('courses/languages/python/lesson2/index.html')
+@app.route('/courses/languages/python/lesson2')
+def python_lesson2():
+    return render_template('courses/languages/python/lesson2/index.html')
+
+@app.route('/courses/languages/python/lesson3')
+def python_lesson3():
+    return render_template('courses/languages/python/lesson3/index.html')
+
+@app.route('/courses/languages/python/lesson4')
+def python_lesson4():
+    return render_template('courses/languages/python/lesson4/index.html')
+
+@app.route('/courses/languages/python/lesson5')
+def python_lesson5():
+    return render_template('courses/languages/python/lesson5/index.html')
+
+# ─── Level 2 ───────────────────────────────────────
+@app.route('/courses/languages/python/lesson6')
+def python_lesson6():
+    return render_template('courses/languages/python/lesson6/index.html')
+
+@app.route('/courses/languages/python/lesson7')
+def python_lesson7():
+    return render_template('courses/languages/python/lesson7/index.html')
+
+@app.route('/courses/languages/python/lesson8')
+def python_lesson8():
+    return render_template('courses/languages/python/lesson8/index.html')
+
+@app.route('/courses/languages/python/lesson9')
+def python_lesson9():
+    return render_template('courses/languages/python/lesson9/index.html')
+
+@app.route('/courses/languages/python/lesson10')
+def python_lesson10():
+    return render_template('courses/languages/python/lesson10/index.html')
+
+# ─── Level 3 (להוסיף כשיהיו מוכנים) ───────────────
+# @app.route('/courses/languages/python/lesson11')
+# def python_lesson11():
+#     return render_template('courses/languages/python/lesson11/index.html')
 
 if __name__ == '__main__':
     app.run(debug=False)
