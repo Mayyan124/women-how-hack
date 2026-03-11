@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | Python — שיעור 2 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: #FFF5F7; color: #2c2c2c; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
+        nav a.logo { font-size: 1.6rem; font-weight: 900; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-wrap: wrap; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 10px 20px; margin: 0; }
+        }
+        .hero { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); padding: 60px 20px 70px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '📦'; position: absolute; font-size: 18rem; opacity: 0.04; top: -40px; left: -40px; }
+        .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; }
+        .hero-breadcrumb a { color: #FF69B4; text-decoration: none; }
+        .hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        .hero h1 span { color: #FF69B4; }
+        .hero p { font-size: 1rem; opacity: 0.8; max-width: 500px; margin: 0 auto 25px; line-height: 1.7; }
+        .lesson-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,105,180,0.2); border: 1px solid rgba(255,105,180,0.4); padding: 6px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: #FF69B4; }
+        .lesson-nav { background: white; border-bottom: 2px solid #F8BBD0; padding: 0 20px; display: flex; justify-content: center; position: sticky; top: 72px; z-index: 999; overflow-x: auto; }
+        .lesson-nav a { padding: 16px 20px; text-decoration: none; color: #999; font-weight: 700; font-size: 0.88rem; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+        .lesson-nav a:hover, .lesson-nav a.active { color: #D81B60; border-bottom-color: #D81B60; }
+        .container { max-width: 860px; margin: 0 auto; padding: 50px 20px 100px; }
+        .lesson-section { margin-bottom: 40px; scroll-margin-top: 140px; }
+        .concept-card { background: white; border-radius: 20px; border: 2px solid #F8BBD0; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255,105,180,0.07); }
+        .concept-card h3 { font-size: 1.2rem; font-weight: 900; color: #D81B60; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .concept-card p { color: #555; line-height: 1.8; font-size: 0.97rem; }
+        .review-box { background: #FFF8E1; border: 2px solid #FFE082; border-radius: 15px; padding: 20px 25px; margin-bottom: 30px; font-size: 0.93rem; color: #555; line-height: 1.7; }
+        .review-box strong { color: #F57F17; }
+        .life-example { background: linear-gradient(135deg, #FCE4EC, #FFF5F7); border-right: 5px solid #FF69B4; border-radius: 0 15px 15px 0; padding: 20px 25px; margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-start; }
+        .life-emoji { font-size: 2rem; flex-shrink: 0; }
+        .life-text { color: #555; line-height: 1.7; font-size: 0.95rem; }
+        .life-text strong { color: #D81B60; }
+        .code-box { background: #1a1a2e; border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .code-label { color: #FF69B4; font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .code-box pre { font-family: 'Courier New', monospace; font-size: 0.92rem; line-height: 1.8; color: #a8ff78; white-space: pre-wrap; word-wrap: break-word; }
+        .code-comment { color: #666; }
+        .code-string { color: #ffd43b; }
+        .code-keyword { color: #FF69B4; }
+        .code-output { color: #74c0fc; }
+        .code-type { color: #ff9f43; }
+        .section-title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: 40px; }
+        .section-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(216,27,96,0.2); }
+        .section-title-row h2 { font-size: 1.3rem; font-weight: 900; color: #D81B60; }
+        .types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .type-card { background: white; border: 2px solid #F8BBD0; border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 3px 10px rgba(255,105,180,0.07); }
+        .type-card .type-name { font-size: 1.1rem; font-weight: 900; margin-bottom: 6px; }
+        .type-card .type-desc { font-size: 0.82rem; color: #777; margin-bottom: 8px; }
+        .type-card .type-example { background: #FFF0F5; padding: 4px 10px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: #D81B60; font-weight: bold; }
+        .int-card { border-color: #90CAF9; } .int-card .type-name { color: #1565C0; }
+        .float-card { border-color: #A5D6A7; } .float-card .type-name { color: #2E7D32; }
+        .str-card { border-color: #FFE082; } .str-card .type-name { color: #F57F17; }
+        .bool-card { border-color: #CE93D8; } .bool-card .type-name { color: #6A1B9A; }
+        .quiz-section { background: white; border: 2px solid #F8BBD0; border-radius: 25px; padding: 35px; margin-top: 50px; box-shadow: 0 8px 30px rgba(255,105,180,0.1); }
+        .quiz-section h2 { color: #D81B60; font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; text-align: center; }
+        .quiz-subtitle { text-align: center; color: #999; margin-bottom: 30px; font-size: 0.9rem; }
+        .quiz-q { margin-bottom: 28px; }
+        .quiz-q p { font-weight: 700; color: #333; margin-bottom: 12px; font-size: 0.97rem; line-height: 1.5; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-btn { background: #FFF5F7; border: 2px solid #F8BBD0; border-radius: 12px; padding: 11px 16px; text-align: right; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.93rem; color: #444; transition: all 0.2s; font-weight: 600; }
+        .quiz-btn:hover { border-color: #FF69B4; background: #FFF0F5; }
+        .quiz-btn.correct { background: #E8F5E9; border-color: #81C784; color: #2E7D32; }
+        .quiz-btn.wrong { background: #FCE4EC; border-color: #EF9A9A; color: #C62828; }
+        .quiz-btn:disabled { cursor: not-allowed; }
+        .quiz-feedback { margin-top: 8px; padding: 10px 14px; border-radius: 10px; font-size: 0.88rem; font-weight: 600; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.ok { background: #E8F5E9; color: #2E7D32; }
+        .quiz-feedback.no { background: #FCE4EC; color: #C62828; }
+        .quiz-score { text-align: center; padding: 25px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 20px; color: white; display: none; margin-top: 20px; }
+        .quiz-score h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
+        .quiz-submit { background: linear-gradient(135deg, #FF69B4, #D81B60); color: white; border: none; padding: 14px 35px; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: 'Heebo', sans-serif; display: block; margin: 25px auto 0; box-shadow: 0 8px 25px rgba(216,27,96,0.3); transition: transform 0.2s; }
+        .quiz-submit:hover { transform: translateY(-2px); }
+        .lesson-nav-btns { display: flex; justify-content: space-between; gap: 15px; margin-top: 40px; }
+        .nav-btn { flex: 1; display: flex; justify-content: space-between; align-items: center; background: white; border: 2px solid #F8BBD0; border-radius: 20px; padding: 20px 25px; text-decoration: none; color: inherit; transition: all 0.3s; }
+        .nav-btn:hover { border-color: #FF69B4; box-shadow: 0 8px 25px rgba(216,27,96,0.1); transform: translateY(-2px); }
+        .nav-btn-text p { color: #999; font-size: 0.85rem; margin-bottom: 4px; }
+        .nav-btn-text h3 { font-size: 1rem; font-weight: 900; color: #D81B60; }
+        .nav-arrow { width: 40px; height: 40px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; box-shadow: 0 4px 15px rgba(216,27,96,0.3); flex-shrink: 0; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-breadcrumb">
+        <a href="/courses">קורסים</a> ← <a href="/courses/languages/python">🐍 Python</a> ← שיעור 2
+    </div>
+    <div class="lesson-badge">📚 Level 1 — Basics | שיעור 2 מתוך 15</div>
+    <h1>משתנים וסוגי <span>נתונים</span> 📦</h1>
+    <p>מהו משתנה, מהם סוגי הנתונים ואיך לשמור מידע בתוכנית</p>
+</div>
+
+<nav class="lesson-nav">
+    <a href="#review" class="active">🔄 חזרה</a>
+    <a href="#concepts">💡 מושגים</a>
+    <a href="#life">🌸 מהחיים</a>
+    <a href="#code">💻 קוד</a>
+    <a href="#quiz">🎀 שאלות</a>
+</nav>
+
+<div class="container">
+
+    <div class="lesson-section" id="review">
+        <div class="review-box">
+            <strong>🔄 חזרה על שיעור 1:</strong> למדנו מהי שפת תכנות, מהי פקודה, מהי פונקציה, ואיך משתמשים ב-<code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">print()</code> להצגת טקסט על המסך.
+        </div>
+    </div>
+
+    <div class="lesson-section" id="concepts">
+        <div class="section-title-row">
+            <div class="section-icon">💡</div>
+            <h2>מושגים חדשים</h2>
+        </div>
+
+        <div class="concept-card">
+            <h3>📦 מהו משתנה (Variable)?</h3>
+            <p>משתנה הוא <strong>מקום בזיכרון המחשב שבו שומרים מידע</strong>. אפשר לדמיין אותו כ<strong>קופסה עם תווית</strong> — התווית היא שם המשתנה, והתוכן הוא הערך שמאוחסן בו.<br><br>
+            לדוגמה: <code style="background:#FFF0F5;padding:2px 8px;border-radius:5px;color:#D81B60;font-weight:bold;">name = "Maayan"</code> — יצרנו קופסה בשם <strong>name</strong> שמכילה את הערך <strong>"Maayan"</strong>.</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>🔢 סוגי נתונים (Data Types)</h3>
+            <p>לכל משתנה יש <strong>סוג</strong> — Python צריכה לדעת מה מין מידע מאוחסן. יש 4 סוגים בסיסיים:</p>
+        </div>
+
+        <div class="types-grid">
+            <div class="type-card int-card">
+                <div class="type-name">int 🔢</div>
+                <div class="type-desc">מספר שלם (ללא נקודה)</div>
+                <div class="type-example">18, 100, -5</div>
+            </div>
+            <div class="type-card float-card">
+                <div class="type-name">float 📊</div>
+                <div class="type-desc">מספר עם נקודה עשרונית</div>
+                <div class="type-example">1.65, 3.14</div>
+            </div>
+            <div class="type-card str-card">
+                <div class="type-name">str 💬</div>
+                <div class="type-desc">טקסט (בין מרכאות)</div>
+                <div class="type-example">"Maayan", "שלום"</div>
+            </div>
+            <div class="type-card bool-card">
+                <div class="type-name">bool ✅</div>
+                <div class="type-desc">נכון או לא נכון</div>
+                <div class="type-example">True, False</div>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <h3>🔍 ההבדל בין int ל-float</h3>
+            <p><strong>int</strong> = מספר שלם בלבד: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">age = 18</code><br><br>
+            <strong>float</strong> = מספר עם נקודה עשרונית: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">height = 1.65</code><br><br>
+            למה חשוב? כי פעולות מתמטיות יכולות להתנהג שונה — <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">5 / 2 = 2.5</code> (float) אבל <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">5 // 2 = 2</code> (int).</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>✅ מהו bool (Boolean)?</h3>
+            <p>Boolean הוא סוג נתונים שיכול להכיל רק שני ערכים: <strong>True</strong> (נכון) או <strong>False</strong> (לא נכון).<br><br>
+            משתמשים בו לשאלות כן/לא: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">is_student = True</code><br>
+            שימו לב — <strong>T</strong> ו-<strong>F</strong> חייבים להיות באות גדולה!</p>
+        </div>
+    </div>
+
+    <div class="lesson-section" id="life">
+        <div class="section-title-row">
+            <div class="section-icon">🌸</div>
+            <h2>דוגמה מהחיים</h2>
+        </div>
+        <div class="life-example">
+            <div class="life-emoji">📱</div>
+            <div class="life-text">
+                בפרופיל האינסטגרם שלך:<br><br>
+                <strong>שם</strong> → str: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">"Maayan"</code><br>
+                <strong>גיל</strong> → int: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">18</code><br>
+                <strong>גובה</strong> → float: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">1.65</code><br>
+                <strong>האם יש חיית מחמד?</strong> → bool: <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">True</code><br><br>
+                <strong>כל פריט מידע שומרים בסוג הנתון המתאים לו! 🎀</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-section" id="code">
+        <div class="section-title-row">
+            <div class="section-icon">💻</div>
+            <h2>דוגמת קוד</h2>
+        </div>
+        <div class="code-box">
+            <div class="code-label">🐍 Python — שיעור 2</div>
+            <pre><span class="code-comment"># יצירת משתנים מסוגים שונים</span>
+<span class="code-type">name</span> = <span class="code-string">"Maayan"</span>      <span class="code-comment"># str — טקסט</span>
+<span class="code-type">age</span> = <span class="code-string">18</span>            <span class="code-comment"># int — מספר שלם</span>
+<span class="code-type">height</span> = <span class="code-string">1.65</span>        <span class="code-comment"># float — מספר עשרוני</span>
+<span class="code-type">has_pet</span> = <span class="code-keyword">True</span>      <span class="code-comment"># bool — נכון/לא נכון</span>
+
+<span class="code-comment"># הצגת המשתנים</span>
+<span class="code-keyword">print</span>(<span class="code-string">"שם:"</span>, name)
+<span class="code-keyword">print</span>(<span class="code-string">"גיל:"</span>, age)
+<span class="code-keyword">print</span>(<span class="code-string">"גובה:"</span>, height)
+<span class="code-keyword">print</span>(<span class="code-string">"יש חיית מחמד?"</span>, has_pet)
+
+<span class="code-comment"># פלט:</span>
+<span class="code-output"># שם: Maayan
+# גיל: 18
+# גובה: 1.65
+# יש חיית מחמד? True</span></pre>
+        </div>
+    </div>
+
+    <div class="quiz-section" id="quiz">
+        <h2>🎀 שאלות אמריקאיות</h2>
+        <p class="quiz-subtitle">5 שאלות על מה שלמדת — בהצלחה!</p>
+
+        <div class="quiz-q" id="q1">
+            <p>1. מהו משתנה (Variable)?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">A) פונקציה מיוחדת</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) מקום בזיכרון לשמירת מידע ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">C) סוג של לולאה</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">D) שגיאה בקוד</button>
+            </div>
+            <div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+
+        <div class="quiz-q" id="q2">
+            <p>2. מהו int?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">A) טקסט</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) מספר שלם ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C) מספר עשרוני</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">D) נכון/לא נכון</button>
+            </div>
+            <div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+
+        <div class="quiz-q" id="q3">
+            <p>3. איזה סוג נתון מתאים לגובה 1.65?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">A) int</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) float ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">C) str</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">D) bool</button>
+            </div>
+            <div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+
+        <div class="quiz-q" id="q4">
+            <p>4. מהו bool?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A) מספר שלם</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">B) טקסט</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">C) נכון או לא נכון (True/False) ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">D) מספר עשרוני</button>
+            </div>
+            <div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+
+        <div class="quiz-q" id="q5">
+            <p>5. איזה סוג נתון מתאים לשם "Maayan"?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A) int</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">B) float</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) str ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">D) bool</button>
+            </div>
+            <div class="quiz-feedback" id="fb-q5"></div>
+        </div>
+
+        <div class="quiz-score" id="quiz-score"></div>
+        <button class="quiz-submit" onclick="showScore()">בדקי תוצאות 🎀</button>
+    </div>
+
+    <div class="lesson-nav-btns">
+        <a href="/courses/languages/python/lesson1" class="nav-btn">
+            <div class="nav-arrow">→</div>
+            <div class="nav-btn-text" style="text-align:right;">
+                <p>← השיעור הקודם</p>
+                <h3>שיעור 1 — היכרות עם Python</h3>
+            </div>
+        </a>
+        <a href="/courses/languages/python/lesson3" class="nav-btn">
+            <div class="nav-btn-text">
+                <p>השיעור הבא ←</p>
+                <h3>שיעור 3 — קלט ופלט 🎤</h3>
+            </div>
+            <div class="nav-arrow">←</div>
+        </a>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('hamburger').onclick = function() { document.getElementById('nav-links').classList.toggle('open'); };
+    const feedbacks = {
+        q1: { ok: '✅ נכון! משתנה הוא מקום בזיכרון לשמירת מידע.', no: '❌ לא. משתנה הוא מקום בזיכרון לשמירת מידע.' },
+        q2: { ok: '✅ מעולה! int הוא מספר שלם.', no: '❌ לא. int הוא מספר שלם ללא נקודה.' },
+        q3: { ok: '✅ נכון! 1.65 הוא מספר עשרוני = float.', no: '❌ לא. 1.65 הוא float — מספר עם נקודה עשרונית.' },
+        q4: { ok: '✅ בדיוק! bool הוא True או False בלבד.', no: '❌ לא. bool הוא True או False.' },
+        q5: { ok: '✅ נכון! טקסט כמו שם הוא str.', no: '❌ לא. שם הוא טקסט = str.' },
+    };
+    const answers = {};
+    function answer(btn, q, correct) {
+        const btns = btn.closest('.quiz-options').querySelectorAll('.quiz-btn');
+        btns.forEach(b => b.disabled = true);
+        btn.classList.add(correct ? 'correct' : 'wrong');
+        answers[q] = correct;
+        const fb = document.getElementById('fb-' + q);
+        fb.textContent = correct ? feedbacks[q].ok : feedbacks[q].no;
+        fb.className = 'quiz-feedback show ' + (correct ? 'ok' : 'no');
+    }
+    function showScore() {
+        const score = Object.values(answers).filter(Boolean).length;
+        const el = document.getElementById('quiz-score');
+        const emoji = score === 5 ? '🏆' : score >= 4 ? '🎀' : score >= 3 ? '💪' : '📚';
+        const msg = score === 5 ? 'מושלם! את מוכנה לשיעור הבא!' : score >= 4 ? 'כמעט מושלם!' : score >= 3 ? 'יפה! כדאי לחזור על החומר.' : 'בואי נקרא שוב 💪';
+        el.innerHTML = `<h3>${emoji} ${score}/5</h3><p>${msg}</p>`;
+        el.style.display = 'block';
+        el.scrollIntoView({ behavior: 'smooth' });
+    }
+    document.querySelectorAll('.lesson-nav a').forEach(a => {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.lesson-nav a').forEach(x => x.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
