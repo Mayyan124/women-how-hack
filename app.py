@@ -105,10 +105,26 @@ def python_lesson9():
 def python_lesson10():
     return render_template('courses/languages/python/lesson10/index.html')
 
-# ─── Level 3 (להוסיף כשיהיו מוכנים) ───────────────
-# @app.route('/courses/languages/python/lesson11')
-# def python_lesson11():
-#     return render_template('courses/languages/python/lesson11/index.html')
+# ─── Level 3 ───────────────────────────────────────
+@app.route('/courses/languages/python/lesson11')
+def python_lesson11():
+    return render_template('courses/languages/python/lesson11/index.html')
+
+@app.route('/courses/languages/python/lesson12')
+def python_lesson12():
+    return render_template('courses/languages/python/lesson12/index.html')
+
+@app.route('/courses/languages/python/lesson13')
+def python_lesson13():
+    return render_template('courses/languages/python/lesson13/index.html')
+
+@app.route('/courses/languages/python/lesson14')
+def python_lesson14():
+    return render_template('courses/languages/python/lesson14/index.html')
+
+@app.route('/courses/languages/python/lesson15')
+def python_lesson15():
+    return render_template('courses/languages/python/lesson15/index.html')
 
 if __name__ == '__main__':
     app.run(debug=False)
