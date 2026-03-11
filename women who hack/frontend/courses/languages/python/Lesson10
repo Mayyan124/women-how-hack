@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | Python — שיעור 10 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app); onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin:0;padding:0;box-sizing:border-box; } body { font-family:'Heebo',sans-serif;background:#FFF5F7;color:#2c2c2c; }
+        nav { display:flex;justify-content:space-between;align-items:center;padding:15px 50px;background:#FFFDD0;box-shadow:0 2px 15px rgba(255,182,193,0.4);position:sticky;top:0;z-index:1000;border-bottom:2px solid #F8BBD0;direction:rtl; }
+        nav a.logo { font-size:1.6rem;font-weight:900;color:#D81B60;text-decoration:none; }
+        .nav-links a { text-decoration:none;color:#555;margin:0 12px;font-weight:600;font-size:0.95rem; }
+        .nav-links a.join-btn { background:#FF69B4;color:white;padding:8px 22px;border-radius:50px;font-weight:bold; }
+        .hamburger { display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:5px; }
+        .hamburger span { display:block;width:25px;height:3px;background:#D81B60;border-radius:3px; }
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);padding:60px 20px 70px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .hero::before{content:'📁';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
+        .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
+        .hero-breadcrumb a{color:#FF69B4;text-decoration:none;}
+        .hero h1{font-size:2.5rem;font-weight:900;margin-bottom:10px;} .hero h1 span{color:#FF69B4;}
+        .hero p{font-size:1rem;opacity:0.8;max-width:500px;margin:0 auto 25px;line-height:1.7;}
+        .lesson-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,105,180,0.2);border:1px solid rgba(255,105,180,0.4);padding:6px 18px;border-radius:50px;font-size:0.85rem;font-weight:700;color:#FF69B4;}
+        .lesson-nav{background:white;border-bottom:2px solid #F8BBD0;padding:0 20px;display:flex;justify-content:center;position:sticky;top:72px;z-index:999;overflow-x:auto;}
+        .lesson-nav a{padding:16px 20px;text-decoration:none;color:#999;font-weight:700;font-size:0.88rem;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s;}
+        .lesson-nav a:hover,.lesson-nav a.active{color:#D81B60;border-bottom-color:#D81B60;}
+        .container{max-width:860px;margin:0 auto;padding:50px 20px 100px;}
+        .lesson-section{margin-bottom:40px;scroll-margin-top:140px;}
+        .concept-card{background:white;border-radius:20px;border:2px solid #F8BBD0;padding:28px;margin-bottom:20px;box-shadow:0 4px 15px rgba(255,105,180,0.07);}
+        .concept-card h3{font-size:1.2rem;font-weight:900;color:#D81B60;margin-bottom:12px;}
+        .concept-card p{color:#555;line-height:1.8;font-size:0.97rem;}
+        .review-box{background:#FFF8E1;border:2px solid #FFE082;border-radius:15px;padding:20px 25px;margin-bottom:30px;font-size:0.93rem;color:#555;line-height:1.7;}
+        .review-box strong{color:#F57F17;}
+        .life-example{background:linear-gradient(135deg,#FCE4EC,#FFF5F7);border-right:5px solid #FF69B4;border-radius:0 15px 15px 0;padding:20px 25px;margin-bottom:20px;display:flex;gap:15px;align-items:flex-start;}
+        .life-emoji{font-size:2rem;flex-shrink:0;} .life-text{color:#555;line-height:1.7;font-size:0.95rem;} .life-text strong{color:#D81B60;}
+        .code-box{background:#1a1a2e;border-radius:15px;padding:25px;margin-bottom:20px;}
+        .code-label{color:#FF69B4;font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:15px;}
+        .code-box pre{font-family:'Courier New',monospace;font-size:0.92rem;line-height:1.8;color:#a8ff78;white-space:pre-wrap;word-wrap:break-word;}
+        .code-comment{color:#666;} .code-string{color:#ffd43b;} .code-keyword{color:#FF69B4;} .code-output{color:#74c0fc;}
+        .section-title-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;margin-top:40px;}
+        .section-icon{width:42px;height:42px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+        .section-title-row h2{font-size:1.3rem;font-weight:900;color:#D81B60;}
+        .modes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:20px;}
+        .mode-card{background:white;border:2px solid #F8BBD0;border-radius:16px;padding:18px;text-align:center;box-shadow:0 3px 10px rgba(255,105,180,0.07);}
+        .mode-sym{font-family:monospace;font-size:1.5rem;font-weight:900;color:#D81B60;margin-bottom:6px;}
+        .mode-name{font-size:0.85rem;font-weight:700;color:#333;margin-bottom:4px;}
+        .mode-desc{font-size:0.8rem;color:#777;}
+        .project-box{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFE082;border-radius:20px;padding:28px;margin-top:30px;}
+        .project-box h3{font-size:1.2rem;font-weight:900;color:#F57F17;margin-bottom:10px;}
+        .project-box p{color:#555;line-height:1.8;font-size:0.95rem;}
+        .quiz-section{background:white;border:2px solid #F8BBD0;border-radius:25px;padding:35px;margin-top:50px;}
+        .quiz-section h2{color:#D81B60;font-size:1.5rem;font-weight:900;margin-bottom:6px;text-align:center;}
+        .quiz-subtitle{text-align:center;color:#999;margin-bottom:30px;font-size:0.9rem;}
+        .quiz-q{margin-bottom:28px;} .quiz-q p{font-weight:700;color:#333;margin-bottom:12px;font-size:0.97rem;line-height:1.5;}
+        .quiz-options{display:flex;flex-direction:column;gap:8px;}
+        .quiz-btn{background:#FFF5F7;border:2px solid #F8BBD0;border-radius:12px;padding:11px 16px;text-align:right;cursor:pointer;font-family:'Heebo',sans-serif;font-size:0.93rem;color:#444;transition:all 0.2s;font-weight:600;}
+        .quiz-btn:hover{border-color:#FF69B4;background:#FFF0F5;} .quiz-btn.correct{background:#E8F5E9;border-color:#81C784;color:#2E7D32;} .quiz-btn.wrong{background:#FCE4EC;border-color:#EF9A9A;color:#C62828;} .quiz-btn:disabled{cursor:not-allowed;}
+        .quiz-feedback{margin-top:8px;padding:10px 14px;border-radius:10px;font-size:0.88rem;font-weight:600;display:none;} .quiz-feedback.show{display:block;} .quiz-feedback.ok{background:#E8F5E9;color:#2E7D32;} .quiz-feedback.no{background:#FCE4EC;color:#C62828;}
+        .quiz-score{text-align:center;padding:25px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:20px;color:white;display:none;margin-top:20px;}
+        .quiz-score h3{font-size:1.8rem;font-weight:900;margin-bottom:8px;}
+        .quiz-submit{background:linear-gradient(135deg,#FF69B4,#D81B60);color:white;border:none;padding:14px 35px;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;display:block;margin:25px auto 0;transition:transform 0.2s;}
+        .quiz-submit:hover{transform:translateY(-2px);}
+        .lesson-nav-btns{display:flex;justify-content:space-between;gap:15px;margin-top:40px;}
+        .nav-btn{flex:1;display:flex;justify-content:space-between;align-items:center;background:white;border:2px solid #F8BBD0;border-radius:20px;padding:20px 25px;text-decoration:none;color:inherit;transition:all 0.3s;}
+        .nav-btn:hover{border-color:#FF69B4;box-shadow:0 8px 25px rgba(216,27,96,0.1);transform:translateY(-2px);}
+        .nav-btn-text p{color:#999;font-size:0.85rem;margin-bottom:4px;} .nav-btn-text h3{font-size:1rem;font-weight:900;color:#D81B60;}
+        .nav-arrow{width:40px;height:40px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a><a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/python">🐍 Python</a> ← שיעור 10</div>
+    <div class="lesson-badge">📚 Level 2 — Logic | שיעור 10 מתוך 15</div>
+    <h1>עבודה עם <span>קבצים</span> 📁</h1>
+    <p>איך לשמור ולקרוא מידע מקבצים על המחשב</p>
+</div>
+<nav class="lesson-nav">
+    <a href="#review" class="active">🔄 חזרה</a><a href="#concepts">💡 מושגים</a>
+    <a href="#life">🌸 מהחיים</a><a href="#code">💻 קוד</a><a href="#quiz">🎀 שאלות</a>
+</nav>
+<div class="container">
+    <div class="lesson-section" id="review">
+        <div class="review-box"><strong>🔄 חזרה על שיעור 9:</strong> למדנו מודולים — קבצים עם פונקציות מוכנות. import מייבא מודול. מודול math לחשבון, random למספרים אקראיים, datetime לתאריכים. from X import Y מייבא פונקציה ספציפית.</div>
+    </div>
+    <div class="lesson-section" id="concepts">
+        <div class="section-title-row"><div class="section-icon">💡</div><h2>מושגים חדשים</h2></div>
+        <div class="concept-card">
+            <h3>📁 מהי עבודה עם קבצים (File Handling)?</h3>
+            <p><strong>File Handling</strong> מאפשרת לנו <strong>לשמור מידע לקובץ ולקרוא ממנו</strong>. בלי קבצים, כל המידע נאבד כשהתוכנית נסגרת.<br><br>
+            בPython משתמשים ב-<strong>open()</strong> לפתיחת קובץ, עם ציון שם הקובץ ו<strong>מצב הפתיחה</strong>.</p>
+        </div>
+        <div class="modes-grid">
+            <div class="mode-card"><div class="mode-sym">"r"</div><div class="mode-name">Read — קריאה</div><div class="mode-desc">קורא קובץ קיים. שגיאה אם לא קיים.</div></div>
+            <div class="mode-card"><div class="mode-sym">"w"</div><div class="mode-name">Write — כתיבה</div><div class="mode-desc">יוצר/מוחק ומחדש. מוחק תוכן ישן!</div></div>
+            <div class="mode-card"><div class="mode-sym">"a"</div><div class="mode-name">Append — הוספה</div><div class="mode-desc">מוסיף בסוף בלי למחוק.</div></div>
+            <div class="mode-card"><div class="mode-sym">"x"</div><div class="mode-name">Create — יצירה</div><div class="mode-desc">יוצר קובץ חדש בלבד. שגיאה אם קיים.</div></div>
+        </div>
+        <div class="concept-card">
+            <h3>🔒 with — סגירה אוטומטית</h3>
+            <p><strong>with</strong> פותחת קובץ ו<strong>סוגרת אותו אוטומטית</strong> בסוף הבלוק — גם אם קרתה שגיאה! זה הדרך המומלצת לעבוד עם קבצים:<br><br>
+            <code style="background:#FFF0F5;padding:4px 8px;border-radius:5px;color:#D81B60;display:block;">with open("file.txt", "w") as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write("שלום!") # הקובץ נסגר אוטומטית</code></p>
+        </div>
+        <div class="concept-card">
+            <h3>📖 פונקציות קריאה</h3>
+            <p><code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">f.read()</code> — קורא את כל תוכן הקובץ<br>
+            <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">f.readline()</code> — קורא שורה אחת<br>
+            <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">f.readlines()</code> — קורא כל השורות לרשימה<br><br>
+            <strong>טיפ:</strong> בכתיבה, <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">\n</code> יוצר שורה חדשה בקובץ.</p>
+        </div>
+    </div>
+    <div class="lesson-section" id="life">
+        <div class="section-title-row"><div class="section-icon">🌸</div><h2>דוגמה מהחיים</h2></div>
+        <div class="life-example">
+            <div class="life-emoji">📓</div>
+            <div class="life-text">
+                כמו <strong>יומן אישי</strong> שאת כותבת בו כל יום — הקובץ הוא היומן!<br><br>
+                כשאת כותבת ← <strong>write()</strong> לקובץ<br>
+                כשאת קוראת את מה שכתבת ← <strong>read()</strong><br>
+                כשאת מוסיפה רשומה חדשה בלי למחוק ← <strong>append</strong><br><br>
+                <strong>קבצים מאפשרים לנו לשמור מידע לצמיתות! 🎀</strong>
+            </div>
+        </div>
+    </div>
+    <div class="lesson-section" id="code">
+        <div class="section-title-row"><div class="section-icon">💻</div><h2>דוגמת קוד</h2></div>
+        <div class="code-box">
+            <div class="code-label">🐍 Python — שיעור 10</div>
+            <pre><span class="code-comment"># כתיבה לקובץ</span>
+<span class="code-keyword">with</span> open(<span class="code-string">"students.txt"</span>, <span class="code-string">"w"</span>) <span class="code-keyword">as</span> f:
+    f.write(<span class="code-string">"מיה, 18\n"</span>)
+    f.write(<span class="code-string">"נועה, 17\n"</span>)
+    f.write(<span class="code-string">"תמר, 19\n"</span>)
+
+<span class="code-comment"># קריאה מהקובץ</span>
+<span class="code-keyword">with</span> open(<span class="code-string">"students.txt"</span>, <span class="code-string">"r"</span>) <span class="code-keyword">as</span> f:
+    content = f.read()
+    <span class="code-keyword">print</span>(content)
+
+<span class="code-comment"># קריאה שורה אחרי שורה</span>
+<span class="code-keyword">with</span> open(<span class="code-string">"students.txt"</span>, <span class="code-string">"r"</span>) <span class="code-keyword">as</span> f:
+    <span class="code-keyword">for</span> line <span class="code-keyword">in</span> f:
+        <span class="code-keyword">print</span>(line.strip())  <span class="code-comment"># strip מסיר \n</span>
+
+<span class="code-comment"># הוספה לקובץ קיים (לא מוחק)</span>
+<span class="code-keyword">with</span> open(<span class="code-string">"students.txt"</span>, <span class="code-string">"a"</span>) <span class="code-keyword">as</span> f:
+    f.write(<span class="code-string">"דנה, 18\n"</span>)</pre>
+        </div>
+        <div class="project-box">
+            <h3>🛠️ פרויקט קטן — סיום Level 2!</h3>
+            <p>תוכנית שמבקשת 3 שמות חברות וגיל, שומרת ל-friends.txt, וקוראת ומדפיסה:<br><br>
+            <code style="background:#FFF0F5;padding:4px 10px;border-radius:8px;color:#D81B60;font-family:monospace;font-size:0.85rem;display:block;">friends = []<br>for _ in range(3):<br>&nbsp;&nbsp;name = input("שם: ")<br>&nbsp;&nbsp;age = int(input("גיל: "))<br>&nbsp;&nbsp;friends.append(f"{name}, {age}")<br>with open("friends.txt", "w") as f:<br>&nbsp;&nbsp;for fr in friends:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write(fr + "\n")<br>with open("friends.txt", "r") as f:<br>&nbsp;&nbsp;print(f.read())</code></p>
+        </div>
+    </div>
+    <div class="quiz-section" id="quiz">
+        <h2>🎀 שאלות אמריקאיות</h2>
+        <p class="quiz-subtitle">5 שאלות על מה שלמדת — בהצלחה!</p>
+        <div class="quiz-q" id="q1"><p>1. מה עושה open("file.txt", "w")?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">A) קורא את הקובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) פותח קובץ לכתיבה (מוחק תוכן ישן)</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">C) מוסיף לסוף הקובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">D) מוחק קובץ</button>
+            </div><div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-q" id="q2"><p>2. מה היתרון של with open(...) as f:?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">A) קורא מהר יותר</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) סוגר את הקובץ אוטומטית בסוף הבלוק</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C) יוצר תיקיה</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">D) מצפין את הקובץ</button>
+            </div><div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+        <div class="quiz-q" id="q3"><p>3. איזה מצב משתמשים בו כדי להוסיף לסוף קובץ בלי למחוק?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">A) "w"</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) "a"</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">C) "r"</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">D) "x"</button>
+            </div><div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+        <div class="quiz-q" id="q4"><p>4. מה עושה f.read()?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A) כותב לקובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) קורא את כל תוכן הקובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">C) סוגר קובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">D) מוחק קובץ</button>
+            </div><div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+        <div class="quiz-q" id="q5"><p>5. למה משתמשים ב-\n בכתיבה לקובץ?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A) כדי לסגור קובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) כדי לרדת שורה חדשה בקובץ</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">C) כדי להצפין</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">D) זה לא נדרש</button>
+            </div><div class="quiz-feedback" id="fb-q5"></div>
+        </div>
+        <div class="quiz-score" id="quiz-score"></div>
+        <button class="quiz-submit" onclick="showScore()">בדקי תוצאות 🎀</button>
+    </div>
+    <div class="lesson-nav-btns">
+        <a href="/courses/languages/python/lesson9" class="nav-btn">
+            <div class="nav-arrow">→</div>
+            <div class="nav-btn-text" style="text-align:right;"><p>← השיעור הקודם</p><h3>שיעור 9 — מודולים 📦</h3></div>
+        </a>
+        <a href="/courses/languages/python/lesson11" class="nav-btn">
+            <div class="nav-btn-text"><p>השיעור הבא ←</p><h3>שיעור 11 — קריפטוגרפיה 🔑</h3></div>
+            <div class="nav-arrow">←</div>
+        </a>
+    </div>
+</div>
+<script>
+    document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
+    const feedbacks={q1:{ok:'✅ נכון! "w" פותח לכתיבה ומוחק תוכן ישן.',no:'❌ לא. "w" = write, פותח לכתיבה ומוחק תוכן קיים.'},q2:{ok:'✅ מעולה! with סוגר אוטומטית — אין צורך לזכור לסגור.',no:'❌ לא. היתרון של with הוא שהקובץ נסגר אוטומטית בסוף הבלוק.'},q3:{ok:'✅ נכון! "a" = append, מוסיף בסוף בלי למחוק.',no:'❌ לא. "a" (append) מוסיף בסוף הקובץ בלי למחוק תוכן קיים.'},q4:{ok:'✅ בדיוק! read() קורא את כל תוכן הקובץ.',no:'❌ לא. f.read() קורא את כל תוכן הקובץ כמחרוזת אחת.'},q5:{ok:'✅ נכון! \\n יוצר שורה חדשה.',no:'❌ לא. \\n הוא תו שורה חדשה — בלי זה כל הכתיבה תהיה בשורה אחת.'}};
+    const answers={};
+    function answer(btn,q,correct){const btns=btn.closest('.quiz-options').querySelectorAll('.quiz-btn');btns.forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');answers[q]=correct;const fb=document.getElementById('fb-'+q);fb.textContent=correct?feedbacks[q].ok:feedbacks[q].no;fb.className='quiz-feedback show '+(correct?'ok':'no');}
+    function showScore(){const score=Object.values(answers).filter(Boolean).length;const el=document.getElementById('quiz-score');const emoji=score===5?'🏆':score>=4?'🎀':score>=3?'💪':'📚';el.innerHTML=`<h3>${emoji} ${score}/5</h3><p>${score===5?'מושלם! סיימת Level 2! 🏆':score>=3?'יפה! חזרי על החומר.':'בואי נקרא שוב 💪'}</p>`;el.style.display='block';el.scrollIntoView({behavior:'smooth'});}
+    document.querySelectorAll('.lesson-nav a').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});document.querySelectorAll('.lesson-nav a').forEach(x=>x.classList.remove('active'));this.classList.add('active');});});
+</script>
+</body>
+</html>
