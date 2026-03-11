@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import os
+
 app = Flask(__name__,
             template_folder='women who hack/frontend',
             static_folder='women who hack/frontend/static')
@@ -36,10 +37,6 @@ def register():
 def projects():
     return render_template('projects.html')
 
-@app.route('/courses')
-def courses():
-    return render_template('courses/index.html')
-
 @app.route('/vision')
 def vision():
     return render_template('vision.html')
@@ -53,12 +50,27 @@ def profile():
 def login():
     return render_template('login.html')
 
-# ← חדש!
+# ─── קורסים ───────────────────────────────────────
+@app.route('/courses')
+def courses():
+    return render_template('courses/index.html')
+
+@app.route('/courses/languages')
+def courses_languages():
+    return render_template('courses/languages/index.html')
+
+@app.route('/courses/languages/python')
+def python_course():
+    return render_template('courses/languages/python/index.html')
+
 @app.route('/courses/languages/python/lesson1')
 def python_lesson1():
     return render_template('courses/languages/python/lesson1/index.html')
 
+# ─── שיעורים עתידיים (להוסיף כשיהיו מוכנים) ──────
+# @app.route('/courses/languages/python/lesson2')
+# def python_lesson2():
+#     return render_template('courses/languages/python/lesson2/index.html')
+
 if __name__ == '__main__':
     app.run(debug=False)
-```
-
