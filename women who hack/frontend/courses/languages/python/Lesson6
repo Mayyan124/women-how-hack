@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | Python — שיעור 6 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app); onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin:0;padding:0;box-sizing:border-box; } body { font-family:'Heebo',sans-serif;background:#FFF5F7;color:#2c2c2c; }
+        nav { display:flex;justify-content:space-between;align-items:center;padding:15px 50px;background:#FFFDD0;box-shadow:0 2px 15px rgba(255,182,193,0.4);position:sticky;top:0;z-index:1000;border-bottom:2px solid #F8BBD0;direction:rtl; }
+        nav a.logo { font-size:1.6rem;font-weight:900;color:#D81B60;text-decoration:none; }
+        .nav-links a { text-decoration:none;color:#555;margin:0 12px;font-weight:600;font-size:0.95rem; }
+        .nav-links a.join-btn { background:#FF69B4;color:white;padding:8px 22px;border-radius:50px;font-weight:bold; }
+        .hamburger { display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:5px; }
+        .hamburger span { display:block;width:25px;height:3px;background:#D81B60;border-radius:3px; }
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);padding:60px 20px 70px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .hero::before{content:'🔄';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
+        .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
+        .hero-breadcrumb a{color:#FF69B4;text-decoration:none;}
+        .hero h1{font-size:2.5rem;font-weight:900;margin-bottom:10px;} .hero h1 span{color:#FF69B4;}
+        .hero p{font-size:1rem;opacity:0.8;max-width:500px;margin:0 auto 25px;line-height:1.7;}
+        .lesson-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,105,180,0.2);border:1px solid rgba(255,105,180,0.4);padding:6px 18px;border-radius:50px;font-size:0.85rem;font-weight:700;color:#FF69B4;}
+        .lesson-nav{background:white;border-bottom:2px solid #F8BBD0;padding:0 20px;display:flex;justify-content:center;position:sticky;top:72px;z-index:999;overflow-x:auto;}
+        .lesson-nav a{padding:16px 20px;text-decoration:none;color:#999;font-weight:700;font-size:0.88rem;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s;}
+        .lesson-nav a:hover,.lesson-nav a.active{color:#D81B60;border-bottom-color:#D81B60;}
+        .container{max-width:860px;margin:0 auto;padding:50px 20px 100px;}
+        .lesson-section{margin-bottom:40px;scroll-margin-top:140px;}
+        .concept-card{background:white;border-radius:20px;border:2px solid #F8BBD0;padding:28px;margin-bottom:20px;box-shadow:0 4px 15px rgba(255,105,180,0.07);}
+        .concept-card h3{font-size:1.2rem;font-weight:900;color:#D81B60;margin-bottom:12px;}
+        .concept-card p{color:#555;line-height:1.8;font-size:0.97rem;}
+        .review-box{background:#FFF8E1;border:2px solid #FFE082;border-radius:15px;padding:20px 25px;margin-bottom:30px;font-size:0.93rem;color:#555;line-height:1.7;}
+        .review-box strong{color:#F57F17;}
+        .life-example{background:linear-gradient(135deg,#FCE4EC,#FFF5F7);border-right:5px solid #FF69B4;border-radius:0 15px 15px 0;padding:20px 25px;margin-bottom:20px;display:flex;gap:15px;align-items:flex-start;}
+        .life-emoji{font-size:2rem;flex-shrink:0;} .life-text{color:#555;line-height:1.7;font-size:0.95rem;} .life-text strong{color:#D81B60;}
+        .code-box{background:#1a1a2e;border-radius:15px;padding:25px;margin-bottom:20px;}
+        .code-label{color:#FF69B4;font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:15px;}
+        .code-box pre{font-family:'Courier New',monospace;font-size:0.92rem;line-height:1.8;color:#a8ff78;white-space:pre-wrap;word-wrap:break-word;}
+        .code-comment{color:#666;} .code-string{color:#ffd43b;} .code-keyword{color:#FF69B4;} .code-output{color:#74c0fc;}
+        .section-title-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;margin-top:40px;}
+        .section-icon{width:42px;height:42px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+        .section-title-row h2{font-size:1.3rem;font-weight:900;color:#D81B60;}
+        .loops-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-bottom:20px;}
+        .loop-card{background:white;border:2px solid #F8BBD0;border-radius:16px;padding:20px;box-shadow:0 3px 10px rgba(255,105,180,0.07);}
+        .loop-card h4{font-size:1rem;font-weight:900;color:#D81B60;margin-bottom:8px;}
+        .loop-card p{font-size:0.85rem;color:#666;line-height:1.6;}
+        .loop-ex{background:#1a1a2e;border-radius:8px;padding:10px 14px;margin-top:10px;font-family:monospace;font-size:0.82rem;color:#a8ff78;}
+        .quiz-section{background:white;border:2px solid #F8BBD0;border-radius:25px;padding:35px;margin-top:50px;}
+        .quiz-section h2{color:#D81B60;font-size:1.5rem;font-weight:900;margin-bottom:6px;text-align:center;}
+        .quiz-subtitle{text-align:center;color:#999;margin-bottom:30px;font-size:0.9rem;}
+        .quiz-q{margin-bottom:28px;} .quiz-q p{font-weight:700;color:#333;margin-bottom:12px;font-size:0.97rem;line-height:1.5;}
+        .quiz-options{display:flex;flex-direction:column;gap:8px;}
+        .quiz-btn{background:#FFF5F7;border:2px solid #F8BBD0;border-radius:12px;padding:11px 16px;text-align:right;cursor:pointer;font-family:'Heebo',sans-serif;font-size:0.93rem;color:#444;transition:all 0.2s;font-weight:600;}
+        .quiz-btn:hover{border-color:#FF69B4;background:#FFF0F5;} .quiz-btn.correct{background:#E8F5E9;border-color:#81C784;color:#2E7D32;} .quiz-btn.wrong{background:#FCE4EC;border-color:#EF9A9A;color:#C62828;} .quiz-btn:disabled{cursor:not-allowed;}
+        .quiz-feedback{margin-top:8px;padding:10px 14px;border-radius:10px;font-size:0.88rem;font-weight:600;display:none;} .quiz-feedback.show{display:block;} .quiz-feedback.ok{background:#E8F5E9;color:#2E7D32;} .quiz-feedback.no{background:#FCE4EC;color:#C62828;}
+        .quiz-score{text-align:center;padding:25px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:20px;color:white;display:none;margin-top:20px;}
+        .quiz-score h3{font-size:1.8rem;font-weight:900;margin-bottom:8px;}
+        .quiz-submit{background:linear-gradient(135deg,#FF69B4,#D81B60);color:white;border:none;padding:14px 35px;border-radius:50px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Heebo',sans-serif;display:block;margin:25px auto 0;transition:transform 0.2s;}
+        .quiz-submit:hover{transform:translateY(-2px);}
+        .lesson-nav-btns{display:flex;justify-content:space-between;gap:15px;margin-top:40px;}
+        .nav-btn{flex:1;display:flex;justify-content:space-between;align-items:center;background:white;border:2px solid #F8BBD0;border-radius:20px;padding:20px 25px;text-decoration:none;color:inherit;transition:all 0.3s;}
+        .nav-btn:hover{border-color:#FF69B4;box-shadow:0 8px 25px rgba(216,27,96,0.1);transform:translateY(-2px);}
+        .nav-btn-text p{color:#999;font-size:0.85rem;margin-bottom:4px;} .nav-btn-text h3{font-size:1rem;font-weight:900;color:#D81B60;}
+        .nav-arrow{width:40px;height:40px;background:linear-gradient(135deg,#FF69B4,#D81B60);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a><a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/python">🐍 Python</a> ← שיעור 6</div>
+    <div class="lesson-badge">📚 Level 2 — Logic | שיעור 6 מתוך 15</div>
+    <h1><span>לולאות</span> (Loops) 🔄</h1>
+    <p>איך לחזור על פעולה כמה פעמים בלי לכתוב אותה שוב ושוב</p>
+</div>
+<nav class="lesson-nav">
+    <a href="#review" class="active">🔄 חזרה</a><a href="#concepts">💡 מושגים</a>
+    <a href="#life">🌸 מהחיים</a><a href="#code">💻 קוד</a><a href="#quiz">🎀 שאלות</a>
+</nav>
+<div class="container">
+    <div class="lesson-section" id="review">
+        <div class="review-box"><strong>🔄 חזרה על Level 1:</strong> למדנו משתנים (int, float, str, bool), קלט עם input(), פלט עם print(), אופרטורים מתמטיים והשוואה, ומחרוזות עם פונקציות כמו len() ו-upper(). עכשיו נתחיל Level 2 — לוגיקה!</div>
+    </div>
+    <div class="lesson-section" id="concepts">
+        <div class="section-title-row"><div class="section-icon">💡</div><h2>מושגים חדשים</h2></div>
+        <div class="concept-card">
+            <h3>🔄 מהי לולאה (Loop)?</h3>
+            <p>לולאה היא <strong>סדרה של פקודות שמבוצעת שוב ושוב</strong>. במקום לכתוב את אותה פקודה 10 פעמים, כותבים אותה פעם אחת בתוך לולאה.<br><br>
+            בPython יש שני סוגי לולאות עיקריים: <strong>for</strong> ו-<strong>while</strong>.</p>
+        </div>
+        <div class="loops-grid">
+            <div class="loop-card">
+                <h4>🔁 for loop</h4>
+                <p>עובר על כל איבר ברשימה, מחרוזת, או טווח מספרים. משתמשים כשיודעים <strong>כמה פעמים</strong> לחזור.</p>
+                <div class="loop-ex">for i in range(3):<br>&nbsp;&nbsp;print(i)<br><span style="color:#74c0fc"># 0, 1, 2</span></div>
+            </div>
+            <div class="loop-card">
+                <h4>⏳ while loop</h4>
+                <p>ממשיך לרוץ <strong>כל עוד תנאי נכון</strong>. משתמשים כשלא יודעים כמה פעמים לחזור.</p>
+                <div class="loop-ex">i = 0<br>while i &lt; 3:<br>&nbsp;&nbsp;print(i)<br>&nbsp;&nbsp;i += 1</div>
+            </div>
+        </div>
+        <div class="concept-card">
+            <h3>📏 range() — יצירת טווח מספרים</h3>
+            <p><strong>range()</strong> היא פונקציה שיוצרת סדרת מספרים:<br><br>
+            <code style="background:#FFF0F5;padding:2px 8px;border-radius:5px;color:#D81B60;">range(5)</code> → 0, 1, 2, 3, 4 (5 מספרים מ-0)<br>
+            <code style="background:#FFF0F5;padding:2px 8px;border-radius:5px;color:#D81B60;">range(1, 6)</strong></code> → 1, 2, 3, 4, 5<br>
+            <code style="background:#FFF0F5;padding:2px 8px;border-radius:5px;color:#D81B60;">range(0, 10, 2)</code> → 0, 2, 4, 6, 8 (קפיצות של 2)</p>
+        </div>
+        <div class="concept-card">
+            <h3>🛑 break ו-continue</h3>
+            <p><strong>break</strong> — עוצרת את הלולאה לגמרי מיד:<br>
+            <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">if x == 5: break</code> — כשמגיעים ל-5, יוצאים מהלולאה<br><br>
+            <strong>continue</strong> — מדלגת על הסבב הנוכחי וממשיכה לבא:<br>
+            <code style="background:#FFF0F5;padding:2px 6px;border-radius:4px;color:#D81B60;">if x == 3: continue</code> — מדלגים על 3 וממשיכים</p>
+        </div>
+        <div class="concept-card">
+            <h3>📝 הזחה (Indentation) — חשוב מאוד!</h3>
+            <p>בPython, הקוד שבתוך הלולאה חייב להיות <strong>מוזח פנימה</strong> (4 רווחים או Tab). זה מה שאומר לPython "הפקודה הזו שייכת ללולאה":<br><br>
+            <code style="background:#FFF0F5;padding:4px 8px;border-radius:5px;color:#D81B60;display:block;">for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)&nbsp;&nbsp;&nbsp;&nbsp;← מוזח = בתוך הלולאה<br>print("סוף")&nbsp;&nbsp;← לא מוזח = מחוץ ללולאה</code></p>
+        </div>
+    </div>
+    <div class="lesson-section" id="life">
+        <div class="section-title-row"><div class="section-icon">🌸</div><h2>דוגמה מהחיים</h2></div>
+        <div class="life-example">
+            <div class="life-emoji">📱</div>
+            <div class="life-text">
+                כשאת <strong>שולחת הודעה לכל החברות בקבוצה</strong> — את בעצם מריצה לולאה:<br><br>
+                <strong>for</strong> כל חברה ברשימת הקבוצה → שלחי הודעה<br><br>
+                וכן, כשאת <strong>מחכה שמישהו יגיב</strong> לסטורי — גם זה לולאה:<br>
+                <strong>while</strong> אין תגובה → המשיכי לבדוק 😄<br><br>
+                <strong>לולאות מאפשרות לנו לבצע אותה פעולה שוב ושוב בקלות! 🎀</strong>
+            </div>
+        </div>
+    </div>
+    <div class="lesson-section" id="code">
+        <div class="section-title-row"><div class="section-icon">💻</div><h2>דוגמת קוד</h2></div>
+        <div class="code-box">
+            <div class="code-label">🐍 Python — שיעור 6</div>
+            <pre><span class="code-comment"># for loop — עם range</span>
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(5):
+    <span class="code-keyword">print</span>(<span class="code-string">"מספר:"</span>, i)
+<span class="code-output"># מספר: 0, מספר: 1 ... מספר: 4</span>
+
+<span class="code-comment"># for loop — על רשימה</span>
+friends = [<span class="code-string">"נועה"</span>, <span class="code-string">"תמר"</span>, <span class="code-string">"איה"</span>]
+<span class="code-keyword">for</span> friend <span class="code-keyword">in</span> friends:
+    <span class="code-keyword">print</span>(<span class="code-string">"שלום"</span>, friend)
+
+<span class="code-comment"># while loop</span>
+i = 0
+<span class="code-keyword">while</span> i &lt; 3:
+    <span class="code-keyword">print</span>(<span class="code-string">"סבב מספר"</span>, i)
+    i += 1  <span class="code-comment"># חשוב! בלי זה — לולאה אינסופית</span>
+
+<span class="code-comment"># break — עצירה מוקדמת</span>
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(10):
+    <span class="code-keyword">if</span> i == 5:
+        <span class="code-keyword">break</span>
+    <span class="code-keyword">print</span>(i)  <span class="code-output"># ידפיס 0-4 בלבד</span>
+
+<span class="code-comment"># continue — דילוג</span>
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(5):
+    <span class="code-keyword">if</span> i == 3:
+        <span class="code-keyword">continue</span>
+    <span class="code-keyword">print</span>(i)  <span class="code-output"># ידפיס 0,1,2,4 (ידלג על 3)</span></pre>
+        </div>
+    </div>
+    <div class="quiz-section" id="quiz">
+        <h2>🎀 שאלות אמריקאיות</h2>
+        <p class="quiz-subtitle">5 שאלות על מה שלמדת — בהצלחה!</p>
+        <div class="quiz-q" id="q1"><p>1. מהי לולאה (Loop)?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">A) פונקציה שמחזירה ערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) סדרת פקודות שמבוצעת שוב ושוב</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">C) סוג של משתנה</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">D) קובץ בPython</button>
+            </div><div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-q" id="q2"><p>2. מה עושה range(5)?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">A) יוצר מספרים 1 עד 5</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) יוצר מספרים 0 עד 4</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C) יוצר מספר 5 בלבד</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">D) גורם שגיאה</button>
+            </div><div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+        <div class="quiz-q" id="q3"><p>3. מה ההבדל בין for ל-while?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">A) אין הבדל</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) for — כשיודעים כמה פעמים, while — כשתנאי נכון</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">C) for מהירה יותר תמיד</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">D) while עובד רק עם מספרים</button>
+            </div><div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+        <div class="quiz-q" id="q4"><p>4. מה עושה break בתוך לולאה?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A) מדלגת על סבב אחד</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) עוצרת את הלולאה לגמרי</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">C) מחזירה ערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">D) מדפיסה שגיאה</button>
+            </div><div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+        <div class="quiz-q" id="q5"><p>5. למה חשובה ההזחה (indentation) בלולאות?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A) רק לנראות</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) מגדירה איזה קוד נמצא בתוך הלולאה</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">C) מאיצה את הקוד</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">D) לא חשובה בPython</button>
+            </div><div class="quiz-feedback" id="fb-q5"></div>
+        </div>
+        <div class="quiz-score" id="quiz-score"></div>
+        <button class="quiz-submit" onclick="showScore()">בדקי תוצאות 🎀</button>
+    </div>
+    <div class="lesson-nav-btns">
+        <a href="/courses/languages/python/lesson5" class="nav-btn">
+            <div class="nav-arrow">→</div>
+            <div class="nav-btn-text" style="text-align:right;"><p>← השיעור הקודם</p><h3>שיעור 5 — מחרוזות 💬</h3></div>
+        </a>
+        <a href="/courses/languages/python/lesson7" class="nav-btn">
+            <div class="nav-btn-text"><p>השיעור הבא ←</p><h3>שיעור 7 — רשימות 📋</h3></div>
+            <div class="nav-arrow">←</div>
+        </a>
+    </div>
+</div>
+<script>
+    document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
+    const feedbacks={q1:{ok:'✅ נכון! לולאה חוזרת על פקודות שוב ושוב.',no:'❌ לא. לולאה היא סדרת פקודות שמתבצעת שוב ושוב.'},q2:{ok:'✅ מעולה! range(5) יוצר 0,1,2,3,4.',no:'❌ לא. range(5) מתחיל מ-0 ומגיע עד 4 (לא כולל 5).'},q3:{ok:'✅ נכון! for למספר ידוע, while לתנאי.',no:'❌ לא. for משמש כשיודעים כמה פעמים, while כשתנאי נכון.'},q4:{ok:'✅ בדיוק! break עוצרת את כל הלולאה.',no:'❌ לא. break עוצרת את הלולאה לגמרי. continue מדלגת על סבב אחד.'},q5:{ok:'✅ נכון! הזחה מגדירה מה בתוך הלולאה.',no:'❌ לא. בPython ההזחה חיונית — היא מגדירה איזה קוד שייך ללולאה.'}};
+    const answers={};
+    function answer(btn,q,correct){const btns=btn.closest('.quiz-options').querySelectorAll('.quiz-btn');btns.forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');answers[q]=correct;const fb=document.getElementById('fb-'+q);fb.textContent=correct?feedbacks[q].ok:feedbacks[q].no;fb.className='quiz-feedback show '+(correct?'ok':'no');}
+    function showScore(){const score=Object.values(answers).filter(Boolean).length;const el=document.getElementById('quiz-score');const emoji=score===5?'🏆':score>=4?'🎀':score>=3?'💪':'📚';el.innerHTML=`<h3>${emoji} ${score}/5</h3><p>${score===5?'מושלם! 🏆':score>=3?'יפה! חזרי על החומר.':'בואי נקרא שוב 💪'}</p>`;el.style.display='block';el.scrollIntoView({behavior:'smooth'});}
+    document.querySelectorAll('.lesson-nav a').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});document.querySelectorAll('.lesson-nav a').forEach(x=>x.classList.remove('active'));this.classList.add('active');});});
+</script>
+</body>
+</html>
