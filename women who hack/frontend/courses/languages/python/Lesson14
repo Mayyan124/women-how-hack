@@ -180,14 +180,14 @@ recon(<span class="code-string">"localhost"</span>)</pre>
         <div class="quiz-q" id="q1"><p>1. מהי Ethical Hacker?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A) האקרית שתוקפת בנקים</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) מומחית אבטחה שבודקת מערכות ברשות חוקית ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) מומחית אבטחה שבודקת מערכות ברשות חוקית </button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C) מפתחת אפליקציות</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">D) מנהלת רשת</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
         </div>
         <div class="quiz-q" id="q2"><p>2. מה זה Penetration Testing?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q2',true)">A) בדיקת אבטחה מבוקרת כדי למצוא חולשות לפני האקרים ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">A) בדיקת אבטחה מבוקרת כדי למצוא חולשות לפני האקרים </button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">B) סריקת וירוסים</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">C) בדיקת ביצועים</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">D) גיבוי נתונים</button>
@@ -195,7 +195,7 @@ recon(<span class="code-string">"localhost"</span>)</pre>
         </div>
         <div class="quiz-q" id="q3"><p>3. מה ההבדל בין White Hat ל-Black Hat?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) White Hat = ברשות וחוקי. Black Hat = ללא רשות ולא חוקי ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) White Hat = ברשות וחוקי. Black Hat = ללא רשות ולא חוקי </button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">B) White Hat = מיומנת יותר</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">C) Black Hat = עובדת לממשלה</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">D) אין הבדל</button>
@@ -204,7 +204,7 @@ recon(<span class="code-string">"localhost"</span>)</pre>
         <div class="quiz-q" id="q4"><p>4. מה Bug Bounty?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">A) תוכנה לסריקת וירוסים</button>
-                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) תשלום מחברות על מציאת ודיווח על חולשות אבטחה ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) תשלום מחברות על מציאת ודיווח על חולשות אבטחה </button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">C) קורס סייבר</button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">D) פרוטוקול רשת</button>
             </div><div class="quiz-feedback" id="fb-q4"></div>
@@ -212,7 +212,7 @@ recon(<span class="code-string">"localhost"</span>)</pre>
         <div class="quiz-q" id="q5"><p>5. מה השלב הראשון ב-Penetration Testing?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">A) Exploitation</button>
-                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) Reconnaissance — איסוף מידע ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) Reconnaissance — איסוף מידע </button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">C) Reporting</button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">D) Scanning</button>
             </div><div class="quiz-feedback" id="fb-q5"></div>
