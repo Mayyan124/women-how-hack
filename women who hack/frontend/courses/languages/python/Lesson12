@@ -190,7 +190,7 @@ my_ip = socket.gethostbyname(hostname)
         <div class="quiz-q" id="q1"><p>1. מהי כתובת IP?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A) שם של אתר</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) כתובת ייחודית של מחשב ברשת ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) כתובת ייחודית של מחשב ברשת </button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C) סיסמה</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">D) פרוטוקול</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
@@ -198,14 +198,14 @@ my_ip = socket.gethostbyname(hostname)
         <div class="quiz-q" id="q2"><p>2. איזה פורט משמש HTTPS?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">A) 80</button>
-                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) 443 ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) 443 </button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">C) 22</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">D) 21</button>
             </div><div class="quiz-feedback" id="fb-q2"></div>
         </div>
         <div class="quiz-q" id="q3"><p>3. מה עושה DNS?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) מתרגם שמות דומיין לכתובות IP ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) מתרגם שמות דומיין לכתובות IP </button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">B) מצפין תעבורה</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">C) בודק סיסמאות</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">D) שולח אימיילים</button>
@@ -214,7 +214,7 @@ my_ip = socket.gethostbyname(hostname)
         <div class="quiz-q" id="q4"><p>4. מה זה Socket?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">A) כתובת IP</button>
-                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) חיבור בין שני מחשבים ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) חיבור בין שני מחשבים </button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">C) פרוטוקול הצפנה</button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">D) פורט</button>
             </div><div class="quiz-feedback" id="fb-q4"></div>
@@ -223,7 +223,7 @@ my_ip = socket.gethostbyname(hostname)
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">A) שולחת הודעה</button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">B) פותחת פורט</button>
-                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) מחזירה את כתובת ה-IP של דומיין ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) מחזירה את כתובת ה-IP של דומיין </button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">D) סוגרת חיבור</button>
             </div><div class="quiz-feedback" id="fb-q5"></div>
         </div>
