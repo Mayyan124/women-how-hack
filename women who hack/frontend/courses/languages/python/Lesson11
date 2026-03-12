@@ -192,7 +192,7 @@ hashed = hashlib.md5(password.encode()).hexdigest()
         <div class="quiz-q" id="q1"><p>1. מהי קריפטוגרפיה?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A) שפת תכנות</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) אמנות הסתרת מידע באמצעות הצפנה ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) אמנות הסתרת מידע באמצעות הצפנה </button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C) סוג של וירוס</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">D) פרוטוקול רשת</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
@@ -201,13 +201,13 @@ hashed = hashlib.md5(password.encode()).hexdigest()
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">A) B</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">B) C</button>
-                <button class="quiz-btn" onclick="answer(this,'q2',true)">C) D ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">C) D </button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">D) E</button>
             </div><div class="quiz-feedback" id="fb-q2"></div>
         </div>
         <div class="quiz-q" id="q3"><p>3. מה ההבדל בין Symmetric ל-Asymmetric?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) Symmetric — מפתח אחד. Asymmetric — שני מפתחות ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">A) Symmetric — מפתח אחד. Asymmetric — שני מפתחות </button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">B) אין הבדל</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">C) Symmetric — שניים, Asymmetric — אחד</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">D) Symmetric מהיר יותר בלבד</button>
@@ -216,7 +216,7 @@ hashed = hashlib.md5(password.encode()).hexdigest()
         <div class="quiz-q" id="q4"><p>4. למה אתרים שומרים Hash של סיסמה ולא את הסיסמה עצמה?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">A) כי Hash קצר יותר</button>
-                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) כי Hash לא ניתן לפענוח — מגן על הסיסמה המקורית ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) כי Hash לא ניתן לפענוח — מגן על הסיסמה המקורית </button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">C) כי Hash מהיר יותר</button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">D) כי זה חוק</button>
             </div><div class="quiz-feedback" id="fb-q4"></div>
@@ -225,7 +225,7 @@ hashed = hashlib.md5(password.encode()).hexdigest()
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">A) מצפינה עם Caesar</button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">B) פותחת קובץ</button>
-                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) יוצרת Hash (חד-כיוני) של הטקסט ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) יוצרת Hash (חד-כיוני) של הטקסט </button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">D) שולחת הודעה</button>
             </div><div class="quiz-feedback" id="fb-q5"></div>
         </div>
