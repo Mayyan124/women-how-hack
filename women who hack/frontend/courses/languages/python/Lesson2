@@ -242,7 +242,7 @@
             <p>1. מהו משתנה (Variable)?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A) פונקציה מיוחדת</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) מקום בזיכרון לשמירת מידע ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) מקום בזיכרון לשמירת מידע </button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C) סוג של לולאה</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">D) שגיאה בקוד</button>
             </div>
@@ -253,7 +253,7 @@
             <p>2. מהו int?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">A) טקסט</button>
-                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) מספר שלם ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B) מספר שלם </button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">C) מספר עשרוני</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">D) נכון/לא נכון</button>
             </div>
@@ -264,7 +264,7 @@
             <p>3. איזה סוג נתון מתאים לגובה 1.65?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">A) int</button>
-                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) float ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) float </button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">C) str</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">D) bool</button>
             </div>
@@ -276,7 +276,7 @@
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">A) מספר שלם</button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">B) טקסט</button>
-                <button class="quiz-btn" onclick="answer(this,'q4',true)">C) נכון או לא נכון (True/False) ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">C) נכון או לא נכון (True/False) </button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">D) מספר עשרוני</button>
             </div>
             <div class="quiz-feedback" id="fb-q4"></div>
@@ -287,7 +287,7 @@
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">A) int</button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">B) float</button>
-                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) str ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">C) str </button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">D) bool</button>
             </div>
             <div class="quiz-feedback" id="fb-q5"></div>
