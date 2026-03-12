@@ -200,14 +200,14 @@ URL: {url}
         <div class="quiz-q" id="q1"><p>1. מה hashlib.sha256() עושה?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A) מצפינה עם מפתח</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) יוצרת Hash חד-כיוני של הטקסט ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B) יוצרת Hash חד-כיוני של הטקסט </button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C) שומרת לקובץ</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">D) בודקת חוזק</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
         </div>
         <div class="quiz-q" id="q2"><p>2. מה any() עושה ברשימה?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q2',true)">A) מחזירה True אם לפחות אחד מהאיברים מקיים תנאי ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">A) מחזירה True אם לפחות אחד מהאיברים מקיים תנאי </button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">B) מחזירה את כל האיברים</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">C) סופרת איברים</button>
                 <button class="quiz-btn" onclick="answer(this,'q2',false)">D) ממיינת רשימה</button>
@@ -216,7 +216,7 @@ URL: {url}
         <div class="quiz-q" id="q3"><p>3. למה לא לשמור סיסמה בטקסט רגיל?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">A) זה לוקח יותר מקום</button>
-                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) אם הנתונים נגנבים, הסיסמאות חשופות ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">B) אם הנתונים נגנבים, הסיסמאות חשופות </button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">C) זה איטי יותר</button>
                 <button class="quiz-btn" onclick="answer(this,'q3',false)">D) אין סיבה מיוחדת</button>
             </div><div class="quiz-feedback" id="fb-q3"></div>
@@ -224,7 +224,7 @@ URL: {url}
         <div class="quiz-q" id="q4"><p>4. מה סימן הכי חשוב שURL בטוח?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">A) השם קצר</button>
-                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) מתחיל ב-https:// ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B) מתחיל ב-https:// </button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">C) יש תמונות באתר</button>
                 <button class="quiz-btn" onclick="answer(this,'q4',false)">D) הצבע כחול</button>
             </div><div class="quiz-feedback" id="fb-q4"></div>
@@ -232,7 +232,7 @@ URL: {url}
         <div class="quiz-q" id="q5"><p>5. מה עושה את סיסמה לחזקה?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">A) שם של חיית מחמד</button>
-                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) אורך 8+, אותיות גדולות/קטנות, מספרים וסימנים ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B) אורך 8+, אותיות גדולות/קטנות, מספרים וסימנים </button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">C) תאריך לידה</button>
                 <button class="quiz-btn" onclick="answer(this,'q5',false)">D) מילה מהמילון</button>
             </div><div class="quiz-feedback" id="fb-q5"></div>
