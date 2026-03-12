@@ -70,61 +70,61 @@ def python_lesson1():
 
 @app.route('/courses/languages/python/lesson2')
 def python_lesson2():
-    return render_template('courses/languages/python/lesson2/index.html')
+    return render_template('courses/languages/python/Lesson2')
 
 @app.route('/courses/languages/python/lesson3')
 def python_lesson3():
-    return render_template('courses/languages/python/lesson3/index.html')
+    return render_template('courses/languages/python/Lesson3')
 
 @app.route('/courses/languages/python/lesson4')
 def python_lesson4():
-    return render_template('courses/languages/python/lesson4/index.html')
+    return render_template('courses/languages/python/Lesson4')
 
 @app.route('/courses/languages/python/lesson5')
 def python_lesson5():
-    return render_template('courses/languages/python/lesson5/index.html')
+    return render_template('courses/languages/python/Lesson5')
 
 # ─── Level 2 ───────────────────────────────────────
 @app.route('/courses/languages/python/lesson6')
 def python_lesson6():
-    return render_template('courses/languages/python/lesson6/index.html')
+    return render_template('courses/languages/python/Lesson6')
 
 @app.route('/courses/languages/python/lesson7')
 def python_lesson7():
-    return render_template('courses/languages/python/lesson7/index.html')
+    return render_template('courses/languages/python/Lesson7')
 
 @app.route('/courses/languages/python/lesson8')
 def python_lesson8():
-    return render_template('courses/languages/python/lesson8/index.html')
+    return render_template('courses/languages/python/Lesson8')
 
 @app.route('/courses/languages/python/lesson9')
 def python_lesson9():
-    return render_template('courses/languages/python/lesson9/index.html')
+    return render_template('courses/languages/python/Lesson9')
 
 @app.route('/courses/languages/python/lesson10')
 def python_lesson10():
-    return render_template('courses/languages/python/lesson10/index.html')
+    return render_template('courses/languages/python/Lesson10')
 
 # ─── Level 3 ───────────────────────────────────────
 @app.route('/courses/languages/python/lesson11')
 def python_lesson11():
-    return render_template('courses/languages/python/lesson11/index.html')
+    return render_template('courses/languages/python/Lesson11')
 
 @app.route('/courses/languages/python/lesson12')
 def python_lesson12():
-    return render_template('courses/languages/python/lesson12/index.html')
+    return render_template('courses/languages/python/Lesson12')
 
 @app.route('/courses/languages/python/lesson13')
 def python_lesson13():
-    return render_template('courses/languages/python/lesson13/index.html')
+    return render_template('courses/languages/python/Lesson13')
 
 @app.route('/courses/languages/python/lesson14')
 def python_lesson14():
-    return render_template('courses/languages/python/lesson14/index.html')
+    return render_template('courses/languages/python/Lesson14')
 
 @app.route('/courses/languages/python/lesson15')
 def python_lesson15():
-    return render_template('courses/languages/python/lesson15/index.html')
+    return render_template('courses/languages/python/Lesson15')
 
 if __name__ == '__main__':
     app.run(debug=False)
