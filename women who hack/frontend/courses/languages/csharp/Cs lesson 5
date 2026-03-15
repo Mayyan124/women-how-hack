@@ -120,12 +120,40 @@ bool passed = true;</pre>
     <div class="quiz-section" id="quiz">
         <h2>✅ שאלות אמריקאיות</h2>
         <p class="quiz-subtitle">5 שאלות — בהצלחה!</p>
-        <div class="quiz-q" id="q1"><p>איזה סוג מתאים למספר שלם?</p>
+                <div class="quiz-q" id="q1"><p>1. איזה סוג מתאים למספר שלם?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A. string</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. int </button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. int</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C. bool</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-q" id="q2"><p>2. איזה סוג מתאים למחרוזת?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">A. string</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">B. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C. double</button>
+            </div><div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+        <div class="quiz-q" id="q3"><p>3. איזה סוג מתאים לערך נכון/לא נכון?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">A. bool</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">B. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">C. string</button>
+            </div><div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+        <div class="quiz-q" id="q4"><p>4. איך כותבים double נכון?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A. double price = "9.99";</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B. double price = 9.99;</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">C. double price = true;</button>
+            </div><div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+        <div class="quiz-q" id="q5"><p>5. איזה סוג מתאים למספר עם נקודה עשרונית?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B. double</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">C. string</button>
+            </div><div class="quiz-feedback" id="fb-q5"></div>
         </div>
         <div class="quiz-score" id="quiz-score"></div>
         <button class="quiz-submit" onclick="showScore()">בדקי תוצאות ✅</button>
