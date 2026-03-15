@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women Who Hack | C# — שיעור 3 🎀</title>
+    <title>Women Who Hack | C# — שיעור 4 🎀</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -20,7 +20,7 @@
         .hamburger span{display:block;width:25px;height:3px;background:#D81B60;border-radius:3px;}
         @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
         .hero{background:linear-gradient(135deg,#0a0a1a,#0d1b3e,#1a0a3e);padding:60px 20px 70px;text-align:center;color:white;position:relative;overflow:hidden;}
-        .hero::before{content:'🏗️';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
+        .hero::before{content:'📦';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
         .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
         .hero-breadcrumb a{color:#7EC8E3;text-decoration:none;}
         .hero h1{font-size:2.5rem;font-weight:900;margin-bottom:10px;}.hero h1 span{color:#7EC8E3;}
@@ -78,10 +78,10 @@
     </div>
 </nav>
 <div class="hero">
-    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/csharp">C#</a> ← שיעור 3</div>
-    <div class="lesson-badge">🏗️ Level 1 — Foundations | שיעור 3 מתוך 42</div>
-    <h1><span>מבנה תוכנית ב-C#</span></h1>
-    <p>Project, Class, Method — הבניה הבסיסית</p>
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/csharp">C#</a> ← שיעור 4</div>
+    <div class="lesson-badge">🏗️ Level 1 — Foundations | שיעור 4 מתוך 42</div>
+    <h1><span>משתנים (Variables)</span></h1>
+    <p>int, string, bool — שמירת מידע בזיכרון</p>
 </div>
 <nav class="lesson-nav">
     <a href="#review" class="active">🔄 חזרה</a>
@@ -92,48 +92,79 @@
 </nav>
 <div class="container">
     <div class="lesson-section" id="review">
-        <div class="review-box"><strong>🔄 חזרה על שיעור 2:</strong> למדנו Compiler, Execution ו-IDE. קוד מקור עובר קומפיילר ומורץ מ-Main().</div>
+        <div class="review-box"><strong>🔄 חזרה על שיעור 3:</strong> למדנו מבנה תוכנית — פרויקט, מחלקה ופונקציה.</div>
     </div>
     <div class="lesson-section" id="concepts">
         <div class="section-title-row"><div class="section-icon">💡</div><h2>מושגים חדשים</h2></div>
         <div class="concept-card">
-            <h3>מבנה תוכנית: Project, Class, Method</h3>
-            <p>פרויקט = אוסף קבצים. מחלקה = מבנה שמכיל קוד. פונקציה = פעולה שניתן לקרוא לה.</p>
+            <h3>משתנים (Variables)</h3>
+            <p>משתנה הוא מקום בזיכרון לשמירת מידע. לכל משתנה יש סוג, שם וערך: int age = 25; string name = "Maayan"; bool isStudent = true;</p>
         </div>
     </div>
     <div class="lesson-section" id="code">
         <div class="section-title-row"><div class="section-icon">💻</div><h2>דוגמת קוד</h2></div>
         <div class="code-box">
-            <div class="code-label">C# — שיעור 3</div>
-            <pre>static void SayHello() { Console.WriteLine("Hello!"); } static void Main() { SayHello(); }</pre>
+            <div class="code-label">C# — שיעור 4</div>
+            <pre>int age = 25;
+string name = "Maayan";
+bool isStudent = true;
+Console.WriteLine(name + " " + age);</pre>
         </div>
     </div>
     <div class="lesson-section" id="thinking">
         <div class="thinking-box">
             <h3>🧠 Thinking Like a Developer</h3>
-            <p>חשבי איך לחלק לפונקציות. כל פונקציה — משימה אחת בלבד.</p>
+            <p>כל משתנה צריך שם ברור. משתנים מאפשרים לשמור מידע ולהשתמש בו שוב.</p>
         </div>
     </div>
     <div class="quiz-section" id="quiz">
         <h2>✅ שאלות אמריקאיות</h2>
         <p class="quiz-subtitle">5 שאלות — בהצלחה!</p>
-        <div class="quiz-q" id="q1"><p>מהי מחלקה (Class)?</p>
+                <div class="quiz-q" id="q1"><p>1. מהו משתנה?</p>
             <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer(this,'q1',false)">A. משתנה פשוט</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. מבנה שמכיל קוד ופונקציות </button>
-                <button class="quiz-btn" onclick="answer(this,'q1',false)">C. פקודה למדפסת</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">A. פקודה למחשב</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. מקום בזיכרון לשמירת מידע</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',false)">C. פונקציה</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-q" id="q2"><p>2. איזה סוג מתאים למספר שלם?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">A. string</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C. bool</button>
+            </div><div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+        <div class="quiz-q" id="q3"><p>3. איזה סוג מתאים למילה או משפט?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">A. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">B. bool</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">C. string</button>
+            </div><div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+        <div class="quiz-q" id="q4"><p>4. איך מקצים ערך למשתנה age?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A. 25 = age;</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B. age = 25;</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">C. age := 25</button>
+            </div><div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+        <div class="quiz-q" id="q5"><p>5. כמה חלקים יש למשתנה?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A. שניים — שם וערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B. שלושה — סוג, שם וערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">C. אחד — שם בלבד</button>
+            </div><div class="quiz-feedback" id="fb-q5"></div>
         </div>
         <div class="quiz-score" id="quiz-score"></div>
         <button class="quiz-submit" onclick="showScore()">בדקי תוצאות ✅</button>
     </div>
     <div class="lesson-nav-btns">
-        <a href="/courses/languages/csharp/lesson2" class="nav-btn">
+        <a href="/courses/languages/csharp/lesson3" class="nav-btn">
             <div class="nav-arrow">→</div>
-            <div class="nav-btn-text" style="text-align:right;"><p>← השיעור הקודם</p><h3>שיעור 2</h3></div>
+            <div class="nav-btn-text" style="text-align:right;"><p>← השיעור הקודם</p><h3>שיעור 3</h3></div>
         </a>
-        <a href="/courses/languages/csharp/lesson4" class="nav-btn">
-            <div class="nav-btn-text"><p>השיעור הבא ←</p><h3>שיעור 4</h3></div>
+        <a href="/courses/languages/csharp/lesson5" class="nav-btn">
+            <div class="nav-btn-text"><p>השיעור הבא ←</p><h3>שיעור 5</h3></div>
             <div class="nav-arrow">←</div>
         </a>
     </div>
