@@ -10,6 +10,8 @@
     { "source": "/projects", "destination": "/women%20who%20hack/frontend/projects.html" },
     { "source": "/courses", "destination": "/women%20who%20hack/frontend/courses/index.html" },
     { "source": "/courses/languages", "destination": "/women%20who%20hack/frontend/courses/languages/index.html" },
+    { "source": "/courses/languages/python", "destination": "/women%20who%20hack/frontend/courses/languages/python/index.html" },
+    { "source": "/courses/languages/csharp", "destination": "/women%20who%20hack/frontend/courses/languages/csharp/index.html" },
     { "source": "/courses/:path*", "destination": "/women%20who%20hack/frontend/courses/:path*" },
     { "source": "/mysteries", "destination": "/women%20who%20hack/frontend/mysteries.html" },
     { "source": "/contact", "destination": "/women%20who%20hack/frontend/contact.html" },
