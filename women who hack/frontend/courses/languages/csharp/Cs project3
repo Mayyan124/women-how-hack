@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | C# — פרויקט Level 3 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app); onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Heebo',sans-serif;background:#F0F4FF;color:#2c2c2c;}
+        nav{display:flex;justify-content:space-between;align-items:center;padding:15px 50px;background:#FFFDD0;box-shadow:0 2px 15px rgba(255,182,193,0.4);position:sticky;top:0;z-index:1000;border-bottom:2px solid #F8BBD0;direction:rtl;}
+        nav a.logo{font-size:1.6rem;font-weight:900;color:#D81B60;text-decoration:none;}
+        .nav-links a{text-decoration:none;color:#555;margin:0 12px;font-weight:600;font-size:0.95rem;}
+        .nav-links a.join-btn{background:#FF69B4;color:white;padding:8px 22px;border-radius:50px;font-weight:bold;}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:5px;}
+        .hamburger span{display:block;width:25px;height:3px;background:#D81B60;border-radius:3px;}
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero{background:linear-gradient(135deg,#0a0a1a,#0d1b3e,#1a0a3e);padding:70px 20px 80px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .hero::before{content:'🔐';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
+        .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
+        .hero-breadcrumb a{color:#7EC8E3;text-decoration:none;}
+        .hero h1{font-size:2.8rem;font-weight:900;margin-bottom:12px;}.hero h1 span{color:#7EC8E3;}
+        .hero p{font-size:1.05rem;opacity:0.8;max-width:550px;margin:0 auto 25px;line-height:1.7;}
+        .project-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,0.2);border:1px solid rgba(255,215,0,0.4);padding:6px 18px;border-radius:50px;font-size:0.85rem;font-weight:700;color:#FFD700;}
+        .container{max-width:860px;margin:0 auto;padding:60px 20px 100px;}
+        .section-card{background:white;border-radius:20px;border:2px solid #C5D8FF;padding:30px;margin-bottom:25px;box-shadow:0 4px 15px rgba(21,101,192,0.07);}
+        .section-card h2{font-size:1.3rem;font-weight:900;color:#1565C0;margin-bottom:15px;}
+        .section-card p{color:#555;line-height:1.8;font-size:0.97rem;}
+        .req-list{list-style:none;padding:0;margin-top:15px;}
+        .req-list li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #E3F2FD;font-size:0.95rem;color:#444;}
+        .req-list li:last-child{border-bottom:none;}
+        .req-num{width:28px;height:28px;background:linear-gradient(135deg,#1565C0,#0d47a1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:0.85rem;flex-shrink:0;}
+        .code-box{background:#0a0a1a;border-radius:15px;padding:25px;margin-top:20px;border:1px solid #1a2a4a;}
+        .code-label{color:#7EC8E3;font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:15px;}
+        .code-box pre{font-family:'Courier New',monospace;font-size:0.85rem;line-height:1.8;color:#a8ff78;white-space:pre-wrap;word-wrap:break-word;}
+        .code-comment{color:#555;}.code-string{color:#ffd43b;}.code-keyword{color:#7EC8E3;}.code-output{color:#74c0fc;}
+        .submit-section{background:linear-gradient(135deg,#E3F2FD,#F0F4FF);border:2px solid #1565C0;border-radius:20px;padding:30px;text-align:center;margin-top:30px;}
+        .submit-section h3{font-size:1.3rem;font-weight:900;color:#1565C0;margin-bottom:10px;}
+        .submit-section p{color:#555;margin-bottom:20px;font-size:0.95rem;line-height:1.7;}
+        .submit-btn{display:inline-block;background:linear-gradient(135deg,#1565C0,#0d47a1);color:white;text-decoration:none;padding:16px 40px;border-radius:50px;font-size:1.1rem;font-weight:900;font-family:'Heebo',sans-serif;box-shadow:0 8px 25px rgba(21,101,192,0.3);transition:transform 0.2s;}
+        .submit-btn:hover{transform:translateY(-3px);}
+        .nav-btns{display:flex;justify-content:space-between;gap:15px;margin-top:40px;}
+        .nav-btn{flex:1;display:flex;justify-content:space-between;align-items:center;background:white;border:2px solid #C5D8FF;border-radius:20px;padding:20px 25px;text-decoration:none;color:inherit;transition:all 0.3s;}
+        .nav-btn:hover{border-color:#1565C0;transform:translateY(-2px);}
+        .nav-btn-text p{color:#999;font-size:0.85rem;margin-bottom:4px;}.nav-btn-text h3{font-size:1rem;font-weight:900;color:#1565C0;}
+        .nav-arrow{width:40px;height:40px;background:linear-gradient(135deg,#1565C0,#0d47a1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a><a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/csharp">C#</a> ← פרויקט Level 3</div>
+    <div class="project-badge">🛠️ פרויקט Level 3 — Logic & Problem Solving</div>
+    <h1><span>Password Strength Checker</span> 🔐</h1>
+    <p>תוכנית שבודקת חוזק סיסמה — שילוב של לולאות, תנאים ואלגוריתם</p>
+</div>
+<div class="container">
+    <div class="section-card">
+        <h2>📋 תיאור הפרויקט</h2>
+        <p>בני תוכנית שמקבלת סיסמה מהמשתמשת ובודקת את חוזקה. התוכנית תבדוק מספר תנאים ותחזיר: Weak, Medium, או Strong.</p>
+    </div>
+    <div class="section-card">
+        <h2>✅ דרישות</h2>
+        <ul class="req-list">
+            <li><div class="req-num">1</div><span>קבלת סיסמה מהמשתמשת</span></li>
+            <li><div class="req-num">2</div><span>בדיקה: לפחות 8 תווים (אורך)</span></li>
+            <li><div class="req-num">3</div><span>בדיקה: מכילה מספר (לולאה על תווים)</span></li>
+            <li><div class="req-num">4</div><span>בדיקה: מכילה אות גדולה</span></li>
+            <li><div class="req-num">5</div><span>פלט: Weak / Medium / Strong לפי מספר התנאים שהתקיימו</span></li>
+        </ul>
+    </div>
+    <div class="section-card">
+        <h2>💡 הסבר — איך לבצע</h2>
+        <p>
+        <strong>שלב 1:</strong> קראי סיסמה מהמשתמשת.<br><br>
+        <strong>שלב 2:</strong> הגדירי משתנה score = 0 לספירת תנאים שהתקיימו.<br><br>
+        <strong>שלב 3:</strong> בדקי כל תנאי — אם מתקיים → score++<br><br>
+        <strong>שלב 4:</strong> לבדיקת תווים — השתמשי ב-<code style="background:#E3F2FD;padding:1px 6px;border-radius:4px;color:#1565C0;font-family:monospace;">char.IsDigit()</code> ו-<code style="background:#E3F2FD;padding:1px 6px;border-radius:4px;color:#1565C0;font-family:monospace;">char.IsUpper()</code><br><br>
+        <strong>שלב 5:</strong> לפי score החזירי Weak (0-1) / Medium (2) / Strong (3).
+        </p>
+    </div>
+    <div class="section-card">
+        <h2>🔑 קוד הפתרון</h2>
+        <div class="code-box">
+            <div class="code-label">C# — Password Strength Checker</div>
+            <pre><span class="code-keyword">using</span> System;
+
+<span class="code-keyword">class</span> Program
+{
+    <span class="code-keyword">static void</span> Main()
+    {
+        Console.WriteLine(<span class="code-string">"הכניסי סיסמה:"</span>);
+        <span class="code-keyword">string</span> password = Console.ReadLine();
+
+        <span class="code-keyword">int</span> score = 0;
+        <span class="code-keyword">bool</span> hasDigit = <span class="code-keyword">false</span>;
+        <span class="code-keyword">bool</span> hasUpper = <span class="code-keyword">false</span>;
+
+        <span class="code-comment">// בדיקת אורך</span>
+        <span class="code-keyword">if</span>(password.Length >= 8)
+        {
+            score++;
+        }
+
+        <span class="code-comment">// בדיקת תווים בלולאה</span>
+        <span class="code-keyword">for</span>(<span class="code-keyword">int</span> i = 0; i < password.Length; i++)
+        {
+            <span class="code-keyword">if</span>(char.IsDigit(password[i]))
+                hasDigit = <span class="code-keyword">true</span>;
+            <span class="code-keyword">if</span>(char.IsUpper(password[i]))
+                hasUpper = <span class="code-keyword">true</span>;
+        }
+
+        <span class="code-keyword">if</span>(hasDigit) score++;
+        <span class="code-keyword">if</span>(hasUpper) score++;
+
+        <span class="code-comment">// קביעת חוזק</span>
+        <span class="code-keyword">if</span>(score <= 1)
+            Console.WriteLine(<span class="code-string">"Weak 🔴"</span>);
+        <span class="code-keyword">else if</span>(score == 2)
+            Console.WriteLine(<span class="code-string">"Medium 🟡"</span>);
+        <span class="code-keyword">else</span>
+            Console.WriteLine(<span class="code-string">"Strong 🟢"</span>);
+    }
+}
+
+<span class="code-comment">// פלט לדוגמה:</span>
+<span class="code-output">הכניסי סיסמה: Maayan123
+Strong 🟢</span></pre>
+        </div>
+    </div>
+    <div class="submit-section">
+        <h3>📤 הגשת הפרויקט</h3>
+        <p>סיימת לכתוב את הקוד? מעולה! הגישי אותו דרך הטופס 🎀</p>
+        <a href="https://forms.gle/dV4ELTmAbHKHUzxMA" target="_blank" class="submit-btn">להגשת הפרויקט 🚀</a>
+    </div>
+    <div class="nav-btns">
+        <a href="/courses/languages/csharp/lesson18" class="nav-btn">
+            <div class="nav-arrow">→</div>
+            <div class="nav-btn-text" style="text-align:right;"><p>← חזרה</p><h3>שיעור 18 — Mini Hacker Challenges</h3></div>
+        </a>
+        <a href="/courses/languages/csharp/lesson19" class="nav-btn">
+            <div class="nav-btn-text"><p>הבא ←</p><h3>שיעור 19 — מערכים (Arrays) 📋</h3></div>
+            <div class="nav-arrow">←</div>
+        </a>
+    </div>
+</div>
+<script>document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};</script>
+</body>
+</html>
