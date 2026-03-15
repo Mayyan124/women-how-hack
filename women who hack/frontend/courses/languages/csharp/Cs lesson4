@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -120,12 +121,40 @@ Console.WriteLine(name + " " + age);</pre>
     <div class="quiz-section" id="quiz">
         <h2>✅ שאלות אמריקאיות</h2>
         <p class="quiz-subtitle">5 שאלות — בהצלחה!</p>
-        <div class="quiz-q" id="q1"><p>מהו משתנה?</p>
+                <div class="quiz-q" id="q1"><p>1. מהו משתנה?</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">A. פקודה למחשב</button>
-                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. מקום בזיכרון לשמירת מידע ✅</button>
+                <button class="quiz-btn" onclick="answer(this,'q1',true)">B. מקום בזיכרון לשמירת מידע</button>
                 <button class="quiz-btn" onclick="answer(this,'q1',false)">C. פונקציה</button>
             </div><div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-q" id="q2"><p>2. איזה סוג מתאים למספר שלם?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">A. string</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',true)">B. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q2',false)">C. bool</button>
+            </div><div class="quiz-feedback" id="fb-q2"></div>
+        </div>
+        <div class="quiz-q" id="q3"><p>3. איזה סוג מתאים למילה או משפט?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">A. int</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',false)">B. bool</button>
+                <button class="quiz-btn" onclick="answer(this,'q3',true)">C. string</button>
+            </div><div class="quiz-feedback" id="fb-q3"></div>
+        </div>
+        <div class="quiz-q" id="q4"><p>4. איך מקצים ערך למשתנה age?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">A. 25 = age;</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',true)">B. age = 25;</button>
+                <button class="quiz-btn" onclick="answer(this,'q4',false)">C. age := 25</button>
+            </div><div class="quiz-feedback" id="fb-q4"></div>
+        </div>
+        <div class="quiz-q" id="q5"><p>5. כמה חלקים יש למשתנה?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">A. שניים — שם וערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',true)">B. שלושה — סוג, שם וערך</button>
+                <button class="quiz-btn" onclick="answer(this,'q5',false)">C. אחד — שם בלבד</button>
+            </div><div class="quiz-feedback" id="fb-q5"></div>
         </div>
         <div class="quiz-score" id="quiz-score"></div>
         <button class="quiz-submit" onclick="showScore()">בדקי תוצאות ✅</button>
