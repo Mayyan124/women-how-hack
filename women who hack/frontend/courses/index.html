@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Women Who Hack | קורסים 🎀</title>
+    <title>Women Who Hack | קורס C# 💻</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -14,83 +14,75 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Heebo', sans-serif; background: #FFF5F7; color: #2c2c2c; overflow-x: hidden; }
+        body { font-family: 'Heebo', sans-serif; background: #F0F4FF; color: #2c2c2c; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
         nav a.logo { font-size: 1.6rem; font-weight: 900; color: #D81B60; text-decoration: none; }
         .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
         .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
         .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
-        @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-wrap: wrap; }
-            .hamburger { display: flex; }
-            .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #F8BBD0; margin-top: 10px; }
-            .nav-links.open { display: flex; }
-            .nav-links a { padding: 10px 20px; margin: 0; }
-        }
-        .hero { background: linear-gradient(135deg, #D81B60, #FF69B4, #FFB6C1); padding: 80px 20px 100px; text-align: center; color: white; position: relative; overflow: hidden; }
-        .hero::before { content: '🎀'; position: absolute; font-size: 22rem; opacity: 0.05; top: -80px; left: -80px; animation: float 8s ease-in-out infinite; }
-        .hero::after { content: '💻'; position: absolute; font-size: 15rem; opacity: 0.05; bottom: -40px; right: -40px; animation: float 6s ease-in-out infinite reverse; }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); padding: 6px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; backdrop-filter: blur(5px); }
-        .hero h1 { font-size: 3.2rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 15px rgba(0,0,0,0.15); line-height: 1.2; }
-        .hero p { font-size: 1.15rem; opacity: 0.9; max-width: 580px; margin: 0 auto 30px; line-height: 1.8; }
-        .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .hero-stat { text-align: center; }
-        .hero-stat .num { font-size: 2rem; font-weight: 900; display: block; }
-        .hero-stat .lbl { font-size: 0.85rem; opacity: 0.8; }
-        .wave { margin-top: -2px; line-height: 0; }
-        .wave svg { display: block; width: 100%; }
-        .breadcrumb { max-width: 1100px; margin: 30px auto 0; padding: 0 30px; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #999; }
-        .breadcrumb a { color: #D81B60; text-decoration: none; font-weight: 600; }
-        .breadcrumb span { color: #ccc; }
-        .section-wrap { max-width: 1100px; margin: 0 auto; padding: 50px 30px; }
-        .section-title { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
-        .section-title-icon { width: 50px; height: 50px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 6px 20px rgba(216,27,96,0.25); flex-shrink: 0; }
-        .section-title h2 { font-size: 1.7rem; font-weight: 900; color: #D81B60; }
-        .section-title p { color: #888; font-size: 0.95rem; margin-top: 3px; }
-        .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 25px; margin-bottom: 70px; }
-        .category-card { background: white; border-radius: 24px; border: 2px solid #F8BBD0; overflow: hidden; box-shadow: 0 4px 20px rgba(255,105,180,0.08); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; text-decoration: none; display: block; color: inherit; position: relative; }
-        .category-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(216,27,96,0.15); border-color: #FF69B4; }
-        .card-top { padding: 30px 25px 20px; position: relative; }
-        .card-emoji { font-size: 2.8rem; margin-bottom: 12px; display: block; }
-        .card-tag { position: absolute; top: 20px; left: 20px; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
-        .tag-available { background: #E8F5E9; color: #2E7D32; }
-        .tag-soon { background: #FFF8E1; color: #F57F17; }
-        .card-top h3 { font-size: 1.35rem; font-weight: 900; color: #2c2c2c; margin-bottom: 6px; }
-        .card-top p { color: #888; font-size: 0.92rem; line-height: 1.6; }
-        .card-bottom { padding: 15px 25px 25px; border-top: 1px solid #FFF0F5; display: flex; align-items: center; justify-content: space-between; }
-        .card-meta { display: flex; gap: 15px; }
-        .card-meta-item { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; color: #aaa; font-weight: 600; }
-        .card-arrow { width: 36px; height: 36px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; transition: transform 0.2s; }
-        .category-card:hover .card-arrow { transform: translateX(-4px); }
-        .category-card.soon { opacity: 0.7; cursor: default; }
-        .category-card.soon:hover { transform: none; box-shadow: 0 4px 20px rgba(255,105,180,0.08); border-color: #F8BBD0; }
-        .how-section { background: white; border-radius: 30px; border: 2px solid #F8BBD0; padding: 50px 40px; margin-bottom: 70px; box-shadow: 0 4px 20px rgba(255,105,180,0.06); }
-        .how-section h2 { font-size: 1.7rem; font-weight: 900; color: #D81B60; margin-bottom: 35px; text-align: center; }
-        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .step { text-align: center; padding: 20px; }
-        .step-num { width: 52px; height: 52px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; color: white; margin: 0 auto 15px; box-shadow: 0 6px 20px rgba(216,27,96,0.25); }
-        .step h4 { font-size: 1rem; font-weight: 800; color: #2c2c2c; margin-bottom: 8px; }
-        .step p { color: #888; font-size: 0.88rem; line-height: 1.6; }
-        .levels-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 70px; }
-        @media (max-width: 700px) { .levels-row { grid-template-columns: 1fr; } }
-        .level-card { border-radius: 20px; padding: 28px; text-align: center; }
-        .level-1 { background: #E8F5E9; border: 2px solid #A5D6A7; }
-        .level-2 { background: #FFF8E1; border: 2px solid #FFE082; }
-        .level-3 { background: #FCE4EC; border: 2px solid #F48FB1; }
-        .level-card .level-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-        .level-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 8px; }
-        .level-1 h3 { color: #2E7D32; }
-        .level-2 h3 { color: #F57F17; }
-        .level-3 h3 { color: #C62828; }
-        .level-card p { font-size: 0.88rem; color: #666; line-height: 1.6; }
-        .level-card ul { list-style: none; padding: 0; margin-top: 12px; text-align: right; }
-        .level-card ul li { font-size: 0.85rem; color: #555; padding: 3px 0; }
-        .level-card ul li::before { content: "← "; color: #FF69B4; font-weight: bold; }
-        footer { text-align: center; padding: 40px 20px; color: #bbb; font-size: 0.88rem; border-top: 1px solid #F8BBD0; }
-        footer a { color: #FF69B4; text-decoration: none; }
-        @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero-stats { gap: 20px; } .how-section { padding: 30px 20px; } .section-wrap { padding: 30px 20px; } }
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero { background: linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a3e); padding: 70px 20px 80px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '#'; position: absolute; font-size: 22rem; font-weight: 900; opacity: 0.04; top: -60px; left: -20px; }
+        .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; }
+        .hero-breadcrumb a { color: #7EC8E3; text-decoration: none; }
+        .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 12px; }
+        .hero h1 span { color: #7EC8E3; }
+        .hero p { font-size: 1.05rem; opacity: 0.8; max-width: 550px; margin: 0 auto 25px; line-height: 1.7; }
+        .hero-stats { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .hero-stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 12px 22px; }
+        .hero-stat strong { display: block; font-size: 1.4rem; font-weight: 900; color: #7EC8E3; }
+        .hero-stat span { font-size: 0.8rem; opacity: 0.7; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px 100px; }
+        .level-section { margin-bottom: 55px; }
+        .level-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding: 20px 25px; border-radius: 18px; border: 2px solid; }
+        .level-header.l1 { background: linear-gradient(135deg, #E3F2FD, #EDE7F6); border-color: #90CAF9; }
+        .level-header.l2 { background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border-color: #A5D6A7; }
+        .level-header.l3 { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border-color: #FFE082; }
+        .level-header.l4 { background: linear-gradient(135deg, #FCE4EC, #FFF5F7); border-color: #F48FB1; }
+        .level-header.l5 { background: linear-gradient(135deg, #EDE7F6, #F3E5F5); border-color: #CE93D8; }
+        .level-header.l6 { background: linear-gradient(135deg, #E0F7FA, #E0F2F1); border-color: #80DEEA; }
+        .level-header.l7 { background: linear-gradient(135deg, #FBE9E7, #FFF3E0); border-color: #FFAB91; }
+        .level-badge { padding: 6px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 900; }
+        .l1 .level-badge { background: #1565C0; color: white; }
+        .l2 .level-badge { background: #2E7D32; color: white; }
+        .l3 .level-badge { background: #F57F17; color: white; }
+        .l4 .level-badge { background: #C62828; color: white; }
+        .l5 .level-badge { background: #6A1B9A; color: white; }
+        .l6 .level-badge { background: #00838F; color: white; }
+        .l7 .level-badge { background: #BF360C; color: white; }
+        .level-header h2 { font-size: 1.3rem; font-weight: 900; flex: 1; }
+        .l1 .level-header h2 { color: #1565C0; }
+        .l2 .level-header h2 { color: #2E7D32; }
+        .l3 .level-header h2 { color: #F57F17; }
+        .l4 .level-header h2 { color: #C62828; }
+        .l5 .level-header h2 { color: #6A1B9A; }
+        .l6 .level-header h2 { color: #00838F; }
+        .l7 .level-header h2 { color: #BF360C; }
+        .level-count { font-size: 0.85rem; font-weight: 700; opacity: 0.6; }
+        .lessons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .lesson-card { background: white; border: 2px solid #C5D8FF; border-radius: 18px; padding: 22px; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: flex-start; gap: 16px; box-shadow: 0 3px 12px rgba(21,101,192,0.06); }
+        .lesson-card:hover { transform: translateY(-4px); border-color: #1565C0; box-shadow: 0 10px 30px rgba(21,101,192,0.15); }
+        .lesson-num { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.95rem; flex-shrink: 0; }
+        .l1-num { background: #E3F2FD; color: #1565C0; }
+        .l2-num { background: #E8F5E9; color: #2E7D32; }
+        .l3-num { background: #FFF8E1; color: #F57F17; }
+        .l4-num { background: #FCE4EC; color: #C62828; }
+        .l5-num { background: #EDE7F6; color: #6A1B9A; }
+        .l6-num { background: #E0F7FA; color: #00838F; }
+        .l7-num { background: #FBE9E7; color: #BF360C; }
+        .lesson-info { flex: 1; }
+        .lesson-info h3 { font-size: 0.97rem; font-weight: 900; color: #1a1a2e; margin-bottom: 5px; line-height: 1.4; }
+        .lesson-info p { font-size: 0.82rem; color: #999; line-height: 1.5; }
+        .lesson-status { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; flex-shrink: 0; align-self: flex-start; }
+        .status-available { background: #E8F5E9; color: #2E7D32; }
+        .project-card { background: linear-gradient(135deg, #E3F2FD, #EDE7F6); border: 2px solid #90CAF9; border-radius: 16px; padding: 18px 22px; margin-top: 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; transition: all 0.3s; }
+        .project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(21,101,192,0.15); }
+        .project-card.exam { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border-color: #FFE082; }
+        .project-icon { font-size: 1.5rem; }
+        .project-info h4 { font-size: 0.92rem; font-weight: 900; color: #1565C0; margin-bottom: 3px; }
+        .project-card.exam .project-info h4 { color: #F57F17; }
+        .project-info p { font-size: 0.8rem; color: #999; }
     </style>
 </head>
 <body>
@@ -106,254 +98,148 @@
 </nav>
 
 <div class="hero">
-    <div class="hero-badge">🎓 מרכז הלמידה של Women Who Hack</div>
-    <h1>למדי. תכנתי. שני את כללי המשחק. 💻</h1>
-    <p>קורסים מלאים שנבנו במיוחד בשבילך — מהבסיס ועד לרמה מקצועית, בעברית, עם דוגמאות מהחיים</p>
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← C#</div>
+    <h1>קורס <span>C#</span> 💻</h1>
+    <p>מהיסודות ועד מערכות מתקדמות — 42 שיעורים ב-7 רמות, עם פרויקטים ומבחנים</p>
     <div class="hero-stats">
-        <div class="hero-stat"><span class="num">57+</span><span class="lbl">שיעורים</span></div>
-        <div class="hero-stat"><span class="num">2</span><span class="lbl">קורסים פעילים</span></div>
-        <div class="hero-stat"><span class="num">🎀</span><span class="lbl">בנות בלבד</span></div>
+        <div class="hero-stat"><strong>42</strong><span>שיעורים</span></div>
+        <div class="hero-stat"><strong>7</strong><span>רמות</span></div>
+        <div class="hero-stat"><strong>7</strong><span>פרויקטים</span></div>
     </div>
 </div>
-<div class="wave">
-    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FFF5F7"/>
-    </svg>
-</div>
 
-<div class="section-wrap">
-    <div class="breadcrumb" style="padding:0; margin-bottom:40px;">
-        <a href="/">בית</a><span>←</span><span>קורסים</span>
+<div class="container">
+
+    <!-- LEVEL 1 -->
+    <div class="level-section">
+        <div class="level-header l1">
+            <span class="level-badge">Level 1</span>
+            <h2>🏗️ Foundations — יסודות התכנות</h2>
+            <span class="level-count">שיעורים 1–6</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson1" class="lesson-card"><div class="lesson-num l1-num">01</div><div class="lesson-info"><h3>מבוא ל-C# 💻</h3><p>מהי שפת תכנות, מחשב, קוד ו-Hello World</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson2" class="lesson-card"><div class="lesson-num l1-num">02</div><div class="lesson-info"><h3>כיצד תוכנית רצה ⚙️</h3><p>Compiler, Execution, IDE</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson3" class="lesson-card"><div class="lesson-num l1-num">03</div><div class="lesson-info"><h3>מבנה תוכנית 🏗️</h3><p>Project, Class, Method</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson4" class="lesson-card"><div class="lesson-num l1-num">04</div><div class="lesson-info"><h3>משתנים 📦</h3><p>int, string, bool — שמירת מידע</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson5" class="lesson-card"><div class="lesson-num l1-num">05</div><div class="lesson-info"><h3>סוגי נתונים 🔢</h3><p>int, double, string, bool</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson6" class="lesson-card"><div class="lesson-num l1-num">06</div><div class="lesson-info"><h3>קלט ופלט 🎤</h3><p>Console.ReadLine() ו-WriteLine()</p></div><span class="lesson-status status-available">✅</span></a>
+        </div>
+        <a href="/courses/languages/csharp/project1" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 1 — מערכת פרופיל משתמש</h4><p>קלט, משתנים, הדפסה מסודרת</p></div></a>
     </div>
 
-    <div class="section-title">
-        <div class="section-title-icon">💻</div>
-        <div>
-            <h2>שפות תכנות</h2>
-            <p>בחרי שפה ותתחילי ללמוד — שיעור אחד בכל פעם</p>
+    <!-- LEVEL 2 -->
+    <div class="level-section">
+        <div class="level-header l2">
+            <span class="level-badge">Level 2</span>
+            <h2>⚡ Control Flow — זרימת התוכנית</h2>
+            <span class="level-count">שיעורים 7–12</span>
         </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson7" class="lesson-card"><div class="lesson-num l2-num">07</div><div class="lesson-info"><h3>אופרטורים מתמטיים ➕</h3><p>+, -, *, /, %</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson8" class="lesson-card"><div class="lesson-num l2-num">08</div><div class="lesson-info"><h3>אופרטורים לוגיים 🧠</h3><p>&&, ||, !</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson9" class="lesson-card"><div class="lesson-num l2-num">09</div><div class="lesson-info"><h3>תנאים (if) 🔀</h3><p>if, else if, else</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson10" class="lesson-card"><div class="lesson-num l2-num">10</div><div class="lesson-info"><h3>תנאים מורכבים 🔀</h3><p>AND/OR בתוך תנאים</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson11" class="lesson-card"><div class="lesson-num l2-num">11</div><div class="lesson-info"><h3>לולאת for 🔄</h3><p>חזרה על קוד מספר פעמים</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson12" class="lesson-card"><div class="lesson-num l2-num">12</div><div class="lesson-info"><h3>לולאת while 🔄</h3><p>חזרה עם תנאי</p></div><span class="lesson-status status-available">✅</span></a>
+        </div>
+        <a href="/courses/languages/csharp/project2" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 2 — משחק ניחוש מספר</h4><p>תנאים, לולאות, אופרטורים</p></div></a>
     </div>
 
-    <div class="category-grid">
-
-        <!-- Python ✅ -->
-        <a href="/courses/languages/python" class="category-card">
-            <div class="card-top">
-                <span class="card-tag tag-available">✅ זמין עכשיו</span>
-                <span class="card-emoji">🐍</span>
-                <h3>Python</h3>
-                <p>שפת ההתחלה המושלמת — פשוטה, עוצמתית, ונפוצה בסייבר, AI ונתונים</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
-                </div>
-                <div class="card-arrow">←</div>
-            </div>
-        </a>
-
-        <!-- C# ✅ -->
-        <a href="/courses/languages/csharp" class="category-card">
-            <div class="card-top">
-                <span class="card-tag tag-available">✅ זמין עכשיו</span>
-                <span class="card-emoji">💎</span>
-                <h3>C#</h3>
-                <p>שפת Microsoft — לפיתוח אפליקציות, משחקי Unity ומערכות ארגוניות</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 42 שיעורים</span>
-                    <span class="card-meta-item">⭐ 7 רמות</span>
-                </div>
-                <div class="card-arrow">←</div>
-            </div>
-        </a>
-
-        <!-- JavaScript 🔒 -->
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">✨</span>
-                <h3>JavaScript</h3>
-                <p>שפת האינטרנט — לבניית אתרים אינטראקטיביים ואפליקציות</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
-                </div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
+    <!-- LEVEL 3 -->
+    <div class="level-section">
+        <div class="level-header l3">
+            <span class="level-badge">Level 3</span>
+            <h2>🧩 Logic & Problem Solving</h2>
+            <span class="level-count">שיעורים 13–18</span>
         </div>
-
-        <!-- C 🔒 -->
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">⚙️</span>
-                <h3>C</h3>
-                <p>השפה הבסיסית של כולן — מבנה מחשב, זיכרון ומערכות הפעלה</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
-                </div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson13" class="lesson-card"><div class="lesson-num l3-num">13</div><div class="lesson-info"><h3>אלגוריתמים 🧠</h3><p>חשיבה אלגוריתמית</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson14" class="lesson-card"><div class="lesson-num l3-num">14</div><div class="lesson-info"><h3>פתרון בעיות 🔍</h3><p>שלבים לפתרון בעיה</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson15" class="lesson-card"><div class="lesson-num l3-num">15</div><div class="lesson-info"><h3>לולאות מתקדמות 🔄</h3><p>Nested Loops</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson16" class="lesson-card"><div class="lesson-num l3-num">16</div><div class="lesson-info"><h3>מציאת מקסימום 🏆</h3><p>אלגוריתם מקסימום במערך</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson17" class="lesson-card"><div class="lesson-num l3-num">17</div><div class="lesson-info"><h3>ניתוח קוד 🔎</h3><p>Code Analysis</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson18" class="lesson-card"><div class="lesson-num l3-num">18</div><div class="lesson-info"><h3>Mini Hacker Challenges 💥</h3><p>אתגרי תכנות</p></div><span class="lesson-status status-available">✅</span></a>
         </div>
-
-        <!-- C++ 🔒 -->
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">🔧</span>
-                <h3>C++</h3>
-                <p>לתכנות מתקדם — משחקים, מערכות ותוכנות ביצועיות</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
-                </div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
-        </div>
-
-        <!-- Java 🔒 -->
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">☕</span>
-                <h3>Java</h3>
-                <p>שפה קלאסית ועוצמתית — אפליקציות Android ומערכות גדולות</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
-                </div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
-        </div>
-
+        <a href="/courses/languages/csharp/project3" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 3 — Password Strength Checker</h4><p>אלגוריתמים, לולאות, תנאים</p></div></a>
     </div>
 
-    <!-- נושאים נוספים -->
-    <div class="section-title">
-        <div class="section-title-icon">🌐</div>
-        <div>
-            <h2>נושאים נוספים</h2>
-            <p>טכנולוגיות שכל האקרית צריכה להכיר</p>
+    <!-- LEVEL 4 -->
+    <div class="level-section">
+        <div class="level-header l4">
+            <span class="level-badge">Level 4</span>
+            <h2>📊 Data Structures — מבני נתונים</h2>
+            <span class="level-count">שיעורים 19–24</span>
         </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson19" class="lesson-card"><div class="lesson-num l4-num">19</div><div class="lesson-info"><h3>מערכים (Arrays) 📋</h3><p>יצירה, גישה, אורך</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson20" class="lesson-card"><div class="lesson-num l4-num">20</div><div class="lesson-info"><h3>לולאות עם מערכים 🔄</h3><p>for ו-foreach</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson21" class="lesson-card"><div class="lesson-num l4-num">21</div><div class="lesson-info"><h3>רשימות (Lists) 📝</h3><p>גודל דינמי, Add, Remove</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson22" class="lesson-card"><div class="lesson-num l4-num">22</div><div class="lesson-info"><h3>מילונים (Dictionary) 📖</h3><p>Key-Value pairs</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson23" class="lesson-card"><div class="lesson-num l4-num">23</div><div class="lesson-info"><h3>חיפוש במערכים 🔍</h3><p>Linear Search</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson24" class="lesson-card"><div class="lesson-num l4-num">24</div><div class="lesson-info"><h3>מיון נתונים 🗂️</h3><p>Array.Sort(), Bubble Sort</p></div><span class="lesson-status status-available">✅</span></a>
+        </div>
+        <a href="/courses/languages/csharp/project4" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 4 — Student Manager</h4><p>List, Dictionary, Arrays</p></div></a>
     </div>
 
-    <div class="category-grid" style="margin-bottom: 70px;">
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">🌐</span>
-                <h3>רשתות ותקשורת</h3>
-                <p>IP, DNS, HTTP, TCP/IP — איך האינטרנט עובד מבפנים</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta"><span class="card-meta-item">📚 10 שיעורים</span></div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
+    <!-- LEVEL 5 -->
+    <div class="level-section">
+        <div class="level-header l5">
+            <span class="level-badge">Level 5</span>
+            <h2>🏛️ OOP — תכנות מונחה עצמים</h2>
+            <span class="level-count">שיעורים 25–30</span>
         </div>
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">🔒</span>
-                <h3>אבטחת מידע</h3>
-                <p>הצפנה, אימות, הרשאות — אבני הבניין של עולם הסייבר</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta"><span class="card-meta-item">📚 10 שיעורים</span></div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson25" class="lesson-card"><div class="lesson-num l5-num">25</div><div class="lesson-info"><h3>מחלקות ואובייקטים 🏛️</h3><p>Classes & Objects</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson26" class="lesson-card"><div class="lesson-num l5-num">26</div><div class="lesson-info"><h3>Constructors 🔧</h3><p>אתחול אובייקטים</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson27" class="lesson-card"><div class="lesson-num l5-num">27</div><div class="lesson-info"><h3>Encapsulation 🔒</h3><p>הסתרת מידע</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson28" class="lesson-card"><div class="lesson-num l5-num">28</div><div class="lesson-info"><h3>טיפול בשגיאות ⚠️</h3><p>try, catch, finally</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson29" class="lesson-card"><div class="lesson-num l5-num">29</div><div class="lesson-info"><h3>עבודה עם קבצים 📁</h3><p>File.ReadAllText, WriteAllText</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson30" class="lesson-card"><div class="lesson-num l5-num">30</div><div class="lesson-info"><h3>Mini Project System 🛠️</h3><p>User Management System</p></div><span class="lesson-status status-available">✅</span></a>
         </div>
-        <div class="category-card soon">
-            <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
-                <span class="card-emoji">🖥️</span>
-                <h3>Web Development</h3>
-                <p>HTML, CSS, JavaScript — בניית אתרים מאפס</p>
-            </div>
-            <div class="card-bottom">
-                <div class="card-meta"><span class="card-meta-item">📚 12 שיעורים</span></div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
-            </div>
-        </div>
+        <a href="/courses/languages/csharp/project5" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 5 — Library Management System</h4><p>Classes, Lists, File Handling</p></div></a>
     </div>
 
-    <!-- HOW IT WORKS -->
-    <div class="how-section">
-        <h2>🎀 איך זה עובד?</h2>
-        <div class="steps-grid">
-            <div class="step"><div class="step-num">1</div><h4>בחרי קורס</h4><p>בחרי שפת תכנות או נושא שמעניין אותך</p></div>
-            <div class="step"><div class="step-num">2</div><h4>למדי שיעור</h4><p>כל שיעור עם הסבר, דוגמה מהחיים וקוד</p></div>
-            <div class="step"><div class="step-num">3</div><h4>עני על שאלות</h4><p>5 שאלות אמריקאיות בסוף כל שיעור</p></div>
-            <div class="step"><div class="step-num">4</div><h4>בני פרויקט</h4><p>פרויקט אמיתי אחרי כל Level</p></div>
+    <!-- LEVEL 6 -->
+    <div class="level-section">
+        <div class="level-header l6">
+            <span class="level-badge">Level 6</span>
+            <h2>🚀 Advanced Logic & Algorithms</h2>
+            <span class="level-count">שיעורים 31–36</span>
         </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson31" class="lesson-card"><div class="lesson-num l6-num">31</div><div class="lesson-info"><h3>אלגוריתמים מתקדמים 🧮</h3><p>סוגי אלגוריתמים, סיבוכיות</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson32" class="lesson-card"><div class="lesson-num l6-num">32</div><div class="lesson-info"><h3>Linear Search מתקדם 🔍</h3><p>פונקציה + החזרת אינדקס</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson33" class="lesson-card"><div class="lesson-num l6-num">33</div><div class="lesson-info"><h3>Sorting Algorithms 🗂️</h3><p>Bubble Sort לעומק</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson34" class="lesson-card"><div class="lesson-num l6-num">34</div><div class="lesson-info"><h3>פתרון בעיות מורכבות 🧩</h3><p>לולאה אחת לכל</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson35" class="lesson-card"><div class="lesson-num l6-num">35</div><div class="lesson-info"><h3>Challenge Problems 💥</h3><p>מספרים ראשוניים ועוד</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson36" class="lesson-card"><div class="lesson-num l6-num">36</div><div class="lesson-info"><h3>Mini Hacker Challenge 🎯</h3><p>Most Frequent Element</p></div><span class="lesson-status status-available">✅</span></a>
+        </div>
+        <a href="/courses/languages/csharp/project6" class="project-card"><div class="project-icon">🛠️</div><div class="project-info"><h4>פרויקט Level 6 — Data Analyzer</h4><p>ממוצע, מקסימום, מינימום, ספירה</p></div></a>
     </div>
 
-    <!-- LEVELS -->
-    <div class="section-title">
-        <div class="section-title-icon">⭐</div>
-        <div>
-            <h2>3 רמות בכל קורס</h2>
-            <p>מהבסיס הכי בסיסי ועד לאתגרים של האקריות אמיתיות</p>
+    <!-- LEVEL 7 -->
+    <div class="level-section">
+        <div class="level-header l7">
+            <span class="level-badge">Level 7</span>
+            <h2>🏆 Real Developer Skills — Elite</h2>
+            <span class="level-count">שיעורים 37–42</span>
         </div>
-    </div>
-    <div class="levels-row">
-        <div class="level-card level-1">
-            <span class="level-icon">🌱</span>
-            <h3>Level 1 — Basics</h3>
-            <p>מושלם להתחלה מאפס</p>
-            <ul>
-                <li>שיעורים 1–5</li>
-                <li>משתנים, קלט/פלט</li>
-                <li>אופרטורים ומחרוזות</li>
-                <li>3 פרויקטים סופיים</li>
-            </ul>
+        <div class="lessons-grid">
+            <a href="/courses/languages/csharp/lesson37" class="lesson-card"><div class="lesson-num l7-num">37</div><div class="lesson-info"><h3>Debugging 🐛</h3><p>Syntax, Logical, Runtime errors</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson38" class="lesson-card"><div class="lesson-num l7-num">38</div><div class="lesson-info"><h3>קריאת קוד של אחרים 👀</h3><p>Code Reading Skills</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson39" class="lesson-card"><div class="lesson-num l7-num">39</div><div class="lesson-info"><h3>Clean Code ✨</h3><p>שמות ברורים, פונקציות קצרות</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson40" class="lesson-card"><div class="lesson-num l7-num">40</div><div class="lesson-info"><h3>Performance Thinking ⚡</h3><p>סיבוכיות זמן O(n)</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson41" class="lesson-card"><div class="lesson-num l7-num">41</div><div class="lesson-info"><h3>Mini System Design 🏗️</h3><p>Task Manager</p></div><span class="lesson-status status-available">✅</span></a>
+            <a href="/courses/languages/csharp/lesson42" class="lesson-card"><div class="lesson-num l7-num">42</div><div class="lesson-info"><h3>Final Developer Challenge 🏆</h3><p>User Login System</p></div><span class="lesson-status status-available">✅</span></a>
         </div>
-        <div class="level-card level-2">
-            <span class="level-icon">🔥</span>
-            <h3>Level 2 — Logic</h3>
-            <p>לאחר שיש בסיס</p>
-            <ul>
-                <li>שיעורים 6–10</li>
-                <li>לולאות ורשימות</li>
-                <li>קבצים ומודולים</li>
-                <li>3 פרויקטים סופיים</li>
-            </ul>
-        </div>
-        <div class="level-card level-3">
-            <span class="level-icon">💀</span>
-            <h3>Level 3 — Hacker</h3>
-            <p>לאמיצות בלבד 😈</p>
-            <ul>
-                <li>שיעורים 11–15</li>
-                <li>קריפטוגרפיה ורשתות</li>
-                <li>Ethical Hacking</li>
-                <li>3 פרויקטים סופיים</li>
-            </ul>
-        </div>
+        <a href="/courses/languages/csharp/project7" class="project-card"><div class="project-icon">🏆</div><div class="project-info"><h4>פרויקט סיום — Student Management System</h4><p>הרשמה, ציונים, ממוצע, חיפוש</p></div></a>
+        <a href="/courses/languages/csharp/final-exam" class="project-card exam"><div class="project-icon">📝</div><div class="project-info"><h4>מבחן גמר — 20 שאלות + צבירת פפיונים 🎀</h4><p>ניתוח קוד, תיקון באגים, פתרון בעיות</p></div></a>
     </div>
 
 </div>
-
-<footer>
-    <p>Women Who Hack 🎀 | <a href="/contact">צור קשר</a> | <a href="/about">המייסדת</a></p>
-    <p style="margin-top:8px;">כל הזכויות שמורות © 2024</p>
-</footer>
-
 <script>
-    document.getElementById('hamburger').onclick = function() {
-        document.getElementById('nav-links').classList.toggle('open');
-    };
+    document.getElementById('hamburger').onclick = function() { document.getElementById('nav-links').classList.toggle('open'); };
 </script>
 </body>
 </html>
