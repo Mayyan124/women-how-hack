@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
 import os
 
 app = Flask(__name__,
@@ -131,204 +131,254 @@ def csharp_course():
 
 @app.route('/courses/languages/csharp/lesson1')
 def csharp_lesson1():
-    return render_template('courses/languages/csharp/lesson1.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson1')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson2')
 def csharp_lesson2():
-    return render_template('courses/languages/csharp/lesson2.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson2')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson3')
 def csharp_lesson3():
-    return render_template('courses/languages/csharp/lesson3.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson3')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson4')
 def csharp_lesson4():
-    return render_template('courses/languages/csharp/lesson4.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson4')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson5')
 def csharp_lesson5():
-    return render_template('courses/languages/csharp/lesson5.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson5')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson6')
 def csharp_lesson6():
-    return render_template('courses/languages/csharp/lesson6.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson6')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson7')
 def csharp_lesson7():
-    return render_template('courses/languages/csharp/lesson7.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson7')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson8')
 def csharp_lesson8():
-    return render_template('courses/languages/csharp/lesson8.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson8')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson9')
 def csharp_lesson9():
-    return render_template('courses/languages/csharp/lesson9.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson9')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson10')
 def csharp_lesson10():
-    return render_template('courses/languages/csharp/lesson10.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson10')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson11')
 def csharp_lesson11():
-    return render_template('courses/languages/csharp/lesson11.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson11')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson12')
 def csharp_lesson12():
-    return render_template('courses/languages/csharp/lesson12.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson12')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson13')
 def csharp_lesson13():
-    return render_template('courses/languages/csharp/lesson13.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson13')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson14')
 def csharp_lesson14():
-    return render_template('courses/languages/csharp/lesson14.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson14')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson15')
 def csharp_lesson15():
-    return render_template('courses/languages/csharp/lesson15.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson15')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson16')
 def csharp_lesson16():
-    return render_template('courses/languages/csharp/lesson16.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson16')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson17')
 def csharp_lesson17():
-    return render_template('courses/languages/csharp/lesson17.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson17')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson18')
 def csharp_lesson18():
-    return render_template('courses/languages/csharp/lesson18.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson18')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson19')
 def csharp_lesson19():
-    return render_template('courses/languages/csharp/lesson19.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson19')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson20')
 def csharp_lesson20():
-    return render_template('courses/languages/csharp/lesson20.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson20')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson21')
 def csharp_lesson21():
-    return render_template('courses/languages/csharp/lesson21.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson21')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson22')
 def csharp_lesson22():
-    return render_template('courses/languages/csharp/lesson22.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson22')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson23')
 def csharp_lesson23():
-    return render_template('courses/languages/csharp/lesson23.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson23')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson24')
 def csharp_lesson24():
-    return render_template('courses/languages/csharp/lesson24.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson24')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson25')
 def csharp_lesson25():
-    return render_template('courses/languages/csharp/lesson25.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson25')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson26')
 def csharp_lesson26():
-    return render_template('courses/languages/csharp/lesson26.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson26')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson27')
 def csharp_lesson27():
-    return render_template('courses/languages/csharp/lesson27.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson27')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson28')
 def csharp_lesson28():
-    return render_template('courses/languages/csharp/lesson28.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson28')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson29')
 def csharp_lesson29():
-    return render_template('courses/languages/csharp/lesson29.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson29')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson30')
 def csharp_lesson30():
-    return render_template('courses/languages/csharp/lesson30.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson30')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson31')
 def csharp_lesson31():
-    return render_template('courses/languages/csharp/lesson31.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson31')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson32')
 def csharp_lesson32():
-    return render_template('courses/languages/csharp/lesson32.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson32')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson33')
 def csharp_lesson33():
-    return render_template('courses/languages/csharp/lesson33.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson33')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson34')
 def csharp_lesson34():
-    return render_template('courses/languages/csharp/lesson34.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson34')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson35')
 def csharp_lesson35():
-    return render_template('courses/languages/csharp/lesson35.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson35')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson36')
 def csharp_lesson36():
-    return render_template('courses/languages/csharp/lesson36.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson36')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson37')
 def csharp_lesson37():
-    return render_template('courses/languages/csharp/lesson37.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson37')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson38')
 def csharp_lesson38():
-    return render_template('courses/languages/csharp/lesson38.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson38')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson39')
 def csharp_lesson39():
-    return render_template('courses/languages/csharp/lesson39.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson39')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson40')
 def csharp_lesson40():
-    return render_template('courses/languages/csharp/lesson40.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson40')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson41')
 def csharp_lesson41():
-    return render_template('courses/languages/csharp/lesson41.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson41')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/lesson42')
 def csharp_lesson42():
-    return render_template('courses/languages/csharp/lesson42.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/lesson42')
+    return send_file(path, mimetype='text/html')
 
 # ─── C# פרויקטים ──────────────────────────────────
 @app.route('/courses/languages/csharp/project1')
 def csharp_project1():
-    return render_template('courses/languages/csharp/project1.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project1')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project2')
 def csharp_project2():
-    return render_template('courses/languages/csharp/project2.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project2')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project3')
 def csharp_project3():
-    return render_template('courses/languages/csharp/project3.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project3')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project4')
 def csharp_project4():
-    return render_template('courses/languages/csharp/project4.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project4')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project5')
 def csharp_project5():
-    return render_template('courses/languages/csharp/project5.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project5')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project6')
 def csharp_project6():
-    return render_template('courses/languages/csharp/project6.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project6')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/project7')
 def csharp_project7():
-    return render_template('courses/languages/csharp/project7.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/project7')
+    return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/csharp/final-exam')
 def csharp_final_exam():
-    return render_template('courses/languages/csharp/final exam.html')
+    path = os.path.join(app.template_folder, 'courses/languages/csharp/final exam')
+    return send_file(path, mimetype='text/html')
 
 if __name__ == '__main__':
     app.run(debug=False)
