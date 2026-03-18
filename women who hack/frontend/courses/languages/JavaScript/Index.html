@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | קורס JavaScript 🌐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Heebo',sans-serif;background:#FFFDF0;color:#2c2c2c;}
+        nav{display:flex;justify-content:space-between;align-items:center;padding:15px 50px;background:#FFFDD0;box-shadow:0 2px 15px rgba(255,182,193,0.4);position:sticky;top:0;z-index:1000;border-bottom:2px solid #F8BBD0;direction:rtl;}
+        nav a.logo{font-size:1.6rem;font-weight:900;color:#D81B60;text-decoration:none;}
+        .nav-links a{text-decoration:none;color:#555;margin:0 12px;font-weight:600;font-size:0.95rem;}
+        .nav-links a.join-btn{background:#FF69B4;color:white;padding:8px 22px;border-radius:50px;font-weight:bold;}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:5px;}
+        .hamburger span{display:block;width:25px;height:3px;background:#D81B60;border-radius:3px;}
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero{background:linear-gradient(135deg,#1a1400,#2d2000,#1a0d00);padding:70px 20px 80px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .hero::before{content:'🌐';position:absolute;font-size:18rem;opacity:0.04;top:-40px;left:-40px;}
+        .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
+        .hero-breadcrumb a{color:#FFD700;text-decoration:none;}
+        .hero h1{font-size:2.8rem;font-weight:900;margin-bottom:12px;}.hero h1 span{color:#FFD700;}
+        .hero p{font-size:1.05rem;opacity:0.8;max-width:550px;margin:0 auto 25px;line-height:1.7;}
+        .hero-stats{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;}
+        .hero-stat{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 22px;}
+        .hero-stat strong{display:block;font-size:1.4rem;font-weight:900;color:#FFD700;}
+        .hero-stat span{font-size:0.8rem;opacity:0.7;}
+        .container{max-width:1000px;margin:0 auto;padding:60px 20px 100px;}
+        .level-section{margin-bottom:55px;}
+        .level-header{display:flex;align-items:center;gap:15px;margin-bottom:25px;padding:20px 25px;border-radius:18px;border:2px solid;}
+        .level-header.l1{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border-color:#FFE082;}
+        .level-header.l2{background:linear-gradient(135deg,#FFF3E0,#FFF8E1);border-color:#FFCC80;}
+        .level-header.l3{background:linear-gradient(135deg,#FCE4EC,#FFF5F7);border-color:#F48FB1;}
+        .level-header.l4{background:linear-gradient(135deg,#E8EAF6,#EDE7F6);border-color:#9FA8DA;}
+        .level-header.l5{background:linear-gradient(135deg,#E0F2F1,#E8F5E9);border-color:#80CBC4;}
+        .level-badge{padding:6px 16px;border-radius:50px;font-size:0.82rem;font-weight:900;}
+        .l1 .level-badge{background:#F5A623;color:white;}.l2 .level-badge{background:#E67E22;color:white;}
+        .l3 .level-badge{background:#D81B60;color:white;}.l4 .level-badge{background:#5C6BC0;color:white;}
+        .l5 .level-badge{background:#00897B;color:white;}
+        .level-header h2{font-size:1.3rem;font-weight:900;flex:1;}
+        .l1 .level-header h2{color:#E65100;}.l2 .level-header h2{color:#BF360C;}
+        .l3 .level-header h2{color:#C62828;}.l4 .level-header h2{color:#3949AB;}
+        .l5 .level-header h2{color:#00695C;}
+        .level-count{font-size:0.85rem;font-weight:700;opacity:0.6;}
+        .lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+        .lesson-card{background:white;border:2px solid #FFE082;border-radius:18px;padding:22px;text-decoration:none;color:inherit;transition:all 0.3s;display:flex;align-items:flex-start;gap:16px;box-shadow:0 3px 12px rgba(245,166,35,0.06);}
+        .lesson-card:hover{transform:translateY(-4px);border-color:#F5A623;box-shadow:0 10px 30px rgba(245,166,35,0.15);}
+        .lesson-card.coming-soon{opacity:0.5;pointer-events:none;}
+        .lesson-num{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0;}
+        .l1-num{background:#FFF8E1;color:#F5A623;}.l2-num{background:#FFF3E0;color:#E67E22;}
+        .l3-num{background:#FCE4EC;color:#C62828;}.l4-num{background:#E8EAF6;color:#3949AB;}
+        .l5-num{background:#E0F2F1;color:#00897B;}
+        .lesson-info{flex:1;}.lesson-info h3{font-size:0.97rem;font-weight:900;color:#1a1400;margin-bottom:5px;line-height:1.4;}
+        .lesson-info p{font-size:0.82rem;color:#999;line-height:1.5;}
+        .lesson-status{font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:50px;flex-shrink:0;align-self:flex-start;}
+        .status-available{background:#E8F5E9;color:#2E7D32;}.status-soon{background:#F5F5F5;color:#999;}
+        .project-card{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border:2px solid #FFE082;border-radius:16px;padding:18px 22px;margin-top:16px;display:flex;align-items:center;gap:14px;}
+        .project-card.big{background:linear-gradient(135deg,#FCE4EC,#FFF5F7);border-color:#F48FB1;margin-top:10px;}
+        .project-card.submit{background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border-color:#A5D6A7;margin-top:10px;}
+        .project-icon{font-size:1.5rem;}
+        .project-info h4{font-size:0.92rem;font-weight:900;color:#F57F17;margin-bottom:3px;}
+        .project-card.big .project-info h4{color:#C62828;}
+        .project-card.submit .project-info h4{color:#2E7D32;}
+        .project-info p{font-size:0.8rem;color:#999;}
+        .project-info a{font-size:0.85rem;font-weight:700;color:#2E7D32;text-decoration:none;}
+        .project-info a:hover{text-decoration:underline;}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← JavaScript</div>
+    <h1>קורס <span>JavaScript</span> 🌐</h1>
+    <p>מהיכרות ראשונה עם JavaScript ועד בניית אפליקציות אמיתיות — 25 שיעורים ב-5 רמות</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><strong>25</strong><span>שיעורים</span></div>
+        <div class="hero-stat"><strong>5</strong><span>רמות</span></div>
+        <div class="hero-stat"><strong>5</strong><span>פרויקטים</span></div>
+    </div>
+</div>
+<div class="container">
+
+    <!-- LEVEL 1 -->
+    <div class="level-section">
+        <div class="level-header l1">
+            <span class="level-badge">Level 1</span>
+            <h2>🌱 Foundations — יסודות</h2>
+            <span class="level-count">שיעורים 1–5</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/javascript/lesson1" class="lesson-card">
+                <div class="lesson-num l1-num">01</div>
+                <div class="lesson-info"><h3>מבוא ל-JavaScript 🌐</h3><p>מהי JS, console.log, סביבת ריצה</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson2" class="lesson-card">
+                <div class="lesson-num l1-num">02</div>
+                <div class="lesson-info"><h3>משתנים 📦</h3><p>let, const, שמות וכללים</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson3" class="lesson-card">
+                <div class="lesson-num l1-num">03</div>
+                <div class="lesson-info"><h3>סוגי נתונים 🔢</h3><p>Number, String, Boolean, typeof</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson4" class="lesson-card">
+                <div class="lesson-num l1-num">04</div>
+                <div class="lesson-info"><h3>אופרטורים ➕</h3><p>חשבוניים, השוואה, לוגיים</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson5" class="lesson-card">
+                <div class="lesson-num l1-num">05</div>
+                <div class="lesson-info"><h3>תנאים 🔀</h3><p>if, else, else if</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+        </div>
+        <div class="project-card big"><div class="project-icon">🦋</div><div class="project-info"><h4>פרויקט Level 1 — Age Analyzer</h4><p>תוכנית שקולטת גיל ומציגה הודעה בהתאם</p></div></div>
+        <div class="project-card submit"><div class="project-icon">📬</div><div class="project-info"><h4>הגשת פרויקט Level 1</h4><a href="https://forms.gle/5tHQA4SHcf3Xtap99" target="_blank">← לחצי כאן להגשה 🎀</a></div></div>
+    </div>
+
+    <!-- LEVEL 2 -->
+    <div class="level-section">
+        <div class="level-header l2">
+            <span class="level-badge">Level 2</span>
+            <h2>⚡ Logic & Control Flow — לוגיקה ובקרה</h2>
+            <span class="level-count">שיעורים 6–10</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/javascript/lesson6" class="lesson-card">
+                <div class="lesson-num l2-num">06</div>
+                <div class="lesson-info"><h3>לולאות 🔄</h3><p>for, while, אתחול ועדכון</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson7" class="lesson-card">
+                <div class="lesson-num l2-num">07</div>
+                <div class="lesson-info"><h3>פונקציות 🔧</h3><p>הגדרה, פרמטרים, return</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson8" class="lesson-card">
+                <div class="lesson-num l2-num">08</div>
+                <div class="lesson-info"><h3>מערכים 📋</h3><p>יצירה, גישה, push, length</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson9" class="lesson-card">
+                <div class="lesson-num l2-num">09</div>
+                <div class="lesson-info"><h3>אובייקטים 🗂️</h3><p>keys, values, גישה ועדכון</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson10" class="lesson-card">
+                <div class="lesson-num l2-num">10</div>
+                <div class="lesson-info"><h3>לוגיקה מתקדמת 🧠</h3><p>&&, ||, !, תנאים מרובים</p></div>
+                <span class="lesson-status status-available">✅ זמין</span>
+            </a>
+        </div>
+        <div class="project-card big"><div class="project-icon">🦋</div><div class="project-info"><h4>פרויקט Level 2 — Smart User System</h4><p>מערכת שבודקת גישה למשתמשים לפי תנאים מרובים</p></div></div>
+        <div class="project-card submit"><div class="project-icon">📬</div><div class="project-info"><h4>הגשת פרויקט Level 2</h4><a href="https://forms.gle/5tHQA4SHcf3Xtap99" target="_blank">← לחצי כאן להגשה 🎀</a></div></div>
+    </div>
+
+    <!-- LEVEL 3 -->
+    <div class="level-section">
+        <div class="level-header l3">
+            <span class="level-badge">Level 3</span>
+            <h2>🖥️ DOM & Events — ממשק המשתמש</h2>
+            <span class="level-count">שיעורים 11–15</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/javascript/lesson11" class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">11</div>
+                <div class="lesson-info"><h3>מבוא ל-DOM 🌳</h3><p>Document, HTML כעץ, מבנה</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson12" class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">12</div>
+                <div class="lesson-info"><h3>בחירת אלמנטים 🎯</h3><p>getElementById, querySelector</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson13" class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">13</div>
+                <div class="lesson-info"><h3>אירועים ⚡</h3><p>addEventListener, click, keypress</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson14" class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">14</div>
+                <div class="lesson-info"><h3>שינוי עיצוב דרך JS 🎨</h3><p>style, classList, toggle</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson15" class="lesson-card coming-soon">
+                <div class="lesson-num l3-num">15</div>
+                <div class="lesson-info"><h3>יצירת אלמנטים דינמית ✨</h3><p>createElement, appendChild</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card big"><div class="project-icon">🦋</div><div class="project-info"><h4>פרויקט Level 3 — Interactive Task Manager</h4><p>רשימת משימות אינטראקטיבית עם DOM מלא</p></div></div>
+        <div class="project-card submit"><div class="project-icon">📬</div><div class="project-info"><h4>הגשת פרויקט Level 3</h4><a href="https://forms.gle/5tHQA4SHcf3Xtap99" target="_blank">← לחצי כאן להגשה 🎀</a></div></div>
+    </div>
+
+    <!-- LEVEL 4 -->
+    <div class="level-section">
+        <div class="level-header l4">
+            <span class="level-badge">Level 4</span>
+            <h2>🌍 API & Async — שליפת נתונים</h2>
+            <span class="level-count">שיעורים 16–20</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/javascript/lesson16" class="lesson-card coming-soon">
+                <div class="lesson-num l4-num">16</div>
+                <div class="lesson-info"><h3>מה זה API? 🔌</h3><p>ממשק, בקשה, תשובה</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson17" class="lesson-card coming-soon">
+                <div class="lesson-num l4-num">17</div>
+                <div class="lesson-info"><h3>Fetch 📡</h3><p>שליחת בקשות, then, json()</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson18" class="lesson-card coming-soon">
+                <div class="lesson-num l4-num">18</div>
+                <div class="lesson-info"><h3>Async / Await ⏳</h3><p>קוד אסינכרוני קריא</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson19" class="lesson-card coming-soon">
+                <div class="lesson-num l4-num">19</div>
+                <div class="lesson-info"><h3>נתונים מהשרת 🗄️</h3><p>שילוב fetch עם DOM</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson20" class="lesson-card coming-soon">
+                <div class="lesson-num l4-num">20</div>
+                <div class="lesson-info"><h3>טיפול בשגיאות ⚠️</h3><p>try, catch, error handling</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card big"><div class="project-icon">🦋</div><div class="project-info"><h4>פרויקט Level 4 — Live User Dashboard</h4><p>שליפת משתמשים מ-API והצגתם בדף</p></div></div>
+        <div class="project-card submit"><div class="project-icon">📬</div><div class="project-info"><h4>הגשת פרויקט Level 4</h4><a href="https://forms.gle/5tHQA4SHcf3Xtap99" target="_blank">← לחצי כאן להגשה 🎀</a></div></div>
+    </div>
+
+    <!-- LEVEL 5 -->
+    <div class="level-section">
+        <div class="level-header l5">
+            <span class="level-badge">Level 5</span>
+            <h2>🏆 Real World — פיתוח אמיתי</h2>
+            <span class="level-count">שיעורים 21–25</span>
+        </div>
+        <div class="lessons-grid">
+            <a href="/courses/languages/javascript/lesson21" class="lesson-card coming-soon">
+                <div class="lesson-num l5-num">21</div>
+                <div class="lesson-info"><h3>ארכיטקטורת קוד 🏗️</h3><p>DRY, Separation of Concerns</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson22" class="lesson-card coming-soon">
+                <div class="lesson-num l5-num">22</div>
+                <div class="lesson-info"><h3>מודולריות 🧩</h3><p>חלוקת קוד לחלקים</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson23" class="lesson-card coming-soon">
+                <div class="lesson-num l5-num">23</div>
+                <div class="lesson-info"><h3>טפסים 📝</h3><p>submit, preventDefault, value</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson24" class="lesson-card coming-soon">
+                <div class="lesson-num l5-num">24</div>
+                <div class="lesson-info"><h3>Local Storage 💾</h3><p>setItem, getItem, removeItem</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+            <a href="/courses/languages/javascript/lesson25" class="lesson-card coming-soon">
+                <div class="lesson-num l5-num">25</div>
+                <div class="lesson-info"><h3>חשיבה פרויקטלית 🚀</h3><p>תכנון, פירוק, בנייה שלב-שלב</p></div>
+                <span class="lesson-status status-soon">🔜 בקרוב</span>
+            </a>
+        </div>
+        <div class="project-card big"><div class="project-icon">🦋</div><div class="project-info"><h4>פרויקט סיום — Smart Web App</h4><p>אפליקציה מלאה עם Local Storage, API, DOM ולוגיקה</p></div></div>
+        <div class="project-card submit"><div class="project-icon">📬</div><div class="project-info"><h4>הגשת פרויקט סיום</h4><a href="https://forms.gle/5tHQA4SHcf3Xtap99" target="_blank">← לחצי כאן להגשה 🎀</a></div></div>
+    </div>
+
+</div>
+<script>
+    document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
+</script>
+</body>
+</html>
