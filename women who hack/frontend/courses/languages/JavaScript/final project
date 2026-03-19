@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | JavaScript — פרויקט סיום 🏆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app); onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Heebo',sans-serif;background:#FFFDF0;color:#2c2c2c;}
+        nav{display:flex;justify-content:space-between;align-items:center;padding:15px 50px;background:#FFFDD0;box-shadow:0 2px 15px rgba(255,182,193,0.4);position:sticky;top:0;z-index:1000;border-bottom:2px solid #F8BBD0;direction:rtl;}
+        nav a.logo{font-size:1.6rem;font-weight:900;color:#D81B60;text-decoration:none;}
+        .nav-links a{text-decoration:none;color:#555;margin:0 12px;font-weight:600;font-size:0.95rem;}
+        .nav-links a.join-btn{background:#FF69B4;color:white;padding:8px 22px;border-radius:50px;font-weight:bold;}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none;padding:5px;}
+        .hamburger span{display:block;width:25px;height:3px;background:#D81B60;border-radius:3px;}
+        @media(max-width:768px){nav{padding:15px 20px;flex-wrap:wrap;}.hamburger{display:flex;}.nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #F8BBD0;margin-top:10px;}.nav-links.open{display:flex;}.nav-links a{padding:10px 20px;margin:0;}}
+        .hero{background:linear-gradient(135deg,#1a1400,#2d2000,#3d1a00);padding:80px 20px 90px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .hero::before{content:'🏆';position:absolute;font-size:20rem;opacity:0.05;top:-60px;left:-40px;}
+        .hero-breadcrumb{display:flex;justify-content:center;align-items:center;gap:8px;font-size:0.85rem;opacity:0.6;margin-bottom:20px;}
+        .hero-breadcrumb a{color:#FFD700;text-decoration:none;}
+        .hero h1{font-size:3rem;font-weight:900;margin-bottom:12px;}.hero h1 span{color:#FFD700;}
+        .hero p{font-size:1.1rem;opacity:0.8;max-width:600px;margin:0 auto 25px;line-height:1.7;}
+        .project-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,0.25);border:2px solid rgba(255,215,0,0.6);padding:8px 22px;border-radius:50px;font-size:0.9rem;font-weight:900;color:#FFD700;margin-bottom:20px;}
+        .container{max-width:860px;margin:0 auto;padding:60px 20px 100px;}
+        .congrats{background:linear-gradient(135deg,#F5A623,#E8960F);border-radius:25px;padding:35px;text-align:center;color:white;margin-bottom:30px;}
+        .congrats h2{font-size:2rem;font-weight:900;margin-bottom:10px;}
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:25px;}
+        .skill{background:white;border:2px solid #FFE082;border-radius:14px;padding:15px;text-align:center;}
+        .skill-icon{font-size:1.5rem;margin-bottom:5px;}
+        .skill-name{font-size:0.85rem;font-weight:700;color:#F5A623;}
+        .section-card{background:white;border-radius:20px;border:2px solid #FFE082;padding:30px;margin-bottom:25px;box-shadow:0 4px 15px rgba(245,166,35,0.07);}
+        .section-card h2{font-size:1.3rem;font-weight:900;color:#F5A623;margin-bottom:15px;}
+        .section-card p{color:#555;line-height:1.8;font-size:0.97rem;}
+        .req-list{list-style:none;padding:0;margin-top:15px;}
+        .req-list li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #FFF8E1;font-size:0.95rem;color:#444;}
+        .req-list li:last-child{border-bottom:none;}
+        .req-num{width:28px;height:28px;background:linear-gradient(135deg,#FFD700,#F5A623);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:0.85rem;flex-shrink:0;}
+        .code-box{background:#1a1400;border-radius:15px;padding:25px;margin-top:20px;border:1px solid #3d3000;}
+        .code-label{color:#FFD700;font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:15px;}
+        .code-box pre{font-family:'Courier New',monospace;font-size:0.78rem;line-height:1.8;color:#a8ff78;white-space:pre-wrap;word-wrap:break-word;}
+        .code-comment{color:#666;}.code-string{color:#ffd43b;}.code-keyword{color:#FFD700;}.code-output{color:#74c0fc;}
+        .bows-section{background:linear-gradient(135deg,#1a1400,#2d2000);border:2px solid #FFD700;border-radius:20px;padding:30px;text-align:center;margin-bottom:25px;color:white;}
+        .bows-section h3{color:#FFD700;font-size:1.2rem;font-weight:900;margin-bottom:15px;}
+        .bows-display{font-size:1.8rem;letter-spacing:3px;margin:10px 0;line-height:1.6;}
+        .submit-section{background:linear-gradient(135deg,#FFD700,#F5A623);border-radius:25px;padding:35px;text-align:center;margin-top:30px;}
+        .submit-section h3{font-size:1.5rem;font-weight:900;color:white;margin-bottom:10px;}
+        .submit-section p{color:rgba(255,255,255,0.9);margin-bottom:20px;font-size:1rem;line-height:1.7;}
+        .submit-btn{display:inline-block;background:white;color:#F5A623;text-decoration:none;padding:18px 50px;border-radius:50px;font-size:1.2rem;font-weight:900;font-family:'Heebo',sans-serif;box-shadow:0 8px 25px rgba(0,0,0,0.2);transition:transform 0.2s;}
+        .submit-btn:hover{transform:translateY(-3px);}
+        .nav-btns{display:flex;justify-content:center;margin-top:40px;}
+        .nav-btn{flex:1;max-width:350px;display:flex;justify-content:space-between;align-items:center;background:white;border:2px solid #FFE082;border-radius:20px;padding:20px 25px;text-decoration:none;color:inherit;transition:all 0.3s;}
+        .nav-btn:hover{border-color:#F5A623;transform:translateY(-2px);}
+        .nav-btn-text p{color:#999;font-size:0.85rem;margin-bottom:4px;}.nav-btn-text h3{font-size:1rem;font-weight:900;color:#F5A623;}
+        .nav-arrow{width:40px;height:40px;background:linear-gradient(135deg,#F5A623,#E8960F);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a><a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb"><a href="/courses">קורסים</a> ← <a href="/courses/languages/javascript">JavaScript</a> ← פרויקט סיום</div>
+    <div class="project-badge">🏆 פרויקט סיום — קורס JavaScript מלא!</div>
+    <h1><span>Smart Web App</span> 🦋🏆</h1>
+    <p>אפליקציה אינטראקטיבית מלאה — כל מה שלמדת בפרויקט אחד!</p>
+</div>
+<div class="container">
+    <div class="congrats">
+        <h2>🏆 כל הכבוד! סיימת 25 שיעורים ב-5 Levels!</h2>
+        <p>עברת מ-console.log ועד אפליקציה מלאה עם API, DOM ו-Local Storage — את JavaScript Developer! 🎀</p>
+    </div>
+
+    <div class="section-card">
+        <h2>💪 מה למדת בקורס</h2>
+        <div class="skills-grid">
+            <div class="skill"><div class="skill-icon">📦</div><div class="skill-name">Variables</div></div>
+            <div class="skill"><div class="skill-icon">🔢</div><div class="skill-name">Data Types</div></div>
+            <div class="skill"><div class="skill-icon">🔀</div><div class="skill-name">Conditions</div></div>
+            <div class="skill"><div class="skill-icon">🔄</div><div class="skill-name">Loops</div></div>
+            <div class="skill"><div class="skill-icon">🔧</div><div class="skill-name">Functions</div></div>
+            <div class="skill"><div class="skill-icon">📋</div><div class="skill-name">Arrays</div></div>
+            <div class="skill"><div class="skill-icon">🗂️</div><div class="skill-name">Objects</div></div>
+            <div class="skill"><div class="skill-icon">🖱️</div><div class="skill-name">Events</div></div>
+            <div class="skill"><div class="skill-icon">🎨</div><div class="skill-name">DOM</div></div>
+            <div class="skill"><div class="skill-icon">📡</div><div class="skill-name">Fetch / API</div></div>
+            <div class="skill"><div class="skill-icon">⏳</div><div class="skill-name">Async/Await</div></div>
+            <div class="skill"><div class="skill-icon">💾</div><div class="skill-name">Local Storage</div></div>
+        </div>
+    </div>
+
+    <div class="bows-section">
+        <h3>🦋 פפיונים שאפשר לצבור בפרויקט הסיום</h3>
+        <div class="bows-display">🦋🦋🦋🦋🦋🦋🦋🦋</div>
+        <p>פרויקט עובד: 🦋🦋🦋🦋 | Local Storage: 🦋 | לוגיקה מתקדמת: 🦋 | UI מושקע: 🦋🦋</p>
+    </div>
+
+    <div class="section-card">
+        <h2>📋 תיאור הפרויקט</h2>
+        <p>בני Smart Todo App מלאה — רשימת משימות עם שמירה ב-Local Storage, הוספה, מחיקה ועיצוב יפה. הפרויקט משלב את כל מה שלמדת!</p>
+    </div>
+
+    <div class="section-card">
+        <h2>✅ דרישות</h2>
+        <ul class="req-list">
+            <li><div class="req-num">1</div><span>טופס קלט — הוספת משימה</span></li>
+            <li><div class="req-num">2</div><span>הצגת משימות ב-DOM</span></li>
+            <li><div class="req-num">3</div><span>שמירה ב-Local Storage</span></li>
+            <li><div class="req-num">4</div><span>מחיקת משימה</span></li>
+            <li><div class="req-num">5</div><span>סימון משימה כהושלמה</span></li>
+            <li><div class="req-num">6</div><span>עיצוב בסיסי יפה</span></li>
+        </ul>
+    </div>
+
+    <div class="section-card">
+        <h2>🔑 קוד הפתרון המלא</h2>
+        <div class="code-box">
+            <div class="code-label">JavaScript — Smart Web App (Final Project)</div>
+            <pre><span class="code-comment">&lt;!-- HTML --&gt;</span>
+&lt;input id="taskInput" placeholder="משימה חדשה..."&gt;
+&lt;button id="addBtn"&gt;הוסף ✅&lt;/button&gt;
+&lt;ul id="list"&gt;&lt;/ul&gt;
+
+&lt;style&gt;
+  .done {{ text-decoration: line-through; opacity: 0.5; }}
+  li {{ cursor: pointer; padding: 8px; margin: 4px 0; background: #FFF8E1; border-radius: 8px; }}
+&lt;/style&gt;
+
+<span class="code-comment">// JavaScript</span>
+<span class="code-keyword">let</span> input = document.getElementById(<span class="code-string">"taskInput"</span>);
+<span class="code-keyword">let</span> button = document.getElementById(<span class="code-string">"addBtn"</span>);
+<span class="code-keyword">let</span> list = document.getElementById(<span class="code-string">"list"</span>);
+
+<span class="code-comment">// טעינת משימות שמורות</span>
+<span class="code-keyword">let</span> tasks = JSON.parse(localStorage.getItem(<span class="code-string">"tasks"</span>)) || [];
+
+<span class="code-keyword">function</span> render() {
+    list.innerHTML = <span class="code-string">""</span>;
+    tasks.forEach(<span class="code-keyword">function</span>(task, index) {
+        <span class="code-keyword">let</span> li = document.createElement(<span class="code-string">"li"</span>);
+        li.innerText = task.text;
+        <span class="code-keyword">if</span>(task.done) li.classList.add(<span class="code-string">"done"</span>);
+
+        <span class="code-comment">// סימון הושלם</span>
+        li.addEventListener(<span class="code-string">"click"</span>, <span class="code-keyword">function</span>() {
+            tasks[index].done = !tasks[index].done;
+            save(); render();
+        });
+
+        <span class="code-comment">// מחיקה</span>
+        <span class="code-keyword">let</span> del = document.createElement(<span class="code-string">"button"</span>);
+        del.innerText = <span class="code-string">"🗑️"</span>;
+        del.addEventListener(<span class="code-string">"click"</span>, <span class="code-keyword">function</span>(e) {
+            e.stopPropagation();
+            tasks.splice(index, 1);
+            save(); render();
+        });
+
+        li.appendChild(del);
+        list.appendChild(li);
+    });
+}
+
+<span class="code-keyword">function</span> save() {
+    localStorage.setItem(<span class="code-string">"tasks"</span>, JSON.stringify(tasks));
+}
+
+button.addEventListener(<span class="code-string">"click"</span>, <span class="code-keyword">function</span>() {
+    <span class="code-keyword">if</span>(input.value === <span class="code-string">""</span>) <span class="code-keyword">return</span>;
+    tasks.push({{text: input.value, done: <span class="code-keyword">false</span>}});
+    save();
+    render();
+    input.value = <span class="code-string">""</span>;
+});
+
+render(); <span class="code-comment">// טעינה ראשונית</span></pre>
+        </div>
+    </div>
+
+    <div class="submit-section">
+        <h3>🏆 הגישי את פרויקט הסיום!</h3>
+        <p>סיימת את כל הקורס — כל הכבוד! הגישי את הפרויקט ותקבלי אישור סיום 🎀</p>
+        <a href="https://forms.gle/Asp1wQoTeaXoUsbZ8" target="_blank" class="submit-btn">הגישי את הפרויקט הסופי 🦋🏆</a>
+    </div>
+
+    <div class="nav-btns">
+        <a href="/courses/languages/javascript/lesson25" class="nav-btn">
+            <div class="nav-arrow">→</div>
+            <div class="nav-btn-text" style="text-align:right;"><p>← חזרה</p><h3>שיעור 25 — חשיבה פרויקטלית</h3></div>
+        </a>
+    </div>
+</div>
+<script>document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};</script>
+</body>
+</html>
