@@ -43,7 +43,6 @@
         .wave svg { display: block; width: 100%; }
         .breadcrumb { max-width: 1100px; margin: 30px auto 0; padding: 0 30px; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #999; }
         .breadcrumb a { color: #D81B60; text-decoration: none; font-weight: 600; }
-        .breadcrumb span { color: #ccc; }
         .section-wrap { max-width: 1100px; margin: 0 auto; padding: 50px 30px; }
         .section-title { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
         .section-title-icon { width: 50px; height: 50px; background: linear-gradient(135deg, #FF69B4, #D81B60); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 6px 20px rgba(216,27,96,0.25); flex-shrink: 0; }
@@ -94,7 +93,6 @@
     </style>
 </head>
 <body>
-
 <nav>
     <a href="/" class="logo">Women Who Hack 🎀</a>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -111,8 +109,8 @@
     <h1>למדי. תכנתי. שני את כללי המשחק. 💻</h1>
     <p>קורסים מלאים שנבנו במיוחד בשבילך — מהבסיס ועד לרמה מקצועית, בעברית, עם דוגמאות מהחיים</p>
     <div class="hero-stats">
-        <div class="hero-stat"><span class="num">15+</span><span class="lbl">שיעורים בפייתון</span></div>
-        <div class="hero-stat"><span class="num">42</span><span class="lbl">שיעורים ב-C#</span></div>
+        <div class="hero-stat"><span class="num">82+</span><span class="lbl">שיעורים</span></div>
+        <div class="hero-stat"><span class="num">3</span><span class="lbl">קורסים פעילים</span></div>
         <div class="hero-stat"><span class="num">🎀</span><span class="lbl">בנות בלבד</span></div>
     </div>
 </div>
@@ -137,7 +135,7 @@
 
     <div class="category-grid">
 
-        <!-- Python ✅ זמין -->
+        <!-- Python ✅ -->
         <a href="/courses/languages/python" class="category-card">
             <div class="card-top">
                 <span class="card-tag tag-available">✅ זמין עכשיו</span>
@@ -154,7 +152,7 @@
             </div>
         </a>
 
-        <!-- C# ✅ זמין -->
+        <!-- C# ✅ -->
         <a href="/courses/languages/csharp" class="category-card">
             <div class="card-top">
                 <span class="card-tag tag-available">✅ זמין עכשיו</span>
@@ -171,22 +169,22 @@
             </div>
         </a>
 
-        <!-- JavaScript 🔒 -->
-        <div class="category-card soon">
+        <!-- JavaScript ✅ -->
+        <a href="/courses/languages/javascript" class="category-card">
             <div class="card-top">
-                <span class="card-tag tag-soon">🔜 בקרוב</span>
+                <span class="card-tag tag-available">✅ זמין עכשיו</span>
                 <span class="card-emoji">✨</span>
                 <h3>JavaScript</h3>
                 <p>שפת האינטרנט — לבניית אתרים אינטראקטיביים ואפליקציות</p>
             </div>
             <div class="card-bottom">
                 <div class="card-meta">
-                    <span class="card-meta-item">📚 15 שיעורים</span>
-                    <span class="card-meta-item">⭐ 3 רמות</span>
+                    <span class="card-meta-item">📚 25 שיעורים</span>
+                    <span class="card-meta-item">⭐ 5 רמות</span>
                 </div>
-                <div class="card-arrow" style="background:#ddd;">←</div>
+                <div class="card-arrow">←</div>
             </div>
-        </div>
+        </a>
 
         <!-- C 🔒 -->
         <div class="category-card soon">
@@ -289,7 +287,6 @@
         </div>
     </div>
 
-    <!-- HOW IT WORKS -->
     <div class="how-section">
         <h2>🎀 איך זה עובד?</h2>
         <div class="steps-grid">
@@ -300,7 +297,6 @@
         </div>
     </div>
 
-    <!-- LEVELS -->
     <div class="section-title">
         <div class="section-title-icon">⭐</div>
         <div>
@@ -308,40 +304,24 @@
             <p>מהבסיס הכי בסיסי ועד לאתגרים של האקריות אמיתיות</p>
         </div>
     </div>
-
     <div class="levels-row">
         <div class="level-card level-1">
             <span class="level-icon">🌱</span>
             <h3>Level 1 — Basics</h3>
             <p>מושלם להתחלה מאפס</p>
-            <ul>
-                <li>שיעורים 1–5</li>
-                <li>משתנים, קלט/פלט</li>
-                <li>אופרטורים ומחרוזות</li>
-                <li>פרויקטים סופיים</li>
-            </ul>
+            <ul><li>שיעורים 1–5</li><li>משתנים, קלט/פלט</li><li>אופרטורים ומחרוזות</li><li>פרויקטים סופיים</li></ul>
         </div>
         <div class="level-card level-2">
             <span class="level-icon">🔥</span>
             <h3>Level 2 — Logic</h3>
             <p>לאחר שיש בסיס</p>
-            <ul>
-                <li>שיעורים 6–10</li>
-                <li>לולאות ורשימות</li>
-                <li>קבצים ומודולים</li>
-                <li>פרויקטים סופיים</li>
-            </ul>
+            <ul><li>שיעורים 6–10</li><li>לולאות ורשימות</li><li>קבצים ומודולים</li><li>פרויקטים סופיים</li></ul>
         </div>
         <div class="level-card level-3">
             <span class="level-icon">💀</span>
             <h3>Level 3 — Hacker</h3>
             <p>לאמיצות בלבד 😈</p>
-            <ul>
-                <li>שיעורים 11–15</li>
-                <li>קריפטוגרפיה ורשתות</li>
-                <li>Ethical Hacking</li>
-                <li>פרויקטים סופיים</li>
-            </ul>
+            <ul><li>שיעורים 11–15</li><li>קריפטוגרפיה ורשתות</li><li>Ethical Hacking</li><li>פרויקטים סופיים</li></ul>
         </div>
     </div>
 
@@ -357,5 +337,7 @@
         document.getElementById('nav-links').classList.toggle('open');
     };
 </script>
+</body>
+</html>
 </body>
 </html>
