@@ -71,7 +71,7 @@
     { "source": "/courses/languages/csharp/project7", "destination": "/women%20who%20hack/frontend/courses/languages/csharp/Cs%20project7" },
     { "source": "/courses/languages/csharp/final-exam", "destination": "/women%20who%20hack/frontend/courses/languages/csharp/Cs%20final%20exam" },
 
-    { "source": "/courses/languages/javascript", "destination": "/women%20who%20hack/frontend/courses/languages/JavaScript" },
+    { "source": "/courses/languages/javascript", "destination": "/women%20who%20hack/frontend/courses/languages/JavaScript/index" },
     { "source": "/courses/languages/javascript/lesson1", "destination": "/women%20who%20hack/frontend/courses/languages/JavaScript/lesson1" },
     { "source": "/courses/languages/javascript/lesson2", "destination": "/women%20who%20hack/frontend/courses/languages/JavaScript/lesson2" },
     { "source": "/courses/languages/javascript/lesson3", "destination": "/women%20who%20hack/frontend/courses/languages/JavaScript/lesson3" },
