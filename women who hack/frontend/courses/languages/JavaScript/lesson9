@@ -203,10 +203,10 @@ console.log(user.city); <span class="code-comment">// Tel Aviv</span></pre>
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! Object = key-value.',no:'❌ לא. Object מאחסן זוגות של מפתח וערך.'},
-        q2:{ok:'✅ נכון! גישה: object.key.',no:'❌ לא. user.name או user['name'] — שתי דרכים לגשת.'},
-        q3:{ok:'✅ נכון! key = שם השדה.',no:'❌ לא. ב-{name: 'Maayan'} — name הוא ה-key.'},
+        q2:{ok:'✅ נכון! גישה: object.key.',no:'❌ לא. user.name — ככה ניגשים לשדה ב-Object.'},
+        q3:{ok:'✅ נכון! key = שם השדה.',no:'❌ לא. ב-{name: Maayan} — name הוא ה-key.'},
         q4:{ok:'✅ נכון! כן, ניתן לשנות ערך.',no:'❌ לא. user.age = 19 משנה את גיל המשתמש.'},
-        q5:{ok:'✅ נכון! Object = ייצוג ישות.',no:'❌ לא. Object מאפשר לייצג משתמש, מוצר, הזמנה וכו'.'},
+        q5:{ok:'✅ נכון! Object = ייצוג ישות.',no:'❌ לא. Object מאפשר לייצג משתמש, מוצר, הזמנה.'},
     };
     const answers={};
     function answer(btn,q,correct){const btns=btn.closest('.quiz-options').querySelectorAll('.quiz-btn');btns.forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');answers[q]=correct;const fb=document.getElementById('fb-'+q);fb.textContent=correct?feedbacks[q].ok:feedbacks[q].no;fb.className='quiz-feedback show '+(correct?'ok':'no');}
