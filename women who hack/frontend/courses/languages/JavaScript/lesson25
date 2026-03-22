@@ -222,7 +222,7 @@ render();</pre>
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! הבנת הדרישות ראשון.',no:'❌ לא. לפני כל קוד — מה צריך לבנות? מה המשתמש צריך?'},
-        q2:{ok:'✅ נכון! DRY = לא לחזור.',no:'❌ לא. Don't Repeat Yourself — פונקציה במקום Copy-Paste.'},
+        q2:{ok:'✅ נכון! DRY = לא לחזור.',no:'❌ לא. כתבי פונקציה במקום לחזור על קוד.'},
         q3:{ok:'✅ נכון! render() מצייר DOM.',no:'❌ לא. render() מנקה ומצייר מחדש את ה-DOM לפי הנתונים.'},
         q4:{ok:'✅ נכון! כן, גם Seniors גוגלים.',no:'❌ לא. Google + MDN הם כלי עבודה לכל מפתח, תמיד!'},
         q5:{ok:'✅ נכון! Data → Logic → DOM.',no:'❌ לא. קודם נתונים, אחר כך לוגיקה, אחר כך להציג.'},
