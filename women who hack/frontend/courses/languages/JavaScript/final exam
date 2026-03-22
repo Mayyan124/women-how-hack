@@ -140,7 +140,7 @@ const questions = [
     {num:17,level:"Level 4",q:"try/catch משמש ל:",opts:["לולאות","טיפול בשגיאות","משתנים","הדפסה"],correct:1,ok:"try/catch תופס שגיאות ומונע קריסה.",no:"try מנסה, catch תופס שגיאה אם קרתה."},
     {num:18,level:"Level 5",q:"localStorage.setItem עושה:",opts:["קורא נתון","שומר נתון","מוחק","מדפיס"],correct:1,ok:"setItem שומר נתון ב-Local Storage.",no:"localStorage.setItem('key', 'value') שומר זוג key-value."},
     {num:19,level:"Level 5",q:"למה JSON.stringify לפני שמירה ב-LocalStorage?",opts:["מהירות","כי LocalStorage שומר רק Strings","חובה","לא צריך"],correct:1,ok:"LocalStorage שומר רק Strings — חייבים להמיר.",no:"Local Storage מקבל רק Strings, לכן ממירים Object ל-String."},
-    {num:20,level:"Level 5",q:"DRY אומר:",opts:["קוד קצר","אל תחזרי על קוד","קוד מהיר","קוד יפה"],correct:1,ok:"DRY = Don't Repeat Yourself.",no:"DRY = Don't Repeat Yourself — כתבי פונקציה במקום לחזור."}
+    {num:20,level:"Level 5",q:"DRY אומר:",opts:["קוד קצר","אל תחזרי על קוד","קוד מהיר","קוד יפה"],correct:1,ok:"DRY = אל תחזרי על קוד Repeat Yourself.",no:"DRY = אל תחזרי על קוד Repeat Yourself — כתבי פונקציה במקום לחזור."}
 ];
 
 let bowsEarned = 0, answeredCount = 0;
