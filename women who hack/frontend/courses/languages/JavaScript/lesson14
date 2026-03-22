@@ -202,8 +202,8 @@ btn.addEventListener(<span class="code-string">"click"</span>, <span class="code
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! style.backgroundColor = שינוי רקע.',no:'❌ לא. ב-JS camelCase: backgroundColor ולא background-color.'},
-        q2:{ok:'✅ נכון! toggle = מתג.',no:'❌ לא. toggle מוסיף class אם אין, מסיר אם יש — מושלם ל-Dark Mode.'},
-        q3:{ok:'✅ נכון! add = הוספת class.',no:'❌ לא. classList.add('active') מוסיף את class 'active'.'},
+        q2:{ok:'✅ נכון! toggle = מתג.',no:'❌ לא. toggle מוסיף class אם אין, מסיר אם יש.'},
+        q3:{ok:'✅ נכון! add = הוספת class.',no:'❌ לא. classList.add מוסיף את ה-class.'},
         q4:{ok:'✅ נכון! camelCase ב-JS.',no:'❌ לא. JavaScript משתמשת ב-camelCase: backgroundColor, fontSize.'},
         q5:{ok:'✅ נכון! toggle מושלם ל-Dark Mode.',no:'❌ לא. classList.toggle מאפשר מתג פשוט בין שני מצבים.'},
     };
