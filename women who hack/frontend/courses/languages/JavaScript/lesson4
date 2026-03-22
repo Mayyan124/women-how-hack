@@ -199,9 +199,9 @@ console.log(5 !== 3); <span class="code-comment">// true</span></pre>
         const feedbacks={
         q1:{ok:'✅ נכון! 5+5 = 10.',no:'❌ לא. חיבור פשוט!'},
         q2:{ok:'✅ נכון! * = כפל.',no:'❌ לא. * הוא אופרטור הכפל ב-JS.'},
-        q3:{ok:'✅ נכון! === = השוואה מדויקת.',no:'❌ לא. === בודק גם ערך וגם סוג. 5 === '5' → false!'},
+        q3:{ok:'✅ נכון! === = השוואה מדויקת.',no:'❌ לא. === בודק גם ערך וגם סוג.'},
         q4:{ok:'✅ נכון! 10-3 = 7.',no:'❌ לא. חיסור פשוט!'},
-        q5:{ok:'✅ נכון! 5 === '5' = false.',no:'❌ לא. === בודק סוג. 5 הוא number, '5' הוא string → false.'},
+        q5:{ok:'✅ נכון! 5 === 5 (string) = false.',no:'❌ לא. === בודק סוג. 5 הוא number, 5 במרכאות הוא string.'},
     };
     const answers={};
     function answer(btn,q,correct){const btns=btn.closest('.quiz-options').querySelectorAll('.quiz-btn');btns.forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');answers[q]=correct;const fb=document.getElementById('fb-'+q);fb.textContent=correct?feedbacks[q].ok:feedbacks[q].no;fb.className='quiz-feedback show '+(correct?'ok':'no');}
