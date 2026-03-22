@@ -197,9 +197,9 @@ console.log(greeting); <span class="code-comment">// Hello Dana</span></pre>
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! 25 = Number.',no:'❌ לא. מספרים ללא גרשיים = Number.'},
-        q2:{ok:'✅ נכון! "Hello" = String.',no:'❌ לא. טקסט בגרשיים = String.'},
+        q2:{ok:'✅ נכון! Hello = String.',no:'❌ לא. טקסט בגרשיים = String.'},
         q3:{ok:'✅ נכון! true = Boolean.',no:'❌ לא. Boolean = רק true או false.'},
-        q4:{ok:'✅ נכון! typeof בודק סוג.',no:'❌ לא. typeof score מחזיר 'number', typeof name מחזיר 'string'.'},
+        q4:{ok:'✅ נכון! typeof בודק סוג.',no:'❌ לא. typeof score מחזיר number, typeof name מחזיר string.'},
         q5:{ok:'✅ נכון! Boolean = true/false.',no:'❌ לא. Boolean מכיל רק שני ערכים: true או false.'},
     };
     const answers={};
