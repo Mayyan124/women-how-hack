@@ -198,7 +198,7 @@ console.log(age);   <span class="code-comment">// 19</span>
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! משתנה = מקום לאחסון מידע.',no:'❌ לא. משתנה שומר מידע בזיכרון לשימוש חוזר בקוד.'},
-        q2:{ok:'✅ נכון! let יוצר משתנה.',no:'❌ לא. let name = 'Maayan'; — ככה יוצרים משתנה ב-JS.'},
+        q2:{ok:'✅ נכון! let יוצר משתנה.',no:'❌ לא. let name = Maayan — ככה יוצרים משתנה ב-JS.'},
         q3:{ok:'✅ נכון! const = ערך קבוע.',no:'❌ לא. const מגדיר ערך שלא ניתן לשנות — קבוע.'},
         q4:{ok:'✅ נכון! userName עדיף — שם ברור.',no:'❌ לא. שמות טובים מסבירים את עצמם. x לא מסביר כלום.'},
         q5:{ok:'✅ נכון! לא ניתן לשנות const.',no:'❌ לא. שינוי const גורם ל-TypeError!'},
