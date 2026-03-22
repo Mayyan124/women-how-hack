@@ -200,8 +200,8 @@ names.forEach(<span class="code-keyword">function</span>(name) {
     document.getElementById('hamburger').onclick=function(){document.getElementById('nav-links').classList.toggle('open');};
         const feedbacks={
         q1:{ok:'✅ נכון! מערך = אוסף נתונים.',no:'❌ לא. מערך מאחסן כמה ערכים תחת משתנה אחד.'},
-        q2:{ok:'✅ נכון! אינדקס ראשון = 0.',no:'❌ לא. JS (כמו רוב שפות) מתחיל ספירה מ-0.'},
-        q3:{ok:'✅ נכון! push מוסיף לסוף.',no:'❌ לא. names.push('שם') מוסיף לסוף המערך.'},
+        q2:{ok:'✅ נכון! אינדקס ראשון = 0.',no:'❌ לא. JS מתחיל ספירה מ-0.'},
+        q3:{ok:'✅ נכון! push מוסיף לסוף.',no:'❌ לא. arr.push מוסיף לסוף המערך.'},
         q4:{ok:'✅ נכון! length = מספר האיברים.',no:'❌ לא. names.length = 3 אם יש 3 שמות.'},
         q5:{ok:'✅ נכון! names[1] = השני.',no:'❌ לא. אינדקס 1 = האיבר השני (0 = ראשון).'},
     };
