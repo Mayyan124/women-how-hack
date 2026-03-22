@@ -188,7 +188,7 @@ Hello JavaScript</span></pre>
         q1:{ok:'✅ נכון! JavaScript היא שפת תכנות.',no:'❌ לא. JavaScript היא שפת תכנות — לא עיצוב ולא DB.'},
         q2:{ok:'✅ נכון! JavaScript = לוגיקה ואינטראקטיביות.',no:'❌ לא. HTML = מבנה, CSS = עיצוב, JS = לוגיקה.'},
         q3:{ok:'✅ נכון! console.log מדפיס ל-Console.',no:'❌ לא. console.log() מדפיסה מידע ל-Console בדפדפן.'},
-        q4:{ok:'✅ נכון! JavaScript רצה בדפדפן.',no:'❌ לא. JS רצה ישירות בדפדפן — Chrome, Firefox וכו'.'},
+        q4:{ok:'✅ נכון! JavaScript רצה בדפדפן.',no:'❌ לא. JS רצה ישירות בדפדפן — Chrome, Firefox וכו.'},
         q5:{ok:'✅ נכון! HTML = מבנה האתר.',no:'❌ לא. HTML מגדירה את מבנה האתר — כותרות, פסקאות, כפתורים.'},
     };
     const answers={};
