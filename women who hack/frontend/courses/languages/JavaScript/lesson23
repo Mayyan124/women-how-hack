@@ -212,7 +212,7 @@ form.addEventListener(<span class="code-string">"submit"</span>, <span class="co
         q2:{ok:'✅ נכון! preventDefault = מונע רענון.',no:'❌ לא. בלי זה הדף מתרענן ומאבד הכל.'},
         q3:{ok:'✅ נכון! submit = אירוע שליחה.',no:'❌ לא. submit מופעל כשלוחצים Submit בטופס.'},
         q4:{ok:'✅ נכון! validation = אימות קלט.',no:'❌ לא. תמיד לבדוק שהקלט תקין לפני עיבוד.'},
-        q5:{ok:'✅ נכון! parseInt ממיר ל-Number.',no:'❌ לא. parseInt('18') = 18 כמספר, לא כ-String.'},
+        q5:{ok:'✅ נכון! parseInt ממיר ל-Number.',no:'❌ לא. parseInt ממיר String למספר שלם.'},
     };
     const answers={};
     function answer(btn,q,correct){const btns=btn.closest('.quiz-options').querySelectorAll('.quiz-btn');btns.forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');answers[q]=correct;const fb=document.getElementById('fb-'+q);fb.textContent=correct?feedbacks[q].ok:feedbacks[q].no;fb.className='quiz-feedback show '+(correct?'ok':'no');}
