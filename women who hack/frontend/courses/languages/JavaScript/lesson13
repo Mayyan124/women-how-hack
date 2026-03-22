@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -197,7 +198,7 @@ button.addEventListener(<span class="code-string">"click"</span>, <span class="c
         q1:{ok:'✅ נכון! Event = פעולה של משתמש.',no:'❌ לא. אירועים הם לחיצות, הקלדות, גלילה ועוד.'},
         q2:{ok:'✅ נכון! click = לחיצה.',no:'❌ לא. click הוא האירוע הנפוץ ביותר.'},
         q3:{ok:'✅ נכון! addEventListener = האזנה.',no:'❌ לא. מוסיפה מאזין שמחכה לאירוע ומריץ פונקציה.'},
-        q4:{ok:'✅ נכון! getElementById עם id.',no:'❌ לא. getElementById('btn') מחזיר את האלמנט עם id='btn'.'},
+        q4:{ok:'✅ נכון! getElementById עם id.',no:'❌ לא. getElementById מחזיר את האלמנט לפי ה-id שלו.'},
         q5:{ok:'✅ נכון! אפשר להאזין להרבה אירועים.',no:'❌ לא. click, keypress, mouseover, submit ועוד רבים.'},
     };
     const answers={};
