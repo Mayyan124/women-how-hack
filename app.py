@@ -533,12 +533,12 @@ def javascript_project4():
 
 @app.route('/courses/languages/javascript/final-project')
 def javascript_final_project():
-    path = os.path.join(app.template_folder, 'courses/languages/JavaScript/final-project')
+    path = os.path.join(app.template_folder, 'courses/languages/JavaScript/final project')
     return send_file(path, mimetype='text/html')
 
 @app.route('/courses/languages/javascript/final-exam')
 def javascript_final_exam():
-    path = os.path.join(app.template_folder, 'courses/languages/JavaScript/final-exam')
+    path = os.path.join(app.template_folder, 'courses/languages/JavaScript/final exam')
     return send_file(path, mimetype='text/html')
 
 if __name__ == '__main__':
