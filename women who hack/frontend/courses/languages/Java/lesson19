@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | שיעור 19 — Encapsulation — private, getters, setters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: #FFFDF0; color: #2c2c2c; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(245,166,35,0.15); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #FFE082; direction: rtl; }
+        nav a.logo { font-size: 1.6rem; font-weight: 900; color: #c8860a; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a.join-btn { background: #F5A623; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: #c8860a; border-radius: 3px; }
+        @media (max-width: 768px) { nav { padding: 15px 20px; flex-wrap: wrap; } .hamburger { display: flex; } .nav-links { display: none; width: 100%; flex-direction: column; background: #FFFDD0; padding: 15px 0; border-top: 1px solid #FFE082; margin-top: 10px; } .nav-links.open { display: flex; } .nav-links a { padding: 10px 20px; margin: 0; } }
+        .hero { background: linear-gradient(135deg, #1a0a00, #2d1500, #1a0500); padding: 60px 20px 70px; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '☕'; position: absolute; font-size: 16rem; opacity: 0.04; top: -30px; left: -30px; }
+        .hero-breadcrumb { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.6; margin-bottom: 20px; flex-wrap: wrap; }
+        .hero-breadcrumb a { color: #FF9800; text-decoration: none; }
+        .hero-level { display: inline-block; background: rgba(255,152,0,0.15); border: 1px solid rgba(255,152,0,0.3); color: #FF9800; padding: 5px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; margin-bottom: 14px; }
+        .hero h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 10px; }
+        .hero h1 span { color: #FF9800; }
+        .hero p { font-size: 1rem; opacity: 0.75; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+        .lesson-nav { display: flex; justify-content: center; gap: 8px; padding: 20px; background: white; border-bottom: 2px solid #FFE082; flex-wrap: wrap; }
+        .lesson-nav a { text-decoration: none; color: #888; font-weight: 700; font-size: 0.88rem; padding: 8px 18px; border-radius: 50px; border: 2px solid #eee; transition: all 0.2s; }
+        .lesson-nav a:hover, .lesson-nav a.active { background: #FF9800; color: white; border-color: #FF9800; }
+        .container { max-width: 860px; margin: 0 auto; padding: 50px 20px 100px; }
+        .section-block { margin-bottom: 40px; scroll-margin-top: 90px; }
+        .review-box { background: linear-gradient(135deg, #FFF8E1, #FFFDE7); border: 2px solid #FFE082; border-radius: 20px; padding: 28px 32px; }
+        .review-box h2 { font-size: 1.15rem; font-weight: 900; color: #c8860a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .review-box ul { list-style: none; }
+        .review-box ul li { padding: 7px 0; font-size: 0.95rem; color: #555; border-bottom: 1px solid #FFE082; display: flex; align-items: flex-start; gap: 10px; }
+        .review-box ul li:last-child { border-bottom: none; }
+        .review-box ul li::before { content: '✅'; flex-shrink: 0; }
+        .concept-card { background: white; border: 2px solid #FFE082; border-radius: 20px; padding: 28px 32px; box-shadow: 0 4px 20px rgba(255,152,0,0.08); }
+        .concept-card h2 { font-size: 1.15rem; font-weight: 900; color: #E65100; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .concept-card p { font-size: 0.95rem; color: #444; line-height: 1.8; margin-bottom: 14px; }
+        .concept-card strong { color: #E65100; }
+        .highlight-box { background: #FFF8E1; border-right: 4px solid #FF9800; border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.93rem; color: #555; line-height: 1.8; }
+        .life-box { background: linear-gradient(135deg, #FFF3E0, #FFF8E1); border: 2px solid #FFCC80; border-radius: 20px; padding: 28px 32px; }
+        .life-box h2 { font-size: 1.15rem; font-weight: 900; color: #e65100; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .life-box p { font-size: 0.95rem; color: #444; line-height: 1.8; margin-bottom: 12px; }
+        .code-box { background: #1a0a00; border-radius: 20px; padding: 28px 32px; }
+        .code-box h2 { font-size: 1.15rem; font-weight: 900; color: #FF9800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .code-label { font-size: 0.78rem; font-weight: 700; color: #FF9800; opacity: 0.7; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+        pre { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; overflow-x: auto; margin-bottom: 6px; }
+        pre code { font-family: 'Courier New', monospace; font-size: 0.92rem; color: #FFE0B2; line-height: 1.8; direction: ltr; display: block; text-align: left; }
+        .code-note { font-size: 0.84rem; color: #aaa; margin-bottom: 20px; line-height: 1.6; }
+        .playground-section { background: #0a0500; border-radius: 20px; padding: 28px 32px; border: 2px solid #FF9800; }
+        .playground-section h2 { font-size: 1.15rem; font-weight: 900; color: #FF9800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .pg-subtitle { font-size: 0.88rem; color: #888; margin-bottom: 22px; }
+        .challenge-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+        .challenge-tab { padding: 7px 18px; border-radius: 50px; border: 2px solid #333; background: transparent; color: #888; font-size: 0.83rem; font-weight: 700; cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.2s; }
+        .challenge-tab.active { background: #FF9800; color: white; border-color: #FF9800; }
+        .challenge-panel { display: none; }
+        .challenge-panel.active { display: block; }
+        .challenge-desc { background: rgba(255,152,0,0.07); border: 1px solid rgba(255,152,0,0.25); border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; font-size: 0.9rem; color: #ccc; line-height: 1.8; direction: rtl; }
+        .challenge-desc strong { color: #FF9800; }
+        .hint { font-size: 0.82rem; color: #777; margin-top: 8px; display: block; }
+        .code-editor { width: 100%; min-height: 130px; background: #1e1200; border: 2px solid #333; border-radius: 12px; padding: 16px; font-family: 'Courier New', monospace; font-size: 0.92rem; color: #FFE0B2; line-height: 1.7; resize: vertical; outline: none; direction: ltr; text-align: left; transition: border-color 0.2s; box-sizing: border-box; }
+        .code-editor:focus { border-color: #FF9800; }
+        .pg-actions { display: flex; gap: 10px; margin-top: 12px; }
+        .run-btn { background: linear-gradient(135deg, #FF9800, #FFC107); color: #1a0a00; border: none; padding: 11px 28px; border-radius: 50px; font-size: 0.92rem; font-weight: 900; cursor: pointer; font-family: 'Heebo', sans-serif; transition: transform 0.15s; }
+        .run-btn:hover { transform: scale(1.04); }
+        .reset-btn { background: transparent; border: 2px solid #444; color: #888; padding: 11px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: 'Heebo', sans-serif; }
+        .reset-btn:hover { border-color: #aaa; color: #ccc; }
+        .output-box { margin-top: 14px; background: #050200; border: 2px solid #1e1200; border-radius: 12px; padding: 14px 18px; min-height: 60px; }
+        .output-label { font-size: 0.72rem; color: #555; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; direction: rtl; text-align: right; font-family: 'Heebo', sans-serif; }
+        .output-line { font-family: 'Courier New', monospace; font-size: 0.88rem; color: #7fff7f; line-height: 1.7; direction: ltr; text-align: left; }
+        .output-error { font-family: 'Courier New', monospace; font-size: 0.88rem; color: #ff7f7f; line-height: 1.7; }
+        .success-badge { display: none; background: #1a3a1a; border: 1px solid #4caf50; border-radius: 10px; padding: 10px 16px; margin-top: 12px; font-size: 0.88rem; color: #81c784; direction: rtl; }
+        .quiz-section { background: white; border: 2px solid #FFE082; border-radius: 20px; padding: 28px 32px; }
+        .quiz-section h2 { font-size: 1.15rem; font-weight: 900; color: #E65100; margin-bottom: 22px; display: flex; align-items: center; gap: 8px; }
+        .quiz-question { margin-bottom: 24px; }
+        .quiz-question p { font-size: 0.95rem; font-weight: 700; color: #2c2c2c; margin-bottom: 10px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-option { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border: 2px solid #eee; border-radius: 10px; cursor: pointer; font-size: 0.9rem; color: #555; transition: all 0.2s; }
+        .quiz-option:hover { border-color: #FF9800; background: #FFF8E1; }
+        .quiz-option.correct { background: #E8F5E9; border-color: #66BB6A; color: #2E7D32; }
+        .quiz-option.wrong { background: #FFEBEE; border-color: #EF9A9A; color: #C62828; }
+        .quiz-option input { accent-color: #FF9800; }
+        .quiz-btn { margin-top: 24px; background: linear-gradient(135deg, #FF9800, #FFC107); color: #1a0a00; border: none; padding: 13px 35px; border-radius: 50px; font-size: 1rem; font-weight: 900; cursor: pointer; font-family: 'Heebo', sans-serif; }
+        .quiz-score { margin-top: 18px; font-size: 1rem; font-weight: 700; color: #E65100; display: none; text-align: center; padding: 14px; background: #FFF8E1; border-radius: 12px; }
+        .lesson-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 2px solid #FFE082; flex-wrap: wrap; gap: 16px; }
+        .nav-btn { text-decoration: none; padding: 13px 28px; border-radius: 50px; font-weight: 900; font-size: 0.95rem; transition: all 0.3s; }
+        .nav-btn.prev { background: #FFF8E1; color: #E65100; border: 2px solid #FFE082; }
+        .nav-btn.next { background: linear-gradient(135deg, #FF9800, #FFC107); color: #1a0a00; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,152,0,0.3); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb">
+        <a href="/courses">קורסים</a> ← <a href="/courses/languages">שפות תכנות</a> ← <a href="/courses/languages/java">Java</a> ← שיעור 19
+    </div>
+    <div class="hero-level">Level 4 — OOP</div>
+    <h1>שיעור 19 — <span>Encapsulation — private, getters, setters 🔒</span></h1>
+    <p>הגנה על נתוני אובייקט</p>
+</div>
+<div class="lesson-nav">
+    <a href="#review" class="active">חזרה</a>
+    <a href="#concept">מושגים</a>
+    <a href="#life">מהחיים</a>
+    <a href="#code">קוד</a>
+    <a href="#playground">Playground ⚡</a>
+    <a href="#quiz">שאלות</a>
+</div>
+<div class="container">
+    <div class="section-block review-box" id="review">
+        <h2>🔁 חזרה</h2>
+        <ul><li>מחלקות ואובייקטים</li><li>פונקציות</li><li>גישה public ו-private</li></ul>
+    </div>
+    <div class="section-block concept-card" id="concept">
+        <h2>💡 מושגים</h2>
+        
+<p><strong>Encapsulation</strong> — עיקרון שמגן על נתוני האובייקט מגישה ישירה.</p>
+<p>משתנים <strong>private</strong> נגישים רק מתוך המחלקה — לא מבחוץ.</p>
+<div class="highlight-box">
+    📌 getters ו-setters:<br>
+    <strong>getter</strong> → getName() — מחזיר ערך<br>
+    <strong>setter</strong> → setName(name) — מגדיר ערך<br>
+    ניתן להוסיף בדיקות ב-setter (גיל לא שלילי, שם לא ריק)
+</div>
+<p>Encapsulation מונע שינוי ערכים שגויים ומאפשר בדיקות תקינות.</p>
+
+    </div>
+    <div class="section-block life-box" id="life">
+        <h2>🌍 מהחיים</h2>
+        
+<p>🏠 <strong>דוגמה מהחיים:</strong> גיל המשתמשות לא ניתן לשינוי ישיר — רק דרך setter שבודק תקינות.</p>
+<p>כך לא ניתן לרשום גיל שלילי או לא הגיוני.</p>
+<p>🎯 <strong>יתרון:</strong> קוד בטוח, נכון, קל לתחזוקה.</p>
+
+    </div>
+    <div class="section-block code-box" id="code">
+        <h2>💻 קוד</h2>
+        <div class="code-label">private + getter/setter</div>
+<pre><code>class User {
+    private String name;
+    private int age;
+    
+    public void setName(String name){ this.name=name; }
+    public String getName(){ return name; }
+    
+    public void setAge(int age){
+        if(age >= 0) this.age=age;
+        else System.out.println("גיל לא חוקי!");
+    }
+    public int getAge(){ return age; }
+}</code></pre>
+<p class="code-note">👆 <span style="color:#aaa">👆 setter בודק תקינות לפני הגדרת הערך</span></p>
+
+    </div>
+    <div class="section-block playground-section" id="playground">
+        <h2>⚡ Playground — כתבי קוד!</h2>
+        <p class="pg-subtitle">תרגולים אינטראקטיביים — כתבי, הרצי, ראי פלט 🚀</p>
+        <div class="challenge-tabs"><button class="challenge-tab active" onclick="switchChallenge(0)">תרגיל 1</button><button class="challenge-tab " onclick="switchChallenge(1)">תרגיל 2</button><button class="challenge-tab " onclick="switchChallenge(2)">אתגר 🔥</button></div>
+        <div class="challenge-panel active" id="panel-0">
+            <div class="challenge-desc">🎯 <strong>getter ו-setter</strong><br>צרי אובייקט עם שם, שנה שינוי שמה, והדפיסי.<span class="hint">💡 רמז: let user={_name:'שרה', getName(){ return this._name; }, setName(n){ this._name=n; }}</span></div>
+            <textarea class="code-editor" id="editor-0" spellcheck="false">// getter ו-setter
+let user = {
+    _name: 'שרה',
+    _age: 22,
+    getName(){ return this._name; },
+    setName(n){ this._name = n; },
+    getAge(){ return this._age; },
+    setAge(a){ if(a>=0) this._age=a; else console.log('גיל לא חוקי!'); }
+};
+
+console.log('שם:', user.getName());
+user.setName('מיה');
+console.log('שם חדש:', user.getName());</textarea>
+            <div class="pg-actions">
+                <button class="run-btn" onclick="runCode(0)">▶ הרץ קוד</button>
+                <button class="reset-btn" onclick="resetCode(0)">↺ אפס</button>
+            </div>
+            <div class="output-box" id="output-0">
+                <div class="output-label">פלט</div>
+                <div id="output-lines-0" style="color:#555;font-size:0.85rem;">הפלט יופיע כאן...</div>
+            </div>
+            <div class="success-badge" id="badge-0">✅ מצוין! עבודה נהדרת! ☕</div>
+        </div>
+<div class="challenge-panel " id="panel-1">
+            <div class="challenge-desc">🎯 <strong>בדיקת תקינות</strong><br>ודאי שה-setter מסרב לגיל שלילי.<span class="hint">💡 רמז: user.setAge(-5); // אמור להדפיס שגיאה</span></div>
+            <textarea class="code-editor" id="editor-1" spellcheck="false">// setter עם בדיקת תקינות
+let user = {
+    _age: 22,
+    setAge(a){
+        if(a >= 0){
+            this._age = a;
+            console.log('גיל עודכן ל-' + a);
+        } else {
+            console.log('שגיאה: גיל לא יכול להיות שלילי!');
+        }
+    },
+    getAge(){ return this._age; }
+};
+
+user.setAge(25);
+user.setAge(-5);
+console.log('גיל:', user.getAge());</textarea>
+            <div class="pg-actions">
+                <button class="run-btn" onclick="runCode(1)">▶ הרץ קוד</button>
+                <button class="reset-btn" onclick="resetCode(1)">↺ אפס</button>
+            </div>
+            <div class="output-box" id="output-1">
+                <div class="output-label">פלט</div>
+                <div id="output-lines-1" style="color:#555;font-size:0.85rem;">הפלט יופיע כאן...</div>
+            </div>
+            <div class="success-badge" id="badge-1">✅ מצוין! עבודה נהדרת! ☕</div>
+        </div>
+<div class="challenge-panel " id="panel-2">
+            <div class="challenge-desc">🔥 <strong>אובייקט מוגן</strong><br>צרי User מלא עם name, age, active — כולם עם getters/setters ובדיקות.<span class="hint">💡 רמז: setters בודקים תקינות לפני שינוי</span></div>
+            <textarea class="code-editor" id="editor-2" spellcheck="false">// User מוגן עם getters/setters
+let user = {
+    _name: '', _age: 0, _active: false,
+    setName(n){ if(n.length>0) this._name=n; else console.log('שם לא יכול להיות ריק!'); },
+    getName(){ return this._name; },
+    setAge(a){ if(a>=0 && a<120) this._age=a; else console.log('גיל לא חוקי!'); },
+    getAge(){ return this._age; },
+    setActive(a){ this._active = a; },
+    isActive(){ return this._active; }
+};
+
+user.setName('שרה');
+user.setAge(22);
+user.setActive(true);
+console.log(user.getName()+', '+user.getAge()+', פעילה: '+user.isActive());</textarea>
+            <div class="pg-actions">
+                <button class="run-btn" onclick="runCode(2)">▶ הרץ קוד</button>
+                <button class="reset-btn" onclick="resetCode(2)">↺ אפס</button>
+            </div>
+            <div class="output-box" id="output-2">
+                <div class="output-label">פלט</div>
+                <div id="output-lines-2" style="color:#555;font-size:0.85rem;">הפלט יופיע כאן...</div>
+            </div>
+            <div class="success-badge" id="badge-2">✅ מצוין! עבודה נהדרת! ☕</div>
+        </div>
+
+    </div>
+    <div class="section-block quiz-section" id="quiz">
+        <h2>❓ שאלות</h2>
+        <div class="quiz-question"><p>1. מה private עושה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q1" value="A"> A — מאפשר גישה מכל מקום</label><label class="quiz-option"><input type="radio" name="q1" value="B"> B — מגביל גישה למחלקה בלבד</label><label class="quiz-option"><input type="radio" name="q1" value="C"> C — מוחק משתנה</label></div></div>
+<div class="quiz-question"><p>2. מה getter עושה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q2" value="A"> A — מגדיר ערך</label><label class="quiz-option"><input type="radio" name="q2" value="B"> B — מחזיר את ערך המשתנה הפרטי</label><label class="quiz-option"><input type="radio" name="q2" value="C"> C — מוחק ערך</label></div></div>
+<div class="quiz-question"><p>3. מה setter עושה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q3" value="A"> A — מחזיר ערך</label><label class="quiz-option"><input type="radio" name="q3" value="B"> B — מגדיר ערך — יכול לכלול בדיקות תקינות</label><label class="quiz-option"><input type="radio" name="q3" value="C"> C — מוחק ערך</label></div></div>
+<div class="quiz-question"><p>4. מה יתרון Encapsulation?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q4" value="A"> A — קוד מהיר יותר</label><label class="quiz-option"><input type="radio" name="q4" value="B"> B — הגנה על נתונים ואפשרות לבדוק תקינות</label><label class="quiz-option"><input type="radio" name="q4" value="C"> C — פחות קוד</label></div></div>
+<div class="quiz-question"><p>5. מה ההבדל בין public ל-private?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q5" value="A"> A — אין הבדל</label><label class="quiz-option"><input type="radio" name="q5" value="B"> B — public נגיש לכל, private רק מהמחלקה</label><label class="quiz-option"><input type="radio" name="q5" value="C"> C — public מהיר יותר</label></div></div>
+
+        <button class="quiz-btn" onclick="showScore()">בדקי תשובות ✨</button>
+        <div class="quiz-score" id="score"></div>
+    </div>
+    <div class="lesson-footer">
+        <a href="/courses/languages/java/lesson18" class="nav-btn prev">← שיעור 18</a>
+        <a href="/courses/languages/java/lesson20" class="nav-btn next">שיעור 20 ←</a>
+    </div>
+</div>
+<script>
+    document.getElementById('hamburger').onclick = function() { document.getElementById('nav-links').classList.toggle('open'); };
+    document.querySelectorAll('.lesson-nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.lesson-nav a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    const defaults = [
+`// getter ו-setter
+let user = {
+    _name: 'שרה',
+    _age: 22,
+    getName(){ return this._name; },
+    setName(n){ this._name = n; },
+    getAge(){ return this._age; },
+    setAge(a){ if(a>=0) this._age=a; else console.log('גיל לא חוקי!'); }
+};
+
+console.log('שם:', user.getName());
+user.setName('מיה');
+console.log('שם חדש:', user.getName());`,
+`// setter עם בדיקת תקינות
+let user = {
+    _age: 22,
+    setAge(a){
+        if(a >= 0){
+            this._age = a;
+            console.log('גיל עודכן ל-' + a);
+        } else {
+            console.log('שגיאה: גיל לא יכול להיות שלילי!');
+        }
+    },
+    getAge(){ return this._age; }
+};
+
+user.setAge(25);
+user.setAge(-5);
+console.log('גיל:', user.getAge());`,
+`// User מוגן עם getters/setters
+let user = {
+    _name: '', _age: 0, _active: false,
+    setName(n){ if(n.length>0) this._name=n; else console.log('שם לא יכול להיות ריק!'); },
+    getName(){ return this._name; },
+    setAge(a){ if(a>=0 && a<120) this._age=a; else console.log('גיל לא חוקי!'); },
+    getAge(){ return this._age; },
+    setActive(a){ this._active = a; },
+    isActive(){ return this._active; }
+};
+
+user.setName('שרה');
+user.setAge(22);
+user.setActive(true);
+console.log(user.getName()+', '+user.getAge()+', פעילה: '+user.isActive());`
+];
+    function switchChallenge(idx) {
+        document.querySelectorAll('.challenge-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+        document.querySelectorAll('.challenge-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+    }
+    function runCode(idx) {
+        const code = document.getElementById('editor-' + idx).value;
+        const outputEl = document.getElementById('output-lines-' + idx);
+        const lines = []; let count = 0;
+        const fakeConsole = { log: (...args) => { if (++count > 200) return; lines.push(args.map(String).join(' ')); } };
+        try {
+            new Function('console', code)(fakeConsole);
+            if (count > 200) { outputEl.innerHTML = '<div class="output-error">⚠️ לולאה ארוכה מדי — בדקי תנאי עצירה</div>'; return; }
+            outputEl.innerHTML = lines.length ? lines.map(l => `<div class="output-line">${esc(l)}</div>`).join('') : '<span style="color:#666">// אין פלט</span>';
+            checkBadge(idx, lines.join('\n'));
+        } catch(e) { outputEl.innerHTML = `<div class="output-error">❌ ${esc(e.message)}</div>`; }
+    }
+    function resetCode(idx) {
+        document.getElementById('editor-' + idx).value = defaults[idx];
+        document.getElementById('output-lines-' + idx).innerHTML = '<span style="color:#555;font-size:0.85rem;">הפלט יופיע כאן...</span>';
+        const b = document.getElementById('badge-' + idx); if (b) b.style.display = 'none';
+    }
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    const badgeChecks = ['מיה', 'שגיאה', 'שרה'];
+    function checkBadge(idx, out) {
+        const check = badgeChecks[idx];
+        if (!check) return;
+        const badge = document.getElementById('badge-' + idx);
+        if (out.includes(check)) badge.style.display = 'block';
+    }
+    const answers = {"q1": "B", "q2": "B", "q3": "B", "q4": "B", "q5": "B"};
+    function showScore() {
+        let score = 0;
+        for (let q in answers) {
+            const chosen = document.querySelector(`input[name="${q}"]:checked`);
+            document.querySelectorAll(`input[name="${q}"]`).forEach(o => {
+                const lbl = o.parentElement;
+                if (o.value === answers[q]) lbl.classList.add('correct');
+                else if (chosen && o.value === chosen.value) lbl.classList.add('wrong');
+                o.disabled = true;
+            });
+            if (chosen && chosen.value === answers[q]) score++;
+        }
+        const el = document.getElementById('score');
+        el.style.display = 'block';
+        el.innerHTML = `קיבלת ${score}/5 ✨ — ${['נסי שוב 💪','ממשיכים!','לא רע!','כמעט!','מושלם! 🌟','מצוין! 🏆'][score]}`;
+    }
+</script>
+</body>
+</html>
