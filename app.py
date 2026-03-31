@@ -541,5 +541,141 @@ def javascript_final_exam():
     path = os.path.join(app.template_folder, 'courses/languages/JavaScript/final exam')
     return send_file(path, mimetype='text/html')
 
+# ─── Java ─────────────────────────────────────────
+@app.route('/courses/languages/java')
+def java_course():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/index.html')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson1')
+def java_lesson1():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson1')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson2')
+def java_lesson2():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson2')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson3')
+def java_lesson3():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson3')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson4')
+def java_lesson4():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson4')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson5')
+def java_lesson5():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson5')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson6')
+def java_lesson6():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson6')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson7')
+def java_lesson7():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson7')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson8')
+def java_lesson8():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson8')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson9')
+def java_lesson9():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson9')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson10')
+def java_lesson10():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson10')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson11')
+def java_lesson11():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson11')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson12')
+def java_lesson12():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson12')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson13')
+def java_lesson13():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson13')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson14')
+def java_lesson14():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson14')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson15')
+def java_lesson15():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson15')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson16')
+def java_lesson16():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson16')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson17')
+def java_lesson17():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson17')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson18')
+def java_lesson18():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson18')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson19')
+def java_lesson19():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson19')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson20')
+def java_lesson20():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson20')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson21')
+def java_lesson21():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson21')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson22')
+def java_lesson22():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson22')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson23')
+def java_lesson23():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson23')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson24')
+def java_lesson24():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson24')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/lesson25')
+def java_lesson25():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/lesson25')
+    return send_file(path, mimetype='text/html')
+
+@app.route('/courses/languages/java/final-exam')
+def java_final_exam():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/Final exam')
+    return send_file(path, mimetype='text/html')
+
 if __name__ == '__main__':
     app.run(debug=False)
