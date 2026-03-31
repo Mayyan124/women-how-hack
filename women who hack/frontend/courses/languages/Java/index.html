@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | קורס Java — כל השיעורים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Heebo',sans-serif; background:#FFFDF0; color:#2c2c2c; }
+
+        /* NAV */
+        nav { display:flex; justify-content:space-between; align-items:center; padding:15px 50px; background:#FFFDD0; box-shadow:0 2px 15px rgba(245,166,35,0.15); position:sticky; top:0; z-index:1000; border-bottom:2px solid #FFE082; direction:rtl; }
+        nav a.logo { font-size:1.6rem; font-weight:900; color:#c8860a; text-decoration:none; }
+        .nav-links a { text-decoration:none; color:#555; margin:0 12px; font-weight:600; font-size:0.95rem; }
+        .nav-links a.join-btn { background:#F5A623; color:white; padding:8px 22px; border-radius:50px; font-weight:bold; }
+        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; background:none; border:none; padding:5px; }
+        .hamburger span { display:block; width:25px; height:3px; background:#c8860a; border-radius:3px; }
+        @media(max-width:768px){ nav{padding:15px 20px;flex-wrap:wrap;} .hamburger{display:flex;} .nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #FFE082;margin-top:10px;} .nav-links.open{display:flex;} .nav-links a{padding:10px 20px;margin:0;} }
+
+        /* HERO */
+        .hero { background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0500); padding:70px 20px 80px; text-align:center; color:white; position:relative; overflow:hidden; }
+        .hero::before { content:'☕'; position:absolute; font-size:22rem; opacity:0.03; top:-60px; left:-40px; pointer-events:none; }
+        .hero::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 60% 50%,rgba(255,152,0,0.07) 0%,transparent 70%); }
+        .hero-badge { display:inline-block; background:rgba(255,152,0,0.15); border:1px solid rgba(255,152,0,0.35); color:#FF9800; padding:5px 18px; border-radius:50px; font-size:0.82rem; font-weight:700; margin-bottom:18px; letter-spacing:1px; position:relative; z-index:1; }
+        .hero h1 { font-size:3rem; font-weight:900; margin-bottom:14px; position:relative; z-index:1; line-height:1.2; }
+        .hero h1 span { color:#FF9800; }
+        .hero p { font-size:1.05rem; opacity:0.7; max-width:540px; margin:0 auto 32px; line-height:1.7; position:relative; z-index:1; }
+        .hero-stats { display:flex; justify-content:center; gap:44px; position:relative; z-index:1; flex-wrap:wrap; }
+        .hero-stat .num { font-size:2rem; font-weight:900; color:#FF9800; display:block; }
+        .hero-stat .lbl { font-size:0.78rem; opacity:0.55; }
+        @media(max-width:600px){ .hero h1{font-size:2rem;} .hero-stats{gap:20px;} }
+
+        /* QUICK NAV */
+        .qnav { background:white; border-bottom:2px solid #FFE082; padding:14px 20px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+        .qnav a { padding:7px 16px; border-radius:50px; border:2px solid #FFE082; background:white; color:#c8860a; font-size:0.82rem; font-weight:700; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+        .qnav a:hover, .qnav a.exam-btn { background:#FF9800; color:white; border-color:#FF9800; }
+        .qnav a.exam-btn { background:linear-gradient(135deg,#FF7043,#FF9800); border:none; }
+
+        /* MAIN */
+        .container { max-width:960px; margin:0 auto; padding:50px 20px 100px; }
+
+        /* LEVEL SECTION */
+        .level-section { margin-bottom:14px; margin-top:46px; }
+        .level-section:first-child { margin-top:0; }
+        .level-header { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+        .level-badge { background:linear-gradient(135deg,#FF9800,#FFC107); color:#1a0a00; font-size:0.76rem; font-weight:900; padding:5px 15px; border-radius:50px; letter-spacing:1px; white-space:nowrap; }
+        .level-title { font-size:1.18rem; font-weight:900; color:#2c2c2c; }
+        .level-line { flex:1; height:2px; background:linear-gradient(90deg,#FFE082,transparent); }
+        .level-desc { font-size:0.84rem; color:#999; margin-bottom:16px; }
+
+        /* LESSON GRID */
+        .lesson-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; }
+
+        /* CARD */
+        .card { background:white; border:2px solid #FFE082; border-radius:18px; padding:20px 20px 16px; text-decoration:none; color:inherit; transition:all 0.22s; position:relative; overflow:hidden; display:block; }
+        .card::before { content:''; position:absolute; top:0; right:0; width:55px; height:55px; background:radial-gradient(circle at top right,rgba(255,152,0,0.07),transparent 70%); }
+        .card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(255,152,0,0.16); border-color:#FF9800; }
+
+        /* project variant */
+        .card.project { background:linear-gradient(135deg,#FFF8E1,#FFFDE7); border-color:#FFC107; }
+        .card.project:hover { border-color:#FF9800; }
+
+        /* exam card */
+        .card.exam-card { background:linear-gradient(135deg,#fff3e0,#fbe9e7); border-color:#FF7043; }
+        .card.exam-card:hover { border-color:#E64A19; box-shadow:0 10px 28px rgba(255,112,67,0.18); }
+
+        .card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+        .card-num { font-size:0.7rem; font-weight:900; color:#ccc; letter-spacing:1px; }
+        .card-emoji { font-size:1.4rem; line-height:1; }
+        .card-title { font-size:0.97rem; font-weight:800; color:#2c2c2c; margin-bottom:5px; line-height:1.35; }
+        .card.project .card-title { color:#c8860a; }
+        .card.exam-card .card-title { color:#BF360C; }
+        .card-sub { font-size:0.8rem; color:#999; line-height:1.5; }
+        .card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+        .tag { font-size:0.7rem; font-weight:700; background:#FFF8E1; color:#c8860a; padding:3px 10px; border-radius:20px; border:1px solid #FFE082; }
+        .card.project .tag { background:#FFF3E0; color:#E65100; border-color:#FFCC80; }
+        .card.exam-card .tag { background:#FBE9E7; color:#BF360C; border-color:#FFAB91; }
+        .card-arrow { position:absolute; bottom:14px; left:18px; font-size:1rem; opacity:0.25; transition:opacity 0.2s,transform 0.2s; }
+        .card:hover .card-arrow { opacity:0.7; transform:translateX(-4px); }
+
+        /* FINAL EXAM BANNER */
+        .exam-banner { background:linear-gradient(135deg,#1a0a00,#2d1500); border:2px solid #FF7043; border-radius:22px; padding:38px 36px 32px; text-align:center; margin-top:50px; position:relative; overflow:hidden; }
+        .exam-banner::before { content:'🏆'; position:absolute; font-size:11rem; opacity:0.05; top:-15px; left:-15px; }
+        .exam-banner-badge { display:inline-block; background:rgba(255,112,67,0.18); border:1px solid rgba(255,112,67,0.4); color:#FF7043; padding:5px 18px; border-radius:50px; font-size:0.78rem; font-weight:900; margin-bottom:14px; letter-spacing:1px; }
+        .exam-banner h2 { font-size:1.8rem; font-weight:900; color:white; margin-bottom:10px; }
+        .exam-banner h2 span { color:#FF9800; }
+        .exam-banner p { font-size:0.92rem; color:rgba(255,255,255,0.6); max-width:480px; margin:0 auto 26px; line-height:1.7; }
+        .exam-topics { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-bottom:28px; }
+        .exam-topic { background:rgba(255,255,255,0.05); border:1px solid rgba(255,152,0,0.18); border-radius:12px; padding:12px 14px; text-align:right; }
+        .exam-topic-title { font-size:0.8rem; font-weight:700; color:#FF9800; margin-bottom:3px; }
+        .exam-topic-desc  { font-size:0.74rem; color:rgba(255,255,255,0.45); line-height:1.5; }
+        .exam-cta { display:inline-block; background:linear-gradient(135deg,#FF7043,#FF9800); color:white; text-decoration:none; padding:14px 40px; border-radius:50px; font-size:1rem; font-weight:900; transition:all 0.3s; }
+        .exam-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,112,67,0.4); }
+
+        @media(max-width:600px){ .lesson-grid{grid-template-columns:1fr;} .exam-banner{padding:28px 20px;} }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-badge">☕ JAVA COURSE — FULL CURRICULUM</div>
+    <h1>קורס <span>Java</span> מלא</h1>
+    <p>מהדפסה הראשונה ועד מערכת ניהול מלאה — 25 שיעורים, 5 Levels, פרויקטים ומבחן סיום.</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><span class="num">25</span><span class="lbl">שיעורים</span></div>
+        <div class="hero-stat"><span class="num">5</span><span class="lbl">Levels</span></div>
+        <div class="hero-stat"><span class="num">75+</span><span class="lbl">תרגילים</span></div>
+        <div class="hero-stat"><span class="num">125+</span><span class="lbl">שאלות</span></div>
+        <div class="hero-stat"><span class="num">5</span><span class="lbl">פרויקטים</span></div>
+    </div>
+</div>
+
+<!-- QUICK NAV -->
+<div class="qnav">
+    <a href="#level1">Level 1 — בסיסים</a>
+    <a href="#level2">Level 2 — לולאות</a>
+    <a href="#level3">Level 3 — מתקדם</a>
+    <a href="#level4">Level 4 — OOP</a>
+    <a href="#level5">Level 5 — Expert</a>
+    <a href="#finalexam" class="exam-btn">🏆 מבחן סיום</a>
+</div>
+
+<div class="container">
+
+    <!-- ── LEVEL 1 ── -->
+    <div class="level-section" id="level1">
+        <div class="level-header">
+            <div class="level-badge">LEVEL 1</div>
+            <div class="level-title">היכרות עם Java — משתנים, טיפוסים והדפסה</div>
+            <div class="level-line"></div>
+        </div>
+        <p class="level-desc">שיעורים 1–5 | יסודות Java: הדפסה, משתנים, קלט מהמשתמש ופרויקט ראשון</p>
+        <div class="lesson-grid">
+            <a href="/courses/languages/java/lesson1" class="card">
+                <div class="card-top"><span class="card-num">שיעור 01</span><span class="card-emoji">☕</span></div>
+                <div class="card-title">הכרת Java והדפסה למסך</div>
+                <div class="card-sub">System.out.println, מבנה תוכנית בסיסית</div>
+                <div class="card-tags"><span class="tag">println</span><span class="tag">main</span><span class="tag">class</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson2" class="card">
+                <div class="card-top"><span class="card-num">שיעור 02</span><span class="card-emoji">📦</span></div>
+                <div class="card-title">משתנים בסיסיים וטיפוסים</div>
+                <div class="card-sub">int, String, double, boolean</div>
+                <div class="card-tags"><span class="tag">int</span><span class="tag">String</span><span class="tag">boolean</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson3" class="card">
+                <div class="card-top"><span class="card-num">שיעור 03</span><span class="card-emoji">🔗</span></div>
+                <div class="card-title">חיבור והדפסה של משתנים</div>
+                <div class="card-sub">שילוב טקסט ומשתנים עם אופרטור +</div>
+                <div class="card-tags"><span class="tag">concatenation</span><span class="tag">+</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson4" class="card">
+                <div class="card-top"><span class="card-num">שיעור 04</span><span class="card-emoji">⌨️</span></div>
+                <div class="card-title">קלט מהמשתמש</div>
+                <div class="card-sub">Scanner — קריאת קלט מהמשתמשת</div>
+                <div class="card-tags"><span class="tag">Scanner</span><span class="tag">nextLine</span><span class="tag">nextInt</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson5" class="card project">
+                <div class="card-top"><span class="card-num">שיעור 05 — פרויקט</span><span class="card-emoji">🚀</span></div>
+                <div class="card-title">פרויקט סיום Level 1</div>
+                <div class="card-sub">הצגת פרופיל משתמשת — חיבור כל החומר + הגשה</div>
+                <div class="card-tags"><span class="tag">פרויקט</span><span class="tag">הגשה</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── LEVEL 2 ── -->
+    <div class="level-section" id="level2">
+        <div class="level-header">
+            <div class="level-badge">LEVEL 2</div>
+            <div class="level-title">לולאות, תנאים ומערכים</div>
+            <div class="level-line"></div>
+        </div>
+        <p class="level-desc">שיעורים 6–10 | while, for, if/else, Arrays — כלי ה-Control Flow</p>
+        <div class="lesson-grid">
+            <a href="/courses/languages/java/lesson6" class="card">
+                <div class="card-top"><span class="card-num">שיעור 06</span><span class="card-emoji">🔄</span></div>
+                <div class="card-title">לולאת while ו-do-while</div>
+                <div class="card-sub">חזרה על קוד עד שתנאי מתקיים</div>
+                <div class="card-tags"><span class="tag">while</span><span class="tag">do-while</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson7" class="card">
+                <div class="card-top"><span class="card-num">שיעור 07</span><span class="card-emoji">🔢</span></div>
+                <div class="card-title">לולאות for</div>
+                <div class="card-sub">לולאות עם מספר חזרות ידוע מראש</div>
+                <div class="card-tags"><span class="tag">for</span><span class="tag">i++</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson8" class="card">
+                <div class="card-top"><span class="card-num">שיעור 08</span><span class="card-emoji">🔀</span></div>
+                <div class="card-title">תנאים מורכבים</div>
+                <div class="card-sub">if, else if, else — קבלת החלטות בקוד</div>
+                <div class="card-tags"><span class="tag">if</span><span class="tag">else if</span><span class="tag">&&</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson9" class="card">
+                <div class="card-top"><span class="card-num">שיעור 09</span><span class="card-emoji">📋</span></div>
+                <div class="card-title">מערכים חד-ממדיים</div>
+                <div class="card-sub">שמירת רשימות מידע — Arrays</div>
+                <div class="card-tags"><span class="tag">Array</span><span class="tag">length</span><span class="tag">for-each</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson10" class="card project">
+                <div class="card-top"><span class="card-num">שיעור 10 — פרויקט</span><span class="card-emoji">🌐</span></div>
+                <div class="card-title">פרויקט סיום Level 2</div>
+                <div class="card-sub">ניהול קהילה — שילוב לולאות, תנאים ומערכים + הגשה</div>
+                <div class="card-tags"><span class="tag">פרויקט</span><span class="tag">הגשה</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── LEVEL 3 ── -->
+    <div class="level-section" id="level3">
+        <div class="level-header">
+            <div class="level-badge">LEVEL 3</div>
+            <div class="level-title">תנאים מתקדמים, לולאות משולבות ופונקציות</div>
+            <div class="level-line"></div>
+        </div>
+        <p class="level-desc">שיעורים 11–15 | תנאים מורכבים, לולאות מקוננות, מערכים דו-ממדיים ופונקציות</p>
+        <div class="lesson-grid">
+            <a href="/courses/languages/java/lesson11" class="card">
+                <div class="card-top"><span class="card-num">שיעור 11</span><span class="card-emoji">🧠</span></div>
+                <div class="card-title">תנאים מורכבים מתקדמים</div>
+                <div class="card-sub">שילוב &&, ||, ! עם if/else if/else</div>
+                <div class="card-tags"><span class="tag">&&</span><span class="tag">||</span><span class="tag">!</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson12" class="card">
+                <div class="card-top"><span class="card-num">שיעור 12</span><span class="card-emoji">🔲</span></div>
+                <div class="card-title">לולאות מקוננות</div>
+                <div class="card-sub">לולאות בתוך לולאות — טבלאות ומטריצות</div>
+                <div class="card-tags"><span class="tag">nested</span><span class="tag">i,j</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson13" class="card">
+                <div class="card-top"><span class="card-num">שיעור 13</span><span class="card-emoji">🗂️</span></div>
+                <div class="card-title">מערכים דו-ממדיים</div>
+                <div class="card-sub">מטריצות — [שורה][עמודה]</div>
+                <div class="card-tags"><span class="tag">[][]</span><span class="tag">matrix</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson14" class="card">
+                <div class="card-top"><span class="card-num">שיעור 14</span><span class="card-emoji">⚙️</span></div>
+                <div class="card-title">פונקציות עם מערכים</div>
+                <div class="card-sub">פונקציות שמקבלות ומחזירות מערכים</div>
+                <div class="card-tags"><span class="tag">static</span><span class="tag">return</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson15" class="card project">
+                <div class="card-top"><span class="card-num">שיעור 15 — פרויקט</span><span class="card-emoji">📊</span></div>
+                <div class="card-title">פרויקט סיום Level 3</div>
+                <div class="card-sub">מערכת ציונים — ממוצע, מקסימום, מינימום + הגשה</div>
+                <div class="card-tags"><span class="tag">פרויקט</span><span class="tag">הגשה</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── LEVEL 4 ── -->
+    <div class="level-section" id="level4">
+        <div class="level-header">
+            <div class="level-badge">LEVEL 4</div>
+            <div class="level-title">אובייקטים, מחלקות, מורשת ופונקציות מתקדמות</div>
+            <div class="level-line"></div>
+        </div>
+        <p class="level-desc">שיעורים 16–20 | OOP: class, object, inheritance, encapsulation</p>
+        <div class="lesson-grid">
+            <a href="/courses/languages/java/lesson16" class="card">
+                <div class="card-top"><span class="card-num">שיעור 16</span><span class="card-emoji">🏗️</span></div>
+                <div class="card-title">יצירת מחלקות ואובייקטים</div>
+                <div class="card-sub">OOP בסיסי — class, object, constructor</div>
+                <div class="card-tags"><span class="tag">class</span><span class="tag">new</span><span class="tag">this</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson17" class="card">
+                <div class="card-top"><span class="card-num">שיעור 17</span><span class="card-emoji">🧬</span></div>
+                <div class="card-title">מורשת ופולימורפיזם</div>
+                <div class="card-sub">extends, super, override</div>
+                <div class="card-tags"><span class="tag">extends</span><span class="tag">super</span><span class="tag">override</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson18" class="card">
+                <div class="card-top"><span class="card-num">שיעור 18</span><span class="card-emoji">🔧</span></div>
+                <div class="card-title">קונסטרקטורים מרובים וסטטיק</div>
+                <div class="card-sub">Overloading ו-Static methods</div>
+                <div class="card-tags"><span class="tag">overload</span><span class="tag">static</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson19" class="card">
+                <div class="card-top"><span class="card-num">שיעור 19</span><span class="card-emoji">🔒</span></div>
+                <div class="card-title">Encapsulation</div>
+                <div class="card-sub">private, getters, setters — הגנה על נתונים</div>
+                <div class="card-tags"><span class="tag">private</span><span class="tag">getter</span><span class="tag">setter</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson20" class="card project">
+                <div class="card-top"><span class="card-num">שיעור 20 — פרויקט</span><span class="card-emoji">👩‍💻</span></div>
+                <div class="card-title">פרויקט סיום Level 4</div>
+                <div class="card-sub">ניהול משתמשות — OOP מלא + הגשה</div>
+                <div class="card-tags"><span class="tag">פרויקט</span><span class="tag">הגשה</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── LEVEL 5 ── -->
+    <div class="level-section" id="level5">
+        <div class="level-header">
+            <div class="level-badge">LEVEL 5</div>
+            <div class="level-title">נושאים מתקדמים — Expert Java</div>
+            <div class="level-line"></div>
+        </div>
+        <p class="level-desc">שיעורים 21–25 | File I/O, Exceptions, Collections, Strings ופרויקט גמר</p>
+        <div class="lesson-grid">
+            <a href="/courses/languages/java/lesson21" class="card">
+                <div class="card-top"><span class="card-num">שיעור 21</span><span class="card-emoji">📁</span></div>
+                <div class="card-title">עבודה עם קבצים — File I/O</div>
+                <div class="card-sub">כתיבה וקריאה לקבצים — שמירה לטווח ארוך</div>
+                <div class="card-tags"><span class="tag">FileWriter</span><span class="tag">BufferedReader</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson22" class="card">
+                <div class="card-top"><span class="card-num">שיעור 22</span><span class="card-emoji">⚠️</span></div>
+                <div class="card-title">Exceptions — טיפול בשגיאות</div>
+                <div class="card-sub">try/catch/throw — תוכנית שלא קורסת</div>
+                <div class="card-tags"><span class="tag">try</span><span class="tag">catch</span><span class="tag">throw</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson23" class="card">
+                <div class="card-top"><span class="card-num">שיעור 23</span><span class="card-emoji">📝</span></div>
+                <div class="card-title">Collections ו-ArrayList</div>
+                <div class="card-sub">רשימות דינמיות — הוספה, הסרה, חיפוש</div>
+                <div class="card-tags"><span class="tag">ArrayList</span><span class="tag">add</span><span class="tag">remove</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson24" class="card">
+                <div class="card-top"><span class="card-num">שיעור 24</span><span class="card-emoji">🔤</span></div>
+                <div class="card-title">String ומחרוזות</div>
+                <div class="card-sub">length, equals, charAt, substring ועוד</div>
+                <div class="card-tags"><span class="tag">.length()</span><span class="tag">.equals()</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+            <a href="/courses/languages/java/lesson25" class="card project">
+                <div class="card-top"><span class="card-num">שיעור 25 — פרויקט</span><span class="card-emoji">🏆</span></div>
+                <div class="card-title">פרויקט גמר Level 5</div>
+                <div class="card-sub">מערכת ניהול משתמשות — שילוב כל הקורס + הגשה</div>
+                <div class="card-tags"><span class="tag">פרויקט גמר</span><span class="tag">הגשה</span></div>
+                <span class="card-arrow">←</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── FINAL EXAM BANNER ── -->
+    <div class="exam-banner" id="finalexam">
+        <div class="exam-banner-badge">🏆 FINAL EXAM</div>
+        <h2>מבחן סיום <span>הקורס</span></h2>
+        <p>20 שאלות אמריקאיות המכסות את כל 5 ה-Levels — OOP, לולאות, מערכים, Exceptions, Collections ועוד.</p>
+        <div class="exam-topics">
+            <div class="exam-topic">
+                <div class="exam-topic-title">📝 20 שאלות אמריקאיות</div>
+                <div class="exam-topic-desc">כיסוי מלא של כל הקורס</div>
+            </div>
+            <div class="exam-topic">
+                <div class="exam-topic-title">✅ תיקון מיידי</div>
+                <div class="exam-topic-desc">רואים מה נכון/לא נכון בסוף</div>
+            </div>
+            <div class="exam-topic">
+                <div class="exam-topic-title">💻 פרויקט גמר</div>
+                <div class="exam-topic-desc">מערכת ניהול מלאה להגשה</div>
+            </div>
+            <div class="exam-topic">
+                <div class="exam-topic-title">🎓 תעודת סיום</div>
+                <div class="exam-topic-desc">אישור השלמת הקורס עם שמך</div>
+            </div>
+        </div>
+        <a href="/courses/languages/java/final-exam" class="exam-cta">🏆 למבחן הסיום</a>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('hamburger').onclick = function(){ document.getElementById('nav-links').classList.toggle('open'); };
+    document.querySelectorAll('.qnav a').forEach(btn => {
+        btn.addEventListener('click', function(e){
+            const href = this.getAttribute('href');
+            if(href && href.startsWith('#')){
+                e.preventDefault();
+                const t = document.querySelector(href);
+                if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        });
+    });
+</script>
+</body>
+</html>
