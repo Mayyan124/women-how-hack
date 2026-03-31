@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Who Hack | מבחן סיום — קורס Java</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+    </script>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Heebo',sans-serif; background:#FFFDF0; color:#2c2c2c; }
+        nav { display:flex; justify-content:space-between; align-items:center; padding:15px 50px; background:#FFFDD0; box-shadow:0 2px 15px rgba(245,166,35,0.15); position:sticky; top:0; z-index:1000; border-bottom:2px solid #FFE082; direction:rtl; }
+        nav a.logo { font-size:1.6rem; font-weight:900; color:#c8860a; text-decoration:none; }
+        .nav-links a { text-decoration:none; color:#555; margin:0 12px; font-weight:600; font-size:0.95rem; }
+        .nav-links a.join-btn { background:#F5A623; color:white; padding:8px 22px; border-radius:50px; font-weight:bold; }
+        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; background:none; border:none; padding:5px; }
+        .hamburger span { display:block; width:25px; height:3px; background:#c8860a; border-radius:3px; }
+        @media(max-width:768px){ nav{padding:15px 20px;flex-wrap:wrap;} .hamburger{display:flex;} .nav-links{display:none;width:100%;flex-direction:column;background:#FFFDD0;padding:15px 0;border-top:1px solid #FFE082;margin-top:10px;} .nav-links.open{display:flex;} .nav-links a{padding:10px 20px;margin:0;} }
+        .hero { background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0500); padding:60px 20px 70px; text-align:center; color:white; position:relative; overflow:hidden; }
+        .hero::before { content:'☕'; position:absolute; font-size:16rem; opacity:0.04; top:-30px; left:-30px; }
+        .hero-breadcrumb { display:flex; justify-content:center; align-items:center; gap:8px; font-size:0.85rem; opacity:0.6; margin-bottom:20px; flex-wrap:wrap; }
+        .hero-breadcrumb a { color:#FF9800; text-decoration:none; }
+        .hero-level { display:inline-block; background:rgba(255,152,0,0.15); border:1px solid rgba(255,152,0,0.3); color:#FF9800; padding:5px 16px; border-radius:50px; font-size:0.82rem; font-weight:700; margin-bottom:14px; }
+        .hero h1 { font-size:2.4rem; font-weight:900; margin-bottom:10px; }
+        .hero h1 span { color:#FF9800; }
+        .hero p { font-size:1rem; opacity:0.75; max-width:520px; margin:0 auto; line-height:1.7; }
+        .lesson-nav { display:flex; justify-content:center; gap:8px; padding:20px; background:white; border-bottom:2px solid #FFE082; flex-wrap:wrap; }
+        .lesson-nav a { text-decoration:none; color:#888; font-weight:700; font-size:0.88rem; padding:8px 18px; border-radius:50px; border:2px solid #eee; transition:all 0.2s; }
+        .lesson-nav a:hover,.lesson-nav a.active { background:#FF9800; color:white; border-color:#FF9800; }
+        .container { max-width:860px; margin:0 auto; padding:50px 20px 100px; }
+        .section-block { margin-bottom:40px; scroll-margin-top:90px; }
+        .review-box { background:linear-gradient(135deg,#FFF8E1,#FFFDE7); border:2px solid #FFE082; border-radius:20px; padding:28px 32px; }
+        .review-box h2 { font-size:1.15rem; font-weight:900; color:#c8860a; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .review-box ul { list-style:none; }
+        .review-box ul li { padding:7px 0; font-size:0.95rem; color:#555; border-bottom:1px solid #FFE082; display:flex; align-items:flex-start; gap:10px; }
+        .review-box ul li:last-child { border-bottom:none; }
+        .review-box ul li::before { content:'✅'; flex-shrink:0; }
+        .concept-card { background:white; border:2px solid #FFE082; border-radius:20px; padding:28px 32px; box-shadow:0 4px 20px rgba(255,152,0,0.08); }
+        .concept-card h2 { font-size:1.15rem; font-weight:900; color:#E65100; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+        .concept-card p { font-size:0.95rem; color:#444; line-height:1.8; margin-bottom:14px; }
+        .concept-card strong { color:#E65100; }
+        .highlight-box { background:#FFF8E1; border-right:4px solid #FF9800; border-radius:10px; padding:16px 20px; margin:16px 0; font-size:0.93rem; color:#555; line-height:1.8; }
+        .code-box { background:#1a0a00; border-radius:20px; padding:28px 32px; }
+        .code-box h2 { font-size:1.15rem; font-weight:900; color:#FF9800; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+        .code-label { font-size:0.78rem; font-weight:700; color:#FF9800; opacity:0.7; text-transform:uppercase; margin-bottom:6px; letter-spacing:1px; }
+        pre { background:rgba(255,255,255,0.05); border-radius:12px; padding:20px; overflow-x:auto; margin-bottom:6px; }
+        pre code { font-family:'Courier New',monospace; font-size:0.92rem; color:#FFE0B2; line-height:1.8; direction:ltr; display:block; text-align:left; }
+        .code-note { font-size:0.84rem; color:#aaa; margin-bottom:20px; line-height:1.6; }
+        /* steps */
+        .steps-box { background:white; border:2px solid #FFE082; border-radius:20px; padding:28px 32px; }
+        .steps-box h2 { font-size:1.15rem; font-weight:900; color:#E65100; margin-bottom:22px; display:flex; align-items:center; gap:8px; }
+        .step { display:flex; gap:18px; margin-bottom:22px; align-items:flex-start; }
+        .step:last-child { margin-bottom:0; }
+        .step-num { background:linear-gradient(135deg,#FF9800,#FFC107); color:#1a0a00; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.95rem; flex-shrink:0; margin-top:2px; }
+        .step-body h3 { font-size:0.98rem; font-weight:800; color:#2c2c2c; margin-bottom:5px; }
+        .step-body p { font-size:0.88rem; color:#666; line-height:1.7; }
+        .step-body code { background:#FFF8E1; color:#c8860a; padding:2px 8px; border-radius:6px; font-family:'Courier New',monospace; font-size:0.85rem; }
+        /* submit */
+        .submit-box { background:linear-gradient(135deg,#1a0a00,#2d1500); border-radius:20px; padding:36px 32px; text-align:center; }
+        .submit-box h2 { font-size:1.15rem; font-weight:900; color:#FF9800; margin-bottom:10px; }
+        .submit-box p { font-size:0.9rem; color:rgba(255,255,255,0.6); margin-bottom:24px; line-height:1.7; }
+        .submit-btn { display:inline-block; background:linear-gradient(135deg,#FF9800,#FFC107); color:#1a0a00; text-decoration:none; padding:15px 40px; border-radius:50px; font-size:1rem; font-weight:900; transition:all 0.3s; }
+        .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(255,152,0,0.4); }
+        /* quiz */
+        .quiz-section { background:white; border:2px solid #FFE082; border-radius:20px; padding:28px 32px; }
+        .quiz-section h2 { font-size:1.15rem; font-weight:900; color:#E65100; margin-bottom:22px; display:flex; align-items:center; gap:8px; }
+        .quiz-question { margin-bottom:24px; }
+        .quiz-question p { font-size:0.95rem; font-weight:700; color:#2c2c2c; margin-bottom:10px; }
+        .quiz-options { display:flex; flex-direction:column; gap:8px; }
+        .quiz-option { display:flex; align-items:center; gap:10px; padding:10px 16px; border:2px solid #eee; border-radius:10px; cursor:pointer; font-size:0.9rem; color:#555; transition:all 0.2s; }
+        .quiz-option:hover { border-color:#FF9800; background:#FFF8E1; }
+        .quiz-option.correct { background:#E8F5E9; border-color:#66BB6A; color:#2E7D32; }
+        .quiz-option.wrong { background:#FFEBEE; border-color:#EF9A9A; color:#C62828; }
+        .quiz-option input { accent-color:#FF9800; }
+        .quiz-btn { margin-top:24px; background:linear-gradient(135deg,#FF9800,#FFC107); color:#1a0a00; border:none; padding:13px 35px; border-radius:50px; font-size:1rem; font-weight:900; cursor:pointer; font-family:'Heebo',sans-serif; }
+        .quiz-score { margin-top:18px; font-size:1rem; font-weight:700; color:#E65100; display:none; text-align:center; padding:14px; background:#FFF8E1; border-radius:12px; }
+        .lesson-footer { display:flex; justify-content:space-between; align-items:center; margin-top:60px; padding-top:30px; border-top:2px solid #FFE082; flex-wrap:wrap; gap:16px; }
+        .nav-btn { text-decoration:none; padding:13px 28px; border-radius:50px; font-weight:900; font-size:0.95rem; transition:all 0.3s; }
+        .nav-btn.prev { background:#FFF8E1; color:#E65100; border:2px solid #FFE082; }
+        .nav-btn.next { background:linear-gradient(135deg,#FF9800,#FFC107); color:#1a0a00; }
+        .nav-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,152,0,0.3); }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/" class="logo">Women Who Hack 🎀</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nav-links">
+        <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
+        <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+        <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
+        <a href="/register" class="join-btn">הצטרפות 🎀</a>
+    </div>
+</nav>
+<div class="hero">
+    <div class="hero-breadcrumb">
+        <a href="/courses">קורסים</a> ← <a href="/courses/languages/java">Java</a> ← מבחן סיום
+    </div>
+    <div class="hero-level">Final Exam — All Levels</div>
+    <h1><span>מבחן סיום</span> — קורס Java 🏆</h1>
+    <p>20 שאלות אמריקאיות המכסות את כל 5 ה-Levels — OOP, לולאות, מערכים, Exceptions ועוד</p>
+</div>
+<div class="lesson-nav">
+    <a href="#intro" class="active">מבוא</a>
+    <a href="#exam">המבחן</a>
+    <a href="#submit">הגשה</a>
+</div>
+<div class="container">
+
+    <div class="section-block concept-card" id="intro">
+        <h2>📋 הוראות המבחן</h2>
+        <p>המבחן מכסה את כל הנושאים שלמדת לאורך הקורס:</p>
+        <div class="highlight-box">
+            Level 1 — הדפסה, משתנים, קלט &nbsp;|&nbsp;
+            Level 2 — לולאות, תנאים, מערכים<br>
+            Level 3 — תנאים מתקדמים, פונקציות &nbsp;|&nbsp;
+            Level 4 — OOP, מחלקות, מורשת<br>
+            Level 5 — File I/O, Exceptions, Collections
+        </div>
+        <p><strong>20 שאלות אמריקאיות</strong> — בחרי תשובה אחת לכל שאלה ולחצי "בדקי תשובות" בסוף.</p>
+    </div>
+
+    <div class="section-block quiz-section" id="exam">
+        <h2>❓ שאלות המבחן</h2>
+<div class="quiz-question"><p>1. מה עושה System.out.println()?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q1" value="A"> A — מחשבת ביטוי מתמטי</label><label class="quiz-option"><input type="radio" name="q1" value="B"> B — מדפיסה טקסט ועוברת לשורה חדשה</label><label class="quiz-option"><input type="radio" name="q1" value="C"> C — קולטת קלט מהמשתמש</label><label class="quiz-option"><input type="radio" name="q1" value="D"> D — פותחת חלון</label></div></div>
+<div class="quiz-question"><p>2. מהו טיפוס המשתנה המתאים לשמירת שם?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q2" value="A"> A — int</label><label class="quiz-option"><input type="radio" name="q2" value="B"> B — boolean</label><label class="quiz-option"><input type="radio" name="q2" value="C"> C — double</label><label class="quiz-option"><input type="radio" name="q2" value="D"> D — String</label></div></div>
+<div class="quiz-question"><p>3. מה ההבדל בין print ל-println?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q3" value="A"> A — println מהירה יותר</label><label class="quiz-option"><input type="radio" name="q3" value="B"> B — println מוסיפה שורה חדשה בסוף, print לא</label><label class="quiz-option"><input type="radio" name="q3" value="C"> C — print גדולה יותר</label><label class="quiz-option"><input type="radio" name="q3" value="D"> D — אין הבדל</label></div></div>
+<div class="quiz-question"><p>4. כמה פעמים תרוץ: for(int i=1; i<=5; i++) ?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q4" value="A"> A — 4</label><label class="quiz-option"><input type="radio" name="q4" value="B"> B — 6</label><label class="quiz-option"><input type="radio" name="q4" value="C"> C — 5</label><label class="quiz-option"><input type="radio" name="q4" value="D"> D — 1</label></div></div>
+<div class="quiz-question"><p>5. מה יודפס: int x=10; if(x>5) println('A'); else println('B'); ?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q5" value="A"> A — B</label><label class="quiz-option"><input type="radio" name="q5" value="B"> B — AB</label><label class="quiz-option"><input type="radio" name="q5" value="C"> C — A</label><label class="quiz-option"><input type="radio" name="q5" value="D"> D — שגיאה</label></div></div>
+<div class="quiz-question"><p>6. מה לולאת do-while מבטיחה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q6" value="A"> A — הלולאה רצה מספר זוגי של פעמים</label><label class="quiz-option"><input type="radio" name="q6" value="B"> B — התנאי נבדק לפני הריצה</label><label class="quiz-option"><input type="radio" name="q6" value="C"> C — הגוף ירוץ לפחות פעם אחת</label><label class="quiz-option"><input type="radio" name="q6" value="D"> D — הלולאה אינסופית</label></div></div>
+<div class="quiz-question"><p>7. מה האינדקס של האיבר הראשון במערך?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q7" value="A"> A — 1</label><label class="quiz-option"><input type="radio" name="q7" value="B"> B — -1</label><label class="quiz-option"><input type="radio" name="q7" value="C"> C — 0</label><label class="quiz-option"><input type="radio" name="q7" value="D"> D — תלוי בגודל המערך</label></div></div>
+<div class="quiz-question"><p>8. מה עושה && בתנאי?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q8" value="A"> A — לפחות תנאי אחד נכון</label><label class="quiz-option"><input type="radio" name="q8" value="B"> B — כל התנאים חייבים להיות נכונים</label><label class="quiz-option"><input type="radio" name="q8" value="C"> C — הופך תנאי</label><label class="quiz-option"><input type="radio" name="q8" value="D"> D — משווה מחרוזות</label></div></div>
+<div class="quiz-question"><p>9. מה יחזיר: int[] arr={2,5,1,8,3}; arr.length ?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q9" value="A"> A — 8</label><label class="quiz-option"><input type="radio" name="q9" value="B"> B — 3</label><label class="quiz-option"><input type="radio" name="q9" value="C"> C — 5</label><label class="quiz-option"><input type="radio" name="q9" value="D"> D — 1</label></div></div>
+<div class="quiz-question"><p>10. מה פלט: for(int i=1;i<=3;i++) for(int j=1;j<=2;j++) println(i+j); ?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q10" value="A"> A — 3 שורות</label><label class="quiz-option"><input type="radio" name="q10" value="B"> B — 2 שורות</label><label class="quiz-option"><input type="radio" name="q10" value="C"> C — 6 שורות</label><label class="quiz-option"><input type="radio" name="q10" value="D"> D — לולאה אינסופית</label></div></div>
+<div class="quiz-question"><p>11. מה Constructor?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q11" value="A"> A — פונקציה שמוחקת אובייקט</label><label class="quiz-option"><input type="radio" name="q11" value="B"> B — פונקציה שיוצרת ומאתחלת אובייקט</label><label class="quiz-option"><input type="radio" name="q11" value="C"> C — משתנה סטטי</label><label class="quiz-option"><input type="radio" name="q11" value="D"> D — ממשק</label></div></div>
+<div class="quiz-question"><p>12. מה מילת המפתח לירושה ב-Java?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q12" value="A"> A — inherits</label><label class="quiz-option"><input type="radio" name="q12" value="B"> B — super</label><label class="quiz-option"><input type="radio" name="q12" value="C"> C — extends</label><label class="quiz-option"><input type="radio" name="q12" value="D"> D — implements</label></div></div>
+<div class="quiz-question"><p>13. מה private אומר?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q13" value="A"> A — נגיש לכל</label><label class="quiz-option"><input type="radio" name="q13" value="B"> B — נגיש רק מהמחלקה עצמה</label><label class="quiz-option"><input type="radio" name="q13" value="C"> C — נגיש לתת-מחלקות</label><label class="quiz-option"><input type="radio" name="q13" value="D"> D — מוגן לכתיבה</label></div></div>
+<div class="quiz-question"><p>14. מה static void welcome() מאפשר?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q14" value="A"> A — קריאה רק עם אובייקט</label><label class="quiz-option"><input type="radio" name="q14" value="B"> B — קריאה ישירה: ClassName.welcome()</label><label class="quiz-option"><input type="radio" name="q14" value="C"> C — פונקציה פרטית</label><label class="quiz-option"><input type="radio" name="q14" value="D"> D — ירושה בלבד</label></div></div>
+<div class="quiz-question"><p>15. מה Exception?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q15" value="A"> A — שגיאת קומפיילציה</label><label class="quiz-option"><input type="radio" name="q15" value="B"> B — שגיאה בזמן ריצה</label><label class="quiz-option"><input type="radio" name="q15" value="C"> C — הודעת מערכת</label><label class="quiz-option"><input type="radio" name="q15" value="D"> D — ערך חסר</label></div></div>
+<div class="quiz-question"><p>16. מה עושה ArrayList לעומת מערך?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q16" value="A"> A — מהיר יותר</label><label class="quiz-option"><input type="radio" name="q16" value="B"> B — גודל קבוע</label><label class="quiz-option"><input type="radio" name="q16" value="C"> C — דינמי — ניתן להוסיף ולהסיר</label><label class="quiz-option"><input type="radio" name="q16" value="D"> D — קטן יותר</label></div></div>
+<div class="quiz-question"><p>17. מה .equals() משמש ל?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q17" value="A"> A — השוואת כתובות זיכרון</label><label class="quiz-option"><input type="radio" name="q17" value="B"> B — השוואת תוכן מחרוזות</label><label class="quiz-option"><input type="radio" name="q17" value="C"> C — חיבור מחרוזות</label><label class="quiz-option"><input type="radio" name="q17" value="D"> D — המרת טיפוסים</label></div></div>
+<div class="quiz-question"><p>18. מה FileWriter עושה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q18" value="A"> A — קוראת מקובץ</label><label class="quiz-option"><input type="radio" name="q18" value="B"> B — כותבת לקובץ</label><label class="quiz-option"><input type="radio" name="q18" value="C"> C — מוחקת קובץ</label><label class="quiz-option"><input type="radio" name="q18" value="D"> D — מחפשת בקובץ</label></div></div>
+<div class="quiz-question"><p>19. מה finally עושה?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q19" value="A"> A — רץ רק כשיש שגיאה</label><label class="quiz-option"><input type="radio" name="q19" value="B"> B — מחליף catch</label><label class="quiz-option"><input type="radio" name="q19" value="C"> C — רץ תמיד — גם ללא שגיאה</label><label class="quiz-option"><input type="radio" name="q19" value="D"> D — סוגר קבצים אוטומטית</label></div></div>
+<div class="quiz-question"><p>20. מהם 4 עקרונות OOP?</p><div class="quiz-options"><label class="quiz-option"><input type="radio" name="q20" value="A"> A — loop, if, array, function</label><label class="quiz-option"><input type="radio" name="q20" value="B"> B — Encapsulation, Inheritance, Polymorphism, Abstraction</label><label class="quiz-option"><input type="radio" name="q20" value="C"> C — public, private, static, void</label><label class="quiz-option"><input type="radio" name="q20" value="D"> D — class, object, method, field</label></div></div>
+
+        <button class="quiz-btn" onclick="showScore()">בדקי תשובות ✨</button>
+        <div class="quiz-score" id="score"></div>
+    </div>
+
+    <div class="section-block submit-box" id="submit">
+        <h2>📤 הגשת פרויקט הגמר</h2>
+        <p>סיימת את המבחן? מעולה! 🎉<br>
+        עכשיו העלי את <strong>פרויקט הגמר המלא</strong> — מערכת ניהול משתמשות — ב-GitHub ושלחי את הקישור.</p>
+        <a href="https://forms.gle/3f7nb4g2ttEPF1xT6" target="_blank" class="submit-btn">🏆 הגישי את הפרויקט הסופי</a>
+    </div>
+
+    <div class="lesson-footer">
+        <a href="/courses/languages/java/lesson25" class="nav-btn prev">← שיעור 25</a>
+        <a href="/courses/languages/java/certificate" class="nav-btn next">🎓 לתעודת הסיום ←</a>
+    </div>
+</div>
+<script>
+    document.getElementById('hamburger').onclick=function(){{document.getElementById('nav-links').classList.toggle('open');}};
+    document.querySelectorAll('.lesson-nav a').forEach(link=>{{
+        link.addEventListener('click',function(e){{
+            e.preventDefault();
+            document.querySelectorAll('.lesson-nav a').forEach(l=>l.classList.remove('active'));
+            this.classList.add('active');
+            const t=document.querySelector(this.getAttribute('href'));
+            if(t) t.scrollIntoView({{behavior:'smooth'}});
+        }});
+    }});
+</script>
+<script>
+    const answers={"q1": "B", "q2": "D", "q3": "B", "q4": "C", "q5": "C", "q6": "C", "q7": "C", "q8": "B", "q9": "C", "q10": "C", "q11": "B", "q12": "C", "q13": "B", "q14": "B", "q15": "B", "q16": "C", "q17": "B", "q18": "B", "q19": "C", "q20": "B"};
+    function showScore(){
+        let s=0;
+        for(let q in answers){
+            const chosen=document.querySelector(`input[name="${q}"]:checked`);
+            document.querySelectorAll(`input[name="${q}"]`).forEach(o=>{
+                const l=o.parentElement;
+                if(o.value===answers[q]) l.classList.add('correct');
+                else if(chosen&&o.value===chosen.value) l.classList.add('wrong');
+                o.disabled=true;
+            });
+            if(chosen&&chosen.value===answers[q]) s++;
+        }
+        const el=document.getElementById('score');
+        el.style.display='block';
+        const grade=Math.round(s/20*100);
+        const msg=s>=18?'מצוין! 🏆':s>=15?'כל הכבוד! 🌟':s>=10?'טוב, ממשיכים! 💪':'נסי שוב 📖';
+        el.innerHTML=`קיבלת ${s}/20 (${grade}) — ${msg}`;
+        if(s>=10){
+            document.getElementById('submit').scrollIntoView({behavior:'smooth'});
+        }
+    }
+</script>
+</body></html>
