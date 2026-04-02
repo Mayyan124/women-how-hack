@@ -677,5 +677,10 @@ def java_final_exam():
     path = os.path.join(app.template_folder, 'courses/languages/Java/Final exam')
     return send_file(path, mimetype='text/html')
 
+@app.route('/courses/languages/java/certificate')
+def java_certificate():
+    path = os.path.join(app.template_folder, 'courses/languages/Java/certificate')
+    return send_file(path, mimetype='text/html')
+
 if __name__ == '__main__':
     app.run(debug=False)
