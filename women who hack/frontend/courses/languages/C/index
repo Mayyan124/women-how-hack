@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Who Hack | קורס C 🤎</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:linear-gradient(160deg,#1c0e00 0%,#2e1a00 50%,#1c0e00 100%) fixed;color:#f0e6d3;min-height:100vh;direction:rtl}
+
+/* ── NAVBAR (matches site) ── */
+nav{background:rgba(28,14,0,0.97);border-bottom:1px solid rgba(180,120,60,0.2);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.nav-logo{font-size:1.1rem;font-weight:900;color:#f0e6d3;text-decoration:none}
+.nav-logo span{color:#c8864a}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:rgba(240,230,211,0.7);text-decoration:none;font-size:.85rem;font-weight:600;transition:color .2s}
+.nav-links a:hover{color:#c8864a}
+.nav-join{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff!important;padding:7px 16px;border-radius:20px;font-weight:700!important}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{padding:18px 60px;font-size:.82rem;color:rgba(240,230,211,0.5)}
+.breadcrumb a{color:rgba(240,230,211,0.5);text-decoration:none}
+.breadcrumb a:hover{color:#c8864a}
+.breadcrumb span{color:rgba(240,230,211,0.3);margin:0 6px}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:50px 20px 40px;border-bottom:1px solid rgba(180,120,60,0.15)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:12px;color:#f0e6d3}
+.hero h1 span{color:#c8864a}
+.hero p{color:rgba(240,230,211,0.6);font-size:1rem;max-width:520px;margin:0 auto 32px;line-height:1.8}
+.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:2rem;font-weight:900;color:#c8864a}
+.stat-lbl{font-size:.72rem;color:rgba(240,230,211,0.5);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* ── LEVELS ── */
+.levels{max-width:900px;margin:0 auto;padding:40px 20px 80px}
+
+.level-block{margin-bottom:48px}
+.level-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(200,134,74,0.12);border:1px solid rgba(200,134,74,0.3);border-radius:6px;padding:4px 14px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c8864a;margin-bottom:16px}
+.level-title{font-size:1.3rem;font-weight:900;color:#f0e6d3;margin-bottom:6px}
+.level-sub{font-size:.85rem;color:rgba(240,230,211,0.45);margin-bottom:20px}
+.level-divider{height:1px;background:linear-gradient(90deg,rgba(200,134,74,0.4),transparent);margin-bottom:20px}
+
+/* lesson cards grid */
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+.lesson-card{background:rgba(255,200,120,0.04);border:1px solid rgba(200,134,74,0.15);border-radius:14px;padding:18px 20px;text-decoration:none;color:#f0e6d3;display:flex;align-items:flex-start;gap:14px;transition:all .2s;position:relative;overflow:hidden}
+.lesson-card:hover{background:rgba(200,134,74,0.08);border-color:rgba(200,134,74,0.4);transform:translateY(-2px)}
+.lesson-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,134,74,0.04),transparent);opacity:0;transition:opacity .2s}
+.lesson-card:hover::before{opacity:1}
+
+.lesson-num{width:38px;height:38px;border-radius:10px;background:rgba(200,134,74,0.15);border:1px solid rgba(200,134,74,0.3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#c8864a;flex-shrink:0}
+.lesson-info{flex:1}
+.lesson-title-text{font-size:.9rem;font-weight:700;line-height:1.4;margin-bottom:4px}
+.lesson-desc{font-size:.75rem;color:rgba(240,230,211,0.45);line-height:1.5}
+
+/* project card */
+.project-card{background:rgba(200,134,74,0.07);border:1px solid rgba(200,134,74,0.3);border-radius:14px;padding:20px 24px;text-decoration:none;color:#f0e6d3;display:flex;align-items:center;gap:16px;transition:all .2s;margin-top:12px}
+.project-card:hover{background:rgba(200,134,74,0.14);border-color:rgba(200,134,74,0.55);transform:translateY(-2px)}
+.project-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#8b4a1a,#c8864a);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.project-info{flex:1}
+.project-tag{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#c8864a;margin-bottom:4px}
+.project-name{font-size:.95rem;font-weight:800}
+.project-desc{font-size:.78rem;color:rgba(240,230,211,0.5);margin-top:3px}
+.arrow{color:rgba(200,134,74,0.5);font-size:1.1rem;transition:transform .2s}
+.project-card:hover .arrow{transform:translateX(-4px)}
+
+/* final exam */
+.final-block{background:linear-gradient(135deg,rgba(139,74,26,0.2),rgba(200,134,74,0.1));border:1px solid rgba(200,134,74,0.4);border-radius:20px;padding:36px;text-align:center;margin-top:48px}
+.final-block h2{font-size:1.5rem;font-weight:900;margin-bottom:8px}
+.final-block p{color:rgba(240,230,211,0.6);margin-bottom:24px}
+.btn-exam{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff;font-family:'Heebo',sans-serif;font-weight:800;font-size:.95rem;padding:13px 32px;border-radius:50px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(200,134,74,0.3)}
+.btn-exam:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(200,134,74,0.45)}
+
+@media(max-width:600px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .breadcrumb{padding:14px 20px}
+  .hero{padding:36px 20px 28px}
+  .hero-stats{gap:24px}
+  .levels{padding:28px 16px 60px}
+  .lessons-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="nav-logo">Women <span>Who</span> Hack 🎀</a>
+  <ul class="nav-links">
+    <li><a href="/">בית</a></li>
+    <li><a href="/about">המייסדת</a></li>
+    <li><a href="/attacks">מתקפות</a></li>
+    <li><a href="/courses">קורסים</a></li>
+    <li><a href="/mysteries">תעלומות</a></li>
+    <li><a href="/projects">פרויקטים</a></li>
+    <li><a href="/blog">בלוג</a></li>
+    <li><a href="/contact">צור קשר</a></li>
+    <li><a href="/register" class="nav-join">הצטרפות 🎀</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="/courses">קורסים</a><span>←</span>
+  <a href="/courses/languages">שפות תכנות</a><span>←</span>
+  C
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>קורס <span>C</span> 🤎</h1>
+  <p>מהיסודות ועד ניהול זיכרון, מצביעים וקבצים — 20 שיעורים ב-5 רמות, עם פרויקטים ומבחן סיום</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">20</div><div class="stat-lbl">שיעורים</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">רמות</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">פרויקטים</div></div>
+    <div class="stat"><div class="stat-num">25</div><div class="stat-lbl">שאלות מבחן</div></div>
+  </div>
+</div>
+
+<!-- LEVELS -->
+<div class="levels">
+
+  <!-- LEVEL 1 -->
+  <div class="level-block">
+    <div class="level-tag">Level 1</div>
+    <div class="level-title">🧱 The Foundation — יסודות הארכיטקטורה</div>
+    <div class="level-sub">שיעורים 1–4</div>
+    <div class="level-divider"></div>
+    <div class="lessons-grid">
+      <a href="/courses/languages/c/lesson1" class="lesson-card">
+        <div class="lesson-num">01</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">שפת C — המתרגמת של עולם החומרה 💻</div>
+          <div class="lesson-desc">קומפיילר, Compilation, שפת מכונה</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson2" class="lesson-card">
+        <div class="lesson-num">02</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">משתנים וטיפוסי נתונים 📦</div>
+          <div class="lesson-desc">int, char, float — המגירות בזיכרון</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson3" class="lesson-card">
+        <div class="lesson-num">03</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">אופרטורים ולוגיקה ➕</div>
+          <div class="lesson-desc">חשבון, השוואה, המנוע של ההחלטות</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson4" class="lesson-card">
+        <div class="lesson-num">04</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">קלט/פלט — Standard I/O 🖥️</div>
+          <div class="lesson-desc">printf, scanf — הגשר למשתמש</div>
+        </div>
+      </a>
+    </div>
+    <a href="/courses/languages/c/project1" class="project-card">
+      <div class="project-icon">🤎</div>
+      <div class="project-info">
+        <div class="project-tag">פרויקט Level 1</div>
+        <div class="project-name">כרטיס ביקור דיגיטלי חכם</div>
+        <div class="project-desc">קלט, חישובים, פלט מעוצב</div>
+      </div>
+      <div class="arrow">←</div>
+    </a>
+  </div>
+
+  <!-- LEVEL 2 -->
+  <div class="level-block">
+    <div class="level-tag">Level 2</div>
+    <div class="level-title">🔀 Control Flow — הניווט בתוך המכונה</div>
+    <div class="level-sub">שיעורים 5–9</div>
+    <div class="level-divider"></div>
+    <div class="lessons-grid">
+      <a href="/courses/languages/c/lesson5" class="lesson-card">
+        <div class="lesson-num">05</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">if / else — צמתים בזיכרון 🔀</div>
+          <div class="lesson-desc">Branching, תנאים, קפיצות מותנות</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson6" class="lesson-card">
+        <div class="lesson-num">06</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">אופרטורים לוגיים 🧠</div>
+          <div class="lesson-desc">&&, ||, ! — קבלת החלטות מורכבות</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson7" class="lesson-card">
+        <div class="lesson-num">07</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">switch case — מרכזיית הנתונים 🏢</div>
+          <div class="lesson-desc">Jump Table, Fall-through, break</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson8" class="lesson-card">
+        <div class="lesson-num">08</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">לולאות while ו-do-while 🔄</div>
+          <div class="lesson-desc">החזרתיות האינסופית, continue</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson9" class="lesson-card">
+        <div class="lesson-num">09</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">לולאת for — הדיוק שבספירה 🎯</div>
+          <div class="lesson-desc">אתחול, תנאי, קידום — לולאות מקוננות</div>
+        </div>
+      </a>
+    </div>
+    <a href="/courses/languages/c/project2" class="project-card">
+      <div class="project-icon">🔐</div>
+      <div class="project-info">
+        <div class="project-tag">פרויקט Level 2</div>
+        <div class="project-name">מערכת ניהול גישה לסרבר סודי</div>
+        <div class="project-desc">לולאות, תנאים, switch — Gatekeeper</div>
+      </div>
+      <div class="arrow">←</div>
+    </a>
+  </div>
+
+  <!-- LEVEL 3 -->
+  <div class="level-block">
+    <div class="level-tag">Level 3</div>
+    <div class="level-title">🗃️ Data Organization — ארכיטקטורה וסדר</div>
+    <div class="level-sub">שיעורים 10–13</div>
+    <div class="level-divider"></div>
+    <div class="lessons-grid">
+      <a href="/courses/languages/c/lesson10" class="lesson-card">
+        <div class="lesson-num">10</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">פונקציות — המפעל של הקוד 🏭</div>
+          <div class="lesson-desc">return type, arguments, Stack Frame</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson11" class="lesson-card">
+        <div class="lesson-num">11</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">מערכים (Arrays) — מחסן הנתונים 📋</div>
+          <div class="lesson-desc">אינדקס, גישה מהירה, Segmentation Fault</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson12" class="lesson-card">
+        <div class="lesson-num">12</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">מחרוזות (Strings) — שרשרת התווים 🔤</div>
+          <div class="lesson-desc">char[], Null Terminator, string.h</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson13" class="lesson-card">
+        <div class="lesson-num">13</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">מבנים (Structs) — יצירת ישויות 🏗️</div>
+          <div class="lesson-desc">typedef, Padding, שדות מסוגים שונים</div>
+        </div>
+      </a>
+    </div>
+    <a href="/courses/languages/c/project3" class="project-card">
+      <div class="project-icon">🕵️</div>
+      <div class="project-info">
+        <div class="project-tag">פרויקט Level 3</div>
+        <div class="project-name">מערכת ניהול סוכנות סייבר</div>
+        <div class="project-desc">Structs, מערכים, strcmp, פונקציות</div>
+      </div>
+      <div class="arrow">←</div>
+    </a>
+  </div>
+
+  <!-- LEVEL 4 -->
+  <div class="level-block">
+    <div class="level-tag">Level 4</div>
+    <div class="level-title">🧲 The Pointer Power — השליטה בזיכרון</div>
+    <div class="level-sub">שיעורים 14–16</div>
+    <div class="level-divider"></div>
+    <div class="lessons-grid">
+      <a href="/courses/languages/c/lesson14" class="lesson-card">
+        <div class="lesson-num">14</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">כתובות זיכרון וה-Stack 📍</div>
+          <div class="lesson-desc">RAM, LIFO, כתובות פיזיות</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson15" class="lesson-card">
+        <div class="lesson-num">15</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">מצביעים (Pointers) — השלט רחוק 🎮</div>
+          <div class="lesson-desc">*, &, Dereference, NULL pointer</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson16" class="lesson-card">
+        <div class="lesson-num">16</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">ניהול זיכרון דינמי — ה-Heap 🏔️</div>
+          <div class="lesson-desc">malloc, free, Memory Leak</div>
+        </div>
+      </a>
+    </div>
+    <a href="/courses/languages/c/project4" class="project-card">
+      <div class="project-icon">🛒</div>
+      <div class="project-info">
+        <div class="project-tag">פרויקט Level 4</div>
+        <div class="project-name">מנהל זיכרון רשימת קניות</div>
+        <div class="project-desc">malloc, free, realloc — זיכרון דינמי</div>
+      </div>
+      <div class="arrow">←</div>
+    </a>
+  </div>
+
+  <!-- LEVEL 5 -->
+  <div class="level-block">
+    <div class="level-tag">Level 5</div>
+    <div class="level-title">🏆 Expert Systems — השלב הסופי</div>
+    <div class="level-sub">שיעורים 17–20</div>
+    <div class="level-divider"></div>
+    <div class="lessons-grid">
+      <a href="/courses/languages/c/lesson17" class="lesson-card">
+        <div class="lesson-num">17</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">עבודה עם קבצים — Persistence 📂</div>
+          <div class="lesson-desc">fopen, fwrite, fclose, FILE*</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson18" class="lesson-card">
+        <div class="lesson-num">18</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">פעולות בינאריות (Bitwise) ⚡</div>
+          <div class="lesson-desc">AND, OR, XOR, Shift — לב המכונה</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson19" class="lesson-card">
+        <div class="lesson-num">19</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">רקורסיה — לולאה בתוך עצמה 🔁</div>
+          <div class="lesson-desc">Base Case, Stack Overflow, Fibonacci</div>
+        </div>
+      </a>
+      <a href="/courses/languages/c/lesson20" class="lesson-card">
+        <div class="lesson-num">20</div>
+        <div class="lesson-info">
+          <div class="lesson-title-text">פרויקט הגמר 🚀</div>
+          <div class="lesson-desc">Structs + קבצים + XOR הצפנה</div>
+        </div>
+      </a>
+    </div>
+    <a href="/courses/languages/c/project5" class="project-card">
+      <div class="project-icon">🔐</div>
+      <div class="project-info">
+        <div class="project-tag">פרויקט Level 5</div>
+        <div class="project-name">מסד נתונים מוצפן עם XOR</div>
+        <div class="project-desc">fwrite, XOR, Structs — Expert Level</div>
+      </div>
+      <div class="arrow">←</div>
+    </a>
+  </div>
+
+  <!-- FINAL EXAM -->
+  <div class="final-block">
+    <h2>🏆 מבחן מסכם — קורס C מלא</h2>
+    <p>25 שאלות אמריקאיות על כל 5 הרמות — האם את מוכנה?</p>
+    <a href="/courses/languages/c/final-exam" class="btn-exam">🤎 לכי למבחן</a>
+  </div>
+
+</div>
+
+</body>
+</html>
