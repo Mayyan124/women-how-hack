@@ -817,6 +817,11 @@ def c_project5():
 def c_final_exam():
     path = os.path.join(app.template_folder, 'courses/languages/C/final exam')
     return send_file(path, mimetype='text/html')
+            
+  @app.route('/courses/languages/c/certificate')
+def c_certificate():
+    path = os.path.join(app.template_folder, 'courses/languages/C/certificate')
+    return send_file(path, mimetype='text/html')
 
 if __name__ == '__main__':
     app.run(debug=False)
