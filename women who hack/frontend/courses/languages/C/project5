@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Who Hack | C פרויקט גמר — מסד נתונים מוצפן</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:linear-gradient(160deg,#1c0e00 0%,#2e1a00 50%,#1c0e00 100%) fixed;color:#f0e6d3;min-height:100vh;direction:rtl}
+nav{background:rgba(28,14,0,0.97);border-bottom:1px solid rgba(180,120,60,0.2);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.nav-logo{font-size:1.1rem;font-weight:900;color:#f0e6d3;text-decoration:none}.nav-logo span{color:#c8864a}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:rgba(240,230,211,0.7);text-decoration:none;font-size:.85rem;font-weight:600}.nav-links a:hover{color:#c8864a}
+.nav-join{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff!important;padding:7px 16px;border-radius:20px;font-weight:700!important}
+@media(max-width:600px){nav{padding:0 16px}.nav-links{display:none}}
+.breadcrumb{padding:16px 40px;font-size:.82rem;color:rgba(240,230,211,0.45)}
+.breadcrumb a{color:rgba(240,230,211,0.45);text-decoration:none}.breadcrumb a:hover{color:#c8864a}
+.breadcrumb span{margin:0 6px;color:rgba(240,230,211,0.25)}
+.hero{text-align:center;padding:56px 20px 44px;border-bottom:1px solid rgba(180,120,60,0.15);position:relative;overflow:hidden}
+.hero::before{content:'🏆';position:absolute;font-size:14rem;opacity:.03;top:-20px;left:-20px;pointer-events:none}
+.hero-level{display:inline-block;background:rgba(200,134,74,0.15);border:1px solid rgba(200,134,74,0.4);color:#c8864a;padding:5px 16px;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:14px;letter-spacing:1px}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:10px}.hero h1 span{color:#c8864a}
+.hero p{color:rgba(240,230,211,0.6);font-size:.95rem;max-width:520px;margin:0 auto;line-height:1.7}
+.lesson-nav{display:flex;justify-content:center;gap:8px;padding:16px 20px;border-bottom:1px solid rgba(180,120,60,0.15);flex-wrap:wrap;background:rgba(28,14,0,0.5)}
+.lesson-nav a{color:rgba(240,230,211,0.5);text-decoration:none;font-size:.82rem;font-weight:700;padding:7px 16px;border-radius:50px;border:1px solid rgba(200,134,74,0.2);transition:all .2s}
+.lesson-nav a:hover,.lesson-nav a.active{background:rgba(200,134,74,0.15);border-color:rgba(200,134,74,0.5);color:#c8864a}
+.container{max-width:820px;margin:0 auto;padding:44px 20px 100px}
+.section-block{margin-bottom:36px;scroll-margin-top:90px}
+.card{border-radius:18px;padding:28px 32px}
+.card-warm{background:rgba(200,134,74,0.07);border:1px solid rgba(200,134,74,0.2)}
+.card-dark{background:rgba(0,0,0,0.35);border:1px solid rgba(200,134,74,0.15)}
+.card-code{background:#110800;border:1px solid rgba(200,134,74,0.2)}
+.card-project{background:linear-gradient(135deg,rgba(139,74,26,0.25),rgba(200,134,74,0.12));border:1px solid rgba(200,134,74,0.4)}
+.card h2{font-size:1.05rem;font-weight:900;color:#c8864a;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.card p{font-size:.92rem;color:rgba(240,230,211,0.75);line-height:1.85;margin-bottom:12px}
+.card p:last-child{margin-bottom:0}.card strong{color:#c8864a}
+.highlight{background:rgba(200,134,74,0.1);border-right:3px solid #c8864a;border-radius:8px;padding:14px 18px;margin:14px 0;font-size:.88rem;color:rgba(240,230,211,0.8);line-height:1.9}
+.review-list,.steps-list{list-style:none}
+.review-list li{padding:8px 0;font-size:.9rem;color:rgba(240,230,211,0.7);border-bottom:1px solid rgba(200,134,74,0.1);display:flex;align-items:flex-start;gap:10px}
+.review-list li:last-child{border-bottom:none}.review-list li::before{content:'✅';flex-shrink:0}
+.steps-list li{padding:11px 0;font-size:.9rem;color:rgba(240,230,211,0.75);border-bottom:1px solid rgba(200,134,74,0.1);display:flex;align-items:flex-start;gap:14px}
+.steps-list li:last-child{border-bottom:none}
+.step-num{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;flex-shrink:0;margin-top:1px}
+.code-label{font-size:.7rem;font-weight:700;color:#c8864a;opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+pre{background:rgba(255,255,255,0.04);border-radius:10px;padding:18px;overflow-x:auto;margin-bottom:8px}
+pre code{font-family:'Courier New',monospace;font-size:.88rem;color:#f5d5b0;line-height:1.8;direction:ltr;display:block;text-align:left}
+.submit-btn{display:inline-block;background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff;text-decoration:none;padding:14px 38px;border-radius:50px;font-size:1rem;font-weight:900;transition:all .3s}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,134,74,0.45)}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:28px;border-top:1px solid rgba(200,134,74,0.2);flex-wrap:wrap;gap:14px}
+.nav-btn{text-decoration:none;padding:12px 26px;border-radius:50px;font-weight:900;font-size:.9rem;transition:all .3s}
+.nav-btn.prev{background:rgba(200,134,74,0.1);color:#c8864a;border:1px solid rgba(200,134,74,0.3)}
+.nav-btn.next{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,134,74,0.25)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Women <span>Who</span> Hack 🎀</a>
+  <ul class="nav-links">
+    <li><a href="/">בית</a></li><li><a href="/about">המייסדת</a></li><li><a href="/attacks">מתקפות</a></li>
+    <li><a href="/courses">קורסים</a></li><li><a href="/mysteries">תעלומות</a></li><li><a href="/projects">פרויקטים</a></li>
+    <li><a href="/blog">בלוג</a></li><li><a href="/contact">צור קשר</a></li>
+    <li><a href="/register" class="nav-join">הצטרפות 🎀</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="/courses">קורסים</a><span>←</span><a href="/courses/languages">שפות תכנות</a><span>←</span><a href="/courses/languages/c">C</a><span>←</span>פרויקט גמר</div>
+<div class="hero">
+  <div class="hero-level">🏆 פרויקט גמר — Level 5 Expert</div>
+  <h1>מסד נתונים <span>מוצפן עם XOR 🔐</span></h1>
+  <p>fwrite, XOR Encryption, Structs, fread — חיבור של כל הקורס לתוצר מרהיב</p>
+</div>
+<div class="lesson-nav">
+  <a href="#review" class="active">חזרה</a><a href="#goal">מטרה</a><a href="#steps">שלבים</a><a href="#code">קוד מלא</a><a href="#submit">הגשה</a>
+</div>
+<div class="container">
+
+  <div class="section-block card card-warm" id="review">
+    <h2>🔁 חזרה — כל Level 5</h2>
+    <ul class="review-list">
+      <li>שיעור 17 — קבצים: fopen, fwrite, fread, fclose</li>
+      <li>שיעור 18 — Bitwise: XOR הצפנה — כפולה = חזרה למקור</li>
+      <li>שיעור 19 — רקורסיה: Base Case, Stack Overflow</li>
+      <li>Level 3 — Structs: typedef, שדות מסוגים שונים</li>
+    </ul>
+  </div>
+
+  <div class="section-block card card-project" id="goal">
+    <h2>🎯 מטרת הפרויקט</h2>
+    <p>בנייה של מערכת שמאחסנת סוכנות ב-<strong>קובץ בינארי מוצפן</strong>. אף אחד לא יכול לקרוא את הקובץ בלי התוכנית שלך!</p>
+    <div class="highlight">
+      📌 זהו הפרויקט הגמר של הקורס — חיבור של כל 5 ה-Levels!<br>
+      קראי את כל השלבים לפני שמתחילה לכתוב קוד 🎀
+    </div>
+  </div>
+
+  <div class="section-block card card-dark" id="steps">
+    <h2>🪜 שלבים לביצוע</h2>
+    <ul class="steps-list">
+      <li><div class="step-num">1</div><div>צרי <strong>struct Agent</strong> עם: name (char[50]), level (int)</div></li>
+      <li><div class="step-num">2</div><div>כתבי פונקציה <strong>xorEncrypt(char *data, char key)</strong> שמצפינה כל תו עם XOR</div></li>
+      <li><div class="step-num">3</div><div>צרי Agent, הצפיני את השם עם xorEncrypt, שמרי ל-<strong>database.bin</strong> עם <code style="color:#c8864a">fwrite</code></div></li>
+      <li><div class="step-num">4</div><div>טעיני את הקובץ עם <code style="color:#c8864a">fread</code> לתוך Agent חדש</div></li>
+      <li><div class="step-num">5</div><div>פענחי את השם (XOR כפול = חזרה למקור!) והדפיסי את הפרטים</div></li>
+      <li><div class="step-num">6</div><div><strong>בונוס:</strong> הוסיפי רקורסיה — פונקציה שסורקת ומציגה את כל הסוכנות</div></li>
+    </ul>
+  </div>
+
+  <div class="section-block card card-code" id="code">
+    <h2>💻 קוד מלא — קראי אחרי שניסית לבד!</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+typedef struct {
+    char name[50];
+    int level;
+} Agent;
+
+// פונקציית הצפנה/פענוח XOR
+void xorEncrypt(char *data, char key) {
+    for (int i = 0; i &lt; strlen(data); i++) {
+        data[i] = data[i] ^ key;  // XOR כל תו
+    }
+}
+
+int main() {
+    Agent a1 = {"CyberQueen", 5};
+    char key = 'K';  // מפתח סודי
+
+    // ── שלב 1: הצפנה ושמירה ──
+    xorEncrypt(a1.name, key);
+
+    FILE *f = fopen("database.bin", "wb");
+    if (f == NULL) {
+        printf("כשל בפתיחת קובץ!\n");
+        return 1;
+    }
+    fwrite(&a1, sizeof(Agent), 1, f);
+    fclose(f);
+    printf("הוצפן ונשמר בהצלחה!\n");
+
+    // ── שלב 2: טעינה ופענוח ──
+    Agent loaded;
+    f = fopen("database.bin", "rb");
+    if (f == NULL) {
+        printf("כשל בטעינה!\n");
+        return 1;
+    }
+    fread(&loaded, sizeof(Agent), 1, f);
+    fclose(f);
+
+    // XOR כפול = חזרה למקור!
+    xorEncrypt(loaded.name, key);
+
+    printf("שם: %s | רמה: %d\n", loaded.name, loaded.level);
+    return 0;
+}</code></pre>
+  </div>
+
+  <div class="section-block card card-warm" id="submit">
+    <h2>📤 הגשת הפרויקט הגמר 🏆</h2>
+    <p>סיימת את כל הקורס! 🎉 העלי את הקוד שלך ב-GitHub ושלחי את הקישור בטופס ההגשה.</p>
+    <p>אחרי ההגשה — תוכלי להיגש ל<strong>מבחן המסכם</strong> ולקבל את <strong>תעודת הסיום</strong> שלך!</p>
+    <a href="https://forms.gle/3f7nb4g2ttEPF1xT6" target="_blank" class="submit-btn">🏆 הגישי את הפרויקט הגמר</a>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="/courses/languages/c/lesson19" class="nav-btn prev">← שיעור 19</a>
+    <a href="/courses/languages/c/final-exam" class="nav-btn next">🏆 מבחן מסכם ←</a>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.lesson-nav a').forEach(link=>{link.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.lesson-nav a').forEach(l=>l.classList.remove('active'));this.classList.add('active');document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>
