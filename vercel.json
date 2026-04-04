@@ -159,5 +159,5 @@
     { "source": "/courses/languages/c/project4", "destination": "/women%20who%20hack/frontend/courses/languages/C/project4" },
     { "source": "/courses/languages/c/project5", "destination": "/women%20who%20hack/frontend/courses/languages/C/project5" },
     { "source": "/courses/languages/c/final-exam", "destination": "/women%20who%20hack/frontend/courses/languages/C/final%20exam" }
-{ "source": "/courses/languages/c/certificate", "destination": "/women%20who%20hack/frontend/courses/languages/C/certificate" }
+    { "source": "/courses/languages/c/certificate", "destination": "/women%20who%20hack/frontend/courses/languages/C/certificate" }
 }
