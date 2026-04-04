@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תעודת סיום C | Women Who Hack</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Frank+Ruhl+Libre:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+const auth = getAuth(app);
+
+const letters = [
+  `יש רגעים בחיים שלא תמיד מבינים את המשמעות שלהם בזמן אמת — אבל הם נשארים איתנו הרבה אחרי. והרגע הזה, שבו סיימת את קורס C, הוא בדיוק כזה.\n\nלאורך הדרך ראיתי אותך מתמודדת עם דברים שלא תמיד היו פשוטים — מצביעים, ניהול זיכרון, Bitwise. ובכל פעם מחדש בחרת להמשיך. גם כשזה דרש ממך סבלנות, גם כשזה דרש ממך אמונה בעצמך.\n\nמי שמבינה C, מבינה איך המחשב חושב. ואת — הבנת.\n\nאני גאה בך מכל הלב 💙\nמעיין`,
+  `יש משהו בדרך שלך שפשוט אי אפשר לפספס — הנחישות שלך, הרצון להבין באמת ולא רק לעבור הלאה.\n\nC היא לא שפה קלה. היא שפה שדורשת להבין את המחשב ממש מבפנים — זיכרון, כתובות, ביטים. ואת בחרת להתמודד עם כל זה עד הסוף.\n\nאת יוצאת מהקורס הזה עם משהו שרוב האנשים לא יודעים: איך המחשב באמת עובד.\n\nאני מאמינה בך באמת 💙\nמעיין`,
+  `לפעמים התהליך עצמו הוא הדבר הכי חשוב — לא התוצאה הסופית, אלא הדרך שעברת.\n\nקורס C הוא אחד הדברים המאתגרים ביותר שלמדת — ניהול זיכרון ידני, מצביעים, הצפנה בינארית. וסיימת אותו.\n\nיש בך סקרנות אמיתית, רצון להבין לעומק. וזה משהו נדיר שייקח אותך רחוק.\n\nגאה בך מאוד 💙\nמעיין`,
+  `יש אנשים שרואים "Segmentation Fault" ועוצרים — ויש אנשים שמחפשות למה זה קרה ומתקנות. ואת בדיוק מהסוג השני.\n\nC לימדה אותך לחשוב אחרת — לראות את הזיכרון, להבין את הכתובות, לשלוט בביטים. זה לא ידע רגיל. זו חשיבה של מהנדסת.\n\nאני רוצה שתיקחי את הביטחון הזה איתך לכל אתגר שיבוא.\n\nאני גאה בך מאוד 💙\nמעיין`,
+  `כשמסתכלים אחורה על הדרך שעברת בקורס C, אפשר לראות שינוי אמיתי — לא רק בידע, אלא בגישה שלך לבעיות.\n\nבהתחלה malloc היה מפחיד, מצביעים היו מבלבלים, XOR הצפנה הרגישה כמו קסם. ועכשיו? את כותבת מסד נתונים מוצפן בקוד מאוחסן בינארי.\n\nהקורס הזה הוא הצעד הראשון בדרך הרבה יותר גדולה בעולם הסייבר.\n\nאוהבת וגאה בך 💙\nמעיין`
+];
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) { window.location.href = '/login'; return; }
+  const name = user.displayName || user.email.split('@')[0];
+  const date = new Date().toLocaleDateString('he-IL', {year:'numeric', month:'long', day:'numeric'});
+  let h = 0;
+  for (const c of user.uid) h = Math.imul(31, h) + c.charCodeAt(0) | 0;
+  const certId = 'WWH-C-' + Math.abs(h).toString(36).toUpperCase().slice(0, 8);
+  document.getElementById('letter-name').textContent = name;
+  document.getElementById('letter-body').textContent = letters[Math.abs(h) % letters.length];
+  document.getElementById('cert-name').textContent = name;
+  document.getElementById('cert-date').textContent = date;
+  document.getElementById('cert-id').textContent = certId;
+  window._certData = { name, date, certId };
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('page').style.display = 'flex';
+  setTimeout(() => document.getElementById('page').classList.add('visible'), 50);
+});
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:linear-gradient(160deg,#1c0e00 0%,#2e1a00 55%,#1a0800 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px}
+#loading{color:rgba(240,230,211,.45);font-size:.95rem;display:flex;flex-direction:column;align-items:center;gap:14px}
+.spinner{width:36px;height:36px;border:3px solid rgba(200,134,74,.15);border-top-color:#c8864a;border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#page{display:none;flex-direction:column;align-items:center;gap:30px;width:100%;max-width:800px;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+#page.visible{opacity:1;transform:translateY(0)}
+
+/* LETTER */
+.letter-wrap{width:100%;background:linear-gradient(135deg,#1a0800,#2d1200);border:2px solid rgba(200,134,74,0.3);border-radius:24px;padding:44px 50px;position:relative;overflow:hidden}
+.letter-wrap::before{content:'🤎';position:absolute;font-size:14rem;opacity:.03;bottom:-30px;left:-20px;pointer-events:none}
+.letter-top{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.letter-icon{width:48px;height:48px;background:linear-gradient(135deg,#8b4a1a,#c8864a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.letter-label{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(200,134,74,.7)}
+.letter-title{font-size:1.1rem;font-weight:900;color:#f0e6d3;margin-top:2px}
+.letter-to{font-size:1.1rem;font-weight:700;color:#c8864a;margin-bottom:20px}
+.letter-to span{color:#f0e6d3}
+.letter-body{font-size:.97rem;color:rgba(240,230,211,.82);line-height:2.1;white-space:pre-line}
+
+/* CERTIFICATE */
+#cert{width:100%;background:#FEFCF0;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(180,100,30,.4),0 30px 80px rgba(0,0,0,.7);border-radius:4px}
+#cert::before{content:'';position:absolute;inset:10px;border:2px solid #C8864A;pointer-events:none;z-index:4;border-radius:2px}
+#cert::after{content:'';position:absolute;inset:15px;border:1px solid rgba(200,134,74,.3);pointer-events:none;z-index:4;border-radius:2px}
+.wm{position:absolute;font-size:16rem;opacity:.025;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;z-index:0}
+.corner{position:absolute;color:#C8864A;font-size:1.1rem;opacity:.6;z-index:5}
+.corner.tl{top:22px;right:22px}.corner.tr{top:22px;left:22px}.corner.bl{bottom:22px;right:22px}.corner.br{bottom:22px;left:22px}
+.band{background:linear-gradient(135deg,#1c0e00,#2e1a00);padding:20px 50px;display:flex;align-items:center;justify-content:center;gap:18px;position:relative;z-index:2}
+.band-logo{font-size:1.2rem;font-weight:900;color:#c8864a}.band-logo span{color:#f0e6d3}
+.band-sep{width:1px;height:26px;background:rgba(255,255,255,.15)}
+.band-label{font-size:.72rem;font-weight:700;color:rgba(240,230,211,.45);letter-spacing:2.5px;text-transform:uppercase}
+.cert-body{position:relative;z-index:2;padding:44px 60px 40px;text-align:center}
+.small-label{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8B4513;margin-bottom:6px}
+.big-title{font-family:'Frank Ruhl Libre',serif;font-size:2rem;font-weight:900;color:#1a0800;margin-bottom:6px}
+.big-title em{color:#8B4513;font-style:normal}
+.rule{display:flex;align-items:center;gap:12px;max-width:340px;margin:14px auto}
+.rule-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,#C8864A,transparent)}
+.rule-dot{color:#C8864A;font-size:.8rem}
+.awarded-to{font-size:.82rem;color:#999;letter-spacing:1px;margin-bottom:10px}
+#cert-name{font-family:'Frank Ruhl Libre',serif;font-size:2.6rem;font-weight:900;line-height:1.1;background:linear-gradient(135deg,#6b3a1f,#C8864A,#6b3a1f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.name-rule{width:180px;height:2px;background:linear-gradient(90deg,transparent,#C8864A,transparent);margin:0 auto 22px}
+.cert-text{font-size:.9rem;color:#444;line-height:1.9;max-width:500px;margin:0 auto 10px}
+.cert-text strong{color:#8B4513}
+.course-pill{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FDF6EE,#FAF0E4);border:2px solid #C8864A;border-radius:50px;padding:8px 26px;font-size:1.1rem;font-weight:900;color:#6b3a1f;margin-bottom:20px}
+.cert-quote{font-size:.88rem;color:#777;font-style:italic;max-width:440px;margin:0 auto 22px;line-height:1.8;border-right:3px solid #C8864A;padding-right:14px;text-align:right}
+.cert-footer{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid #C8864A;padding-top:20px}
+.sig{text-align:center;flex:1}
+.sig-line{width:120px;height:1px;background:#C8864A;margin:0 auto 8px}
+.sig-name{font-family:'Frank Ruhl Libre',serif;font-size:1rem;font-weight:700;color:#1a0800}
+.sig-title{font-size:.68rem;color:#aaa;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.seal{width:76px;height:76px;background:linear-gradient(135deg,#6b3a1f,#c8864a);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(107,58,31,.4);flex-shrink:0;margin:0 24px}
+.seal-icon{font-size:1.5rem}
+.seal-text{font-size:.46rem;font-weight:900;color:#fff;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.date-block{text-align:center;flex:1}
+.date-label{font-size:.68rem;color:#aaa;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.date-val{font-size:.88rem;font-weight:700;color:#555}
+#cert-id{font-size:.6rem;color:#ccc;margin-top:4px;direction:ltr}
+
+/* ACTIONS */
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{border:none;padding:13px 28px;border-radius:50px;font-size:.9rem;font-weight:900;cursor:pointer;font-family:'Heebo',sans-serif;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:7px}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
+.btn:disabled{opacity:.65;cursor:wait}
+.btn-dl{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff;box-shadow:0 4px 14px rgba(200,134,74,.3)}
+.btn-dl:hover{box-shadow:0 8px 22px rgba(200,134,74,.45)}
+.btn-print{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(240,230,211,.75)}
+.btn-back{background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(240,230,211,.45);font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:13px 20px;border-radius:50px}
+.btn-back:hover{color:rgba(240,230,211,.75);border-color:rgba(255,255,255,.3)}
+
+@media(max-width:560px){
+  .cert-body{padding:28px 18px}
+  .band{padding:16px 18px;flex-wrap:wrap;gap:10px}
+  .big-title{font-size:1.5rem}
+  #cert-name{font-size:1.7rem}
+  .cert-footer{flex-direction:column;align-items:center;gap:16px}
+  .seal{margin:0}
+  .letter-wrap{padding:28px 22px}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .btn{justify-content:center}
+}
+@media print{
+  body{background:#fff;padding:0}
+  .letter-wrap,.actions{display:none!important}
+  #page{opacity:1;transform:none}
+  #cert{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div id="loading"><div class="spinner"></div><span>טוענת פרטים...</span></div>
+<div id="page">
+
+  <!-- מכתב אישי -->
+  <div class="letter-wrap">
+    <div class="letter-top">
+      <div class="letter-icon">💌</div>
+      <div>
+        <div class="letter-label">מכתב אישי</div>
+        <div class="letter-title">מעיין אל הגיבורה שלנו 🎀</div>
+      </div>
+    </div>
+    <div class="letter-to">ל<span id="letter-name">...</span>,</div>
+    <div class="letter-body" id="letter-body"></div>
+  </div>
+
+  <!-- תעודה -->
+  <div id="cert">
+    <div class="wm">◈</div>
+    <span class="corner tl">✦</span><span class="corner tr">✦</span>
+    <span class="corner bl">✦</span><span class="corner br">✦</span>
+    <div class="band">
+      <div class="band-logo">Women <span>Who</span> Hack 🎀</div>
+      <div class="band-sep"></div>
+      <div class="band-label">Course Completion Certificate</div>
+    </div>
+    <div class="cert-body">
+      <div class="small-label">תעודת הצטיינות</div>
+      <div class="big-title">תעודת <em>סיום קורס</em></div>
+      <div class="rule"><div class="rule-line"></div><div class="rule-dot">✦</div><div class="rule-line"></div></div>
+      <div class="awarded-to">הריני שמחה להעניק ל</div>
+      <div id="cert-name">...</div>
+      <div class="name-rule"></div>
+      <div class="cert-text">
+        תעודת סיום קורס <strong>C: Mastering the Machine ◈</strong><br>
+        במסגרת התוכנית <strong>Women Who Hack</strong>
+      </div>
+      <div class="course-pill">◈ C — Mastering the Machine</div>
+      <div class="cert-quote">
+        זכרי — זו לא רק סיום של קורס.<br>
+        זו הוכחה לכוח, לאומץ וליכולת שלך ליצור את הדרך שלך.
+      </div>
+      <div class="cert-footer">
+        <div class="sig">
+          <div class="sig-line"></div>
+          <div class="sig-name">מעיין מיכלשוילי</div>
+          <div class="sig-title">מנכ"לית Women Who Hack</div>
+        </div>
+        <div class="seal"><div class="seal-icon">🏆</div><div class="seal-text">Certified</div></div>
+        <div class="date-block">
+          <div class="date-label">תאריך סיום</div>
+          <div class="date-val" id="cert-date">...</div>
+          <div id="cert-id"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- כפתורים -->
+  <div class="actions">
+    <button class="btn btn-dl" id="dlBtn" onclick="downloadPDF()">⬇️ הורידי את התעודה PDF</button>
+    <button class="btn btn-print" onclick="window.print()">🖨️ הדפסה</button>
+    <a class="btn btn-back" href="/courses/languages/c">← חזרה לקורס C</a>
+  </div>
+</div>
+
+<script>
+async function downloadPDF() {
+  const btn = document.getElementById('dlBtn');
+  const name = document.getElementById('cert-name').textContent.trim();
+  const filename = 'WWH-C-' + name.replace(/\s+/g, '-') + '.pdf';
+  btn.disabled = true; btn.textContent = '⏳ מייצרת...';
+  try {
+    const cert = document.getElementById('cert');
+    const canvas = await html2canvas(cert, {
+      scale:2, useCORS:true, backgroundColor:'#FEFCF0', logging:false,
+      onclone: function(doc) {
+        const el = doc.getElementById('cert-name');
+        if (el) { el.style.webkitTextFillColor='#6b3a1f'; el.style.color='#6b3a1f'; }
+      }
+    });
+    const img = canvas.toDataURL('image/jpeg', 0.95);
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({orientation:'landscape', unit:'mm', format:'a4'});
+    const pw = pdf.internal.pageSize.getWidth();
+    const ph = pdf.internal.pageSize.getHeight();
+    const m = 8;
+    const r = Math.min((pw-m*2)/canvas.width, (ph-m*2)/canvas.height);
+    pdf.addImage(img, 'JPEG', (pw-canvas.width*r)/2, (ph-canvas.height*r)/2, canvas.width*r, canvas.height*r);
+    pdf.save(filename);
+    btn.disabled = false; btn.innerHTML = '✅ הורד!';
+    setTimeout(() => { btn.innerHTML = '⬇️ הורידי את התעודה PDF'; }, 3000);
+  } catch(e) {
+    btn.disabled = false; btn.innerHTML = '⬇️ הורידי את התעודה PDF';
+    alert('נסי: Ctrl+P ← "שמור כ-PDF"');
+  }
+}
+</script>
+</body>
+</html>
