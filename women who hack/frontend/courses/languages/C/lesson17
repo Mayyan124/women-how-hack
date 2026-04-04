@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Who Hack | C שיעור 17 — קבצים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const app = initializeApp({apiKey:"AIzaSyC-k44JqPI_wYvUwwqDsq4mdB1HAinJE4o",authDomain:"women-who-hack-40840.firebaseapp.com",projectId:"women-who-hack-40840",storageBucket:"women-who-hack-40840.firebasestorage.app",messagingSenderId:"180448551855",appId:"1:180448551855:web:5a05c8deb44fcc2f7f055a"});
+const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:linear-gradient(160deg,#1c0e00 0%,#2e1a00 50%,#1c0e00 100%) fixed;color:#f0e6d3;min-height:100vh;direction:rtl}
+nav{background:rgba(28,14,0,0.97);border-bottom:1px solid rgba(180,120,60,0.2);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.nav-logo{font-size:1.1rem;font-weight:900;color:#f0e6d3;text-decoration:none}.nav-logo span{color:#c8864a}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:rgba(240,230,211,0.7);text-decoration:none;font-size:.85rem;font-weight:600}.nav-links a:hover{color:#c8864a}
+.nav-join{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff!important;padding:7px 16px;border-radius:20px;font-weight:700!important}
+@media(max-width:600px){nav{padding:0 16px}.nav-links{display:none}}
+.breadcrumb{padding:16px 40px;font-size:.82rem;color:rgba(240,230,211,0.45)}
+.breadcrumb a{color:rgba(240,230,211,0.45);text-decoration:none}.breadcrumb a:hover{color:#c8864a}
+.breadcrumb span{margin:0 6px;color:rgba(240,230,211,0.25)}
+.hero{text-align:center;padding:48px 20px 36px;border-bottom:1px solid rgba(180,120,60,0.15)}
+.hero-level{display:inline-block;background:rgba(200,134,74,0.12);border:1px solid rgba(200,134,74,0.3);color:#c8864a;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:10px}.hero h1 span{color:#c8864a}
+.hero p{color:rgba(240,230,211,0.6);font-size:.95rem;max-width:500px;margin:0 auto;line-height:1.7}
+.lesson-nav{display:flex;justify-content:center;gap:8px;padding:16px 20px;border-bottom:1px solid rgba(180,120,60,0.15);flex-wrap:wrap;background:rgba(28,14,0,0.5)}
+.lesson-nav a{color:rgba(240,230,211,0.5);text-decoration:none;font-size:.82rem;font-weight:700;padding:7px 16px;border-radius:50px;border:1px solid rgba(200,134,74,0.2);transition:all .2s}
+.lesson-nav a:hover,.lesson-nav a.active{background:rgba(200,134,74,0.15);border-color:rgba(200,134,74,0.5);color:#c8864a}
+.container{max-width:820px;margin:0 auto;padding:44px 20px 100px}
+.section-block{margin-bottom:36px;scroll-margin-top:90px}
+.card{border-radius:18px;padding:28px 32px}
+.card-warm{background:rgba(200,134,74,0.07);border:1px solid rgba(200,134,74,0.2)}
+.card-dark{background:rgba(0,0,0,0.35);border:1px solid rgba(200,134,74,0.15)}
+.card-code{background:#110800;border:1px solid rgba(200,134,74,0.2)}
+.card h2{font-size:1.05rem;font-weight:900;color:#c8864a;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.card p{font-size:.92rem;color:rgba(240,230,211,0.75);line-height:1.85;margin-bottom:12px}
+.card p:last-child{margin-bottom:0}.card strong{color:#c8864a}
+.highlight{background:rgba(200,134,74,0.1);border-right:3px solid #c8864a;border-radius:8px;padding:14px 18px;margin:14px 0;font-size:.88rem;color:rgba(240,230,211,0.8);line-height:1.9}
+.review-list{list-style:none}
+.review-list li{padding:8px 0;font-size:.9rem;color:rgba(240,230,211,0.7);border-bottom:1px solid rgba(200,134,74,0.1);display:flex;align-items:flex-start;gap:10px}
+.review-list li:last-child{border-bottom:none}.review-list li::before{content:'✅';flex-shrink:0}
+.func-table{width:100%;border-collapse:collapse;margin-top:12px}
+.func-table th,.func-table td{padding:10px 14px;text-align:right;border-bottom:1px solid rgba(200,134,74,0.15);font-size:.85rem}
+.func-table th{color:#c8864a;font-weight:900;font-size:.78rem;letter-spacing:1px}
+.func-table td{color:rgba(240,230,211,0.7)}
+.func-table td:first-child{font-family:'Courier New',monospace;color:#f5d5b0;direction:ltr;text-align:left}
+.code-label{font-size:.7rem;font-weight:700;color:#c8864a;opacity:.7;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+pre{background:rgba(255,255,255,0.04);border-radius:10px;padding:18px;overflow-x:auto;margin-bottom:8px}
+pre code{font-family:'Courier New',monospace;font-size:.88rem;color:#f5d5b0;line-height:1.8;direction:ltr;display:block;text-align:left}
+.code-note{font-size:.8rem;color:rgba(240,230,211,0.4);margin-bottom:18px;line-height:1.6}
+.quiz-question{margin-bottom:22px}
+.quiz-question p{font-size:.92rem;font-weight:700;color:#f0e6d3;margin-bottom:10px}
+.quiz-options{display:flex;flex-direction:column;gap:7px}
+.quiz-option{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(200,134,74,0.2);border-radius:10px;cursor:pointer;font-size:.87rem;color:rgba(240,230,211,0.7);transition:all .2s}
+.quiz-option:hover{border-color:rgba(200,134,74,0.5);background:rgba(200,134,74,0.07)}
+.quiz-option.correct{background:rgba(76,175,80,0.15);border-color:#66BB6A;color:#a5d6a7}
+.quiz-option.wrong{background:rgba(244,67,54,0.12);border-color:#EF9A9A;color:#ef9a9a}
+.quiz-option input{accent-color:#c8864a}
+.quiz-btn{margin-top:22px;background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff;border:none;padding:12px 32px;border-radius:50px;font-size:.92rem;font-weight:900;cursor:pointer;font-family:'Heebo',sans-serif}
+.quiz-score{margin-top:16px;font-size:.95rem;font-weight:700;color:#c8864a;display:none;text-align:center;padding:14px;background:rgba(200,134,74,0.1);border-radius:12px;border:1px solid rgba(200,134,74,0.3)}
+.lesson-footer{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:28px;border-top:1px solid rgba(200,134,74,0.2);flex-wrap:wrap;gap:14px}
+.nav-btn{text-decoration:none;padding:12px 26px;border-radius:50px;font-weight:900;font-size:.9rem;transition:all .3s}
+.nav-btn.prev{background:rgba(200,134,74,0.1);color:#c8864a;border:1px solid rgba(200,134,74,0.3)}
+.nav-btn.next{background:linear-gradient(135deg,#8b4a1a,#c8864a);color:#fff}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,134,74,0.25)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Women <span>Who</span> Hack 🎀</a>
+  <ul class="nav-links">
+    <li><a href="/">בית</a></li><li><a href="/about">המייסדת</a></li><li><a href="/attacks">מתקפות</a></li>
+    <li><a href="/courses">קורסים</a></li><li><a href="/mysteries">תעלומות</a></li><li><a href="/projects">פרויקטים</a></li>
+    <li><a href="/blog">בלוג</a></li><li><a href="/contact">צור קשר</a></li>
+    <li><a href="/register" class="nav-join">הצטרפות 🎀</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="/courses">קורסים</a><span>←</span><a href="/courses/languages">שפות תכנות</a><span>←</span><a href="/courses/languages/c">C</a><span>←</span>שיעור 17</div>
+<div class="hero">
+  <div class="hero-level">Level 5 — Expert Systems 🏆</div>
+  <h1>שיעור 17 — <span>עבודה עם קבצים — Persistence 📂</span></h1>
+  <p>fopen, fclose, fprintf, fread — שמירת נתונים לדיסק לצמיתות</p>
+</div>
+<div class="lesson-nav">
+  <a href="#review" class="active">חזרה</a><a href="#concept">מושגים</a><a href="#life">מהחיים</a><a href="#funcs">פונקציות</a><a href="#code">קוד</a><a href="#quiz">שאלות</a>
+</div>
+<div class="container">
+
+  <div class="section-block card card-warm" id="review">
+    <h2>🔁 חזרה</h2>
+    <ul class="review-list">
+      <li>malloc, free — ניהול Heap</li>
+      <li>מצביעים — *, &, NULL</li>
+      <li>היום: שמירת נתונים לדיסק — נשמרים גם אחרי סגירת התוכנית</li>
+    </ul>
+  </div>
+
+  <div class="section-block card card-dark" id="concept">
+    <h2>💡 מושגים — קבצים ב-C</h2>
+    <p>עד עכשיו, כל הנתונים נמחקו כשהתוכנית נסגרה. עכשיו נלמד לכתוב לדיסק הקשיח ולקרוא ממנו — <strong>Persistence</strong>.</p>
+    <p>משתמשים במצביע מסוג <strong>FILE*</strong> ובפונקציות מ-stdio.h.</p>
+    <div class="highlight">
+      📌 מצבי פתיחה (mode):<br>
+      → <strong>"r"</strong> — קריאה בלבד (Read)<br>
+      → <strong>"w"</strong> — כתיבה (Write) — מוחק תוכן קיים!<br>
+      → <strong>"a"</strong> — הוספה לסוף (Append)<br>
+      → <strong>"rb" / "wb"</strong> — קריאה/כתיבה בינארית<br>
+      → תמיד בדקי שה-FILE* לא NULL לפני שימוש!<br>
+      → <strong>תמיד לסגור עם fclose()!</strong>
+    </div>
+  </div>
+
+  <div class="section-block card card-warm" id="life">
+    <h2>🌍 מהחיים</h2>
+    <p>📓 <strong>כתיבה ביומן.</strong> המחשבות שלך בראש (RAM) נעלמות כשישנים, אבל מה שכתבת ביומן (File) יהיה שם גם בבוקר.</p>
+    <p>🔐 <strong>בסייבר:</strong> Log Files, מסדי נתונים, קובצי הגדרות — כל אלה מנוהלים עם file I/O. הבנת קבצים חיונית לניתוח תוכנות זדוניות.</p>
+  </div>
+
+  <div class="section-block card card-dark" id="funcs">
+    <h2>📚 פונקציות קבצים חשובות</h2>
+    <table class="func-table">
+      <tr><th>פונקציה</th><th>מה היא עושה</th></tr>
+      <tr><td>fopen(path, mode)</td><td>פותחת קובץ, מחזירה FILE*</td></tr>
+      <tr><td>fclose(f)</td><td>סוגרת קובץ — חובה!</td></tr>
+      <tr><td>fprintf(f, fmt, ...)</td><td>כותבת טקסט לקובץ</td></tr>
+      <tr><td>fscanf(f, fmt, ...)</td><td>קוראת טקסט מקובץ</td></tr>
+      <tr><td>fgets(buf, n, f)</td><td>קוראת שורה שלמה</td></tr>
+      <tr><td>fwrite(ptr, size, n, f)</td><td>כותבת נתונים בינאריים</td></tr>
+      <tr><td>fread(ptr, size, n, f)</td><td>קוראת נתונים בינאריים</td></tr>
+      <tr><td>feof(f)</td><td>בודקת אם הגיעה לסוף</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block card card-code" id="code">
+    <h2>💻 קוד</h2>
+    <div class="code-label">כתיבה לקובץ טקסט</div>
+    <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    FILE *f = fopen("agents.txt", "w");
+    if (f == NULL) {
+        printf("כשל בפתיחת קובץ!\n");
+        return 1;
+    }
+
+    fprintf(f, "CyberQueen,5,25\n");
+    fprintf(f, "PinkPanther,4,12\n");
+    fprintf(f, "BowsAndBits,3,8\n");
+
+    fclose(f);  // חובה!
+    printf("נשמר בהצלחה!\n");
+    return 0;
+}</code></pre>
+    <p class="code-note">👆 תמיד בדקי NULL ותמיד סגרי עם fclose!</p>
+
+    <div class="code-label">קריאה מקובץ שורה אחר שורה</div>
+    <pre><code>FILE *f = fopen("agents.txt", "r");
+char line[100];
+
+while (fgets(line, 100, f) != NULL) {
+    printf("שורה: %s", line);
+}
+fclose(f);</code></pre>
+    <p class="code-note">👆 fgets קוראת שורה שלמה כולל \\n — בטוח ויעיל.</p>
+
+    <div class="code-label">כתיבה וקריאה בינארית (Struct לקובץ)</div>
+    <pre><code>typedef struct { char name[30]; int level; } Agent;
+
+// כתיבה
+Agent a = {"Alice", 5};
+FILE *f = fopen("data.bin", "wb");
+fwrite(&a, sizeof(Agent), 1, f);
+fclose(f);
+
+// קריאה
+Agent loaded;
+f = fopen("data.bin", "rb");
+fread(&loaded, sizeof(Agent), 1, f);
+printf("%s | %d\n", loaded.name, loaded.level);
+fclose(f);</code></pre>
+    <p class="code-note">👆 כתיבה בינארית = מהירה ומדויקת — מושלמת ל-Structs.</p>
+  </div>
+
+  <div class="section-block card card-warm" id="quiz">
+    <h2>❓ מבדק הבנה — 5 שאלות</h2>
+    <div class="quiz-question"><p>1. איך פותחים קובץ לכתיבה ב-C?</p>
+      <div class="quiz-options">
+        <label class="quiz-option"><input type="radio" name="q1" value="A"> א — fopen("file.txt", "w")</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="B"> ב — open_file("w")</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="C"> ג — read("file.txt")</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="D"> ד — file.write()</label>
+      </div>
+    </div>
+    <div class="quiz-question"><p>2. מה מסמל mode "a"?</p>
+      <div class="quiz-options">
+        <label class="quiz-option"><input type="radio" name="q2" value="A"> א — למחוק הכל</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="B"> ב — להוסיף לסוף הקובץ (Append)</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="C"> ג — לקרוא בלבד</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="D"> ד — לסגור</label>
+      </div>
+    </div>
+    <div class="quiz-question"><p>3. למה חשוב להשתמש ב-fclose?</p>
+      <div class="quiz-options">
+        <label class="quiz-option"><input type="radio" name="q3" value="A"> א — כדי שהקובץ לא יתפוס מקום</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="B"> ב — לוודא שכל הנתונים נכתבו ושהקובץ לא ייכנס לנעילה</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="C"> ג — למחוק את הקובץ</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="D"> ד — זה לא חשוב</label>
+      </div>
+    </div>
+    <div class="quiz-question"><p>4. איזו פונקציה בודקת אם הגענו לסוף הקובץ?</p>
+      <div class="quiz-options">
+        <label class="quiz-option"><input type="radio" name="q4" value="A"> א — end()</label>
+        <label class="quiz-option"><input type="radio" name="q4" value="B"> ב — feof()</label>
+        <label class="quiz-option"><input type="radio" name="q4" value="C"> ג — finish()</label>
+        <label class="quiz-option"><input type="radio" name="q4" value="D"> ד — stop()</label>
+      </div>
+    </div>
+    <div class="quiz-question"><p>5. מה ההבדל בין קובץ טקסט לבינארי?</p>
+      <div class="quiz-options">
+        <label class="quiz-option"><input type="radio" name="q5" value="A"> א — אין הבדל</label>
+        <label class="quiz-option"><input type="radio" name="q5" value="B"> ב — טקסט קריא לבני אדם, בינארי מכיל מידע גולמי</label>
+        <label class="quiz-option"><input type="radio" name="q5" value="C"> ג — טקסט תמיד גדול יותר</label>
+        <label class="quiz-option"><input type="radio" name="q5" value="D"> ד — בינארי רק לתמונות</label>
+      </div>
+    </div>
+    <button class="quiz-btn" onclick="showScore()">בדקי תשובות ✨</button>
+    <div class="quiz-score" id="score"></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="/courses/languages/c/project4" class="nav-btn prev">← פרויקט Level 4</a>
+    <a href="/courses/languages/c/lesson18" class="nav-btn next">שיעור 18 — Bitwise ←</a>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.lesson-nav a').forEach(link=>{link.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.lesson-nav a').forEach(l=>l.classList.remove('active'));this.classList.add('active');document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+const answers={q1:'A',q2:'B',q3:'B',q4:'B',q5:'B'};
+function showScore(){let s=0;for(let q in answers){const chosen=document.querySelector(`input[name="${q}"]:checked`);document.querySelectorAll(`input[name="${q}"]`).forEach(o=>{const l=o.parentElement;if(o.value===answers[q])l.classList.add('correct');else if(chosen&&o.value===chosen.value)l.classList.add('wrong');o.disabled=true;});if(chosen&&chosen.value===answers[q])s++;}const el=document.getElementById('score');el.style.display='block';el.innerHTML=`קיבלת ${s}/5 ✨ — ${['נסי שוב 💪','ממשיכים!','לא רע!','כמעט!','מושלם! 🌟','מצוין! 🏆'][s]}`;}
+</script>
+</body>
+</html>
