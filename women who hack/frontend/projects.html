@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women Who Hack | פרויקטים 🎀</title>
-    <!-- ✅ Firebase Auth Guard -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -12,13 +11,14 @@
         const auth = getAuth(app);
         onAuthStateChanged(auth, (user) => { if (!user) window.location.href = '/login'; });
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #FFF5F7; }
+        body { font-family: 'Heebo', sans-serif; background-color: #FFF5F7; min-height: 100vh; display: flex; flex-direction: column; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: #FFFDD0; box-shadow: 0 2px 15px rgba(255,182,193,0.4); position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #F8BBD0; direction: rtl; }
-        nav a.logo { font-size: 1.8rem; font-weight: bold; color: #D81B60; text-decoration: none; }
-        .nav-links a { text-decoration: none; color: #555; margin: 0 15px; font-weight: 600; }
-        .nav-links a.join-btn { background: #F8BBD0; color: white; padding: 8px 25px; border-radius: 50px; font-weight: bold; border: 1px solid white; }
+        nav a.logo { font-size: 1.6rem; font-weight: 900; color: #D81B60; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #555; margin: 0 12px; font-weight: 600; font-size: 0.95rem; }
+        .nav-links a.join-btn { background: #FF69B4; color: white; padding: 8px 22px; border-radius: 50px; font-weight: bold; }
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; background: none; border: none; padding: 5px; }
         .hamburger span { display: block; width: 25px; height: 3px; background: #D81B60; border-radius: 3px; }
         @media (max-width: 768px) {
@@ -28,116 +28,91 @@
             .nav-links.open { display: flex; }
             .nav-links a { padding: 10px 20px; margin: 0; }
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px 80px; }
-        .page-header { text-align: center; margin-bottom: 50px; }
-        .page-header h1 { color: #D81B60; font-size: 2.8rem; margin-bottom: 12px; }
-        .page-header p { background: #FFFDD0; display: inline-block; padding: 10px 25px; border-radius: 50px; border: 2px solid #F8BBD0; color: #555; font-size: 1.05rem; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .project-card { background: white; border: 3px solid #F8BBD0; border-radius: 25px; padding: 30px; box-shadow: 0 8px 25px rgba(244,143,177,0.15); transition: transform 0.3s; }
-        .project-card:hover { transform: translateY(-5px); }
-        .project-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-        .project-title { color: #D81B60; font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; }
-        .project-tag { display: inline-block; background: #FCE4EC; color: #D81B60; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 12px; }
-        .project-desc { color: #666; line-height: 1.7; font-size: 0.97rem; margin-bottom: 20px; }
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .tech-badge { background: #FFFDD0; border: 1px solid #F8BBD0; color: #D81B60; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
-        .project-link { display: inline-block; background: linear-gradient(135deg, #FF69B4, #D81B60); color: white; padding: 10px 22px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
-        .project-link:hover { opacity: 0.85; transform: scale(1.03); }
-        .project-link.disabled { background: #ccc; cursor: not-allowed; }
-        .coming-soon { background: #FFF8E1; border: 2px dashed #FFD54F; border-radius: 20px; padding: 20px; text-align: center; color: #F57F17; font-weight: bold; margin-top: 15px; }
+
+        .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+
+        .card {
+            background: white;
+            border: 3px solid #F8BBD0;
+            border-radius: 30px;
+            padding: 60px 50px;
+            text-align: center;
+            max-width: 580px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(255,105,180,0.12);
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .emoji { font-size: 4rem; margin-bottom: 20px; display: block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .card h1 { font-size: 1.8rem; font-weight: 900; color: #D81B60; margin-bottom: 16px; line-height: 1.4; }
+        .card p { color: #888; font-size: 1rem; line-height: 1.8; margin-bottom: 30px; }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF69B4, #D81B60);
+            color: white;
+            padding: 13px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(216,27,96,0.25);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(216,27,96,0.35); }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFF0F5;
+            border: 1px solid #F8BBD0;
+            color: #D81B60;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        footer { text-align: center; padding: 30px 20px; color: #bbb; font-size: 0.88rem; border-top: 1px solid #F8BBD0; }
+        footer a { color: #FF69B4; text-decoration: none; }
     </style>
 </head>
 <body>
     <nav>
         <a href="/" class="logo">Women Who Hack 🎀</a>
-        <button class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
         <div class="nav-links" id="nav-links">
             <a href="/">בית</a><a href="/about">המייסדת</a><a href="/attacks">מתקפות</a>
-            <a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
+            <a href="/courses">קורסים</a><a href="/mysteries">תעלומות</a><a href="/projects">פרויקטים</a>
             <a href="/blog">בלוג</a><a href="/contact">צור קשר</a>
             <a href="/register" class="join-btn">הצטרפות 🎀</a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="page-header">
-            <h1>🎀 פרויקטים</h1>
-            <p>פרויקטים אמיתיים שנבנו על ידי הקהילה שלנו — קוד, סייבר וחדשנות</p>
-        </div>
-
-        <div class="projects-grid">
-
-            <div class="project-card">
-                <span class="project-icon">🔐</span>
-                <div class="project-title">Password Strength Analyzer</div>
-                <span class="project-tag">Python | Security</span>
-                <p class="project-desc">כלי Python שמנתח חוזק סיסמאות לפי קריטריונים של NIST, בודק דליפות ב-HaveIBeenPwned API ומייצר דוח אבטחה מפורט.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">API</span>
-                    <span class="tech-badge">SHA-1 Hash</span>
-                </div>
-                <div class="coming-soon">🚧 בפיתוח — בקרוב!</div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-icon">🕵️‍♀️</span>
-                <div class="project-title">CTF Challenge Solver</div>
-                <span class="project-tag">Cybersecurity</span>
-                <p class="project-desc">אוסף של פתרונות לאתגרי CTF (Capture The Flag) מתחרויות שונות, עם הסבר מפורט לכל אתגר ולמה שיטה מסוימת עובדת.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Linux</span>
-                    <span class="tech-badge">Crypto</span>
-                    <span class="tech-badge">Web</span>
-                </div>
-                <div class="coming-soon">🚧 בפיתוח — בקרוב!</div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-icon">📊</span>
-                <div class="project-title">Network Traffic Monitor</div>
-                <span class="project-tag">Networks</span>
-                <p class="project-desc">כלי לניטור תעבורת רשת בזמן אמת, זיהוי התקפות פשוטות וויזואליזציה של נתוני הרשת. פרויקט לימודי בנושא רשתות וסייבר.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Scapy</span>
-                    <span class="tech-badge">Wireshark</span>
-                </div>
-                <div class="coming-soon">🚧 בפיתוח — בקרוב!</div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-icon">🤖</span>
-                <div class="project-title">Phishing Detector Bot</div>
-                <span class="project-tag">AI | Security</span>
-                <p class="project-desc">בוט Telegram שמנתח קישורים ומיילים חשודים ומזהה ניסיונות פישינג בעזרת Machine Learning ורשימות שחורות מעודכנות.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Telegram API</span>
-                    <span class="tech-badge">ML</span>
-                </div>
-                <div class="coming-soon">🚧 בפיתוח — בקרוב!</div>
-            </div>
-
-            <div class="project-card" style="border-color: #FFD54F; background: #FFFDE7;">
-                <span class="project-icon">💡</span>
-                <div class="project-title">יש לך פרויקט?</div>
-                <span class="project-tag">קהילה</span>
-                <p class="project-desc">אם בנית פרויקט מגניב בתחום הסייבר, הפיתוח או הטכנולוגיה — נשמח להציג אותו כאן! שלחי לנו פרטים דרך עמוד הקשר.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">כל שפה</span>
-                    <span class="tech-badge">כל נושא</span>
-                    <span class="tech-badge">כל רמה</span>
-                </div>
-                <a href="https://forms.gle/L79BHsj3dJnEoFUP6" target="_blank" class="project-link">שלחי לנו 🎀</a>
-            </div>
-
+    <div class="main">
+        <div class="card">
+            <span class="emoji">🚧</span>
+            <div class="badge">🎀 בתהליכי שדרוג</div>
+            <h1>היי אהובה!<br>הדף הזה אינו זמין כרגע</h1>
+            <p>אנחנו עובדות על משהו גדול ומיוחד עבורך — הדף נמצא בתהליכי שדרוג ובנייה ויחזור בקרוב מחודש ✨</p>
+            <p>בינתיים, תוכלי ליהנות ממגוון קורסים מלאים בשפות תכנות שמחכים לך 💻</p>
+            <a href="/courses" class="btn">לקורסים שלנו 🎀</a>
         </div>
     </div>
 
+    <footer>
+        <p>Women Who Hack 🎀 | <a href="/contact">צור קשר</a> | <a href="/about">המייסדת</a></p>
+    </footer>
+
     <script>
-        function toggleNav() { document.getElementById('nav-links').classList.toggle('open'); }
+        document.getElementById('hamburger').onclick = function() {
+            document.getElementById('nav-links').classList.toggle('open');
+        };
     </script>
 </body>
 </html>
