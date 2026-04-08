@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Who Hack — C++ Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #D4537E;
+    --pink-light: #FBEAF0;
+    --pink-dark: #72243E;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-dark: #085041;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --purple-dark: #26215C;
+    --bg: #0f0f14;
+    --bg2: #16161e;
+    --bg3: #1e1e2a;
+    --text: #f0eef8;
+    --text-muted: #9b98b8;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  body {
+    font-family: 'Rubik', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -20%, rgba(83,74,183,0.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,83,126,0.15);
+    border: 1px solid rgba(212,83,126,0.4);
+    color: #ED93B1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #f0eef8 30%, #ED93B1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--pink);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .level-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .level-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.15);
+    background: var(--bg3);
+  }
+
+  .level-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    opacity: 0.12;
+    transform: translate(30px, -30px);
+  }
+
+  .level-card.pink::before { background: var(--pink); }
+  .level-card.teal::before { background: var(--teal); }
+  .level-card.purple::before { background: var(--purple); }
+  .level-card.amber::before { background: #EF9F27; }
+  .level-card.coral::before { background: #D85A30; }
+  .level-card.blue::before { background: #378ADD; }
+  .level-card.green::before { background: #639922; }
+  .level-card.red::before { background: #E24B4A; }
+  .level-card.gray::before { background: #888780; }
+  .level-card.final::before { background: #7F77DD; }
+
+  .level-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .level-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  .level-card.pink .level-num { background: rgba(212,83,126,0.2); color: #ED93B1; }
+  .level-card.teal .level-num { background: rgba(29,158,117,0.2); color: #5DCAA5; }
+  .level-card.purple .level-num { background: rgba(83,74,183,0.2); color: #AFA9EC; }
+  .level-card.amber .level-num { background: rgba(239,159,39,0.2); color: #FAC775; }
+  .level-card.coral .level-num { background: rgba(216,90,48,0.2); color: #F0997B; }
+  .level-card.blue .level-num { background: rgba(55,138,221,0.2); color: #85B7EB; }
+  .level-card.green .level-num { background: rgba(99,153,34,0.2); color: #97C459; }
+  .level-card.red .level-num { background: rgba(226,75,74,0.2); color: #F09595; }
+  .level-card.gray .level-num { background: rgba(136,135,128,0.2); color: #B4B2A9; }
+  .level-card.final .level-num { background: rgba(127,119,221,0.2); color: #AFA9EC; }
+
+  .level-lessons {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .level-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .level-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .level-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .topic-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .arrow {
+    color: var(--text-muted);
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .level-card:hover .arrow { transform: translateX(-4px); }
+
+  .cta-section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(212,83,126,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.8rem; }
+  .cta-section p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+
+  .btn-start {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.8rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-start:hover { background: var(--pink-dark); transform: translateY(-2px); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hero-badge">Women Who Hack — C++</div>
+  <h1>מקוד ראשון<br>לפרויקט מלא</h1>
+  <p class="subtitle">קורס C++ שנבנה במיוחד לנשים — מהשיעור הראשון ועד מערכת מורכבת עם מחלקות, קבצים ופולימורפיזם.</p>
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">10</span>
+      <span class="stat-label">Levels</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">40</span>
+      <span class="stat-label">שיעורים</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">9</span>
+      <span class="stat-label">פרויקטים</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">קוד לכתוב</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">מבנה הקורס</div>
+
+  <div class="levels-grid">
+
+    <a href="level1.html" class="level-card pink">
+      <div class="level-header">
+        <span class="level-num">Level 1</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">יסודות C++</div>
+      <p class="level-desc">הפגישה הראשונה עם עולם הקוד — מ-Hello World עד לתוכנית שלמה שמכירה את המשתמש.</p>
+      <div class="level-topics">
+        <span class="topic-tag">IDE</span>
+        <span class="topic-tag">Variables</span>
+        <span class="topic-tag">cin / cout</span>
+        <span class="topic-tag">main()</span>
+      </div>
+    </a>
+
+    <a href="level2.html" class="level-card teal">
+      <div class="level-header">
+        <span class="level-num">Level 2</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">לולאות ופונקציות</div>
+      <p class="level-desc">ללמוד לחזור על קוד בצורה חכמה, לכתוב פונקציות ולשלב תנאים מורכבים.</p>
+      <div class="level-topics">
+        <span class="topic-tag">for / while</span>
+        <span class="topic-tag">Nested loops</span>
+        <span class="topic-tag">Functions</span>
+        <span class="topic-tag">if/else if</span>
+      </div>
+    </a>
+
+    <a href="level3.html" class="level-card purple">
+      <div class="level-header">
+        <span class="level-num">Level 3</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">מערכים ומחרוזות</div>
+      <p class="level-desc">אחסון וניהול נתונים — מערכים חד ודו ממדיים, עבודה עם מחרוזות ושיטות חיפוש.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Arrays</span>
+        <span class="topic-tag">Strings</span>
+        <span class="topic-tag">2D Arrays</span>
+      </div>
+    </a>
+
+    <a href="level4.html" class="level-card amber">
+      <div class="level-header">
+        <span class="level-num">Level 4</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">פוינטרים ו-Struct</div>
+      <p class="level-desc">גישה ישירה לזיכרון — פוינטרים, מבני נתונים ומשתני מצב.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Pointers</span>
+        <span class="topic-tag">Struct</span>
+        <span class="topic-tag">Boolean / Flags</span>
+      </div>
+    </a>
+
+    <a href="level5.html" class="level-card coral">
+      <div class="level-header">
+        <span class="level-num">Level 5</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">פונקציות מתקדמות</div>
+      <p class="level-desc">העברת פרמטרים, רקורסיה ו-pass by reference — הפונקציה כלב אמיתי.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Recursion</span>
+        <span class="topic-tag">Pass by ref</span>
+        <span class="topic-tag">Arrays as params</span>
+      </div>
+    </a>
+
+    <a href="level6.html" class="level-card blue">
+      <div class="level-header">
+        <span class="level-num">Level 6</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">עבודה עם קבצים</div>
+      <p class="level-desc">שמירה וקריאה של נתונים מהדיסק — ofstream, ifstream ו-append.</p>
+      <div class="level-topics">
+        <span class="topic-tag">ofstream</span>
+        <span class="topic-tag">ifstream</span>
+        <span class="topic-tag">ios::app</span>
+      </div>
+    </a>
+
+    <a href="level7.html" class="level-card green">
+      <div class="level-header">
+        <span class="level-num">Level 7</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">מחלקות ואובייקטים</div>
+      <p class="level-desc">OOP מתחיל — Class, Object, Constructor ו-Destructor.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Class</span>
+        <span class="topic-tag">Constructor</span>
+        <span class="topic-tag">Destructor</span>
+        <span class="topic-tag">Methods</span>
+      </div>
+    </a>
+
+    <a href="level8.html" class="level-card red">
+      <div class="level-header">
+        <span class="level-num">Level 8</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">ירושה ופולימורפיזם</div>
+      <p class="level-desc">מחלקות יורשות, פונקציות וירטואליות וניהול הרשאות שונות.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Inheritance</span>
+        <span class="topic-tag">Virtual</span>
+        <span class="topic-tag">Polymorphism</span>
+        <span class="topic-tag">Access specifiers</span>
+      </div>
+    </a>
+
+    <a href="level9.html" class="level-card gray">
+      <div class="level-header">
+        <span class="level-num">Level 9</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">Static ו-Templates</div>
+      <p class="level-desc">קוד גנרי וחכם — משתנים סטטיים, פונקציות Template ומחלקות גנריות.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Static</span>
+        <span class="topic-tag">Templates</span>
+        <span class="topic-tag">Generic classes</span>
+      </div>
+    </a>
+
+    <a href="level10.html" class="level-card final">
+      <div class="level-header">
+        <span class="level-num">Level 10</span>
+        <span class="level-lessons">4 שיעורים</span>
+        <span class="arrow">←</span>
+      </div>
+      <div class="level-title">פרויקט סיום</div>
+      <p class="level-desc">מערכת משתמשות מלאה — שילוב כל החומר, כתיבה, בדיקה ומבחן סיום.</p>
+      <div class="level-topics">
+        <span class="topic-tag">Full project</span>
+        <span class="topic-tag">File I/O</span>
+        <span class="topic-tag">OOP</span>
+        <span class="topic-tag">Final exam</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="cta-section">
+    <h2>מוכנה להתחיל?</h2>
+    <p>Level 1 מחכה לך — מהשיעור הראשון, שלב אחר שלב.</p>
+    <a href="level1.html" class="btn-start">Level 1 — יסודות C++ →</a>
+  </div>
+</main>
+
+<footer>
+  Women Who Hack — C++ Course &nbsp;|&nbsp; כל הזכויות שמורות
+</footer>
+
+</body>
+</html>
