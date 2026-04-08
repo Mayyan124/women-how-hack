@@ -1,499 +1,511 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women Who Hack — C++ Course</title>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women Who Hack — C++</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink-bg: #fff0f5;
+      --pink-light: #ffe4ef;
+      --pink-mid: #ffb6d9;
+      --pink-dark: #f072a9;
+      --pink-deep: #d94f8a;
+      --pink-accent: #ff8cc8;
+      --white: #ffffff;
+      --text-dark: #3d1a2e;
+      --text-mid: #7a3060;
+      --text-light: #b56090;
+      --shadow: rgba(240, 114, 169, 0.18);
+    }
 
-  :root {
-    --pink: #D4537E;
-    --pink-light: #FBEAF0;
-    --pink-dark: #72243E;
-    --teal: #1D9E75;
-    --teal-light: #E1F5EE;
-    --teal-dark: #085041;
-    --purple: #534AB7;
-    --purple-light: #EEEDFE;
-    --purple-dark: #26215C;
-    --bg: #0f0f14;
-    --bg2: #16161e;
-    --bg3: #1e1e2a;
-    --text: #f0eef8;
-    --text-muted: #9b98b8;
-    --border: rgba(255,255,255,0.08);
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Rubik', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    direction: rtl;
-  }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--pink-bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  header {
-    padding: 3rem 2rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
+    /* ── BACKGROUND DECO ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -120px; left: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #ffd6ec 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #ffcce5 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% -20%, rgba(83,74,183,0.3) 0%, transparent 60%);
-    pointer-events: none;
-  }
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
 
-  .hero-badge {
-    display: inline-block;
-    background: rgba(212,83,126,0.15);
-    border: 1px solid rgba(212,83,126,0.4);
-    color: #ED93B1;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    padding: 0.35rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-  }
+    .header-badge {
+      display: inline-block;
+      background: var(--pink-mid);
+      color: var(--pink-deep);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+      animation: fadeSlideDown 0.6s ease both;
+    }
 
-  h1 {
-    font-size: clamp(2.2rem, 6vw, 3.8rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #f0eef8 30%, #ED93B1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    header h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      color: var(--pink-deep);
+      line-height: 1.15;
+      animation: fadeSlideDown 0.7s ease both;
+    }
 
-  .subtitle {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 540px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.7;
-    font-weight: 300;
-  }
+    header h1 span {
+      color: var(--pink-dark);
+      display: inline-block;
+    }
 
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-  }
+    .header-sub {
+      margin-top: 14px;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      font-weight: 500;
+      animation: fadeSlideDown 0.85s ease both;
+    }
 
-  .stat {
-    text-align: center;
-  }
+    .header-hearts {
+      font-size: 1.4rem;
+      margin-top: 10px;
+      animation: fadeSlideDown 1s ease both;
+      letter-spacing: 4px;
+    }
 
-  .stat-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--pink);
-    display: block;
-    line-height: 1;
-  }
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 30px auto 10px;
+      padding: 0 20px;
+      max-width: 700px;
+      position: relative; z-index: 1;
+      animation: fadeSlideUp 0.9s ease both;
+    }
 
-  .stat-label {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 0.3rem;
-    display: block;
-  }
+    .stat-pill {
+      background: var(--white);
+      border: 2px solid var(--pink-mid);
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--shadow);
+    }
 
-  main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .stat-pill .icon { font-size: 1.1rem; }
 
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
+    /* ── GRID ── */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 24px 60px;
+      position: relative; z-index: 1;
+    }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+    /* ── LEVEL CARD ── */
+    .level-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: 0 6px 28px var(--shadow);
+      border: 1.5px solid #ffd6ec;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: fadeSlideUp 0.7s ease both;
+      cursor: pointer;
+    }
 
-  .levels-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-bottom: 3rem;
-  }
+    .level-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(240, 114, 169, 0.28);
+    }
 
-  .level-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.6rem;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.2s, border-color 0.2s, background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+    .card-header {
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink-accent));
+      padding: 20px 22px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-  .level-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255,255,255,0.15);
-    background: var(--bg3);
-  }
+    .level-num {
+      background: rgba(255,255,255,0.25);
+      color: var(--white);
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.3rem;
+      font-weight: 800;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      backdrop-filter: blur(4px);
+    }
 
-  .level-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    opacity: 0.12;
-    transform: translate(30px, -30px);
-  }
+    .card-header-text h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
 
-  .level-card.pink::before { background: var(--pink); }
-  .level-card.teal::before { background: var(--teal); }
-  .level-card.purple::before { background: var(--purple); }
-  .level-card.amber::before { background: #EF9F27; }
-  .level-card.coral::before { background: #D85A30; }
-  .level-card.blue::before { background: #378ADD; }
-  .level-card.green::before { background: #639922; }
-  .level-card.red::before { background: #E24B4A; }
-  .level-card.gray::before { background: #888780; }
-  .level-card.final::before { background: #7F77DD; }
+    .card-header-text .subtitle {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.85);
+      margin-top: 2px;
+      font-weight: 500;
+    }
 
-  .level-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
+    .card-body {
+      padding: 18px 22px;
+    }
 
-  .level-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.3rem 0.7rem;
-    border-radius: 100px;
-    display: inline-block;
-  }
+    /* ── LESSON LIST ── */
+    .lesson-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-  .level-card.pink .level-num { background: rgba(212,83,126,0.2); color: #ED93B1; }
-  .level-card.teal .level-num { background: rgba(29,158,117,0.2); color: #5DCAA5; }
-  .level-card.purple .level-num { background: rgba(83,74,183,0.2); color: #AFA9EC; }
-  .level-card.amber .level-num { background: rgba(239,159,39,0.2); color: #FAC775; }
-  .level-card.coral .level-num { background: rgba(216,90,48,0.2); color: #F0997B; }
-  .level-card.blue .level-num { background: rgba(55,138,221,0.2); color: #85B7EB; }
-  .level-card.green .level-num { background: rgba(99,153,34,0.2); color: #97C459; }
-  .level-card.red .level-num { background: rgba(226,75,74,0.2); color: #F09595; }
-  .level-card.gray .level-num { background: rgba(136,135,128,0.2); color: #B4B2A9; }
-  .level-card.final .level-num { background: rgba(127,119,221,0.2); color: #AFA9EC; }
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: var(--pink-bg);
+      transition: background 0.2s;
+    }
 
-  .level-lessons {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
+    .lesson-item:hover { background: var(--pink-light); }
 
-  .level-title {
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
+    .lesson-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--pink-dark);
+      flex-shrink: 0;
+    }
 
-  .level-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 1.2rem;
-  }
+    .lesson-item.project {
+      background: linear-gradient(90deg, #fff0f8, #ffe4ef);
+      border: 1px dashed var(--pink-mid);
+      color: var(--pink-deep);
+      font-weight: 600;
+    }
 
-  .level-topics {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
+    .lesson-item.project .lesson-dot {
+      background: var(--pink-deep);
+      width: 10px; height: 10px;
+    }
 
-  .topic-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.05);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
+    .project-star { font-size: 1rem; }
 
-  .arrow {
-    color: var(--text-muted);
-    font-size: 1rem;
-    transition: transform 0.2s;
-  }
+    /* ── CTA BUTTON ── */
+    .card-footer {
+      padding: 0 22px 20px;
+    }
 
-  .level-card:hover .arrow { transform: translateX(-4px); }
+    .btn-start {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink-deep));
+      color: white;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 11px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: 0.03em;
+    }
 
-  .cta-section {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
+    .btn-start:hover { opacity: 0.88; transform: scale(0.98); }
 
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 100%, rgba(212,83,126,0.12) 0%, transparent 60%);
-    pointer-events: none;
-  }
+    /* ── LOCKED ── */
+    .level-card.locked .card-header {
+      background: linear-gradient(135deg, #e8b4cc, #f0c8dc);
+    }
 
-  .cta-section h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.8rem; }
-  .cta-section p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+    .level-card.locked .btn-start {
+      background: linear-gradient(135deg, #dba8c2, #e8b4cc);
+      opacity: 0.7;
+      cursor: default;
+    }
 
-  .btn-start {
-    display: inline-block;
-    background: var(--pink);
-    color: #fff;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.8rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
-  }
+    .lock-badge {
+      background: rgba(255,255,255,0.35);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: auto;
+    }
 
-  .btn-start:hover { background: var(--pink-dark); transform: translateY(-2px); }
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      position: relative; z-index: 1;
+    }
 
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-    font-size: 0.78rem;
-    border-top: 1px solid var(--border);
-  }
-</style>
+    /* ── ANIMATIONS ── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .levels-grid .level-card:nth-child(1) { animation-delay: 0.10s; }
+    .levels-grid .level-card:nth-child(2) { animation-delay: 0.18s; }
+    .levels-grid .level-card:nth-child(3) { animation-delay: 0.26s; }
+    .levels-grid .level-card:nth-child(4) { animation-delay: 0.34s; }
+    .levels-grid .level-card:nth-child(5) { animation-delay: 0.42s; }
+    .levels-grid .level-card:nth-child(6) { animation-delay: 0.50s; }
+    .levels-grid .level-card:nth-child(7) { animation-delay: 0.58s; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .levels-grid { padding: 0 14px 40px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="hero-badge">Women Who Hack — C++</div>
-  <h1>מקוד ראשון<br>לפרויקט מלא</h1>
-  <p class="subtitle">קורס C++ שנבנה במיוחד לנשים — מהשיעור הראשון ועד מערכת מורכבת עם מחלקות, קבצים ופולימורפיזם.</p>
-  <div class="stats-bar">
-    <div class="stat">
-      <span class="stat-num">10</span>
-      <span class="stat-label">Levels</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">40</span>
-      <span class="stat-label">שיעורים</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">9</span>
-      <span class="stat-label">פרויקטים</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">∞</span>
-      <span class="stat-label">קוד לכתוב</span>
-    </div>
-  </div>
-</header>
+  <header>
+    <div class="header-badge">🌸 קורס תכנות לנשים</div>
+    <h1>Women Who Hack<br/><span>C++</span></h1>
+    <p class="header-sub">מאפס לתכנות מתקדם — בצעדים קטנים ומתוקים 💻</p>
+    <div class="header-hearts">🩷 🩷 🩷</div>
+  </header>
 
-<main>
-  <div class="section-label">מבנה הקורס</div>
+  <div class="stats-row">
+    <div class="stat-pill"><span class="icon">📚</span> 7 Levels</div>
+    <div class="stat-pill"><span class="icon">✏️</span> 28 שיעורים</div>
+    <div class="stat-pill"><span class="icon">🚀</span> 7 פרויקטים</div>
+    <div class="stat-pill"><span class="icon">💪</span> מתחילות עד מתקדמות</div>
+  </div>
 
   <div class="levels-grid">
 
-    <a href="level1.html" class="level-card pink">
-      <div class="level-header">
-        <span class="level-num">Level 1</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 1 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">1</div>
+        <div class="card-header-text">
+          <h2>יסודות C++</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">יסודות C++</div>
-      <p class="level-desc">הפגישה הראשונה עם עולם הקוד — מ-Hello World עד לתוכנית שלמה שמכירה את המשתמש.</p>
-      <div class="level-topics">
-        <span class="topic-tag">IDE</span>
-        <span class="topic-tag">Variables</span>
-        <span class="topic-tag">cin / cout</span>
-        <span class="topic-tag">main()</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 1 — מבוא לעולם הקוד</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 2 — משתנים וסוגי נתונים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 3 — הדפסות וקלט</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 4 — מבנה תוכנית בסיסית</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — הצגת עצמי</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי כאן</a>
+      </div>
+    </div>
 
-    <a href="level2.html" class="level-card teal">
-      <div class="level-header">
-        <span class="level-num">Level 2</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 2 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">2</div>
+        <div class="card-header-text">
+          <h2>לולאות ופונקציות</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">לולאות ופונקציות</div>
-      <p class="level-desc">ללמוד לחזור על קוד בצורה חכמה, לכתוב פונקציות ולשלב תנאים מורכבים.</p>
-      <div class="level-topics">
-        <span class="topic-tag">for / while</span>
-        <span class="topic-tag">Nested loops</span>
-        <span class="topic-tag">Functions</span>
-        <span class="topic-tag">if/else if</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 5 — חזרה על Level 1 ולולאות</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 6 — לולאת for מתקדמת</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 7 — פונקציות בסיסיות</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 8 — תנאים מורכבים</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — Smart User System</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 2</a>
+      </div>
+    </div>
 
-    <a href="level3.html" class="level-card purple">
-      <div class="level-header">
-        <span class="level-num">Level 3</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 3 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">3</div>
+        <div class="card-header-text">
+          <h2>מערכים ומחרוזות</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">מערכים ומחרוזות</div>
-      <p class="level-desc">אחסון וניהול נתונים — מערכים חד ודו ממדיים, עבודה עם מחרוזות ושיטות חיפוש.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Arrays</span>
-        <span class="topic-tag">Strings</span>
-        <span class="topic-tag">2D Arrays</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 9 — מערכים חד-ממדיים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 10 — מערכים דו-ממדיים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 11 — מחרוזות ופעולות</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 12 — חיפוש ומיון</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — מערכת ניהול כיתה</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 3</a>
+      </div>
+    </div>
 
-    <a href="level4.html" class="level-card amber">
-      <div class="level-header">
-        <span class="level-num">Level 4</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 4 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">4</div>
+        <div class="card-header-text">
+          <h2>פוינטרים ו-Struct</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">פוינטרים ו-Struct</div>
-      <p class="level-desc">גישה ישירה לזיכרון — פוינטרים, מבני נתונים ומשתני מצב.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Pointers</span>
-        <span class="topic-tag">Struct</span>
-        <span class="topic-tag">Boolean / Flags</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 13 — פוינטרים בסיסיים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 14 — Struct בסיסי</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 15 — פוינטרים עם Struct</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 16 — משתני מצב ו-Boolean</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — ניהול תלמידות</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 4</a>
+      </div>
+    </div>
 
-    <a href="level5.html" class="level-card coral">
-      <div class="level-header">
-        <span class="level-num">Level 5</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 5 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">5</div>
+        <div class="card-header-text">
+          <h2>פונקציות מתקדמות</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">פונקציות מתקדמות</div>
-      <p class="level-desc">העברת פרמטרים, רקורסיה ו-pass by reference — הפונקציה כלב אמיתי.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Recursion</span>
-        <span class="topic-tag">Pass by ref</span>
-        <span class="topic-tag">Arrays as params</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 17 — פונקציות עם פרמטרים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 18 — פונקציות עם מערכים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 19 — פונקציות רקורסיביות</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 20 — ערכים לפי Reference</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — מערכת ציונים</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 5</a>
+      </div>
+    </div>
 
-    <a href="level6.html" class="level-card blue">
-      <div class="level-header">
-        <span class="level-num">Level 6</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 6 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">6</div>
+        <div class="card-header-text">
+          <h2>עבודה עם קבצים</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">עבודה עם קבצים</div>
-      <p class="level-desc">שמירה וקריאה של נתונים מהדיסק — ofstream, ifstream ו-append.</p>
-      <div class="level-topics">
-        <span class="topic-tag">ofstream</span>
-        <span class="topic-tag">ifstream</span>
-        <span class="topic-tag">ios::app</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 21 — פתיחת קובץ וכתיבה</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 22 — קריאת קובץ</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 23 — Append לקובץ קיים</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 24 — קריאה וכתיבת מספרים</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — רשימת משתמשות</li>
+        </ul>
       </div>
-    </a>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 6</a>
+      </div>
+    </div>
 
-    <a href="level7.html" class="level-card green">
-      <div class="level-header">
-        <span class="level-num">Level 7</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+    <!-- LEVEL 7 -->
+    <div class="level-card">
+      <div class="card-header">
+        <div class="level-num">7</div>
+        <div class="card-header-text">
+          <h2>מחלקות ואובייקטים</h2>
+          <div class="subtitle">4 שיעורים + פרויקט</div>
+        </div>
       </div>
-      <div class="level-title">מחלקות ואובייקטים</div>
-      <p class="level-desc">OOP מתחיל — Class, Object, Constructor ו-Destructor.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Class</span>
-        <span class="topic-tag">Constructor</span>
-        <span class="topic-tag">Destructor</span>
-        <span class="topic-tag">Methods</span>
+      <div class="card-body">
+        <ul class="lesson-list">
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 25 — מבוא למחלקות</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 26 — Constructors ו-Methods</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 27 — Encapsulation</li>
+          <li class="lesson-item"><span class="lesson-dot"></span> שיעור 28 — Inheritance</li>
+          <li class="lesson-item project"><span class="project-star">⭐</span> פרויקט — מערכת ניהול סטודנטיות</li>
+        </ul>
       </div>
-    </a>
-
-    <a href="level8.html" class="level-card red">
-      <div class="level-header">
-        <span class="level-num">Level 8</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
+      <div class="card-footer">
+        <a class="btn-start" href="#">▶ התחילי Level 7</a>
       </div>
-      <div class="level-title">ירושה ופולימורפיזם</div>
-      <p class="level-desc">מחלקות יורשות, פונקציות וירטואליות וניהול הרשאות שונות.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Inheritance</span>
-        <span class="topic-tag">Virtual</span>
-        <span class="topic-tag">Polymorphism</span>
-        <span class="topic-tag">Access specifiers</span>
-      </div>
-    </a>
-
-    <a href="level9.html" class="level-card gray">
-      <div class="level-header">
-        <span class="level-num">Level 9</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
-      </div>
-      <div class="level-title">Static ו-Templates</div>
-      <p class="level-desc">קוד גנרי וחכם — משתנים סטטיים, פונקציות Template ומחלקות גנריות.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Static</span>
-        <span class="topic-tag">Templates</span>
-        <span class="topic-tag">Generic classes</span>
-      </div>
-    </a>
-
-    <a href="level10.html" class="level-card final">
-      <div class="level-header">
-        <span class="level-num">Level 10</span>
-        <span class="level-lessons">4 שיעורים</span>
-        <span class="arrow">←</span>
-      </div>
-      <div class="level-title">פרויקט סיום</div>
-      <p class="level-desc">מערכת משתמשות מלאה — שילוב כל החומר, כתיבה, בדיקה ומבחן סיום.</p>
-      <div class="level-topics">
-        <span class="topic-tag">Full project</span>
-        <span class="topic-tag">File I/O</span>
-        <span class="topic-tag">OOP</span>
-        <span class="topic-tag">Final exam</span>
-      </div>
-    </a>
+    </div>
 
   </div>
 
-  <div class="cta-section">
-    <h2>מוכנה להתחיל?</h2>
-    <p>Level 1 מחכה לך — מהשיעור הראשון, שלב אחר שלב.</p>
-    <a href="level1.html" class="btn-start">Level 1 — יסודות C++ →</a>
-  </div>
-</main>
-
-<footer>
-  Women Who Hack — C++ Course &nbsp;|&nbsp; כל הזכויות שמורות
-</footer>
+  <footer>
+    עשוי באהבה 🩷 Women Who Hack — C++ | כל הזכויות שמורות
+  </footer>
 
 </body>
 </html>
