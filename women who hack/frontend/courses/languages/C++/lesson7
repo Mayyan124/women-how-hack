@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 7 — פונקציות בסיסיות | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+/* function anatomy */
+.func-anatomy{border-radius:14px;overflow:hidden;border:1.5px solid #ffd6ec}
+.func-line{display:flex;align-items:stretch}
+.func-code{background:#2d1b26;padding:11px 16px;font-family:'Courier New',monospace;font-size:.82rem;color:#f8d6e8;direction:ltr;text-align:left;min-width:200px;display:flex;align-items:center;line-height:1.4}
+.func-arrow{background:#3d2232;color:var(--pink-mid);padding:0 12px;display:flex;align-items:center;font-size:1rem;flex-shrink:0}
+.func-explain{background:var(--pink-bg);padding:10px 14px;flex:1;font-size:.84rem;color:var(--text-mid);font-weight:600;display:flex;align-items:center;line-height:1.5;border-right:1.5px solid #ffd6ec}
+.func-line:not(:last-child) .func-code,.func-line:not(:last-child) .func-arrow{border-bottom:1px solid #3d2232}
+.func-line:not(:last-child) .func-explain{border-bottom:1px solid #ffd6ec}
+/* func types grid */
+.func-types{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ftype-box{border-radius:16px;padding:16px;border:2px solid}
+.ftype-box.void-type{background:#fff5fa;border-color:var(--pink-mid)}
+.ftype-box.return-type{background:#f0fff8;border-color:#7de8a8}
+.ftype-title{font-family:'Baloo 2',cursive;font-size:.95rem;font-weight:800;margin-bottom:6px}
+.void-type .ftype-title{color:var(--pink-deep)}.return-type .ftype-title{color:#0e7a40}
+.ftype-desc{font-size:.8rem;color:var(--text-mid);font-weight:600;line-height:1.5;margin-bottom:8px}
+.ftype-code{font-family:'Courier New',monospace;font-size:.74rem;background:rgba(0,0,0,.07);padding:6px 10px;border-radius:8px;display:block;line-height:1.7}
+/* quiz */
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,color .2s}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:580px){.func-types{grid-template-columns:1fr}.func-code{min-width:140px;font-size:.74rem}.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 2 · שיעור 7 מתוך 4</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 2 · שיעור 7</div>
+  <h1>פונקציות בסיסיות</h1>
+  <p>לארגן קוד לגושים חכמים — פעם כותבים, הרבה פעמים משתמשים! 🧩✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 2</span><span>שיעור 7 / 8</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:75%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה מהשיעור הקודם</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור 6 למדנו לולאת <strong>for</strong> עם שלושת חלקיה ולולאות מקוננות. עכשיו נלמד <strong>פונקציות</strong> — הדרך לארגן קוד לגושים עצמאיים שניתן לשימוש חוזר! 🧩</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין מה זו פונקציה ולמה היא חשובה</li>
+        <li><span class="gdot"></span>ללמוד לכתוב פונקציות void (ללא החזרת ערך)</li>
+        <li><span class="gdot"></span>ללמוד פונקציות עם return (מחזירות ערך)</li>
+        <li><span class="gdot"></span>לדעת כיצד לקרוא לפונקציה ולהעביר פרמטרים</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🤔</span><h2>מה זו פונקציה?</h2></div>
+    <div class="card-body">
+      <div class="example-box" style="margin-bottom:16px">
+        <strong>🍰 מתכון לעוגה —</strong><br/>
+        פונקציה היא כמו מתכון: כותבים אותו פעם אחת ומשתמשים בו כמה פעמים שרוצים. כל פעם שרוצים עוגה — קוראים למתכון, לא כותבים אותו מחדש!
+      </div>
+      <div class="concepts-grid">
+        <div class="concept-box"><div class="concept-term">Function (פונקציה)</div><div class="concept-desc">בלוק קוד בעל שם שמבצע משימה ספציפית — ניתן לקרוא לו שוב ושוב.</div></div>
+        <div class="concept-box"><div class="concept-term">Parameter (פרמטר)</div><div class="concept-desc">מידע שמעבירים לפונקציה — כמו חומרי גלם למתכון.</div></div>
+        <div class="concept-box"><div class="concept-term">Return Value</div><div class="concept-desc">ערך שהפונקציה מחזירה בסיום — כמו התוצאה של המתכון.</div></div>
+        <div class="concept-box"><div class="concept-term">Function Call</div><div class="concept-desc">קריאה לפונקציה — ציון שמה ופרמטריה כדי להפעילה.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🏗️</span><h2>מבנה פונקציה — שורה שורה</h2></div>
+    <div class="card-body">
+      <div class="func-anatomy">
+        <div class="func-line">
+          <div class="func-code"><span style="color:#b8f0c8">void</span> <span style="color:#7ee8c0">greet</span>(<span style="color:#b8f0c8">string</span> name) {</div>
+          <div class="func-arrow">→</div>
+          <div class="func-explain">📛 סוג החזרה · שם הפונקציה · פרמטר בסוגריים</div>
+        </div>
+        <div class="func-line">
+          <div class="func-code">&nbsp;&nbsp;cout &lt;&lt; <span style="color:#ffd68a">"שלום, "</span> &lt;&lt; name;</div>
+          <div class="func-arrow">→</div>
+          <div class="func-explain">⚙️ גוף הפונקציה — מה היא עושה</div>
+        </div>
+        <div class="func-line">
+          <div class="func-code">}</div>
+          <div class="func-arrow">→</div>
+          <div class="func-explain">🔒 סגירת הפונקציה</div>
+        </div>
+      </div>
+      <br/>
+      <div class="section-label">📞 קריאה לפונקציה</div>
+      <div class="code-block"><span class="fn">greet</span>(<span class="str">"מיה"</span>);   <span class="cmt">// קוראים לפונקציה עם ערך</span>
+<span class="fn">greet</span>(<span class="str">"דנה"</span>);   <span class="cmt">// ניתן לקרוא שוב עם ערך אחר</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔀</span><h2>שני סוגי פונקציות</h2></div>
+    <div class="card-body">
+      <div class="func-types">
+        <div class="ftype-box void-type">
+          <div class="ftype-title">void — ללא החזרה</div>
+          <div class="ftype-desc">הפונקציה מבצעת פעולה אבל <strong>לא מחזירה ערך</strong> — כמו הדפסת הודעה.</div>
+          <code class="ftype-code"><span style="color:#ffb6d9">void</span> <span style="color:#7ee8c0">printLine</span>() {<br/>&nbsp;&nbsp;cout &lt;&lt; "-----";<br/>}</code>
+        </div>
+        <div class="ftype-box return-type">
+          <div class="ftype-title">return — מחזירה ערך</div>
+          <div class="ftype-desc">הפונקציה מחשבת ו<strong>מחזירה תוצאה</strong> — ניתן לשמור אותה במשתנה.</div>
+          <code class="ftype-code"><span style="color:#b8f0c8">int</span> <span style="color:#7ee8c0">add</span>(<span style="color:#b8f0c8">int</span> a, <span style="color:#b8f0c8">int</span> b) {<br/>&nbsp;&nbsp;<span style="color:#ffb6d9">return</span> a + b;<br/>}</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>דוגמת קוד — תוכנית עם פונקציות</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// פונקציה void — מדפיסה קו</span>
+<span class="tp">void</span> <span class="fn">printLine</span>() {
+    cout &lt;&lt; <span class="str">"========================"</span> &lt;&lt; endl;
+}
+
+<span class="cmt">// פונקציה void עם פרמטר</span>
+<span class="tp">void</span> <span class="fn">greet</span>(<span class="tp">string</span> name) {
+    cout &lt;&lt; <span class="str">"שלום, "</span> &lt;&lt; name &lt;&lt; <span class="str">"! 🩷"</span> &lt;&lt; endl;
+}
+
+<span class="cmt">// פונקציה שמחזירה ערך</span>
+<span class="tp">int</span> <span class="fn">add</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) {
+    <span class="kw">return</span> a + b;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="fn">printLine</span>();
+    <span class="fn">greet</span>(<span class="str">"מיה"</span>);
+    <span class="fn">greet</span>(<span class="str">"דנה"</span>);
+    <span class="fn">printLine</span>();
+
+    <span class="tp">int</span> result = <span class="fn">add</span>(10, 5);
+    cout &lt;&lt; <span class="str">"סכום: "</span> &lt;&lt; result &lt;&lt; endl;
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>📱 כפתורים באפליקציה —</strong><br/>
+        כל כפתור באפליקציה קורא לפונקציה שכתבת פעם אחת. לחיצה על "התחבר" תמיד תפעיל את אותה פונקציית login() — לא כותבים את הקוד שוב!<br/><br/>
+        <strong>🧮 מחשבון —</strong><br/>
+        פונקציות add(), subtract(), multiply() — כל אחת כותבת פעם אחת ומשתמשת בה מכל מקום.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>כתבי פונקציית void בשם <strong style="color:var(--pink-deep)">printWelcome()</strong> שמדפיסה "ברוכה הבאה לקורס! 🩷"</li>
+        <li>כתבי פונקציה <strong style="color:var(--pink-deep)">int multiply(int a, int b)</strong> שמחזירה את מכפלת שני מספרים</li>
+        <li>קראי לשתי הפונקציות מ-main()</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 7</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">מה עושה המילה <span style="font-family:monospace;color:var(--pink-deep)">void</span> לפני שם הפונקציה?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>מציינת שהפונקציה מחזירה מספר שלם</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>מציינת שהפונקציה לא מחזירה ערך</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>מציינת שהפונקציה פרטית</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! void = ריק — הפונקציה מבצעת פעולה אך לא מחזירה ערך כלשהו 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ לא בדיוק. void = הפונקציה לא מחזירה ערך. אם רוצים להחזיר int, כותבים int במקום void.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה יודפס כשקוראים ל-<span style="font-family:monospace;color:var(--pink-deep)">greet("רחל")</span>?</div>
+        <div class="q-code"><span style="color:#b8f0c8">void</span> <span style="color:#7ee8c0">greet</span>(<span style="color:#b8f0c8">string</span> name) {
+    cout &lt;&lt; <span style="color:#ffd68a">"היי, "</span> &lt;&lt; name &lt;&lt; <span style="color:#ffd68a">"!"</span>;
+}</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','B')"><span class="opt-letter">A</span>היי, name!</div>
+          <div class="opt" onclick="answer('q2','B','B')"><span class="opt-letter">B</span>היי, רחל!</div>
+          <div class="opt" onclick="answer('q2','C','B')"><span class="opt-letter">C</span>greet("רחל")</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מדויק! "רחל" מועברת כפרמטר name — אז מודפס "היי, רחל!" 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ הפרמטר name מקבל את הערך "רחל" — לכן מודפס: היי, רחל!</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">מה תחזיר הפונקציה <span style="font-family:monospace;color:var(--pink-deep)">add(3, 7)</span>?</div>
+        <div class="q-code"><span style="color:#b8f0c8">int</span> <span style="color:#7ee8c0">add</span>(<span style="color:#b8f0c8">int</span> a, <span style="color:#b8f0c8">int</span> b) {
+    <span style="color:#ffb6d9">return</span> a + b;
+}</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','C')"><span class="opt-letter">A</span>3</div>
+          <div class="opt" onclick="answer('q3','B','C')"><span class="opt-letter">B</span>7</div>
+          <div class="opt" onclick="answer('q3','C','C')"><span class="opt-letter">C</span>10</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ כל הכבוד! a=3, b=7, return a+b = 10. הפונקציה מחזירה את סכומם! 🎉</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ a=3, b=7, והפונקציה מחזירה a + b = 3 + 7 = 10.</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level2-lesson6.html" class="btn-nav">← שיעור 6</a>
+  <a href="level2-lesson8.html" class="btn-nav primary">שיעור 8 — תנאים מורכבים ←</a>
+</div>
+<script>
+const correct={q1:'B',q2:'B',q3:'C'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! ממשיכות לשיעור 8! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
