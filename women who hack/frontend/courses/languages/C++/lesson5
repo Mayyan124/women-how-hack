@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 5 — חזרה על Level 1 ולולאות | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+/* review grid */
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.review-pill{background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:1.5px solid var(--pink-mid);border-radius:14px;padding:12px 14px;text-align:center}
+.review-icon{font-size:1.4rem;margin-bottom:4px}
+.review-term{font-family:'Baloo 2',cursive;font-size:.88rem;font-weight:800;color:var(--pink-deep);margin-bottom:2px}
+.review-desc{font-size:.76rem;color:var(--text-mid);font-weight:600;line-height:1.4}
+/* loop anatomy */
+.loop-anatomy{background:#2d1b26;border-radius:14px;padding:18px;font-family:'Courier New',monospace;font-size:.84rem;line-height:2;color:#f8d6e8;direction:ltr;text-align:left;position:relative}
+.loop-label{position:absolute;right:14px;font-family:'Quicksand',sans-serif;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px}
+.ll-init{background:#ffb6d9;color:#3d1a2e;top:18px}
+.ll-cond{background:#7ee8c0;color:#0a3020;top:45px}
+.ll-inc{background:#ffd68a;color:#3a2000;top:72px}
+/* quiz */
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,color .2s}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 2 · שיעור 5 מתוך 4</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 2 · שיעור 5</div>
+  <h1>חזרה על Level 1 ולולאות</h1>
+  <p>מרעננות את הזיכרון — ומתחילות לחזור על עצמנו בחכמה! 🔁✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 2</span><span>שיעור 5 / 8</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:25%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🏅</span><h2>ברוכה הבאה ל-Level 2!</h2></div>
+    <div class="card-body">
+      <div class="recap-box">סיימת Level 1 — יסודות C++! 🎉 עכשיו מתחילים Level 2: <strong>לולאות ופונקציות</strong>. נתחיל בחזרה מהירה על Level 1, ואז נלמד אחד הכלים החזקים ביותר בתכנות — הלולאה! 🔁</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>לחזור על מושגי Level 1: משתנים, cout/cin, if/else</li>
+        <li><span class="gdot"></span>להבין מה זו לולאה ולמה היא שימושית</li>
+        <li><span class="gdot"></span>ללמוד לולאת while — הלולאה הבסיסית</li>
+        <li><span class="gdot"></span>ללמוד לולאת do-while — שמבצעת לפחות פעם אחת</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה מהירה — Level 1</h2></div>
+    <div class="card-body">
+      <div class="review-grid">
+        <div class="review-pill"><div class="review-icon">📦</div><div class="review-term">משתנים</div><div class="review-desc">int, float, char, bool, string</div></div>
+        <div class="review-pill"><div class="review-icon">📤</div><div class="review-term">cout</div><div class="review-desc">הדפסה על המסך</div></div>
+        <div class="review-pill"><div class="review-icon">📥</div><div class="review-term">cin</div><div class="review-desc">קבלת קלט מהמשתמש</div></div>
+        <div class="review-pill"><div class="review-icon">🔀</div><div class="review-term">if / else</div><div class="review-desc">תנאים והחלטות</div></div>
+        <div class="review-pill"><div class="review-icon">🏗️</div><div class="review-term">main()</div><div class="review-desc">הפונקציה הראשית</div></div>
+        <div class="review-pill"><div class="review-icon">✅</div><div class="review-term">return 0;</div><div class="review-desc">סיום תקין</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🤔</span><h2>למה צריך לולאות?</h2></div>
+    <div class="card-body">
+      <div class="example-box" style="margin-bottom:16px">
+        <strong>🤦 בלי לולאה — גרועה:</strong><br/>
+        רוצות להדפיס "שלום!" 5 פעמים? בלי לולאה נצטרך לכתוב 5 שורות זהות!<br/><br/>
+        <strong>✅ עם לולאה — נהדר:</strong><br/>
+        עם לולאה כותבים פעם אחת ואומרים כמה פעמים לחזור — חוסכות קוד ומאפשרות גמישות!
+      </div>
+      <div class="concepts-grid">
+        <div class="concept-box"><div class="concept-term">Loop (לולאה)</div><div class="concept-desc">מבנה שמבצע קבוצת פקודות שוב ושוב — כל עוד תנאי מסוים מתקיים.</div></div>
+        <div class="concept-box"><div class="concept-term">Iteration (איטרציה)</div><div class="concept-desc">כל "סיבוב" אחד של הלולאה — כל פעם שמבצעים את הקוד בתוכה.</div></div>
+        <div class="concept-box"><div class="concept-term">Condition (תנאי)</div><div class="concept-desc">הביטוי הנבדק בכל סיבוב — כשהוא false, הלולאה נעצרת.</div></div>
+        <div class="concept-box"><div class="concept-term">Infinite Loop</div><div class="concept-desc">לולאה שלא נעצרת — קורה כשהתנאי תמיד true. יש להימנע מזה!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔁</span><h2>לולאת while</h2></div>
+    <div class="card-body">
+      <p style="font-size:.9rem;color:var(--text-mid);font-weight:600;margin-bottom:14px;line-height:1.6">לולאת <strong style="color:var(--pink-deep)">while</strong> בודקת את התנאי <strong>לפני</strong> כל סיבוב. אם התנאי false מההתחלה — הלולאה לא תרוץ כלל.</p>
+      <div class="section-label">📝 תחביר</div>
+      <div class="code-block"><span class="kw">while</span> (condition) {
+    <span class="cmt">// קוד שיתבצע כל עוד condition == true</span>
+}</div>
+      <br/>
+      <div class="section-label">💻 דוגמה</div>
+      <div class="code-block"><span class="tp">int</span> i = 1;
+<span class="kw">while</span> (i &lt;= 5) {
+    cout &lt;&lt; <span class="str">"שלום מספר "</span> &lt;&lt; i &lt;&lt; endl;
+    i++; <span class="cmt">// חשוב! בלי זה — לולאה אינסופית</span>
+}
+<span class="cmt">// מדפיס: שלום מספר 1, 2, 3, 4, 5</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔃</span><h2>לולאת do-while</h2></div>
+    <div class="card-body">
+      <p style="font-size:.9rem;color:var(--text-mid);font-weight:600;margin-bottom:14px;line-height:1.6">לולאת <strong style="color:var(--pink-deep)">do-while</strong> מבצעת את הקוד <strong>לפחות פעם אחת</strong> — ורק אחר כך בודקת את התנאי.</p>
+      <div class="section-label">📝 תחביר</div>
+      <div class="code-block"><span class="kw">do</span> {
+    <span class="cmt">// קוד שיתבצע לפחות פעם אחת</span>
+} <span class="kw">while</span> (condition);</div>
+      <br/>
+      <div class="section-label">💻 דוגמה — בדיקת סיסמה</div>
+      <div class="code-block"><span class="tp">string</span> password;
+<span class="kw">do</span> {
+    cout &lt;&lt; <span class="str">"הכניסי סיסמה: "</span>;
+    cin  &gt;&gt; password;
+} <span class="kw">while</span> (password != <span class="str">"1234"</span>);
+cout &lt;&lt; <span class="str">"ברוכה הבאה! 🩷"</span> &lt;&lt; endl;</div>
+      <br/>
+      <div class="example-box">
+        <strong>🔐 למה do-while מושלמת לבדיקת קלט?</strong><br/>
+        תמיד נרצה לבקש קלט <em>לפחות פעם אחת</em> — do-while עושה בדיוק זאת: מבצעת, ואז בודקת אם צריך עוד פעם.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>כתבי לולאת while שמדפיסה את המספרים 1 עד 10</li>
+        <li>כתבי לולאת do-while שמבקשת מספר מהמשתמשת עד שהיא מכניסה מספר גדול מ-0</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 5</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">מה קורה אם תנאי ה-while שקרי (false) מההתחלה?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','C')"><span class="opt-letter">A</span>הלולאה רצה פעם אחת ונעצרת</div>
+          <div class="opt" onclick="answer('q1','B','C')"><span class="opt-letter">B</span>הלולאה רצה עד אינסוף</div>
+          <div class="opt" onclick="answer('q1','C','C')"><span class="opt-letter">C</span>הלולאה לא רצה כלל</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! while בודקת <em>לפני</em> — אם התנאי כבר false, הקוד בפנים לא יתבצע אפילו פעם אחת 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ לא בדיוק. while בודקת את התנאי לפני כל סיבוב — אם false מההתחלה, הלולאה לא רצה כלל.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה ההבדל העיקרי בין while לבין do-while?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','B')"><span class="opt-letter">A</span>אין הבדל, שתיהן עושות אותו דבר בדיוק</div>
+          <div class="opt" onclick="answer('q2','B','B')"><span class="opt-letter">B</span>do-while מבצעת את הקוד לפחות פעם אחת לפני בדיקת התנאי</div>
+          <div class="opt" onclick="answer('q2','C','B')"><span class="opt-letter">C</span>while מהירה יותר מ-do-while</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מעולה! do-while: קוד קודם, בדיקה אחר כך. לכן מובטח שהקוד ירוץ לפחות פעם אחת 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ לא נכון. ההבדל: do-while מבצעת את הגוף קודם ורק אז בודקת — לכן תמיד ירוץ לפחות פעם.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">כמה פעמים תדפיס הלולאה הבאה?</div>
+        <div class="q-code"><span style="color:#b8f0c8">int</span> i = 0;
+<span style="color:#ffb6d9">while</span> (i < 3) {
+    cout &lt;&lt; i;
+    i++;
+}</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','B')"><span class="opt-letter">A</span>2 פעמים</div>
+          <div class="opt" onclick="answer('q3','B','B')"><span class="opt-letter">B</span>3 פעמים (i = 0, 1, 2)</div>
+          <div class="opt" onclick="answer('q3','C','B')"><span class="opt-letter">C</span>4 פעמים (i = 0, 1, 2, 3)</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ נכון! i מתחיל ב-0, רץ כל עוד i < 3, כלומר עבור 0, 1, 2 — 3 סיבובים בסה"כ 🎉</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ נסי שוב. i = 0, 1, 2 — כשi מגיע ל-3, התנאי i < 3 הופך false ונעצרים. 3 סיבובים.</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level1-project.html" class="btn-nav">← פרויקט Level 1</a>
+  <a href="level2-lesson6.html" class="btn-nav primary">שיעור 6 — לולאת for ←</a>
+</div>
+<script>
+const correct={q1:'C',q2:'B',q3:'B'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה! עוד קצת 💕','מושלם! ממשיכות לשיעור 6! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
