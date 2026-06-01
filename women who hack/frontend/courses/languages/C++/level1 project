@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פרויקט — הצגת עצמי | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--gold:#f5b942;--gold-bg:#fffbea;--gold-border:#f5d87a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+
+/* hero - gold style for project */
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--gold);color:#7a4800;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.hero-stars{font-size:1.3rem;margin-top:10px;letter-spacing:4px;animation:fadeUp .8s ease both}
+
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}
+
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.card-head.gold-head{background:linear-gradient(135deg,#e8884a,#f5b942)}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+
+/* requirements */
+.req-list{list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:req}
+.req-item{counter-increment:req;display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:14px;background:var(--pink-bg);border:1.5px solid #ffd6ec}
+.req-num{min-width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.req-text{font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.req-text strong{color:var(--pink-deep)}
+
+/* bonus */
+.bonus-box{background:linear-gradient(135deg,var(--gold-bg),#fffef0);border:2px solid var(--gold-border);border-radius:14px;padding:14px 16px}
+.bonus-title{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:#8a5a00;margin-bottom:10px}
+.bonus-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.bonus-list li{display:flex;align-items:flex-start;gap:9px;font-size:.88rem;color:#7a5000;font-weight:600;line-height:1.5}
+.bdot{color:var(--gold);font-size:1rem;flex-shrink:0}
+
+/* expected output */
+.output-box{background:#1a1a2e;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.84rem;line-height:2;color:#e8e8f0;direction:ltr;text-align:left}
+.out-prompt{color:#ffb6d9}.out-input{color:#7ee8c0}.out-text{color:#f8d6e8}.out-special{color:#ffd68a}
+
+/* solution - hidden by default */
+.solution-toggle{width:100%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);border:none;border-radius:14px;padding:14px 20px;font-family:'Quicksand',sans-serif;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .2s;margin-bottom:0}
+.solution-toggle:hover{opacity:.88}
+.solution-toggle .toggle-icon{font-size:1.1rem;transition:transform .3s}
+.solution-toggle.open .toggle-icon{transform:rotate(180deg)}
+.solution-body{display:none;padding-top:16px}
+.solution-body.show{display:block}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;margin-top:16px}
+.section-label:first-child{margin-top:0}
+.explain-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.explain-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.explain-list li .edot{color:var(--pink-dark);font-size:1rem;flex-shrink:0}
+
+/* checklist */
+.checklist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--green-bg);border:1.5px solid var(--green-border);font-size:.88rem;font-weight:600;color:#1a5c38;cursor:pointer;user-select:none;transition:opacity .2s}
+.check-item.unchecked{background:var(--pink-bg);border-color:#ffd6ec;color:var(--text-mid)}
+.check-item .chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--green-border);background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
+.check-item.unchecked .chk{background:var(--white);border-color:var(--pink-mid);color:transparent}
+
+/* complete card */
+.complete-card{background:linear-gradient(135deg,var(--pink-deep),#c0397a);border-radius:20px;padding:28px;text-align:center;animation:fadeUp .5s ease .45s both;box-shadow:0 10px 40px rgba(217,79,138,.35)}
+.complete-card .cc-icon{font-size:3rem;margin-bottom:10px}
+.complete-card h2{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px}
+.complete-card p{font-size:.9rem;color:rgba(255,255,255,.88);font-weight:600;line-height:1.6;max-width:480px;margin:0 auto 18px}
+.badge-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);color:var(--white);border:1.5px solid rgba(255,255,255,.4);border-radius:50px;padding:7px 18px;font-size:.82rem;font-weight:700;backdrop-filter:blur(4px)}
+
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">⭐ Level 1 · פרויקט</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">⭐ פרויקט Level 1</div>
+  <h1>הצגת עצמי</h1>
+  <p>מה למדת ב-Level 1? עכשיו תכניסי הכל לתוכנית אחת! 💻🩷</p>
+  <div class="hero-stars">⭐ ⭐ ⭐</div>
+</div>
+
+<div class="wrap">
+
+  <!-- מטרת הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מה נבנה בפרויקט הזה?</h2></div>
+    <div class="card-body">
+      <p style="font-size:.92rem;color:var(--text-mid);font-weight:600;line-height:1.7;margin-bottom:14px">
+        בפרויקט הזה תכתבי תוכנית שלמה שמבקשת פרטים אישיים ומציגה <strong style="color:var(--pink-deep)">כרטיס הצגה אישי</strong> — שילוב של כל מה שלמדת ב-Level 1! 🌸
+      </p>
+      <ul class="goal-list">
+        <li><span class="gdot"></span>שימוש במשתנים מסוגים שונים (string, int, bool)</li>
+        <li><span class="gdot"></span>קבלת קלט מהמשתמשת עם cin</li>
+        <li><span class="gdot"></span>הדפסה מסודרת עם cout</li>
+        <li><span class="gdot"></span>שימוש בתנאי if/else</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- דרישות הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📋</span><h2>דרישות הפרויקט</h2></div>
+    <div class="card-body">
+      <ol class="req-list">
+        <li class="req-item"><div class="req-num">1</div><div class="req-text">בקשי מהמשתמשת <strong>שם</strong> (string) ושמרי במשתנה</div></li>
+        <li class="req-item"><div class="req-num">2</div><div class="req-text">בקשי <strong>גיל</strong> (int) ושמרי במשתנה</div></li>
+        <li class="req-item"><div class="req-num">3</div><div class="req-text">בקשי <strong>עיר מגורים</strong> (string) ושמרי במשתנה</div></li>
+        <li class="req-item"><div class="req-num">4</div><div class="req-text">בקשי האם אוהבת קפה — <strong>1 לכן / 0 לאו</strong> (bool) ושמרי</div></li>
+        <li class="req-item"><div class="req-num">5</div><div class="req-text">הדפיסי <strong>כרטיס הצגה</strong> מסודר עם כל הפרטים</div></li>
+        <li class="req-item"><div class="req-num">6</div><div class="req-text">הוסיפי תנאי <strong>if/else</strong>: אם גיל >= 18 הדפיסי ברכה מיוחדת, אחרת — ברכה אחרת</div></li>
+      </ol>
+      <br/>
+      <div class="bonus-box">
+        <div class="bonus-title">⭐ בונוס (לא חובה)</div>
+        <ul class="bonus-list">
+          <li><span class="bdot">★</span>הוסיפי שורת קישוט (===========) לפני ואחרי הכרטיס</li>
+          <li><span class="bdot">★</span>הדפיסי הודעה שונה אם loveCoffee היא true או false</li>
+          <li><span class="bdot">★</span>הוסיפי שדה נוסף לבחירתך (חיית מחמד, תחביב וכו')</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- פלט צפוי -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🖥️</span><h2>פלט לדוגמה — ככה אמורה להיראות התוכנית</h2></div>
+    <div class="card-body">
+      <div class="output-box">
+<span class="out-prompt">מה שמך? </span><span class="out-input">מיה</span>
+<span class="out-prompt">מה גילך? </span><span class="out-input">22</span>
+<span class="out-prompt">באיזו עיר את גרה? </span><span class="out-input">תל אביב</span>
+<span class="out-prompt">את אוהבת קפה? (1=כן, 0=לא): </span><span class="out-input">1</span>
+<br/>
+<span class="out-special">============================</span>
+<span class="out-text">   🩷 כרטיס הצגה אישי 🩷</span>
+<span class="out-special">============================</span>
+<span class="out-text">שם:      מיה</span>
+<span class="out-text">גיל:     22</span>
+<span class="out-text">עיר:     תל אביב</span>
+<span class="out-text">קפה:     כן ☕</span>
+<span class="out-special">============================</span>
+<span class="out-text">ברוכה הבאה, מיה! את מבוגרת — יאללה לקוד! 🚀</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- checklist -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✅</span><h2>רשימת ביקורת — לפני שמגישות</h2></div>
+    <div class="card-body">
+      <ul class="checklist" id="checklist">
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הגדרתי משתנים מסוגים שונים (string, int, bool)</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>השתמשתי ב-cin לקבלת קלט</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הדפסתי כרטיס הצגה מסודר עם cout</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הוספתי תנאי if/else לפי הגיל</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>התוכנית מסתיימת עם return 0;</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הקוד מסודר ויש לי הערות (comments)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- solution -->
+  <div class="card">
+    <div class="card-head gold-head"><span class="head-icon">💡</span><h2>תשובה לדוגמה — לחצי לאחר שניסית בעצמך!</h2></div>
+    <div class="card-body">
+      <button class="solution-toggle" id="sol-btn" onclick="toggleSolution()">
+        <span>👁️ הצגי תשובה לדוגמה</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+      <div class="solution-body" id="solution-body">
+
+        <div class="section-label">📝 קוד התשובה המלאה</div>
+        <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+
+    <span class="cmt">// --- הכרזת משתנים ---</span>
+    <span class="tp">string</span> name;
+    <span class="tp">int</span>    age;
+    <span class="tp">string</span> city;
+    <span class="tp">bool</span>   loveCoffee;
+
+    <span class="cmt">// --- קלט מהמשתמשת ---</span>
+    cout &lt;&lt; <span class="str">"מה שמך? "</span>;
+    cin  &gt;&gt; name;
+
+    cout &lt;&lt; <span class="str">"מה גילך? "</span>;
+    cin  &gt;&gt; age;
+
+    cout &lt;&lt; <span class="str">"באיזו עיר את גרה? "</span>;
+    cin  &gt;&gt; city;
+
+    cout &lt;&lt; <span class="str">"את אוהבת קפה? (1=כן, 0=לא): "</span>;
+    cin  &gt;&gt; loveCoffee;
+
+    <span class="cmt">// --- הדפסת כרטיס הצגה ---</span>
+    cout &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"============================"</span>  &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"   🩷 כרטיס הצגה אישי 🩷"</span>    &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"============================"</span>  &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"שם:      "</span> &lt;&lt; name             &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"גיל:     "</span> &lt;&lt; age              &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"עיר:     "</span> &lt;&lt; city             &lt;&lt; endl;
+
+    <span class="cmt">// הדפסת מצב קפה עם תנאי</span>
+    <span class="kw">if</span> (loveCoffee) {
+        cout &lt;&lt; <span class="str">"קפה:     כן ☕"</span> &lt;&lt; endl;
+    } <span class="kw">else</span> {
+        cout &lt;&lt; <span class="str">"קפה:     לא 🙅"</span> &lt;&lt; endl;
+    }
+
+    cout &lt;&lt; <span class="str">"============================"</span> &lt;&lt; endl;
+
+    <span class="cmt">// --- תנאי גיל ---</span>
+    <span class="kw">if</span> (age &gt;= 18) {
+        cout &lt;&lt; <span class="str">"ברוכה הבאה, "</span> &lt;&lt; name
+             &lt;&lt; <span class="str">"! את מבוגרת — יאללה לקוד! 🚀"</span> &lt;&lt; endl;
+    } <span class="kw">else</span> {
+        cout &lt;&lt; <span class="str">"כל הכבוד, "</span> &lt;&lt; name
+             &lt;&lt; <span class="str">"! צעירה ומוכשרת — המשיכי כך! 🌟"</span> &lt;&lt; endl;
+    }
+
+    <span class="kw">return</span> 0;
+}</div>
+
+        <div class="section-label">🔍 הסבר קצר</div>
+        <ul class="explain-list">
+          <li><span class="edot">🩷</span>הכרזנו 4 משתנים בסוגים שונים — string, int, bool</li>
+          <li><span class="edot">🩷</span>השתמשנו ב-cin 4 פעמים לאיסוף הנתונים מהמשתמשת</li>
+          <li><span class="edot">🩷</span>הדפסנו כרטיס מסודר עם cout ו-endl לשורות נקיות</li>
+          <li><span class="edot">🩷</span>השתמשנו ב-if/else פעמיים — לקפה ולגיל</li>
+          <li><span class="edot">🩷</span>שורות ה-"====" הן סתם מחרוזת — נותנות מראה מסודר!</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- level complete -->
+  <div class="complete-card">
+    <div class="cc-icon">🏅</div>
+    <h2>Level 1 — הושלם! 🎉</h2>
+    <p>כל הכבוד! למדת יסודות C++, משתנים, הדפסות, קלט ומבנה תוכנית — ועכשיו גם פרויקט שלם! Level 2 מחכה לך! 🩷</p>
+    <div class="badge-row">
+      <span class="badge">✅ משתנים</span>
+      <span class="badge">✅ cout / cin</span>
+      <span class="badge">✅ if / else</span>
+      <span class="badge">✅ מבנה תוכנית</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level1-lesson4.html" class="btn-nav">← שיעור 4</a>
+  <a href="level2-lesson5.html" class="btn-nav primary">🚀 Level 2 — לולאות ופונקציות ←</a>
+</div>
+
+<script>
+function toggleSolution() {
+  const body = document.getElementById('solution-body');
+  const btn  = document.getElementById('sol-btn');
+  body.classList.toggle('show');
+  btn.classList.toggle('open');
+  btn.querySelector('span:first-child').textContent =
+    body.classList.contains('show') ? '🙈 הסתירי תשובה' : '👁️ הצגי תשובה לדוגמה';
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('unchecked');
+}
+</script>
+</body>
+</html>
