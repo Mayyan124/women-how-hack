@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פרויקט — Smart User System | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--gold:#f5b942;--gold-bg:#fffbea;--gold-border:#f5d87a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--gold);color:#7a4800;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.hero-stars{font-size:1.3rem;margin-top:10px;letter-spacing:4px;animation:fadeUp .8s ease both}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.card-head.gold-head{background:linear-gradient(135deg,#e8884a,#f5b942)}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.req-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.req-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:14px;background:var(--pink-bg);border:1.5px solid #ffd6ec}
+.req-num{min-width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.req-text{font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.req-text strong{color:var(--pink-deep)}
+.bonus-box{background:linear-gradient(135deg,var(--gold-bg),#fffef0);border:2px solid var(--gold-border);border-radius:14px;padding:14px 16px}
+.bonus-title{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:#8a5a00;margin-bottom:10px}
+.bonus-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.bonus-list li{display:flex;align-items:flex-start;gap:9px;font-size:.88rem;color:#7a5000;font-weight:600;line-height:1.5}
+.bdot{color:var(--gold);font-size:1rem;flex-shrink:0}
+.output-box{background:#1a1a2e;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.84rem;line-height:2;color:#e8e8f0;direction:ltr;text-align:left}
+.out-prompt{color:#ffb6d9}.out-input{color:#7ee8c0}.out-text{color:#f8d6e8}.out-special{color:#ffd68a}.out-ok{color:#7ee8c0}.out-deny{color:#ff8888}
+.solution-toggle{width:100%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);border:none;border-radius:14px;padding:14px 20px;font-family:'Quicksand',sans-serif;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .2s}
+.solution-toggle:hover{opacity:.88}
+.solution-toggle .toggle-icon{font-size:1.1rem;transition:transform .3s}
+.solution-toggle.open .toggle-icon{transform:rotate(180deg)}
+.solution-body{display:none;padding-top:16px}
+.solution-body.show{display:block}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;margin-top:16px}
+.section-label:first-child{margin-top:0}
+.explain-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.explain-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.explain-list li .edot{color:var(--pink-dark);font-size:1rem;flex-shrink:0}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--green-bg);border:1.5px solid var(--green-border);font-size:.88rem;font-weight:600;color:#1a5c38;cursor:pointer;user-select:none;transition:opacity .2s}
+.check-item.unchecked{background:var(--pink-bg);border-color:#ffd6ec;color:var(--text-mid)}
+.check-item .chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--green-border);background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
+.check-item.unchecked .chk{background:var(--white);border-color:var(--pink-mid);color:transparent}
+.complete-card{background:linear-gradient(135deg,var(--pink-deep),#c0397a);border-radius:20px;padding:28px;text-align:center;animation:fadeUp .5s ease .45s both;box-shadow:0 10px 40px rgba(217,79,138,.35)}
+.complete-card .cc-icon{font-size:3rem;margin-bottom:10px}
+.complete-card h2{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px}
+.complete-card p{font-size:.9rem;color:rgba(255,255,255,.88);font-weight:600;line-height:1.6;max-width:480px;margin:0 auto 18px}
+.badge-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);color:var(--white);border:1.5px solid rgba(255,255,255,.4);border-radius:50px;padding:7px 18px;font-size:.82rem;font-weight:700;backdrop-filter:blur(4px)}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">⭐ Level 2 · פרויקט</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">⭐ פרויקט Level 2</div>
+  <h1>Smart User System</h1>
+  <p>לשלב לולאות, פונקציות ותנאים — בתוכנית אחת מגניבה! 💻🩷</p>
+  <div class="hero-stars">⭐ ⭐ ⭐</div>
+</div>
+
+<div class="wrap">
+
+  <!-- מטרת הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מה נבנה בפרויקט הזה?</h2></div>
+    <div class="card-body">
+      <p style="font-size:.92rem;color:var(--text-mid);font-weight:600;line-height:1.7;margin-bottom:14px">
+        בפרויקט הזה תבני <strong style="color:var(--pink-deep)">מערכת ניהול משתמשות</strong> — תוכנית שמחזיקה רשימה של משתמשות ובודקת אם יש להן גישה למערכת. שילוב כל מה שלמדת ב-Level 2! 🌸
+      </p>
+      <ul class="goal-list">
+        <li><span class="gdot"></span>שימוש ב-struct לאחסון מידע על משתמשות</li>
+        <li><span class="gdot"></span>מערך של מספר משתמשות</li>
+        <li><span class="gdot"></span>פונקציה שבודקת הרשאת גישה</li>
+        <li><span class="gdot"></span>לולאה שעוברת על כל המשתמשות ומדפיסה תוצאה</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- דרישות הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📋</span><h2>דרישות הפרויקט</h2></div>
+    <div class="card-body">
+      <ol class="req-list">
+        <li class="req-item"><div class="req-num">1</div><div class="req-text">צרי <strong>struct בשם User</strong> עם שלושה שדות: name (string), age (int), isLoggedIn (bool)</div></li>
+        <li class="req-item"><div class="req-num">2</div><div class="req-text">צרי <strong>מערך של 3 משתמשות</strong> עם ערכים שונים לכל אחת</div></li>
+        <li class="req-item"><div class="req-num">3</div><div class="req-text">כתבי <strong>פונקציה checkAccess</strong> שמקבלת User ומחזירה string — "Access granted" או "Access denied"</div></li>
+        <li class="req-item"><div class="req-num">4</div><div class="req-text">בפונקציה: גישה מותרת רק אם <strong>גיל >= 18 וגם isLoggedIn == true</strong> (השתמשי ב-&&)</div></li>
+        <li class="req-item"><div class="req-num">5</div><div class="req-text">כתבי <strong>לולאת for</strong> שעוברת על כל המשתמשות ומדפיסה שם + תוצאת הפונקציה</div></li>
+        <li class="req-item"><div class="req-num">6</div><div class="req-text">הוסיפי <strong>כותרת</strong> מסודרת לפני הלולאה (כמו בפרויקט הקודם)</div></li>
+      </ol>
+      <br/>
+      <div class="bonus-box">
+        <div class="bonus-title">⭐ בונוס (לא חובה)</div>
+        <ul class="bonus-list">
+          <li><span class="bdot">★</span>הוסיפי שדה נוסף ל-struct — לדוגמה email או role</li>
+          <li><span class="bdot">★</span>הדפיסי הודעה שונה לכל סיבת דחייה (גיל נמוך / לא מחוברת)</li>
+          <li><span class="bdot">★</span>ספרי כמה משתמשות קיבלו גישה והדפיסי בסוף</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- פלט צפוי -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🖥️</span><h2>פלט לדוגמה — ככה אמורה להיראות התוכנית</h2></div>
+    <div class="card-body">
+      <div class="output-box">
+<span class="out-special">============================</span>
+<span class="out-text">   🩷 Smart User System 🩷</span>
+<span class="out-special">============================</span>
+<span class="out-text">Maayan (18): </span><span class="out-ok">Access granted ✅</span>
+<span class="out-text">Dana   (15): </span><span class="out-deny">Access denied ❌</span>
+<span class="out-text">Noa    (22): </span><span class="out-deny">Access denied ❌</span>
+<span class="out-special">============================</span>
+<span class="out-text">סיכום: 1 מתוך 3 משתמשות קיבלו גישה.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- checklist -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✅</span><h2>רשימת ביקורת — לפני שמגישות</h2></div>
+    <div class="card-body">
+      <ul class="checklist" id="checklist">
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הגדרתי struct עם name, age, isLoggedIn</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>יצרתי מערך של 3 משתמשות עם ערכים שונים</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>כתבתי פונקציה checkAccess שמחזירה string</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>השתמשתי ב-&& לבדיקת גיל ו-isLoggedIn ביחד</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>כתבתי לולאת for שעוברת על כל המשתמשות</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>התוכנית מסתיימת עם return 0;</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- solution -->
+  <div class="card">
+    <div class="card-head gold-head"><span class="head-icon">💡</span><h2>תשובה לדוגמה — לחצי לאחר שניסית בעצמך!</h2></div>
+    <div class="card-body">
+      <button class="solution-toggle" id="sol-btn" onclick="toggleSolution()">
+        <span>👁️ הצגי תשובה לדוגמה</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+      <div class="solution-body" id="solution-body">
+
+        <div class="section-label">📝 קוד התשובה המלאה</div>
+        <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// --- הגדרת struct ---</span>
+<span class="kw">struct</span> <span class="tp">User</span> {
+    <span class="tp">string</span> name;
+    <span class="tp">int</span>    age;
+    <span class="tp">bool</span>   isLoggedIn;
+};
+
+<span class="cmt">// --- פונקציה שבודקת גישה ---</span>
+<span class="tp">string</span> <span class="fn">checkAccess</span>(<span class="tp">User</span> u) {
+    <span class="kw">if</span> (u.age &gt;= 18 &amp;&amp; u.isLoggedIn) {
+        <span class="kw">return</span> <span class="str">"Access granted ✅"</span>;
+    } <span class="kw">else</span> {
+        <span class="kw">return</span> <span class="str">"Access denied ❌"</span>;
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+
+    <span class="cmt">// --- יצירת מערך משתמשות ---</span>
+    <span class="tp">User</span> users[3] = {
+        {<span class="str">"Maayan"</span>, 18, <span class="kw">true</span>},
+        {<span class="str">"Dana"</span>,   15, <span class="kw">true</span>},
+        {<span class="str">"Noa"</span>,    22, <span class="kw">false</span>}
+    };
+
+    <span class="cmt">// --- הדפסת כותרת ---</span>
+    cout &lt;&lt; <span class="str">"============================"</span> &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"   🩷 Smart User System 🩷"</span>   &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"============================"</span> &lt;&lt; endl;
+
+    <span class="cmt">// --- לולאה על כל המשתמשות ---</span>
+    <span class="tp">int</span> grantedCount = 0;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; 3; i++) {
+        <span class="tp">string</span> result = <span class="fn">checkAccess</span>(users[i]);
+        cout &lt;&lt; users[i].name
+             &lt;&lt; <span class="str">" ("</span> &lt;&lt; users[i].age &lt;&lt; <span class="str">"): "</span>
+             &lt;&lt; result &lt;&lt; endl;
+        <span class="kw">if</span> (users[i].age &gt;= 18 &amp;&amp; users[i].isLoggedIn)
+            grantedCount++;
+    }
+
+    <span class="cmt">// --- סיכום ---</span>
+    cout &lt;&lt; <span class="str">"============================"</span> &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"סיכום: "</span> &lt;&lt; grantedCount
+         &lt;&lt; <span class="str">" מתוך 3 משתמשות קיבלו גישה."</span> &lt;&lt; endl;
+
+    <span class="kw">return</span> 0;
+}</div>
+
+        <div class="section-label">🔍 הסבר קצר</div>
+        <ul class="explain-list">
+          <li><span class="edot">🩷</span>הגדרנו struct עם 3 שדות — string, int, bool — לאחסון נתוני כל משתמשת</li>
+          <li><span class="edot">🩷</span>הפונקציה checkAccess מקבלת User ומחזירה string לפי שני תנאים ב-&&</li>
+          <li><span class="edot">🩷</span>לולאת for עם אינדקס i עוברת על כל 3 המשתמשות ומדפיסה תוצאה</li>
+          <li><span class="edot">🩷</span>המשתנה grantedCount סופר כמה קיבלו גישה — זה הבונוס!</li>
+          <li><span class="edot">🩷</span>הכותרת עם "====" נותנת מראה מסודר ומקצועי לתוכנית</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- level complete -->
+  <div class="complete-card">
+    <div class="cc-icon">🏅</div>
+    <h2>Level 2 — הושלם! 🎉</h2>
+    <p>כל הכבוד! למדת לולאות, פונקציות, תנאים מורכבים — ועכשיו גם פרויקט שלם עם struct ומערך! Level 3 מחכה לך! 🩷</p>
+    <div class="badge-row">
+      <span class="badge">✅ לולאות</span>
+      <span class="badge">✅ פונקציות</span>
+      <span class="badge">✅ struct</span>
+      <span class="badge">✅ תנאים מורכבים</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level2-lesson8.html" class="btn-nav">← שיעור 8</a>
+  <a href="index.html" class="btn-nav primary">🚀 Level 3 — מערכים ומחרוזות ←</a>
+</div>
+
+<script>
+function toggleSolution() {
+  const body = document.getElementById('solution-body');
+  const btn  = document.getElementById('sol-btn');
+  body.classList.toggle('show');
+  btn.classList.toggle('open');
+  btn.querySelector('span:first-child').textContent =
+    body.classList.contains('show') ? '🙈 הסתירי תשובה' : '👁️ הצגי תשובה לדוגמה';
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('unchecked');
+}
+</script>
+</body>
+</html>
