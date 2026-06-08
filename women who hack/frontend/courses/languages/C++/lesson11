@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 11 — מחרוזות ופעולות | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+/* string functions table */
+.fn-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;font-size:.84rem}
+.fn-table th{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));color:white;padding:10px 14px;font-family:'Baloo 2',cursive;font-weight:800;text-align:right}
+.fn-table td{padding:10px 14px;border-bottom:1px solid #ffd6ec;color:var(--text-mid);font-weight:600;vertical-align:top}
+.fn-table tr:last-child td{border-bottom:none}
+.fn-table tr:nth-child(even) td{background:var(--pink-bg)}
+.fn-name{font-family:'Courier New',monospace;color:var(--pink-deep);font-weight:700}
+.fn-ex{font-family:'Courier New',monospace;font-size:.78rem;color:var(--text-dark);background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px}
+/* string visual */
+.str-visual{display:flex;gap:0;border-radius:12px;overflow:hidden;border:2px solid var(--pink-mid);margin:14px 0;flex-wrap:wrap}
+.str-cell{flex:1;min-width:40px;text-align:center;border-left:1.5px solid var(--pink-mid)}
+.str-cell:last-child{border-left:none}
+.str-idx{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));color:white;font-family:'Baloo 2',cursive;font-size:.75rem;font-weight:800;padding:4px 0}
+.str-char{background:var(--white);padding:9px 0;font-family:'Courier New',monospace;font-size:.95rem;font-weight:700;color:var(--pink-deep)}
+/* quiz */
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 3 · שיעור 11 מתוך 4</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 3 · שיעור 11</div>
+  <h1>מחרוזות ופעולות</h1>
+  <p>לעבוד עם טקסט — לחפש, לחתוך, לשרשר ועוד! 🔤✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 3</span><span>שיעור 11 / 12</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:75%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה מהשיעור הקודם</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור 10 למדנו <strong>מערכים דו-ממדיים</strong> — טבלאות עם שורות ועמודות. עכשיו נעבור למחרוזות — <strong>string</strong> ב-C++ הוא למעשה מערך של תווים עם כוחות מיוחדים! 🔤</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין מה זו מחרוזת ואיך היא בנויה</li>
+        <li><span class="gdot"></span>ללמוד פונקציות מחרוזת: length, substr, find, +</li>
+        <li><span class="gdot"></span>לגשת לתווים בודדים עם אינדקס</li>
+        <li><span class="gdot"></span>לקבל מחרוזת עם רווחים עם getline</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔬</span><h2>מחרוזת — מערך של תווים</h2></div>
+    <div class="card-body">
+      <p style="font-size:.88rem;color:var(--text-mid);font-weight:600;margin-bottom:10px">המחרוזת: <code style="background:rgba(0,0,0,.07);padding:2px 8px;border-radius:6px">string name = "SHALOM";</code></p>
+      <div class="str-visual">
+        <div class="str-cell"><div class="str-idx">[0]</div><div class="str-char">S</div></div>
+        <div class="str-cell"><div class="str-idx">[1]</div><div class="str-char">H</div></div>
+        <div class="str-cell"><div class="str-idx">[2]</div><div class="str-char">A</div></div>
+        <div class="str-cell"><div class="str-idx">[3]</div><div class="str-char">L</div></div>
+        <div class="str-cell"><div class="str-idx">[4]</div><div class="str-char">O</div></div>
+        <div class="str-cell"><div class="str-idx">[5]</div><div class="str-char">M</div></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--text-light);font-weight:600">name[0]='S', name[2]='A', name.length()=6</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🛠️</span><h2>פונקציות מחרוזת חשובות</h2></div>
+    <div class="card-body">
+      <table class="fn-table">
+        <thead><tr><th>פונקציה</th><th>מה עושה</th><th>דוגמה</th></tr></thead>
+        <tbody>
+          <tr><td><span class="fn-name">.length()</span></td><td>מחזירה אורך המחרוזת</td><td><span class="fn-ex">name.length() → 6</span></td></tr>
+          <tr><td><span class="fn-name">.size()</span></td><td>זהה ל-length()</td><td><span class="fn-ex">name.size() → 6</span></td></tr>
+          <tr><td><span class="fn-name">.substr(pos,len)</span></td><td>חותכת חלק מהמחרוזת</td><td><span class="fn-ex">name.substr(1,3) → "HAL"</span></td></tr>
+          <tr><td><span class="fn-name">.find(str)</span></td><td>מחפשת מיקום של מחרוזת בתוך מחרוזת</td><td><span class="fn-ex">name.find("AL") → 2</span></td></tr>
+          <tr><td><span class="fn-name">+</span></td><td>שרשור — מחברת שתי מחרוזות</td><td><span class="fn-ex">"Hello" + " World"</span></td></tr>
+          <tr><td><span class="fn-name">==</span></td><td>השוואת מחרוזות</td><td><span class="fn-ex">if (name == "מיה")</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>דוגמת קוד — עבודה עם מחרוזות</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="tp">string</span> firstName = <span class="str">"מיה"</span>;
+    <span class="tp">string</span> lastName  = <span class="str">"כהן"</span>;
+
+    <span class="cmt">// שרשור</span>
+    <span class="tp">string</span> fullName = firstName + <span class="str">" "</span> + lastName;
+    cout &lt;&lt; fullName &lt;&lt; endl;   <span class="cmt">// מיה כהן</span>
+
+    <span class="cmt">// אורך</span>
+    cout &lt;&lt; fullName.length() &lt;&lt; endl;   <span class="cmt">// 7</span>
+
+    <span class="cmt">// גישה לתו בודד</span>
+    cout &lt;&lt; fullName[0] &lt;&lt; endl;   <span class="cmt">// מ</span>
+
+    <span class="cmt">// חיתוך</span>
+    cout &lt;&lt; fullName.substr(0, 3) &lt;&lt; endl;   <span class="cmt">// מיה</span>
+
+    <span class="cmt">// חיפוש</span>
+    <span class="tp">int</span> pos = fullName.find(<span class="str">"כהן"</span>);
+    cout &lt;&lt; <span class="str">"מיקום: "</span> &lt;&lt; pos &lt;&lt; endl;
+
+    <span class="cmt">// השוואה</span>
+    <span class="kw">if</span> (firstName == <span class="str">"מיה"</span>)
+        cout &lt;&lt; <span class="str">"שלום מיה! 🩷"</span> &lt;&lt; endl;
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📥</span><h2>getline — קלט עם רווחים</h2></div>
+    <div class="card-body">
+      <p style="font-size:.9rem;color:var(--text-mid);font-weight:600;margin-bottom:12px;line-height:1.6"><code>cin</code> עוצר ברווח הראשון! לקבלת שם מלא עם רווחים (כמו "מיה כהן") — משתמשים ב-<strong style="color:var(--pink-deep)">getline</strong>.</p>
+      <div class="code-block"><span class="tp">string</span> fullName;
+cout &lt;&lt; <span class="str">"שם מלא: "</span>;
+getline(cin, fullName);   <span class="cmt">// קורא שורה שלמה כולל רווחים</span>
+cout &lt;&lt; <span class="str">"שלום, "</span> &lt;&lt; fullName &lt;&lt; <span class="str">"!"</span> &lt;&lt; endl;</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>📧 בדיקת אימייל —</strong><br/>
+        find("@") בודקת אם יש @ במחרוזת — כך אתרים מאמתים כתובות אימייל!<br/><br/>
+        <strong>🔐 בדיקת סיסמה —</strong><br/>
+        length() בודקת שהסיסמה ארוכה מספיק — ו-find("#") מחפשת תו מיוחד.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>קבלי שם מלא עם getline והדפיסי את מספר התווים ואת האות הראשונה</li>
+        <li>בדקי אם מחרוזת שהמשתמשת הכניסה מכילה את המילה "שלום"</li>
+        <li>בונוס: כתבי תוכנית שמהפכת שם (מחזירה אותו ב reverse) אות אות בלולאה</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 11</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">מה מחזירה <span style="font-family:monospace;color:var(--pink-deep)">s.length()</span> עבור <span style="font-family:monospace">string s = "HELLO";</span>?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>4</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>5</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>6</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! "HELLO" = H,E,L,L,O — 5 תווים בדיוק 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ "HELLO" מכילה 5 תווים: H(0), E(1), L(2), L(3), O(4) — length() = 5.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה תחזיר <span style="font-family:monospace;color:var(--pink-deep)">s.substr(2, 3)</span>?</div>
+        <div class="q-code"><span style="color:#b8f0c8">string</span> s = <span style="color:#ffd68a">"SHALOM"</span>;</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','B')"><span class="opt-letter">A</span>"SHA"</div>
+          <div class="opt" onclick="answer('q2','B','B')"><span class="opt-letter">B</span>"ALO"</div>
+          <div class="opt" onclick="answer('q2','C','B')"><span class="opt-letter">C</span>"LOM"</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מדויק! substr(2,3) = מיקום 2, אורך 3. S(0)H(1)A(2)L(3)O(4)M(5) → "ALO" 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ substr(pos, len): מתחיל מאינדקס 2 (האות 'A') ולוקח 3 תווים: A,L,O = "ALO".</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">למה להשתמש ב-<span style="font-family:monospace;color:var(--pink-deep)">getline</span> במקום <span style="font-family:monospace;color:var(--pink-deep)">cin</span>?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','A')"><span class="opt-letter">A</span>כי cin עוצר ברווח הראשון — getline קוראת שורה שלמה כולל רווחים</div>
+          <div class="opt" onclick="answer('q3','B','A')"><span class="opt-letter">B</span>כי getline מהירה יותר מ-cin</div>
+          <div class="opt" onclick="answer('q3','C','A')"><span class="opt-letter">C</span>אין הבדל, אפשר להשתמש בשניהן לכל דבר</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ נכון! cin >> s עוצר ברווח — "מיה כהן" יקרא רק "מיה". getline קוראת את השורה כולה 🎉</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ cin עוצר ברווח — לשם "מיה כהן" נקבל רק "מיה". getline קוראת את כל השורה כולל רווחים.</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level3-lesson10.html" class="btn-nav">← שיעור 10</a>
+  <a href="level3-lesson12.html" class="btn-nav primary">שיעור 12 — חיפוש ומיון ←</a>
+</div>
+<script>
+const correct={q1:'B',q2:'B',q3:'A'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! ממשיכות לשיעור 12! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
