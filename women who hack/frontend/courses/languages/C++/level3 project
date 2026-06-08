@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פרויקט — מערכת ניהול כיתה | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--gold:#f5b942;--gold-bg:#fffbea;--gold-border:#f5d87a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--gold);color:#7a4800;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.hero-stars{font-size:1.3rem;margin-top:10px;letter-spacing:4px;animation:fadeUp .8s ease both}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.card-head.gold-head{background:linear-gradient(135deg,#e8884a,#f5b942)}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.req-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.req-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:14px;background:var(--pink-bg);border:1.5px solid #ffd6ec}
+.req-num{min-width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.req-text{font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.req-text strong{color:var(--pink-deep)}
+.bonus-box{background:linear-gradient(135deg,var(--gold-bg),#fffef0);border:2px solid var(--gold-border);border-radius:14px;padding:14px 16px}
+.bonus-title{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:#8a5a00;margin-bottom:10px}
+.bonus-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.bonus-list li{display:flex;align-items:flex-start;gap:9px;font-size:.88rem;color:#7a5000;font-weight:600;line-height:1.5}
+.bdot{color:var(--gold);font-size:1rem;flex-shrink:0}
+.output-box{background:#1a1a2e;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.84rem;line-height:2;color:#e8e8f0;direction:ltr;text-align:left}
+.out-prompt{color:#ffb6d9}.out-input{color:#7ee8c0}.out-text{color:#f8d6e8}.out-special{color:#ffd68a}
+.solution-toggle{width:100%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);border:none;border-radius:14px;padding:14px 20px;font-family:'Quicksand',sans-serif;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .2s;margin-bottom:0}
+.solution-toggle:hover{opacity:.88}
+.solution-toggle .toggle-icon{font-size:1.1rem;transition:transform .3s}
+.solution-toggle.open .toggle-icon{transform:rotate(180deg)}
+.solution-body{display:none;padding-top:16px}
+.solution-body.show{display:block}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;margin-top:16px}
+.section-label:first-child{margin-top:0}
+.explain-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.explain-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.explain-list li .edot{color:var(--pink-dark);font-size:1rem;flex-shrink:0}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--green-bg);border:1.5px solid var(--green-border);font-size:.88rem;font-weight:600;color:#1a5c38;cursor:pointer;user-select:none;transition:opacity .2s}
+.check-item.unchecked{background:var(--pink-bg);border-color:#ffd6ec;color:var(--text-mid)}
+.check-item .chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--green-border);background:var(--green);color:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
+.check-item.unchecked .chk{background:var(--white);border-color:var(--pink-mid);color:transparent}
+.complete-card{background:linear-gradient(135deg,var(--pink-deep),#c0397a);border-radius:20px;padding:28px;text-align:center;animation:fadeUp .5s ease .45s both;box-shadow:0 10px 40px rgba(217,79,138,.35)}
+.complete-card .cc-icon{font-size:3rem;margin-bottom:10px}
+.complete-card h2{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px}
+.complete-card p{font-size:.9rem;color:rgba(255,255,255,.88);font-weight:600;line-height:1.6;max-width:480px;margin:0 auto 18px}
+.badge-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.2);color:var(--white);border:1.5px solid rgba(255,255,255,.4);border-radius:50px;padding:7px 18px;font-size:.82rem;font-weight:700;backdrop-filter:blur(4px)}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">⭐ Level 3 · פרויקט</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">⭐ פרויקט Level 3</div>
+  <h1>מערכת ניהול כיתה</h1>
+  <p>שילוב מערכים, מחרוזות, חיפוש ומיון — הכל בתוכנית אחת! 📚🩷</p>
+  <div class="hero-stars">⭐ ⭐ ⭐</div>
+</div>
+
+<div class="wrap">
+
+  <!-- מטרת הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מה נבנה בפרויקט הזה?</h2></div>
+    <div class="card-body">
+      <p style="font-size:.92rem;color:var(--text-mid);font-weight:600;line-height:1.7;margin-bottom:14px">
+        בפרויקט הזה תכתבי תוכנית שמנהלת <strong style="color:var(--pink-deep)">כיתה של תלמידות</strong> — שמות, ציונים, חיפוש ומיון. שילוב כל מה שלמדת ב-Level 3! 🌸
+      </p>
+      <ul class="goal-list">
+        <li><span class="gdot"></span>שימוש במערכים חד-ממדיים לשמות ולציונים</li>
+        <li><span class="gdot"></span>עבודה עם מחרוזות ופעולות על string</li>
+        <li><span class="gdot"></span>חיפוש תלמידה לפי שם במערך</li>
+        <li><span class="gdot"></span>מיון ציונים מהגבוה לנמוך (Bubble Sort)</li>
+        <li><span class="gdot"></span>הדפסת סטטיסטיקות: ממוצע, מקסימום, מינימום</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- דרישות הפרויקט -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📋</span><h2>דרישות הפרויקט</h2></div>
+    <div class="card-body">
+      <ol class="req-list">
+        <li class="req-item"><div class="req-num">1</div><div class="req-text">צרי <strong>מערך של שמות</strong> (string) עם לפחות 5 תלמידות</div></li>
+        <li class="req-item"><div class="req-num">2</div><div class="req-text">צרי <strong>מערך של ציונים</strong> (int) מקביל למערך השמות</div></li>
+        <li class="req-item"><div class="req-num">3</div><div class="req-text">הדפיסי את <strong>רשימת הכיתה</strong> המלאה (שם + ציון)</div></li>
+        <li class="req-item"><div class="req-num">4</div><div class="req-text">כתבי <strong>חיפוש לפי שם</strong> — המשתמשת מזינה שם והתוכנית מוצאת את הציון</div></li>
+        <li class="req-item"><div class="req-num">5</div><div class="req-text">מייני את <strong>הציונים מהגבוה לנמוך</strong> והדפיסי את הרשימה הממוינת</div></li>
+        <li class="req-item"><div class="req-num">6</div><div class="req-text">חשבי והדפיסי <strong>ממוצע, ציון מקסימלי וציון מינימלי</strong></div></li>
+      </ol>
+      <br/>
+      <div class="bonus-box">
+        <div class="bonus-title">⭐ בונוס (לא חובה)</div>
+        <ul class="bonus-list">
+          <li><span class="bdot">★</span>הוסיפי מערך דו-ממדי לציונים במקצועות שונים (מתמטיקה, אנגלית, מדעים)</li>
+          <li><span class="bdot">★</span>הדפיסי כמה תלמידות עברו (ציון >= 60) וכמה נכשלו</li>
+          <li><span class="bdot">★</span>הוסיפי אפשרות לעדכן ציון של תלמידה ספציפית</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- פלט צפוי -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🖥️</span><h2>פלט לדוגמה — ככה אמורה להיראות התוכנית</h2></div>
+    <div class="card-body">
+      <div class="output-box">
+<span class="out-special">========== רשימת כיתה ==========</span>
+<span class="out-text">1. מיה        | ציון: 92</span>
+<span class="out-text">2. נועה        | ציון: 78</span>
+<span class="out-text">3. דנה         | ציון: 85</span>
+<span class="out-text">4. עדי         | ציון: 61</span>
+<span class="out-text">5. שירה        | ציון: 97</span>
+<span class="out-special">================================</span>
+<br/>
+<span class="out-prompt">חפשי תלמידה לפי שם: </span><span class="out-input">דנה</span>
+<span class="out-text">✓ נמצאה! דנה — ציון: 85</span>
+<br/>
+<span class="out-special">===== ציונים ממוינים (גבוה→נמוך) =====</span>
+<span class="out-text">שירה: 97 | מיה: 92 | דנה: 85 | נועה: 78 | עדי: 61</span>
+<br/>
+<span class="out-special">===== סטטיסטיקות =====</span>
+<span class="out-text">ממוצע: 82.6</span>
+<span class="out-text">ציון מקסימלי: 97 (שירה)</span>
+<span class="out-text">ציון מינימלי: 61 (עדי)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- checklist -->
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✅</span><h2>רשימת ביקורת — לפני שמגישות</h2></div>
+    <div class="card-body">
+      <ul class="checklist" id="checklist">
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>יצרתי מערך שמות ומערך ציונים מקביל</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הדפסתי את רשימת הכיתה המלאה בצורה מסודרת</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>כתבתי לולאת חיפוש לפי שם</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>מייינתי את הציונים (Bubble Sort)</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>חישבתי ממוצע, מקסימום ומינימום</li>
+        <li class="check-item unchecked" onclick="toggleCheck(this)"><span class="chk">✓</span>הקוד מסודר ויש הערות (comments)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- solution -->
+  <div class="card">
+    <div class="card-head gold-head"><span class="head-icon">💡</span><h2>תשובה לדוגמה — לחצי לאחר שניסית בעצמך!</h2></div>
+    <div class="card-body">
+      <button class="solution-toggle" id="sol-btn" onclick="toggleSolution()">
+        <span>👁️ הצגי תשובה לדוגמה</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+      <div class="solution-body" id="solution-body">
+
+        <div class="section-label">📝 קוד התשובה המלאה</div>
+        <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+
+    <span class="cmt">// --- מערכי הכיתה ---</span>
+    <span class="kw">const int</span> SIZE = 5;
+    <span class="tp">string</span> names[SIZE] = {<span class="str">"מיה"</span>, <span class="str">"נועה"</span>, <span class="str">"דנה"</span>, <span class="str">"עדי"</span>, <span class="str">"שירה"</span>};
+    <span class="tp">int</span>    scores[SIZE] = {92, 78, 85, 61, 97};
+
+    <span class="cmt">// --- הדפסת רשימת הכיתה ---</span>
+    cout &lt;&lt; <span class="str">"========== רשימת כיתה =========="</span> &lt;&lt; endl;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE; i++) {
+        cout &lt;&lt; i+1 &lt;&lt; <span class="str">". "</span> &lt;&lt; names[i]
+             &lt;&lt; <span class="str">" | ציון: "</span> &lt;&lt; scores[i] &lt;&lt; endl;
+    }
+    cout &lt;&lt; <span class="str">"================================"</span> &lt;&lt; endl;
+
+    <span class="cmt">// --- חיפוש לפי שם ---</span>
+    <span class="tp">string</span> search;
+    cout &lt;&lt; <span class="str">"\nחפשי תלמידה לפי שם: "</span>;
+    cin  &gt;&gt; search;
+
+    <span class="tp">bool</span> found = <span class="kw">false</span>;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE; i++) {
+        <span class="kw">if</span> (names[i] == search) {
+            cout &lt;&lt; <span class="str">"✓ נמצאה! "</span> &lt;&lt; names[i]
+                 &lt;&lt; <span class="str">" — ציון: "</span> &lt;&lt; scores[i] &lt;&lt; endl;
+            found = <span class="kw">true</span>;
+        }
+    }
+    <span class="kw">if</span> (!found) cout &lt;&lt; <span class="str">"✗ תלמידה לא נמצאה."</span> &lt;&lt; endl;
+
+    <span class="cmt">// --- מיון Bubble Sort (גבוה→נמוך) ---</span>
+    <span class="tp">string</span> sortedNames[SIZE];
+    <span class="tp">int</span>    sortedScores[SIZE];
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE; i++) {
+        sortedNames[i]  = names[i];
+        sortedScores[i] = scores[i];
+    }
+
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE-1; i++) {
+        <span class="kw">for</span> (<span class="tp">int</span> j = 0; j &lt; SIZE-1-i; j++) {
+            <span class="kw">if</span> (sortedScores[j] &lt; sortedScores[j+1]) {
+                <span class="tp">int</span>    tmpS = sortedScores[j];
+                <span class="tp">string</span> tmpN = sortedNames[j];
+                sortedScores[j]   = sortedScores[j+1];
+                sortedNames[j]    = sortedNames[j+1];
+                sortedScores[j+1] = tmpS;
+                sortedNames[j+1]  = tmpN;
+            }
+        }
+    }
+
+    cout &lt;&lt; <span class="str">"\n===== ציונים ממוינים (גבוה→נמוך) ====="</span> &lt;&lt; endl;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE; i++) {
+        cout &lt;&lt; sortedNames[i] &lt;&lt; <span class="str">": "</span> &lt;&lt; sortedScores[i];
+        <span class="kw">if</span> (i &lt; SIZE-1) cout &lt;&lt; <span class="str">" | "</span>;
+    }
+    cout &lt;&lt; endl;
+
+    <span class="cmt">// --- סטטיסטיקות ---</span>
+    <span class="tp">int</span> sum = 0, maxS = scores[0], minS = scores[0];
+    <span class="tp">int</span> maxIdx = 0, minIdx = 0;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; SIZE; i++) {
+        sum += scores[i];
+        <span class="kw">if</span> (scores[i] &gt; maxS) { maxS = scores[i]; maxIdx = i; }
+        <span class="kw">if</span> (scores[i] &lt; minS) { minS = scores[i]; minIdx = i; }
+    }
+
+    cout &lt;&lt; <span class="str">"\n===== סטטיסטיקות ====="</span> &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"ממוצע: "</span>            &lt;&lt; (double)sum/SIZE &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"ציון מקסימלי: "</span>     &lt;&lt; maxS &lt;&lt; <span class="str">" ("</span> &lt;&lt; names[maxIdx] &lt;&lt; <span class="str">")"</span> &lt;&lt; endl;
+    cout &lt;&lt; <span class="str">"ציון מינימלי: "</span>     &lt;&lt; minS &lt;&lt; <span class="str">" ("</span> &lt;&lt; names[minIdx] &lt;&lt; <span class="str">")"</span> &lt;&lt; endl;
+
+    <span class="kw">return</span> 0;
+}</div>
+
+        <div class="section-label">🔍 הסבר קצר</div>
+        <ul class="explain-list">
+          <li><span class="edot">🩷</span>השתמשנו בשני מערכים מקבילים — אחד לשמות ואחד לציונים</li>
+          <li><span class="edot">🩷</span>לולאת חיפוש עוברת על כל השמות ומשווה עם הקלט</li>
+          <li><span class="edot">🩷</span>Bubble Sort — מעביר בועות את הגדול לתחילת המערך בכל סיבוב</li>
+          <li><span class="edot">🩷</span>במיון מחליפים גם את השמות יחד עם הציונים כדי לשמור על ההתאמה</li>
+          <li><span class="edot">🩷</span>הסטטיסטיקות מחושבות בלולאה אחת — סכום, מקסימום ומינימום</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- level complete -->
+  <div class="complete-card">
+    <div class="cc-icon">🏅</div>
+    <h2>Level 3 — הושלם! 🎉</h2>
+    <p>כל הכבוד! למדת מערכים, מחרוזות, חיפוש ומיון — ועכשיו גם פרויקט שלם של מערכת כיתה! Level 4 מחכה לך! 🩷</p>
+    <div class="badge-row">
+      <span class="badge">✅ מערכים</span>
+      <span class="badge">✅ מחרוזות</span>
+      <span class="badge">✅ חיפוש</span>
+      <span class="badge">✅ Bubble Sort</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level3-lesson12.html" class="btn-nav">← שיעור 12</a>
+  <a href="level4-lesson13.html" class="btn-nav primary">🚀 Level 4 — פוינטרים ו-Struct ←</a>
+</div>
+
+<script>
+function toggleSolution() {
+  const body = document.getElementById('solution-body');
+  const btn  = document.getElementById('sol-btn');
+  body.classList.toggle('show');
+  btn.classList.toggle('open');
+  btn.querySelector('span:first-child').textContent =
+    body.classList.contains('show') ? '🙈 הסתירי תשובה' : '👁️ הצגי תשובה לדוגמה';
+}
+function toggleCheck(el) {
+  el.classList.toggle('unchecked');
+}
+</script>
+</body>
+</html>
