@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 18 — פונקציות עם מערכים | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}.card:nth-child(8){animation-delay:.54s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}.vt{color:#ffd68a}
+/* syntax highlight for array param */
+.arr-param-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:2px solid var(--pink-deep);border-radius:14px;padding:14px 18px;margin:12px 0;text-align:center}
+.ap-code{font-family:'Courier New',monospace;font-size:.95rem;color:var(--text-dark);direction:ltr;text-align:left;display:inline-block}
+.ap-note{font-size:.82rem;color:var(--text-mid);font-weight:600;margin-top:8px}
+.highlight-arr{color:var(--pink-deep);font-weight:800}
+.highlight-size{color:#1a6640;font-weight:800}
+/* two patterns */
+.pattern-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.pattern-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:14px;padding:12px 14px}
+.pattern-label{font-family:'Baloo 2',cursive;font-size:.85rem;font-weight:800;color:var(--pink-deep);margin-bottom:6px}
+/* quiz */
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.pattern-row{grid-template-columns:1fr}.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 5 · שיעור 18 מתוך 20</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 5 · שיעור 18</div>
+  <h1>פונקציות עם מערכים</h1>
+  <p>לעבד רשימות שלמות בבת אחת — כוח אמיתי! 📊✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 5</span><span>שיעור 18 / 20</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:50%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה — שיעור 17</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור הקודם למדנו פונקציות עם <strong>פרמטרים והחזרת ערכים</strong> — return type, Parameter ו-Argument. ראינו כמה סוגי return type (int, double, bool, string, void). עכשיו נלמד איך להעביר <strong>מערך שלם</strong> לפונקציה! 🚀</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין איך מעבירים מערך לפונקציה</li>
+        <li><span class="gdot"></span>להבין למה חייבים להעביר גם את גודל המערך</li>
+        <li><span class="gdot"></span>לכתוב פונקציות שמחשבות סכום, ממוצע ומקסימום</li>
+        <li><span class="gdot"></span>להבין שמערך בפונקציה עובד כפוינטר — שינויים מתבצעים במקור!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📐</span><h2>תחביר — מערך כפרמטר</h2></div>
+    <div class="card-body">
+      <div class="arr-param-box">
+        <div class="ap-code"><span style="color:#b8f0c8">int</span> <span style="color:#7ee8c0">sum</span>(<span class="highlight-arr">int arr[]</span>, <span class="highlight-size">int size</span>)</div>
+        <div class="ap-note">
+          <span style="color:var(--pink-deep);font-weight:700">int arr[]</span> — המערך מועבר (ללא גודל בסוגריים!)<br/>
+          <span style="color:#1a6640;font-weight:700">int size</span> — חייבים להעביר גם את הגודל, כי הפונקציה לא יכולה לדעת אותו לבד
+        </div>
+      </div>
+      <div class="concepts-grid" style="margin-top:14px">
+        <div class="concept-box">
+          <div class="concept-term">Array as pointer</div>
+          <div class="concept-desc">כשמעבירים מערך לפונקציה, בעצם מועבר <strong>פוינטר לאיבר הראשון</strong>. לכן שינויים בפונקציה משנים את המערך המקורי!</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">גודל מערך</div>
+          <div class="concept-desc">הפונקציה לא יכולה לחשב את גודל המערך בעצמה — חייבים להעביר int size כפרמטר נפרד.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>דוגמת קוד — 3 פונקציות מערך קלאסיות</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// סכום כל האיברים</span>
+<span class="tp">int</span> <span class="fn">sumArray</span>(<span class="tp">int</span> arr[], <span class="tp">int</span> size) {
+    <span class="tp">int</span> total = 0;
+    <span class="kw">for</span> (<span class="tp">int</span> i = 0; i &lt; size; i++)
+        total += arr[i];
+    <span class="kw">return</span> total;
+}
+
+<span class="cmt">// ממוצע</span>
+<span class="tp">double</span> <span class="fn">averageArray</span>(<span class="tp">int</span> arr[], <span class="tp">int</span> size) {
+    <span class="kw">return</span> (<span class="tp">double</span>)<span class="fn">sumArray</span>(arr, size) / size;
+}
+
+<span class="cmt">// מקסימום</span>
+<span class="tp">int</span> <span class="fn">maxArray</span>(<span class="tp">int</span> arr[], <span class="tp">int</span> size) {
+    <span class="tp">int</span> maxVal = arr[0];
+    <span class="kw">for</span> (<span class="tp">int</span> i = 1; i &lt; size; i++)
+        <span class="kw">if</span> (arr[i] &gt; maxVal)
+            maxVal = arr[i];
+    <span class="kw">return</span> maxVal;
+}
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="tp">int</span> scores[5] = {85, 92, 78, 96, 88};
+
+    cout &lt;&lt; <span class="str">"סכום:   "</span> &lt;&lt; <span class="fn">sumArray</span>(scores, 5)     &lt;&lt; endl; <span class="cmt">// 439</span>
+    cout &lt;&lt; <span class="str">"ממוצע:  "</span> &lt;&lt; <span class="fn">averageArray</span>(scores, 5) &lt;&lt; endl; <span class="cmt">// 87.8</span>
+    cout &lt;&lt; <span class="str">"ציון מקס: "</span> &lt;&lt; <span class="fn">maxArray</span>(scores, 5)    &lt;&lt; endl; <span class="cmt">// 96</span>
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">⚠️</span><h2>שינויים במערך דרך פונקציה — זהירות!</h2></div>
+    <div class="card-body">
+      <p style="font-size:.9rem;color:var(--text-mid);font-weight:600;margin-bottom:12px;line-height:1.6">כשמערך מועבר לפונקציה — <strong style="color:var(--pink-deep)">שינויים בפונקציה משנים את המערך המקורי!</strong> זאת בגלל שמועבר פוינטר, לא עותק.</p>
+      <div class="pattern-row">
+        <div class="pattern-box">
+          <div class="pattern-label">🔄 פונקציה שמשנה</div>
+          <div class="code-block" style="font-size:.75rem;padding:10px 12px;margin-top:0"><span class="tp">void</span> <span class="fn">doubleAll</span>(<span class="tp">int</span> arr[], <span class="tp">int</span> size) {
+    <span class="kw">for</span>(<span class="tp">int</span> i=0; i&lt;size; i++)
+        arr[i] *= 2;  <span class="cmt">// ← שינוי מקורי!</span>
+}</div>
+        </div>
+        <div class="pattern-box">
+          <div class="pattern-label">📖 פונקציה שרק קוראת</div>
+          <div class="code-block" style="font-size:.75rem;padding:10px 12px;margin-top:0"><span class="tp">void</span> <span class="fn">printAll</span>(<span class="kw">const</span> <span class="tp">int</span> arr[], <span class="tp">int</span> size) {
+    <span class="kw">for</span>(<span class="tp">int</span> i=0; i&lt;size; i++)
+        cout &lt;&lt; arr[i] &lt;&lt; <span class="str">" "</span>;
+}</div>
+        </div>
+      </div>
+      <div class="example-box" style="margin-top:12px">
+        <strong>💡 הסבר —</strong> כשכותבים <code style="background:#2d1b26;color:#b8f0c8;padding:1px 6px;border-radius:4px">const int arr[]</code>, אנחנו מסמנות לפונקציה שאסור לה לשנות את המערך — טוב לפונקציות שרק קוראות.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>📊 מחשבון ציונים בכיתה —</strong><br/>
+        המורה מחזיקה רשימת ציונים של כל הכיתה. פונקציית averageArray מחשבת את הממוצע, פונקציית maxArray מוצאת את הציון הגבוה — בלי לכתוב את הלולאה שוב ושוב לכל חישוב.<br/><br/>
+        <strong>🛒 סל קניות —</strong><br/>
+        מערך מחירים + פונקציית sumArray = סכום הקנייה. פשוט, מהיר, ניתן לשימוש חוזר לכל קנייה!
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>כתבי פונקציה <strong>sumArray</strong> שמקבלת מערך int וגודל, ומחזירה את סכום כל האיברים</li>
+        <li>כתבי פונקציה <strong>maxArray</strong> שמחזירה את האיבר הגדול ביותר במערך</li>
+        <li>בונוס: כתבי פונקציה <strong>countAbove</strong> שמקבלת מערך, גודל, וסף (threshold) — ומחזירה כמה איברים גדולים מהסף</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 18</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">פונקציה שמקבלת מערך יכולה:</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>לקרוא את הערכים בלבד — לא לשנות</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>לקרוא ולשנות את הערכים במערך המקורי</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>לא יכולה לגשת לאיברים בכלל</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! כי מועבר פוינטר למערך — הפונקציה יכולה לקרוא ולשנות את המקור 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ כי מועבר פוינטר, הפונקציה יכולה גם לשנות! כדי למנוע שינוי, משתמשים ב-const.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">למה חייבים להעביר גם <code style="font-family:monospace;color:var(--pink-deep)">int size</code> לפונקציה שמקבלת מערך?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','C')"><span class="opt-letter">A</span>כי זה נחמד</div>
+          <div class="opt" onclick="answer('q2','B','C')"><span class="opt-letter">B</span>כי המחשב שוכח את הגודל</div>
+          <div class="opt" onclick="answer('q2','C','C')"><span class="opt-letter">C</span>כי הפונקציה מקבלת רק פוינטר ולא יכולה לדעת את הגודל לבד</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ בדיוק! הפונקציה מקבלת פוינטר לתחילת המערך — ללא גודל, היא לא יודעת עד איפה ללכת 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ הפונקציה מקבלת פוינטר בלבד — ללא int size, היא לא יודעת כמה איברים יש במערך.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">מה יודפס?</div>
+        <div class="q-code"><span style="color:#b8f0c8">void</span> <span style="color:#7ee8c0">addOne</span>(<span style="color:#b8f0c8">int</span> arr[], <span style="color:#b8f0c8">int</span> size) {
+    <span style="color:#ffb6d9">for</span>(<span style="color:#b8f0c8">int</span> i=0; i&lt;size; i++)
+        arr[i]++;
+}
+<span style="color:#b8f0c8">int</span> nums[3] = {1, 2, 3};
+<span style="color:#7ee8c0">addOne</span>(nums, 3);
+cout &lt;&lt; nums[0] &lt;&lt; <span style="color:#ffd68a">" "</span> &lt;&lt; nums[1];</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','B')"><span class="opt-letter">A</span>1 2</div>
+          <div class="opt" onclick="answer('q3','B','B')"><span class="opt-letter">B</span>2 3</div>
+          <div class="opt" onclick="answer('q3','C','B')"><span class="opt-letter">C</span>1 2 3</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ מצוין! addOne שינתה את המערך המקורי — nums[0]=2, nums[1]=3. פלט: "2 3" 🌸</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ addOne מקבלת פוינטר ומשנה את המערך המקורי! לכן nums[0]=2, nums[1]=3. פלט: "2 3".</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level5-lesson17.html" class="btn-nav">← שיעור 17 — פונקציות עם פרמטרים</a>
+  <a href="level5-lesson19.html" class="btn-nav primary">שיעור 19 — פונקציות רקורסיביות ←</a>
+</div>
+<script>
+const correct={q1:'B',q2:'C',q3:'B'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! ממשיכות לשיעור 19! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
