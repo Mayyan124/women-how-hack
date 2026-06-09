@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 24 — נתיבים וטיפול בשגיאות | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}.card:nth-child(8){animation-delay:.54s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.path-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:12px;padding:12px 14px}
+.path-os{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);margin-bottom:6px}
+.path-example{font-family:'Courier New',monospace;font-size:.78rem;color:var(--text-mid);direction:ltr;text-align:left;line-height:1.7}
+.tip-box{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1.5px solid #ffe082;border-radius:14px;padding:14px 16px;font-size:.88rem;color:#5d4037;font-weight:600;line-height:1.65}
+.tip-box strong{color:#e65100}
+.finish-box{background:linear-gradient(135deg,#fff0f8,var(--pink-light));border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center}
+.finish-box h3{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;color:var(--pink-deep);margin-bottom:8px}
+.finish-box p{font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.6}
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}.path-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 6 · שיעור 24 מתוך 24</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">🌸 Level 6 · שיעור 24 — השיעור האחרון!</div>
+  <h1>נתיבים וטיפול בשגיאות 🗂️</h1>
+  <p>לדעת היכן הקובץ נמצא — ולטפל בכל מקרה בצורה חכמה! 🧭✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 6</span><span>שיעור 24 / 24 ✅</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה מהשיעור הקודם</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור 23 למדנו על <code>ios::app</code> — לפתוח קובץ במצב הוספה כדי שהתוכן הקיים לא יימחק. עכשיו נסגור את Level 6 עם שני נושאים חשובים: <strong>נתיבי קבצים</strong> ו-<strong>טיפול נכון בשגיאות</strong>! 🎓</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין את ההבדל בין נתיב יחסי לנתיב מוחלט</li>
+        <li><span class="gdot"></span>לדעת כיצד לכתוב נתיבים ב-Windows וב-Mac/Linux</li>
+        <li><span class="gdot"></span>לטפל בשגיאות קריאה וכתיבה בצורה מסודרת</li>
+        <li><span class="gdot"></span>לסגור Level 6 עם תמונה שלמה של עבודה עם קבצים!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔬</span><h2>מושגים חשובים</h2></div>
+    <div class="card-body">
+      <div class="concepts-grid">
+        <div class="concept-box">
+          <div class="concept-term">נתיב יחסי</div>
+          <div class="concept-desc">נתיב ביחס לתיקיית הפרויקט. לדוג': <code>"data/users.txt"</code>. פשוט ונוח!</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">נתיב מוחלט</div>
+          <div class="concept-desc">הנתיב המלא מהשורש. לדוג': <code>"C:\Users\dana\file.txt"</code>. מדויק אבל לא גמיש.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">fail()</div>
+          <div class="concept-desc">בודק אם פעולת קריאה/כתיבה נכשלה. יותר מדויק מ-<code>is_open()</code>.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">errno</div>
+          <div class="concept-desc">קוד שגיאה של המערכת — מסביר <em>למה</em> הפעולה נכשלה.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🗺️</span><h2>נתיבי קבצים — Windows vs Mac/Linux</h2></div>
+    <div class="card-body">
+      <div class="path-grid">
+        <div class="path-box">
+          <div class="path-os">🪟 Windows</div>
+          <div class="path-example">// נתיב יחסי<br/>"data\\users.txt"<br/><br/>// נתיב מוחלט<br/>"C:\\Users\\dana\\data\\users.txt"<br/><br/>// גם זה עובד ב-C++!<br/>"C:/Users/dana/file.txt"</div>
+        </div>
+        <div class="path-box">
+          <div class="path-os">🍎 Mac / Linux</div>
+          <div class="path-example">// נתיב יחסי<br/>"data/users.txt"<br/><br/>// נתיב מוחלט<br/>"/home/dana/data/users.txt"<br/><br/>// תיקייה עליונה<br/>"../other/file.txt"</div>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+      <div class="tip-box">
+        <strong>💡 טיפ: עדיפי נתיב יחסי!</strong> נתיב יחסי עובד על כל מחשב — הפרויקט שלך יעבוד גם על המחשב של חברה. נתיב מוחלט עלול להישבר כשמעבירים קבצים.
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>טיפול מסודר בשגיאות</h2></div>
+    <div class="card-body">
+      <div class="section-label">📝 הדרך המקצועית לעבוד עם קבצים</div>
+      <div class="code-block"><span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;fstream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;string&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cmt">// נתיב יחסי — עובד בכל מערכת!</span>
+    ifstream inFile(<span class="str">"data/users.txt"</span>);
+
+    <span class="kw">if</span> (!inFile.<span class="fn">is_open</span>()) {
+        cerr &lt;&lt; <span class="str">"❌ שגיאה: לא נמצא קובץ data/users.txt"</span> &lt;&lt; endl;
+        cerr &lt;&lt; <span class="str">"וודאי שהתיקייה data/ קיימת!"</span> &lt;&lt; endl;
+        <span class="kw">return</span> 1;
+    }
+
+    string line;
+    <span class="tp">int</span> count = 0;
+
+    <span class="kw">while</span> (<span class="fn">getline</span>(inFile, line)) {
+        <span class="kw">if</span> (inFile.<span class="fn">fail</span>() && !inFile.<span class="fn">eof</span>()) {
+            cerr &lt;&lt; <span class="str">"❌ שגיאת קריאה בשורה "</span> &lt;&lt; count &lt;&lt; endl;
+            <span class="kw">break</span>;
+        }
+        cout &lt;&lt; line &lt;&lt; endl;
+        count++;
+    }
+
+    cout &lt;&lt; <span class="str">"\n📊 סה\"כ "</span> &lt;&lt; count &lt;&lt; <span class="str">" שורות נקראו."</span> &lt;&lt; endl;
+    inFile.<span class="fn">close</span>();
+    <span class="kw">return</span> 0;
+}</div>
+
+      <div style="margin-top:14px">
+      <div class="section-label">📝 כתיבה עם בדיקת הצלחה</div>
+      <div class="code-block"><span class="cmt">// כתיבה + אימות שהכל עבר תקין</span>
+ofstream outFile(<span class="str">"output/results.txt"</span>);
+<span class="kw">if</span> (!outFile) { <span class="cmt">// קיצור ל-is_open()</span>
+    cerr &lt;&lt; <span class="str">"❌ לא ניתן ליצור קובץ. האם תיקיית output/ קיימת?"</span>;
+    <span class="kw">return</span> 1;
+}
+outFile &lt;&lt; <span class="str">"תוצאות:\n"</span>;
+<span class="kw">if</span> (outFile.<span class="fn">fail</span>()) {
+    cerr &lt;&lt; <span class="str">"❌ שגיאה בכתיבה לקובץ!"</span>;
+}
+outFile.<span class="fn">close</span>();
+cout &lt;&lt; <span class="str">"✅ נשמר בהצלחה!"</span> &lt;&lt; endl;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>📱 אפליקציות אמיתיות —</strong><br/>
+        כל אפליקציה ניידת שומרת נתוני משתמשת בנתיב יחסי לתיקיית האפליקציה. ככה זה עובד גם לאחר עדכון או העברה למכשיר חדש.<br/><br/>
+        <strong>🔧 IDE וכלי פיתוח —</strong><br/>
+        VSCode, CLion וחבריהם מציגים הודעות שגיאה מסודרות כשקובץ לא נמצא — בדיוק כמו שלמדנו לעשות עם <code>cerr</code> ובדיקת <code>fail()</code>. 🛠️
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול סיכום — Level 6</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>צרי תיקייה <code>data/</code> בפרויקט שלך וכתבי קובץ <code>data/notes.txt</code> עם 3 שורות טקסט</li>
+        <li>כתבי תוכנית שקוראת את הקובץ, מדפיסה כל שורה ומציגה את מספר השורות בסוף</li>
+        <li>הוסיפי לתוכנית אפשרות לכתוב הערה נוספת לקובץ — עם <code>ios::app</code></li>
+        <li>בונוס: הוסיפי טיפול מלא בשגיאות עם הודעות ברורות לכל מקרה</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎓</span><h2>סיכום Level 6</h2></div>
+    <div class="card-body">
+      <div class="finish-box">
+        <h3>🎉 סיימת את Level 6!</h3>
+        <p>
+          כעת את יודעת לכתוב לקובץ עם <code>ofstream</code>, לקרוא עם <code>ifstream</code>, להוסיף עם <code>ios::app</code>, ולטפל בנתיבים ושגיאות כמו מפתחת אמיתית!<br/><br/>
+          🩷 הגיע הזמן לפרויקט הסיום של Level 6!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 24</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">מה ההבדל בין נתיב יחסי לנתיב מוחלט?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>נתיב מוחלט יותר קצר מנתיב יחסי</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>נתיב יחסי ביחס לתיקיית הפרויקט; נתיב מוחלט מהשורש של המערכת</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>הם זהים, רק תחביר שונה</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! נתיב יחסי כמו "data/file.txt" מתחיל מתיקיית הפרויקט. נתיב מוחלט כמו "C:\Users\..." מתחיל מהשורש. 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ נתיב יחסי מתחיל מתיקיית הפרויקט (נוח לשיתוף). נתיב מוחלט מתחיל מהשורש של המערכת (C:\ ב-Windows או / ב-Linux).</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה ההבדל בין <code>cout</code> ל-<code>cerr</code>?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','B')"><span class="opt-letter">A</span>אין הבדל, הם זהים לחלוטין</div>
+          <div class="opt" onclick="answer('q2','B','B')"><span class="opt-letter">B</span><code>cout</code> לפלט רגיל, <code>cerr</code> לפלט שגיאות — ניתן להפנות אותם בנפרד</div>
+          <div class="opt" onclick="answer('q2','C','B')"><span class="opt-letter">C</span><code>cerr</code> מדפיס רק כשיש שגיאת compilation</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מדויק! הפרדת פלט רגיל משגיאות מאפשרת להפנות אותם לקבצים שונים. מקצועי! 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ <code>cerr</code> הוא stream נפרד לשגיאות. בשורת הפקודה אפשר לכתוב <code>./program 2&gt;errors.txt</code> כדי לשמור רק שגיאות.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">מה עושה <code>inFile.fail()</code>?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','C')"><span class="opt-letter">A</span>סוגר את הקובץ ומוחק אותו</div>
+          <div class="opt" onclick="answer('q3','B','C')"><span class="opt-letter">B</span>בודק אם הגענו לסוף הקובץ</div>
+          <div class="opt" onclick="answer('q3','C','C')"><span class="opt-letter">C</span>בודק אם פעולת קריאה/כתיבה נכשלה (לא כולל EOF)</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ נכון! <code>fail()</code> בודק כשלון אמיתי (שגיאת I/O), לא סתם סוף קובץ. לבדיקת EOF משתמשים ב-<code>eof()</code>. 🎉</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ <code>fail()</code> בודק כשלון קריאה/כתיבה. לסוף קובץ יש <code>eof()</code>. לסגירה יש <code>close()</code>.</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level6-lesson23.html" class="btn-nav">← שיעור 23</a>
+  <a href="level6-project.html" class="btn-nav primary">🚀 פרויקט Level 6 ←</a>
+</div>
+
+<script>
+const correct={q1:'B',q2:'B',q3:'C'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! הגיע הזמן לפרויקט! 🚀'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
