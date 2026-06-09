@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פרויקט Level 6 — יומן אישי | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--gold:#f5a623;--gold-bg:#fffbf0;--gold-border:#ffe082;--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8;--purple:#9c27b0;--purple-bg:#f8f0ff;--purple-border:#e1bee7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1.5px solid var(--gold-border);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:linear-gradient(135deg,var(--gold),#ffcc02);color:#5d3a00;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.level-badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));color:white;padding:8px 20px;border-radius:50px;font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}.card:nth-child(8){animation-delay:.54s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.card-head.gold{background:linear-gradient(135deg,#f5a623,#ffcc02)}
+.card-head.purple{background:linear-gradient(135deg,#9c27b0,#ce93d8)}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.gdot.gold{background:var(--gold)}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}.num{color:#ffd68a}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.section-label.gold{color:var(--gold)}
+.section-label.purple{color:var(--purple)}
+/* requirement steps */
+.req-list{display:flex;flex-direction:column;gap:12px}
+.req-item{display:flex;gap:14px;align-items:flex-start;background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.req-num{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--pink-deep);min-width:28px}
+.req-text{font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.6}
+.req-text code{background:var(--pink-light);padding:1px 6px;border-radius:5px;font-size:.82rem}
+/* bonus */
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px}
+.bonus-box{background:var(--gold-bg);border:1.5px solid var(--gold-border);border-radius:14px;padding:12px 14px}
+.bonus-title{font-family:'Baloo 2',cursive;font-size:.88rem;font-weight:800;color:#7d4f00;margin-bottom:4px}
+.bonus-desc{font-size:.8rem;color:#5d3a00;font-weight:500;line-height:1.5}
+/* checklist */
+.checklist{display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);font-size:.88rem;font-weight:600;color:var(--text-mid);cursor:pointer;user-select:none;transition:all .2s}
+.check-item:hover{background:var(--pink-light)}
+.check-item.done{background:var(--green-bg);border-color:var(--green-border);color:#1a6640;text-decoration:line-through}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--pink-mid);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;transition:all .2s}
+.check-item.done .check-box{background:var(--green);border-color:var(--green);color:white}
+/* progress ring */
+.progress-ring-wrap{display:flex;align-items:center;gap:16px;background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:14px 18px;margin-top:14px}
+.ring-text{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--pink-deep)}
+.ring-sub{font-size:.82rem;font-weight:600;color:var(--text-light);margin-top:2px}
+/* structure diagram */
+.struct-box{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.9;color:#f8d6e8;direction:ltr;text-align:left}
+.s-folder{color:#ffb6d9;font-weight:700}
+.s-file{color:#7ee8c0}
+.s-comment{color:#7a5070;font-style:italic}
+/* tip */
+.tip-box{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1.5px solid #ffe082;border-radius:14px;padding:14px 16px;font-size:.88rem;color:#5d4037;font-weight:600;line-height:1.65}
+.tip-box strong{color:#e65100}
+/* finish banner */
+.finish-banner{background:linear-gradient(135deg,var(--pink-deep),#a0218a);border-radius:20px;padding:30px 24px;text-align:center;color:white;margin-top:4px}
+.finish-banner h2{font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;margin-bottom:10px}
+.finish-banner p{font-size:.92rem;font-weight:600;line-height:1.7;opacity:.92}
+.star-row{font-size:1.4rem;margin-bottom:12px;letter-spacing:4px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--gold),#ffcc02);border-color:transparent;color:#5d3a00}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">⭐ פרויקט סיום Level 6</span>
+  <a href="level6-lesson24.html" class="nav-back">← שיעור 24</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">⭐ פרויקט סיום — Level 6</div>
+  <h1>יומן אישי דיגיטלי 📓</h1>
+  <p>מיישמות את כל מה שלמדנו — קריאה, כתיבה, append ושגיאות!</p>
+  <div class="level-badge">🏆 פרויקט גמר — Level 6: עבודה עם קבצים</div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head gold"><span class="head-icon">📋</span><h2>תיאור הפרויקט</h2></div>
+    <div class="card-body">
+      <div class="tip-box" style="margin-bottom:14px">
+        <strong>🎯 המשימה:</strong> לבנות תוכנית C++ שמנהלת יומן אישי. המשתמשת תוכל לכתוב רשומות יומן חדשות ולקרוא רשומות ישנות — והכל נשמר בקובץ בין הפעלה להפעלה!
+      </div>
+      <ul class="goal-list">
+        <li><span class="gdot"></span>כתיבת רשומה חדשה לקובץ — עם append כדי לא למחוק היסטוריה</li>
+        <li><span class="gdot"></span>קריאת כל הרשומות הקיימות מהקובץ</li>
+        <li><span class="gdot"></span>תפריט אינטראקטיבי — המשתמשת בוחרת מה לעשות</li>
+        <li><span class="gdot"></span>טיפול בשגיאות — הודעות ברורות לכל מקרה בעיה</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📁</span><h2>מבנה הפרויקט</h2></div>
+    <div class="card-body">
+      <div class="section-label">📂 סידור הקבצים המומלץ</div>
+      <div class="struct-box"><span class="s-folder">diary-project/</span>
+├── <span class="s-folder">data/</span>
+│   └── <span class="s-file">diary.txt</span>        <span class="s-comment">← הקובץ ייווצר אוטומטית</span>
+├── <span class="s-file">main.cpp</span>           <span class="s-comment">← הקוד שלך</span>
+└── <span class="s-file">README.txt</span>         <span class="s-comment">← (בונוס) תיאור התוכנית</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✅</span><h2>דרישות חובה</h2></div>
+    <div class="card-body">
+      <div class="req-list">
+        <div class="req-item">
+          <div class="req-num">1</div>
+          <div class="req-text"><strong>תפריט בחירה:</strong> הצגת אפשרויות: (1) הוסיפי רשומה, (2) קראי את היומן, (3) צאי. לולאה שממשיכה עד שהמשתמשת בוחרת לצאת.</div>
+        </div>
+        <div class="req-item">
+          <div class="req-num">2</div>
+          <div class="req-text"><strong>כתיבה עם append:</strong> כל רשומה חדשה תצורף לסוף <code>data/diary.txt</code> בלי למחוק רשומות ישנות. השתמשי ב-<code>ios::app</code>!</div>
+        </div>
+        <div class="req-item">
+          <div class="req-num">3</div>
+          <div class="req-text"><strong>קריאה והצגה:</strong> קריאת כל תוכן <code>diary.txt</code> שורה שורה עם <code>getline()</code> והדפסתו למסך בצורה ברורה.</div>
+        </div>
+        <div class="req-item">
+          <div class="req-num">4</div>
+          <div class="req-text"><strong>בדיקת שגיאות:</strong> שימוש ב-<code>is_open()</code> בכל פתיחת קובץ, עם הודעת שגיאה ברורה אם משהו נכשל.</div>
+        </div>
+        <div class="req-item">
+          <div class="req-num">5</div>
+          <div class="req-text"><strong>כותרת לכל רשומה:</strong> לפני כל רשומה, כתבי קו הפרדה כגון <code>--- רשומה ---</code> כדי שהיומן יהיה קריא.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>קוד התחלתי — שלד</h2></div>
+    <div class="card-body">
+      <div class="section-label">📝 יש למלא את החלקים החסרים!</div>
+      <div class="code-block"><span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;fstream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;string&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// פונקציה להוספת רשומה ליומן</span>
+<span class="tp">void</span> <span class="fn">addEntry</span>() {
+    <span class="cmt">// TODO: פתחי את data/diary.txt במצב append</span>
+    <span class="cmt">// TODO: בדקי is_open()</span>
+    <span class="cmt">// TODO: קבלי טקסט מהמשתמשת עם getline</span>
+    <span class="cmt">// TODO: כתבי כותרת + הטקסט לקובץ</span>
+    <span class="cmt">// TODO: סגרי את הקובץ</span>
+    cout &lt;&lt; <span class="str">"✅ הרשומה נשמרה!"</span> &lt;&lt; endl;
+}
+
+<span class="cmt">// פונקציה לקריאת כל היומן</span>
+<span class="tp">void</span> <span class="fn">readDiary</span>() {
+    <span class="cmt">// TODO: פתחי data/diary.txt לקריאה</span>
+    <span class="cmt">// TODO: בדקי is_open()</span>
+    <span class="cmt">// TODO: קרא שורה שורה עם while + getline</span>
+    <span class="cmt">// TODO: הדפיסי כל שורה</span>
+    <span class="cmt">// TODO: סגרי</span>
+}
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="tp">int</span> choice = <span class="num">0</span>;
+
+    <span class="kw">while</span> (choice != <span class="num">3</span>) {
+        cout &lt;&lt; <span class="str">"\n📓 יומן אישי — תפריט\n"</span>;
+        cout &lt;&lt; <span class="str">"1. הוסיפי רשומה חדשה\n"</span>;
+        cout &lt;&lt; <span class="str">"2. קראי את היומן\n"</span>;
+        cout &lt;&lt; <span class="str">"3. צאי\n"</span>;
+        cout &lt;&lt; <span class="str">"בחירה: "</span>;
+        cin &gt;&gt; choice;
+        cin.<span class="fn">ignore</span>(); <span class="cmt">// נקה newline לפני getline</span>
+
+        <span class="kw">if</span> (choice == <span class="num">1</span>) <span class="fn">addEntry</span>();
+        <span class="kw">else if</span> (choice == <span class="num">2</span>) <span class="fn">readDiary</span>();
+        <span class="kw">else if</span> (choice != <span class="num">3</span>) cout &lt;&lt; <span class="str">"בחירה לא תקינה ❌\n"</span>;
+    }
+
+    cout &lt;&lt; <span class="str">"להתראות! 🩷\n"</span>;
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head purple"><span class="head-icon">⭐</span><h2>תוספות בונוס (אופציונלי)</h2></div>
+    <div class="card-body">
+      <div class="section-label purple">💫 למי שרוצה לאתגר את עצמה</div>
+      <div class="bonus-grid">
+        <div class="bonus-box">
+          <div class="bonus-title">📅 תאריך ושעה</div>
+          <div class="bonus-desc">הוסיפי לכל רשומה תאריך ושעה (אפשר גם כמחרוזת שהמשתמשת מזינה).</div>
+        </div>
+        <div class="bonus-box">
+          <div class="bonus-title">🔢 ספירת רשומות</div>
+          <div class="bonus-desc">לאחר קריאת היומן, הדפיסי כמה רשומות יש בסה"כ.</div>
+        </div>
+        <div class="bonus-box">
+          <div class="bonus-title">🔍 חיפוש במילה</div>
+          <div class="bonus-desc">הוסיפי אפשרות לחפש מילה ביומן — הצגת כל השורות שמכילות אותה.</div>
+        </div>
+        <div class="bonus-box">
+          <div class="bonus-title">🗑️ מחיקת יומן</div>
+          <div class="bonus-desc">אפשרות לנקות את כל היומן — עם אישור! (כתיבה רגילה בלי app).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head gold"><span class="head-icon">✔️</span><h2>רשימת ביקורת — לפני הגשה</h2></div>
+    <div class="card-body">
+      <div class="section-label gold">סמני כשסיימת כל סעיף!</div>
+      <div class="checklist" id="checklist">
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>התוכנית מתקמפלת ורצה ללא שגיאות</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>הוספת רשומה — נשמרת לקובץ עם <code>ios::app</code></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>קריאת היומן — מוצגות כל הרשומות הקיימות</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>אחרי הפעלה שנייה — הרשומות הישנות עדיין שם!</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>בדיקת <code>is_open()</code> בכל פתיחת קובץ</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>תפריט עם לולאה שעובדת עד בחירה 3</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"></div>הקוד קריא ועם הערות בעברית / אנגלית</div>
+      </div>
+      <div class="progress-ring-wrap" id="progress-display">
+        <div>
+          <div class="ring-text" id="ring-text">0 / 7 ✅</div>
+          <div class="ring-sub" id="ring-sub">מלאי את הצ'קליסט!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💡</span><h2>טיפים לפרויקט</h2></div>
+    <div class="card-body">
+      <div class="tip-box" style="margin-bottom:10px">
+        <strong>🔑 cin.ignore() חשוב!</strong> אחרי <code>cin &gt;&gt; choice</code> תמיד קראי <code>cin.ignore()</code> לפני <code>getline()</code>, אחרת getline תקרא שורה ריקה!
+      </div>
+      <div class="tip-box" style="margin-bottom:10px">
+        <strong>📂 תיקיית data/</strong> C++ לא יוצרת תיקיות אוטומטית. צרי את תיקיית <code>data/</code> ידנית לפני הרצת התוכנית!
+      </div>
+      <div class="tip-box">
+        <strong>🧪 בדקי edge cases:</strong> מה קורה אם הקובץ ריק? מה קורה אם לא יצרת את תיקיית data/? הוסיפי הודעות ברורות לכל מקרה.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head" style="background:linear-gradient(135deg,#d94f8a,#a0218a)"><span class="head-icon">🏆</span><h2>סיכום Level 6</h2></div>
+    <div class="card-body">
+      <div class="finish-banner">
+        <div class="star-row">🌸 🎓 🩷 ⭐ 🎉</div>
+        <h2>כל הכבוד! סיימת Level 6!</h2>
+        <p>
+          למדת לעבוד עם קבצים בצורה מקצועית —<br/>
+          לכתוב, לקרוא, להוסיף, לטפל בנתיבים ובשגיאות.<br/>
+          אלו כלים שכל מפתחת C++ אמיתית משתמשת בהם יום יום! 💪🩷
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level6-lesson24.html" class="btn-nav">← שיעור 24</a>
+  <a href="index.html" class="btn-nav primary">🏠 חזרה לקורס ←</a>
+</div>
+
+<script>
+function toggle(el){
+  el.classList.toggle('done');
+  if(el.classList.contains('done')) el.querySelector('.check-box').textContent='✓';
+  else el.querySelector('.check-box').textContent='';
+  updateProgress();
+}
+function updateProgress(){
+  const items=document.querySelectorAll('.check-item');
+  const done=document.querySelectorAll('.check-item.done').length;
+  const total=items.length;
+  document.getElementById('ring-text').textContent=done+' / '+total+' ✅';
+  const msgs=['מלאי את הצ\'קליסט!','מתחילות! 💪','ממשיכות! 🌸','טוב מאוד! 💕','מעולה! ✨','כמעט שם! 🎯','שלב אחד! 🩷','הפרויקט מוכן! 🎉🏆'];
+  document.getElementById('ring-sub').textContent=msgs[done]||'הפרויקט מוכן! 🎉';
+}
+</script>
+</body>
+</html>
