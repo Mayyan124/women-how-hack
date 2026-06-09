@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 17 — פונקציות עם פרמטרים | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}.card:nth-child(8){animation-delay:.54s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}.vt{color:#ffd68a}
+/* level 5 welcome */
+.level-welcome{background:linear-gradient(135deg,var(--pink-deep),#b03070);border-radius:20px;padding:20px 22px;text-align:center;margin-bottom:22px;animation:fadeUp .5s ease .02s both}
+.lw-emoji{font-size:2rem;margin-bottom:6px}
+.lw-title{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:4px}
+.lw-sub{font-size:.85rem;color:rgba(255,255,255,.85);font-weight:600}
+/* function anatomy */
+.fn-anatomy{background:#2d1b26;border-radius:16px;padding:18px 20px;margin:14px 0;font-family:'Courier New',monospace;font-size:.88rem;line-height:2;direction:ltr;text-align:left;position:relative}
+.fn-line{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.fn-part{padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:700;display:inline-block}
+.fp-ret{background:#b8f0c820;color:#b8f0c8;border:1px solid #b8f0c850}
+.fp-name{background:#7ee8c020;color:#7ee8c0;border:1px solid #7ee8c050}
+.fp-param{background:#ffb6d920;color:#ffb6d9;border:1px solid #ffb6d950}
+.fp-body{background:#ffd68a20;color:#ffd68a;border:1px solid #ffd68a50}
+.fn-labels{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fn-label{display:flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700;color:var(--text-mid)}
+.fn-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+/* return types grid */
+.return-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:10px}
+.ret-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:10px;padding:10px 12px;text-align:center}
+.ret-type{font-family:'Courier New',monospace;font-size:.88rem;font-weight:700;color:var(--pink-deep);margin-bottom:3px}
+.ret-desc{font-size:.75rem;color:var(--text-light);font-weight:600}
+/* quiz */
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:600px){.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 5 · שיעור 17 מתוך 20</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 5 · שיעור 17</div>
+  <h1>פונקציות עם פרמטרים והחזרת ערכים</h1>
+  <p>לכתוב קוד חכם שעושה עבודה בשבילנו — שוב ושוב! ♻️✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 5</span><span>שיעור 17 / 20</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:25%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="level-welcome">
+    <div class="lw-emoji">⭐</div>
+    <div class="lw-title">ברוכה הבאה ל-Level 5!</div>
+    <div class="lw-sub">סיימת Level 4 — פוינטרים, Struct ו-Boolean! עכשיו נצלול לפונקציות מתקדמות 💪</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה — Level 4</h2></div>
+    <div class="card-body">
+      <div class="recap-box">ב-Level 4 למדנו <strong>פוינטרים</strong> (& ו-*), <strong>Struct</strong> לאגד נתונים, האופרטור <code style="background:#2d1b26;color:#7ee8c0;padding:1px 6px;border-radius:4px">-></code> לגישה דרך פוינטר, ו-<strong>Boolean</strong> עם Flags. עכשיו נלמד איך לבנות פונקציות חכמות שמקבלות קלט ומחזירות תוצאות! 🧠</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להגדיר פונקציה עם פרמטרים (קלט)</li>
+        <li><span class="gdot"></span>להשתמש ב-<code style="background:#2d1b26;color:#ffb6d9;padding:1px 6px;border-radius:4px">return</code> להחזרת ערך</li>
+        <li><span class="gdot"></span>להבין את ה-return type — סוג הערך שהפונקציה מחזירה</li>
+        <li><span class="gdot"></span>לכתוב פונקציות לשימוש חוזר ולהפחית כפילויות בקוד</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔬</span><h2>אנטומיה של פונקציה</h2></div>
+    <div class="card-body">
+      <div class="fn-anatomy">
+        <div style="color:#7a5070;font-style:italic;margin-bottom:8px">// מבנה פונקציה מלא:</div>
+        <div><span class="fn-part fp-ret">int</span> <span style="color:#fff"> </span><span class="fn-part fp-name">multiply</span><span style="color:#f8d6e8">(</span><span class="fn-part fp-param">int a, int b</span><span style="color:#f8d6e8">) {</span></div>
+        <div style="padding-right:20px"><span class="fn-part fp-body">return a * b;</span></div>
+        <div><span style="color:#f8d6e8">}</span></div>
+      </div>
+      <div class="fn-labels">
+        <div class="fn-label"><div class="fn-dot" style="background:#b8f0c8"></div>return type — סוג הערך שמוחזר</div>
+        <div class="fn-label"><div class="fn-dot" style="background:#7ee8c0"></div>שם הפונקציה</div>
+        <div class="fn-label"><div class="fn-dot" style="background:#ffb6d9"></div>פרמטרים — קלט לפונקציה</div>
+        <div class="fn-label"><div class="fn-dot" style="background:#ffd68a"></div>גוף הפונקציה + return</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">📦</span><h2>מושגים חשובים</h2></div>
+    <div class="card-body">
+      <div class="concepts-grid">
+        <div class="concept-box">
+          <div class="concept-term">Parameter (פרמטר)</div>
+          <div class="concept-desc">ערך שמועבר לפונקציה כקלט. מוגדר בסוגריים בהגדרת הפונקציה.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">Argument (ארגומנט)</div>
+          <div class="concept-desc">הערך הממשי שמועבר כשקוראים לפונקציה: multiply(3, 4) — 3 ו-4 הם arguments.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">return</div>
+          <div class="concept-desc">מחזיר ערך מהפונקציה לקוד שקרא לה, ומסיים את ריצת הפונקציה.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">void</div>
+          <div class="concept-desc">return type מיוחד — פירושו שהפונקציה לא מחזירה ערך כלל.</div>
+        </div>
+      </div>
+      <p style="font-size:.88rem;color:var(--text-mid);font-weight:600;margin-top:14px">סוגי return type נפוצים:</p>
+      <div class="return-grid">
+        <div class="ret-box"><div class="ret-type">int</div><div class="ret-desc">מחזירה מספר שלם</div></div>
+        <div class="ret-box"><div class="ret-type">double</div><div class="ret-desc">מחזירה מספר עשרוני</div></div>
+        <div class="ret-box"><div class="ret-type">bool</div><div class="ret-desc">מחזירה true/false</div></div>
+        <div class="ret-box"><div class="ret-type">string</div><div class="ret-desc">מחזירה מחרוזת</div></div>
+        <div class="ret-box"><div class="ret-type">void</div><div class="ret-desc">לא מחזירה כלום</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>דוגמת קוד — פונקציות בפעולה</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// פונקציה שמחזירה int</span>
+<span class="tp">int</span> <span class="fn">multiply</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) {
+    <span class="kw">return</span> a * b;
+}
+
+<span class="cmt">// פונקציה שמחזירה double — ממוצע</span>
+<span class="tp">double</span> <span class="fn">average</span>(<span class="tp">int</span> x, <span class="tp">int</span> y) {
+    <span class="kw">return</span> (<span class="tp">double</span>)(x + y) / 2;
+}
+
+<span class="cmt">// פונקציה שמחזירה bool — בדיקה</span>
+<span class="tp">bool</span> <span class="fn">isPassing</span>(<span class="tp">int</span> grade) {
+    <span class="kw">return</span> grade &gt;= 60;
+}
+
+<span class="cmt">// פונקציה שמחזירה string</span>
+<span class="tp">string</span> <span class="fn">greet</span>(<span class="tp">string</span> name) {
+    <span class="kw">return</span> <span class="str">"שלום, "</span> + name + <span class="str">"! 🩷"</span>;
+}
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    cout &lt;&lt; <span class="fn">multiply</span>(3, 4)          &lt;&lt; endl; <span class="cmt">// 12</span>
+    cout &lt;&lt; <span class="fn">average</span>(80, 90)         &lt;&lt; endl; <span class="cmt">// 85</span>
+    cout &lt;&lt; <span class="fn">isPassing</span>(75)           &lt;&lt; endl; <span class="cmt">// 1 (true)</span>
+    cout &lt;&lt; <span class="fn">greet</span>(<span class="str">"מעיין"</span>)          &lt;&lt; endl; <span class="cmt">// שלום, מעיין! 🩷</span>
+
+    <span class="cmt">// שמירת ערך מוחזר במשתנה</span>
+    <span class="tp">int</span> result = <span class="fn">multiply</span>(7, 8);
+    cout &lt;&lt; <span class="str">"התוצאה: "</span> &lt;&lt; result &lt;&lt; endl; <span class="cmt">// 56</span>
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">♻️</span><h2>למה פונקציות? — שימוש חוזר</h2></div>
+    <div class="card-body">
+      <div class="example-box" style="margin-bottom:14px">
+        <strong>❌ בלי פונקציה — קוד כפול:</strong>
+      </div>
+      <div class="code-block"><span class="cmt">// חישוב ממוצע פעמים רבות — קוד כפול וגרוע!</span>
+<span class="tp">double</span> avg1 = (<span class="tp">double</span>)(80 + 90) / 2;
+<span class="tp">double</span> avg2 = (<span class="tp">double</span>)(70 + 85) / 2;
+<span class="tp">double</span> avg3 = (<span class="tp">double</span>)(95 + 100) / 2;</div>
+      <div class="example-box" style="margin:12px 0">
+        <strong>✅ עם פונקציה — נקי וחכם:</strong>
+      </div>
+      <div class="code-block"><span class="tp">double</span> <span class="fn">avg</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) { <span class="kw">return</span> (<span class="tp">double</span>)(a + b) / 2; }
+
+<span class="tp">double</span> avg1 = <span class="fn">avg</span>(80, 90);   <span class="cmt">// 85</span>
+<span class="tp">double</span> avg2 = <span class="fn">avg</span>(70, 85);   <span class="cmt">// 77.5</span>
+<span class="tp">double</span> avg3 = <span class="fn">avg</span>(95, 100);  <span class="cmt">// 97.5</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>🧮 מחשבון ציונים —</strong><br/>
+        מורה שמחשבת ממוצע לכל תלמידה לא כותבת את הנוסחה כל פעם מחדש — היא כותבת אותה פעם אחת ומשתמשת בה לכולן. כך בדיוק פונקציה עובדת!<br/><br/>
+        <strong>☕ מתכון קפה —</strong><br/>
+        פונקציה היא כמו מתכון: הפרמטרים הם המצרכים (כמה כפיות קפה, כמה מים), וה-return הוא התוצאה — כוס קפה מוכנה.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>כתבי פונקציה <strong>multiply</strong> שמקבלת שני מספרים int ומחזירה את המכפלה שלהם</li>
+        <li>כתבי פונקציה <strong>isAdult</strong> שמקבלת גיל int ומחזירה bool — true אם גיל >= 18</li>
+        <li>בונוס: כתבי פונקציה <strong>longer</strong> שמקבלת שתי מחרוזות ומחזירה את הארוכה מביניהן</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 17</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">פונקציה עם <code style="font-family:monospace;color:var(--pink-deep)">return</code> עושה:</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>מדפיסה ערך למסך</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>מחזירה ערך לקוד שקרא לה</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>מוחקת משתנה</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! return מחזיר ערך לנקודה בקוד שממנה נקראה הפונקציה — ומסיים את ריצתה 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ return מחזיר ערך לקוד שקרא לפונקציה. הדפסה היא cout, לא return!</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה יודפס?</div>
+        <div class="q-code"><span style="color:#b8f0c8">int</span> <span style="color:#7ee8c0">add</span>(<span style="color:#b8f0c8">int</span> a, <span style="color:#b8f0c8">int</span> b) {
+    <span style="color:#ffb6d9">return</span> a + b;
+}
+cout &lt;&lt; <span style="color:#7ee8c0">add</span>(10, 5);</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','B')"><span class="opt-letter">A</span>a + b</div>
+          <div class="opt" onclick="answer('q2','B','B')"><span class="opt-letter">B</span>15</div>
+          <div class="opt" onclick="answer('q2','C','B')"><span class="opt-letter">C</span>10 5</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מדויק! add(10, 5) מחשב 10 + 5 = 15 ומחזיר 15. cout מדפיסה 15 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ add(10, 5) מחזיר 10 + 5 = 15. הפלט הוא 15.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">מה <code style="font-family:monospace;color:var(--pink-deep)">void</code> כ-return type אומר?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','C')"><span class="opt-letter">A</span>הפונקציה מחזירה 0</div>
+          <div class="opt" onclick="answer('q3','B','C')"><span class="opt-letter">B</span>הפונקציה מחזירה false</div>
+          <div class="opt" onclick="answer('q3','C','C')"><span class="opt-letter">C</span>הפונקציה לא מחזירה ערך כלל</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ נכון! void = "ריק" — הפונקציה מבצעת פעולה אבל לא מחזירה שום ערך 🌸</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ void אומר שהפונקציה לא מחזירה ערך בכלל. void != 0 ו-void != false!</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level4-lesson16.html" class="btn-nav">← שיעור 16 — Boolean</a>
+  <a href="level5-lesson18.html" class="btn-nav primary">שיעור 18 — פונקציות עם מערכים ←</a>
+</div>
+<script>
+const correct={q1:'B',q2:'B',q3:'C'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! ממשיכות לשיעור 18! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
