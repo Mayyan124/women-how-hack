@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 31 — Access Specifiers | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}.card:nth-child(8){animation-delay:.54s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.compare-table{width:100%;border-collapse:collapse;margin-top:4px;border-radius:12px;overflow:hidden}
+.compare-table th{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));color:white;font-family:'Baloo 2',cursive;font-weight:800;padding:10px 14px;font-size:.82rem;text-align:center}
+.compare-table td{border:1.5px solid #ffd6ec;padding:10px 14px;text-align:center;font-size:.84rem;font-weight:600;color:var(--text-mid)}
+.compare-table tr:nth-child(even) td{background:var(--pink-bg)}
+.compare-table tr:nth-child(odd) td{background:var(--white)}
+.tip-box{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1.5px solid #ffe082;border-radius:14px;padding:14px 16px;font-size:.88rem;color:#5d4037;font-weight:600;line-height:1.65}
+.tip-box strong{color:#e65100}
+.warn-box{background:linear-gradient(135deg,#fdeaea,#fff0f0);border:1.5px solid #f5b8b8;border-radius:14px;padding:14px 16px;font-size:.88rem;color:#7a1a1a;font-weight:600;line-height:1.65;margin-top:12px}
+.warn-box strong{color:#c0392b}
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+.access-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+.access-box{border-radius:16px;padding:16px 14px;border:2px solid;text-align:center}
+.access-box.pub{background:#edfbf3;border-color:#a8edcc}
+.access-box.prot{background:#fff8e1;border-color:#ffe082}
+.access-box.priv{background:#fdeaea;border-color:#f5b8b8}
+.access-icon{font-size:1.6rem;margin-bottom:6px}
+.access-name{font-family:'Baloo 2',cursive;font-size:.95rem;font-weight:800;margin-bottom:6px}
+.pub .access-name{color:#0e7a40}.prot .access-name{color:#8a5a00}.priv .access-name{color:#c0392b}
+.access-desc{font-size:.78rem;font-weight:600;line-height:1.5;color:var(--text-mid)}
+@media(max-width:600px){.access-grid{grid-template-columns:1fr}.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 8 · שיעור 31 מתוך 32</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">🌸 Level 8 · שיעור 31</div>
+  <h1>Access Specifiers 🔐</h1>
+  <p>לשלוט על מי רואה מה — <code>public</code>, <code>protected</code>, <code>private</code>! 🛡️✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 8</span><span>שיעור 31 / 32</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:75%"></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה מהשיעור הקודם</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור 30 למדנו על <strong>פונקציות וירטואליות</strong> — שמאפשרות פולימורפיזם ו-override במחלקות יורשות. עכשיו נלמד לשלוט על <strong>מי יכולה לגשת למה</strong> במחלקה שלנו! 🔐</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין את ההבדל בין <code>public</code>, <code>protected</code> ו-<code>private</code></li>
+        <li><span class="gdot"></span>לדעת מתי להשתמש בכל אחד מהם</li>
+        <li><span class="gdot"></span>להגן על נתונים רגישים עם <code>private</code></li>
+        <li><span class="gdot"></span>לכתוב setter/getter לגישה מבוקרת</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔬</span><h2>שלושת ה-Access Specifiers</h2></div>
+    <div class="card-body">
+      <div class="access-grid">
+        <div class="access-box pub">
+          <div class="access-icon">🟢</div>
+          <div class="access-name">public</div>
+          <div class="access-desc">נגיש מכל מקום — מהמחלקה, מחלקות יורשות, ומחוץ למחלקה לגמרי.</div>
+        </div>
+        <div class="access-box prot">
+          <div class="access-icon">🟡</div>
+          <div class="access-name">protected</div>
+          <div class="access-desc">נגיש מאותה מחלקה ומחלקות יורשות בלבד. לא נגיש מבחוץ.</div>
+        </div>
+        <div class="access-box priv">
+          <div class="access-icon">🔴</div>
+          <div class="access-name">private</div>
+          <div class="access-desc">נגיש מאותה מחלקה בלבד! לא מחלקות יורשות ולא מבחוץ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔁</span><h2>טבלת השוואה</h2></div>
+    <div class="card-body">
+      <table class="compare-table">
+        <thead>
+          <tr><th>מי יכולה לגשת?</th><th>🟢 public</th><th>🟡 protected</th><th>🔴 private</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>אותה מחלקה</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>מחלקה יורשת</td><td>✅</td><td>✅</td><td>❌</td></tr>
+          <tr><td>מחוץ למחלקה</td><td>✅</td><td>❌</td><td>❌</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>קוד — הגנה על password עם private</h2></div>
+    <div class="card-body">
+      <div class="section-label">🔐 משתנה private + setter לגישה מבוקרת</div>
+      <div class="code-block"><span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;string&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> <span class="tp">User</span> {
+<span class="kw">private</span>:
+    <span class="cmt">// ❌ לא נגיש מבחוץ!</span>
+    string password;
+
+<span class="kw">public</span>:
+    string name;
+    <span class="tp">int</span> age;
+
+    <span class="tp">User</span>(string n, <span class="tp">int</span> a) {
+        name = n;
+        age = a;
+        password = <span class="str">"1234"</span>; <span class="cmt">// ברירת מחדל</span>
+    }
+
+    <span class="cmt">// Setter — הדרך היחידה לשנות את הסיסמה</span>
+    <span class="tp">void</span> <span class="fn">setPassword</span>(string newPass) {
+        <span class="kw">if</span> (newPass.length() >= 6) {
+            password = newPass;
+            cout &lt;&lt; <span class="str">"✅ הסיסמה עודכנה!"</span> &lt;&lt; endl;
+        } <span class="kw">else</span> {
+            cout &lt;&lt; <span class="str">"❌ סיסמה חייבת להיות לפחות 6 תווים"</span> &lt;&lt; endl;
+        }
+    }
+
+    <span class="cmt">// Getter — קריאה מבוקרת</span>
+    <span class="tp">bool</span> <span class="fn">checkPassword</span>(string input) {
+        <span class="kw">return</span> input == password;
+    }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="tp">User</span> u1(<span class="str">"Dana"</span>, 20);
+
+    <span class="cmt">// u1.password = "hack"; ← שגיאה! private</span>
+
+    u1.<span class="fn">setPassword</span>(<span class="str">"abc"</span>);       <span class="cmt">// קצר מדי</span>
+    u1.<span class="fn">setPassword</span>(<span class="str">"secure123"</span>); <span class="cmt">// תקין!</span>
+
+    cout &lt;&lt; u1.<span class="fn">checkPassword</span>(<span class="str">"wrong"</span>)    &lt;&lt; endl; <span class="cmt">// 0</span>
+    cout &lt;&lt; u1.<span class="fn">checkPassword</span>(<span class="str">"secure123"</span>) &lt;&lt; endl; <span class="cmt">// 1</span>
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>דוגמה מחיי היום-יום</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>🏦 חשבון בנק —</strong><br/>
+        יתרת החשבון היא <code>private</code> — אי אפשר לשנות אותה ישירות מבחוץ. רק דרך פונקציות כמו <code>deposit()</code> ו-<code>withdraw()</code> אפשר לגשת — עם בדיקות ואימות! 💳<br/><br/>
+        <strong>🔑 סיסמה באתר —</strong><br/>
+        הסיסמה שמורה כ-<code>private</code>. לא מוצגת לאף אחד — רק מאומתת דרך <code>checkPassword()</code>. זה בדיוק מה שעשינו! 🔐
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💡</span><h2>טיפ חשוב</h2></div>
+    <div class="card-body">
+      <div class="tip-box">
+        <strong>🧠 Encapsulation — עיקרון מרכזי ב-OOP:</strong><br/>
+        הגנה על נתונים פנימיים וחשיפתם רק דרך פונקציות מבוקרות נקראת <strong>Encapsulation</strong>. זה אחד מעקרונות היסוד של תכנות מונחה-עצמים!<br/><br/>
+        כלל אצבע: כל משתנה שלא צריך להיות נגיש מבחוץ — שים אותו <code>private</code>.
+      </div>
+      <div class="warn-box">
+        <strong>⚠️ שים לב:</strong> ברירת המחדל של class היא <code>private</code>! אם לא כותבים כלום — הכל פרטי. ב-struct ברירת המחדל היא <code>public</code>.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>הוסיפי משתנה <code>password</code> כ-<code>private</code> למחלקה <code>User</code></li>
+        <li>כתבי פונקציה <code>setPassword()</code> שמקבלת סיסמה חדשה ובודקת שהיא לפחות 6 תווים</li>
+        <li>בונוס: הוסיפי <code>protected</code> משתנה <code>role</code> (מחרוזת) ובדקי שמחלקה יורשת יכולה לגשת אליו</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 31</h2></div>
+    <div class="quiz-body">
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 1</div>
+        <div class="q-text">משתנה <code>private</code> ניתן לגישה מ:</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','B')"><span class="opt-letter">A</span>מחלקה אחרת</div>
+          <div class="opt" onclick="answer('q1','B','B')"><span class="opt-letter">B</span>אותה מחלקה בלבד</div>
+          <div class="opt" onclick="answer('q1','C','B')"><span class="opt-letter">C</span>כל אובייקט בתוכנית</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! <code>private</code> = נגיש מאותה מחלקה בלבד. זה בדיוק מה שנותן לנו הגנה על הנתונים! 🔐🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ משתנה <code>private</code> נגיש רק מ<strong>אותה מחלקה</strong>. לא ממחלקות אחרות ולא מבחוץ — זה כל הרעיון של Encapsulation!</div>
+      </div>
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-footer">
+  <a href="level8-lesson30.html" class="btn-nav">← שיעור 30</a>
+  <a href="level8-lesson32.html" class="btn-nav primary">שיעור 32 — תרגול מורש ומורכב ←</a>
+</div>
+
+<script>
+const correct={q1:'B'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=score===1?'מושלם! ממשיכות לשיעור 32! 🎉':'נסי שוב! 💪';
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
