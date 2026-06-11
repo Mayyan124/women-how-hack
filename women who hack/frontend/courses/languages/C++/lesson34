@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>שיעור 34 — Templates בסיסיים | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--red:#e05555;--red-bg:#fdeaea;--red-border:#f5b8b8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--pink-deep);background:var(--pink-light);border:1.5px solid var(--pink-mid);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.progress-wrap{max-width:400px;margin:18px auto 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.prog-bar{height:10px;background:#ffd6ec;border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pink-dark),var(--pink-deep));border-radius:50px}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}.card:nth-child(7){animation-delay:.47s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-body{padding:20px 22px}
+.recap-box{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:12px 16px;font-size:.88rem;color:var(--text-mid);font-weight:600;line-height:1.65}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.example-box{background:linear-gradient(135deg,#fff0f8,#ffe4ef);border:1.5px solid var(--pink-mid);border-radius:14px;padding:14px 16px;font-size:.9rem;color:var(--text-mid);line-height:1.7;font-weight:500}
+.example-box strong{color:var(--pink-deep)}
+.ex-list{list-style:none;counter-reset:ex;display:flex;flex-direction:column;gap:9px}
+.ex-list li{counter-increment:ex;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.ex-list li::before{content:counter(ex);background:var(--pink-mid);color:var(--pink-deep);font-weight:800;font-size:.72rem;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.anatomy-box{border-radius:14px;overflow:hidden;border:1.5px solid #ffd6ec}
+.anatomy-line{display:flex;align-items:stretch}
+.anatomy-code{background:#2d1b26;padding:11px 16px;font-family:'Courier New',monospace;font-size:.82rem;color:#f8d6e8;direction:ltr;text-align:left;min-width:220px;display:flex;align-items:center;line-height:1.4}
+.anatomy-arrow{background:#3d2232;color:var(--pink-mid);padding:0 12px;display:flex;align-items:center;font-size:1rem;flex-shrink:0}
+.anatomy-explain{background:var(--pink-bg);padding:10px 14px;flex:1;font-size:.84rem;color:var(--text-mid);font-weight:600;display:flex;align-items:center;line-height:1.5;border-right:1.5px solid #ffd6ec}
+.anatomy-line:not(:last-child) .anatomy-code,.anatomy-line:not(:last-child) .anatomy-arrow{border-bottom:1px solid #3d2232}
+.anatomy-line:not(:last-child) .anatomy-explain{border-bottom:1px solid #ffd6ec}
+.types-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:4px}
+.type-chip{background:var(--pink-bg);border:1.5px solid var(--pink-mid);border-radius:12px;padding:10px 12px;text-align:center}
+.type-chip .chip-type{font-family:'Courier New',monospace;font-size:.85rem;font-weight:700;color:var(--pink-deep)}
+.type-chip .chip-label{font-size:.75rem;color:var(--text-light);font-weight:600;margin-top:3px}
+.quiz-card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:2px solid var(--pink-mid);margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease .5s both}
+.quiz-head{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.quiz-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.quiz-body{padding:22px}
+.q-block{margin-bottom:24px}.q-block:last-child{margin-bottom:0}
+.q-num{display:inline-block;background:var(--pink-mid);color:var(--pink-deep);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:8px}
+.q-text{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.5}
+.q-code{background:#2d1b26;border-radius:10px;padding:10px 14px;font-family:'Courier New',monospace;font-size:.8rem;color:#f8d6e8;direction:ltr;text-align:left;margin-bottom:12px;line-height:1.7}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid #ffd6ec;background:var(--pink-bg);cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text-mid);transition:all .2s;user-select:none}
+.opt:hover:not(.locked){background:var(--pink-light);border-color:var(--pink-mid)}
+.opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#1a6640}
+.opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#7a1a1a}
+.opt.locked{cursor:default}
+.opt-letter{min-width:26px;height:26px;border-radius:50%;background:var(--pink-mid);color:var(--pink-deep);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,color .2s}
+.opt.correct .opt-letter{background:var(--green);color:#fff}.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.85rem;font-weight:600;line-height:1.55;display:none}
+.feedback.show{display:block}
+.feedback.fb-correct{background:var(--green-bg);border:1.5px solid var(--green-border);color:#1a6640}
+.feedback.fb-wrong{background:var(--red-bg);border:1.5px solid var(--red-border);color:#7a1a1a}
+.q-divider{border:none;border-top:1.5px dashed var(--pink-mid);margin:22px 0}
+.score-box{display:none;background:linear-gradient(135deg,var(--pink-light),#fff0f8);border:2px solid var(--pink-mid);border-radius:16px;padding:20px 22px;text-align:center;margin-top:18px}
+.score-box.show{display:block}
+.score-num{font-family:'Baloo 2',cursive;font-size:2.4rem;font-weight:800;color:var(--pink-deep)}
+.score-msg{font-size:.92rem;font-weight:600;color:var(--text-mid);margin-top:6px}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:580px){.types-row{grid-template-columns:1fr 1fr}.anatomy-code{min-width:150px;font-size:.74rem}.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">Level 9 · שיעור 34 מתוך 36</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🌸 Level 9 · שיעור 34</div>
+  <h1>Templates בסיסיים</h1>
+  <p>פונקציה אחת לכל הסוגים — כתבי פחות, עשי יותר! 🧬✨</p>
+  <div class="progress-wrap">
+    <div class="prog-labels"><span>Level 9</span><span>שיעור 34 / 36</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:50%"></div></div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🔄</span><h2>חזרה קצרה מהשיעור הקודם</h2></div>
+    <div class="card-body">
+      <div class="recap-box">בשיעור 33 למדנו <strong>static variables ו-static functions</strong> — כיצד ליצור משתנים ופונקציות שמשותפים לכל האובייקטים של קלאס. עכשיו נלמד <strong>Templates</strong> — כיצד לכתוב פונקציות שעובדות עם <em>כל</em> סוג נתונים! 🧬</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות השיעור</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>להבין מה זה Template ולמה הוא מגמיש את הקוד</li>
+        <li><span class="gdot"></span>לכתוב template functions שעובדות עם סוגים שונים</li>
+        <li><span class="gdot"></span>לגלות כיצד המהדר מייצר קוד אוטומטית לכל סוג</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🤔</span><h2>מה זה Template?</h2></div>
+    <div class="card-body">
+      <div class="example-box" style="margin-bottom:16px">
+        <strong>👗 תבנית תפירה —</strong><br/>
+        Template הוא כמו תבנית תפירה: אותו דפוס, אבל כל פעם עם בד אחר. פונקציה אחת שעובדת עם int, עם double, עם string — בלי לכתוב שלוש פונקציות נפרדות!
+      </div>
+      <div class="concepts-grid">
+        <div class="concept-box"><div class="concept-term">template&lt;typename T&gt;</div><div class="concept-desc">הכרזה שT הוא סוג כלשהו — המהדר ימלא את הפרטים בזמן הקומפילציה.</div></div>
+        <div class="concept-box"><div class="concept-term">typename T</div><div class="concept-desc">T הוא שם "מציין מקום" לסוג. ניתן לקרוא לו כל שם — T, Type, MyType וכו'.</div></div>
+        <div class="concept-box"><div class="concept-term">Template Instantiation</div><div class="concept-desc">כשקוראים לפונקציה עם int — המהדר יוצר גרסת int. עם double — גרסת double.</div></div>
+        <div class="concept-box"><div class="concept-term">Type Deduction</div><div class="concept-desc">המהדר מבין לבד מה T — לא צריך לציין! הוא מסיק מסוג הפרמטרים.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🏗️</span><h2>מבנה Template Function — שורה שורה</h2></div>
+    <div class="card-body">
+      <div class="anatomy-box">
+        <div class="anatomy-line">
+          <div class="anatomy-code"><span style="color:#ffb6d9">template</span>&lt;<span style="color:#ffb6d9">typename</span> <span style="color:#b8f0c8">T</span>&gt;</div>
+          <div class="anatomy-arrow">→</div>
+          <div class="anatomy-explain">🏷️ הכרזת template — T הוא סוג גנרי</div>
+        </div>
+        <div class="anatomy-line">
+          <div class="anatomy-code"><span style="color:#b8f0c8">T</span> <span style="color:#7ee8c0">maxValue</span>(<span style="color:#b8f0c8">T</span> a, <span style="color:#b8f0c8">T</span> b) {</div>
+          <div class="anatomy-arrow">→</div>
+          <div class="anatomy-explain">⚙️ T כסוג החזרה ופרמטרים</div>
+        </div>
+        <div class="anatomy-line">
+          <div class="anatomy-code">&nbsp;&nbsp;<span style="color:#ffb6d9">return</span> (a &gt; b) ? a : b;</div>
+          <div class="anatomy-arrow">→</div>
+          <div class="anatomy-explain">🔄 גוף הפונקציה — עובד לכל T</div>
+        </div>
+        <div class="anatomy-line">
+          <div class="anatomy-code">}</div>
+          <div class="anatomy-arrow">→</div>
+          <div class="anatomy-explain">🔒 סגירה</div>
+        </div>
+      </div>
+      <br/>
+      <div class="section-label">🎯 איך T הופך לסוג אמיתי?</div>
+      <div class="types-row">
+        <div class="type-chip"><div class="chip-type">maxValue(3, 7)</div><div class="chip-label">T = int</div></div>
+        <div class="type-chip"><div class="chip-type">maxValue(2.5, 9.1)</div><div class="chip-label">T = double</div></div>
+        <div class="type-chip"><div class="chip-type">maxValue("abc","xyz")</div><div class="chip-label">T = string</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💻</span><h2>דוגמת קוד — maxValue עם Template</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cmt">// template function אחת — עובדת לכל סוג!</span>
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="tp">T</span>&gt;
+<span class="tp">T</span> <span class="fn">maxValue</span>(<span class="tp">T</span> a, <span class="tp">T</span> b) {
+    <span class="kw">return</span> (a &gt; b) ? a : b;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cmt">// המהדר יוצר גרסת int</span>
+    cout &lt;&lt; <span class="fn">maxValue</span>(3, 7) &lt;&lt; endl;         <span class="cmt">// 7</span>
+
+    <span class="cmt">// המהדר יוצר גרסת double</span>
+    cout &lt;&lt; <span class="fn">maxValue</span>(2.5, 9.1) &lt;&lt; endl;     <span class="cmt">// 9.1</span>
+
+    <span class="cmt">// המהדר יוצר גרסת string</span>
+    <span class="tp">string</span> s = <span class="fn">maxValue</span>(<span class="str">"apple"</span>, <span class="str">"mango"</span>);
+    cout &lt;&lt; s &lt;&lt; endl;                         <span class="cmt">// mango</span>
+
+    <span class="kw">return</span> 0;
+}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌸</span><h2>למה Templates כל כך שימושיים?</h2></div>
+    <div class="card-body">
+      <div class="example-box">
+        <strong>🚫 בלי template — קוד כפול:</strong><br/>
+        int maxInt(int a, int b) {...}<br/>
+        double maxDouble(double a, double b) {...}<br/>
+        string maxString(string a, string b) {...}<br/><br/>
+        <strong>✅ עם template — קוד אחד:</strong><br/>
+        template&lt;typename T&gt;<br/>
+        T maxValue(T a, T b) {...} &nbsp;← <strong>עובד לכולם!</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">✏️</span><h2>תרגול</h2></div>
+    <div class="card-body">
+      <ol class="ex-list">
+        <li>כתבי template function בשם <strong style="color:var(--pink-deep)">minValue(T a, T b)</strong> שמחזירה את הקטן מבין שניים</li>
+        <li>קראי לה עם int (5, 3), עם double (7.2, 2.8) ועם string ("banana", "apple")</li>
+        <li>הדפיסי את כל התוצאות ובדקי שהן נכונות</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-head"><span style="font-size:1.2rem">🧠</span><h2>מבחן — שיעור 34</h2></div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">שאלה 1 מתוך 3</div>
+        <div class="q-text">template מאפשר לנו:</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q1','A','A')"><span class="opt-letter">A</span>לכתוב פונקציה אחת שעובדת עם סוגים שונים</div>
+          <div class="opt" onclick="answer('q1','B','A')"><span class="opt-letter">B</span>לכתוב פונקציות למספרים בלבד</div>
+          <div class="opt" onclick="answer('q1','C','A')"><span class="opt-letter">C</span>למחוק אוטומטית משתנים מהזיכרון</div>
+        </div>
+        <div class="feedback fb-correct" id="q1-ok">✅ נכון! template מאפשר גנריות — פונקציה אחת לכל הסוגים! 🎉</div>
+        <div class="feedback fb-wrong" id="q1-no">❌ template מאפשר לכתוב פונקציה כללית אחת שעובדת עם int, double, string ועוד!</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">שאלה 2 מתוך 3</div>
+        <div class="q-text">מה יודפס כשקוראים ל-<span style="font-family:monospace;color:var(--pink-deep)">maxValue(4, 9)</span>?</div>
+        <div class="q-code"><span style="color:#ffb6d9">template</span>&lt;<span style="color:#ffb6d9">typename</span> <span style="color:#b8f0c8">T</span>&gt;
+<span style="color:#b8f0c8">T</span> <span style="color:#7ee8c0">maxValue</span>(<span style="color:#b8f0c8">T</span> a, <span style="color:#b8f0c8">T</span> b) {
+    <span style="color:#ffb6d9">return</span> (a &gt; b) ? a : b;
+}</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q2','A','C')"><span class="opt-letter">A</span>4</div>
+          <div class="opt" onclick="answer('q2','B','C')"><span class="opt-letter">B</span>13</div>
+          <div class="opt" onclick="answer('q2','C','C')"><span class="opt-letter">C</span>9</div>
+        </div>
+        <div class="feedback fb-correct" id="q2-ok">✅ מדויק! 9 &gt; 4, אז הפונקציה מחזירה 9 🩷</div>
+        <div class="feedback fb-wrong" id="q2-no">❌ הפונקציה בודקת מי גדול יותר ומחזירה אותו. 9 &gt; 4, אז התשובה היא 9.</div>
+      </div>
+
+      <hr class="q-divider"/>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">שאלה 3 מתוך 3</div>
+        <div class="q-text">מה T מייצג ב-<span style="font-family:monospace;color:var(--pink-deep)">template&lt;typename T&gt;</span>?</div>
+        <div class="options">
+          <div class="opt" onclick="answer('q3','A','B')"><span class="opt-letter">A</span>T זה תמיד int</div>
+          <div class="opt" onclick="answer('q3','B','B')"><span class="opt-letter">B</span>T הוא "מציין מקום" לסוג כלשהו — המהדר ממלא לפי הקריאה</div>
+          <div class="opt" onclick="answer('q3','C','B')"><span class="opt-letter">C</span>T זה שם של משתנה</div>
+        </div>
+        <div class="feedback fb-correct" id="q3-ok">✅ כל הכבוד! T הוא פרמטר-סוג — המהדר מחליף אותו בסוג האמיתי בזמן קומפילציה 🎉</div>
+        <div class="feedback fb-wrong" id="q3-no">❌ T הוא פרמטר גנרי — לא int ולא שם משתנה. המהדר מבין מה T לפי הסוג שמועבר בקריאה.</div>
+      </div>
+
+      <div class="score-box" id="score-box">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-msg" id="score-msg"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="level9-lesson33.html" class="btn-nav">← שיעור 33</a>
+  <a href="level9-lesson35.html" class="btn-nav primary">שיעור 35 — Template עם מחלקות ←</a>
+</div>
+<script>
+const correct={q1:'A',q2:'C',q3:'B'};const answered={};const total=Object.keys(correct).length;
+function answer(qId,chosen,correctAns){
+  if(answered[qId])return;answered[qId]=chosen;
+  const block=document.getElementById(qId);
+  block.querySelectorAll('.opt').forEach((o,i)=>{const l=['A','B','C'][i];o.classList.add('locked');if(l===correctAns)o.classList.add('correct');else if(l===chosen&&chosen!==correctAns)o.classList.add('wrong');});
+  document.getElementById(qId+(chosen===correctAns?'-ok':'-no')).classList.add('show');
+  if(Object.keys(answered).length===total){
+    let score=Object.keys(answered).filter(q=>answered[q]===correct[q]).length;
+    document.getElementById('score-num').textContent=score+' / '+total;
+    document.getElementById('score-msg').textContent=['נסי שוב! 💪','כמעט! 🌸','יפה מאוד! 💕','מושלם! ממשיכות לשיעור 35! 🎉'][score];
+    document.getElementById('score-box').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
