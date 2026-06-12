@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>פרויקט Level 7 — מערכת משתמשות | Women Who Hack C++</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--pink-bg:#fff0f5;--pink-light:#ffe4ef;--pink-mid:#ffb6d9;--pink-dark:#f072a9;--pink-deep:#d94f8a;--pink-accent:#ff8cc8;--white:#ffffff;--text-dark:#3d1a2e;--text-mid:#7a3060;--text-light:#b56090;--shadow:rgba(240,114,169,.18);--green:#2ebd78;--green-bg:#edfbf3;--green-border:#a8edcc;--gold:#e8a800;--gold-bg:#fffbe8;--gold-border:#f5d080}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;background:var(--pink-bg);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,#ffd6ec 0%,transparent 70%);z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,#ffcce5 0%,transparent 70%);z-index:0;pointer-events:none}
+nav{position:relative;z-index:2;background:var(--white);border-bottom:1.5px solid #ffd6ec;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px var(--shadow)}
+.nav-logo{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--pink-deep);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:600;padding:7px 16px;border-radius:50px;background:var(--pink-bg);border:1.5px solid var(--pink-mid);transition:background .2s}
+.nav-back:hover{background:var(--pink-light)}
+.nav-badge{font-size:.78rem;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1.5px solid var(--gold-border);padding:5px 14px;border-radius:50px}
+.hero{position:relative;z-index:1;text-align:center;padding:42px 20px 28px}
+.hero-tag{display:inline-block;background:linear-gradient(135deg,var(--gold),#f5c842);color:#7a5000;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 18px;border-radius:50px;margin-bottom:14px}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;color:var(--pink-deep);line-height:1.2}
+.hero p{margin-top:10px;font-size:.95rem;color:var(--text-light);font-weight:500}
+.hero-badge-row{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.hbadge{background:var(--pink-light);border:1.5px solid var(--pink-mid);border-radius:50px;padding:6px 16px;font-size:.78rem;font-weight:700;color:var(--pink-deep)}
+.wrap{max-width:760px;margin:0 auto;padding:10px 22px 80px;position:relative;z-index:1}
+.card{background:var(--white);border-radius:20px;box-shadow:0 6px 28px var(--shadow);border:1.5px solid #ffd6ec;margin-bottom:22px;overflow:hidden;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.40s}
+.card-head{background:linear-gradient(135deg,var(--pink-dark),var(--pink-accent));padding:16px 22px;display:flex;align-items:center;gap:12px}
+.card-head.gold-head{background:linear-gradient(135deg,#e8a800,#f5c842)}
+.head-icon{font-size:1.3rem}
+.card-head h2{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--white)}
+.card-head.gold-head h2{color:#4a3000}
+.card-body{padding:20px 22px}
+.goal-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.goal-list li{display:flex;align-items:flex-start;gap:9px;font-size:.9rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--pink-dark);flex-shrink:0;margin-top:6px}
+.gdot.gold{background:var(--gold)}
+.steps-list{display:flex;flex-direction:column;gap:14px}
+.step{display:flex;align-items:flex-start;gap:14px}
+.step-num{min-width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--pink-dark),var(--pink-deep));color:var(--white);font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-title{font-family:'Baloo 2',cursive;font-size:.92rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.step-desc{font-size:.84rem;color:var(--text-mid);font-weight:600;line-height:1.55}
+.step-code{font-family:'Courier New',monospace;font-size:.76rem;background:var(--pink-bg);border:1px solid var(--pink-mid);padding:4px 8px;border-radius:6px;display:inline-block;margin-top:4px;color:var(--pink-deep)}
+.code-block{background:#2d1b26;border-radius:14px;padding:16px 18px;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:#f8d6e8;overflow-x:auto;direction:ltr;text-align:left;margin-top:6px}
+.kw{color:#ffb6d9}.fn{color:#7ee8c0}.str{color:#ffd68a}.cmt{color:#7a5070;font-style:italic}.tp{color:#b8f0c8}.num{color:#c9a8f5}
+.output-box{background:#1a1a2e;border-radius:12px;padding:14px 16px;font-family:'Courier New',monospace;font-size:.83rem;color:#a8f0c8;direction:ltr;text-align:left;margin-top:6px;line-height:1.8}
+.output-line.del{color:#f08080}
+.section-label{font-family:'Baloo 2',cursive;font-size:.82rem;font-weight:800;color:var(--pink-deep);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.concept-box{background:var(--pink-bg);border:1.5px solid #ffd6ec;border-radius:14px;padding:12px 14px}
+.concept-term{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--pink-deep);margin-bottom:4px}
+.concept-desc{font-size:.82rem;color:var(--text-mid);line-height:1.55;font-weight:500}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tip-box{background:var(--gold-bg);border:1.5px solid var(--gold-border);border-radius:14px;padding:12px 14px}
+.tip-icon{font-size:1.1rem;margin-bottom:4px}
+.tip-title{font-family:'Baloo 2',cursive;font-size:.88rem;font-weight:800;color:#7a5000;margin-bottom:4px}
+.tip-desc{font-size:.8rem;color:#5a3800;font-weight:600;line-height:1.5}
+/* users demo */
+.users-demo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:4px}
+.user-card{border-radius:16px;padding:14px;border:2px solid var(--pink-mid);background:var(--pink-bg);text-align:center}
+.user-avatar{font-size:2rem;margin-bottom:6px}
+.user-name{font-family:'Baloo 2',cursive;font-size:.92rem;font-weight:800;color:var(--pink-deep)}
+.user-age{font-size:.76rem;color:var(--text-light);font-weight:600;margin-bottom:8px}
+.user-status{display:inline-block;padding:4px 12px;border-radius:50px;font-size:.75rem;font-weight:700}
+.status-in{background:var(--green-bg);border:1px solid var(--green-border);color:#1a6640}
+.status-out{background:#fff0f0;border:1px solid #fcc;color:#a04040}
+.completion-banner{background:linear-gradient(135deg,var(--gold-bg),#fff5d0);border:2px solid var(--gold-border);border-radius:20px;padding:28px 22px;text-align:center;margin-bottom:22px;animation:fadeUp .5s ease .7s both}
+.cb-icon{font-size:3rem;margin-bottom:10px}
+.cb-title{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;color:#7a5000;margin-bottom:8px}
+.cb-text{font-size:.9rem;color:#5a3800;font-weight:600;line-height:1.65}
+.nav-footer{max-width:760px;margin:0 auto;padding:0 22px 50px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.btn-nav{display:flex;align-items:center;gap:7px;padding:11px 22px;border-radius:50px;font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;text-decoration:none;border:1.5px solid var(--pink-mid);background:var(--white);color:var(--text-mid);transition:all .2s;box-shadow:0 3px 10px var(--shadow)}
+.btn-nav:hover{background:var(--pink-light)}
+.btn-nav.primary{background:linear-gradient(135deg,var(--gold),#e09000);border-color:transparent;color:var(--white)}
+.btn-nav.primary:hover{opacity:.88}
+@media(max-width:580px){.tips-grid{grid-template-columns:1fr}.users-demo{grid-template-columns:1fr}.wrap{padding:10px 14px 60px}.nav-footer{padding:0 14px 40px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🩷 Women Who Hack C++</a>
+  <span class="nav-badge">🏆 פרויקט Level 7</span>
+  <a href="index.html" class="nav-back">← חזרה לקורס</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🏆 פרויקט Level 7</div>
+  <h1>מערכת משתמשות</h1>
+  <p>Classes, Constructors, Destructors — הכל ביחד לתוכנית אמיתית! 🚀</p>
+  <div class="hero-badge-row">
+    <div class="hbadge">🧱 Classes</div>
+    <div class="hbadge">🔨 Constructors</div>
+    <div class="hbadge">🗑️ Destructors</div>
+    <div class="hbadge">🔐 Login Status</div>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🎯</span><h2>מטרות הפרויקט</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot gold"></span>שימוש ב-Classes עם מספר שדות נתונים</li>
+        <li><span class="gdot gold"></span>כתיבת Constructor שמקבל פרמטרים ומאתחל אובייקט</li>
+        <li><span class="gdot gold"></span>כתיבת Destructor שמדפיס הודעת מחיקה</li>
+        <li><span class="gdot gold"></span>פונקציות מחלקה לניהול סטטוס התחברות</li>
+        <li><span class="gdot gold"></span>יצירת מספר אובייקטים וניהולם ב-main</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🧠</span><h2>מושגים שמשתמשים בפרויקט</h2></div>
+    <div class="card-body">
+      <div class="concepts-grid">
+        <div class="concept-box">
+          <div class="concept-term">Class</div>
+          <div class="concept-desc">תבנית לאובייקט — מכילה שדות נתונים ופונקציות שפועלות עליהם.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">Constructor</div>
+          <div class="concept-desc">פונקציה מיוחדת בעלת שם הקלאס — רצה אוטומטית בעת יצירת אובייקט.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">Destructor</div>
+          <div class="concept-desc">פונקציה עם ~ לפני שם הקלאס — רצה אוטומטית כשהאובייקט נמחק.</div>
+        </div>
+        <div class="concept-box">
+          <div class="concept-term">bool isLoggedIn</div>
+          <div class="concept-desc">שדה בוליאני — true/false לייצוג מצב התחברות המשתמשת.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🗺️</span><h2>שלבים לביצוע</h2></div>
+    <div class="card-body">
+      <div class="steps-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">הגדרת Class User עם שלושה שדות</div>
+            <div class="step-desc">הגדירי קלאס עם שם, גיל, וסטטוס התחברות.</div>
+            <div class="step-code">string name; &nbsp; int age; &nbsp; bool isLoggedIn;</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Constructor שמקבל שם וגיל</div>
+            <div class="step-desc">מאתחל את השדות ומגדיר isLoggedIn = false כברירת מחדל.</div>
+            <div class="step-code">User(string n, int a) { name=n; age=a; isLoggedIn=false; }</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">פונקציה login() לעדכון סטטוס</div>
+            <div class="step-desc">פונקציה שמחליפה את isLoggedIn ל-true — המשתמשת התחברה!</div>
+            <div class="step-code">void login() { isLoggedIn = true; }</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Destructor עם הודעת מחיקה</div>
+            <div class="step-desc">הוסיפי destructor שמדפיס הודעה כשהאובייקט עוזב את הזיכרון.</div>
+            <div class="step-code">~User() { cout &lt;&lt; name &lt;&lt; " deleted\n"; }</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">Main — 3 משתמשות + פעולות + הדפסה</div>
+            <div class="step-desc">צרי u1, u2, u3 — קראי ל-login() לחלקן, הדפיסי סטטוס לכל אחת.</div>
+            <div class="step-code">u1.login(); &nbsp; cout &lt;&lt; u1.name &lt;&lt; " logged in: " &lt;&lt; u1.isLoggedIn;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">👁️</span><h2>מה שאמורות לראות — ויזואליזציה</h2></div>
+    <div class="card-body">
+      <div class="section-label">מצב המשתמשות אחרי הרצת הקוד</div>
+      <div class="users-demo">
+        <div class="user-card">
+          <div class="user-avatar">👩</div>
+          <div class="user-name">Maayan</div>
+          <div class="user-age">גיל 18</div>
+          <span class="user-status status-in">✅ Logged In</span>
+        </div>
+        <div class="user-card">
+          <div class="user-avatar">👩</div>
+          <div class="user-name">Dana</div>
+          <div class="user-age">גיל 20</div>
+          <span class="user-status status-out">❌ Logged Out</span>
+        </div>
+        <div class="user-card">
+          <div class="user-avatar">👩</div>
+          <div class="user-name">Noa</div>
+          <div class="user-age">גיל 22</div>
+          <span class="user-status status-in">✅ Logged In</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">💡</span><h2>טיפים לפני שמתחילות</h2></div>
+    <div class="card-body">
+      <div class="tips-grid">
+        <div class="tip-box"><div class="tip-icon">🔨</div><div class="tip-title">Constructor אוטומטי</div><div class="tip-desc">הוא רץ לבד עם יצירת האובייקט — לא צריך לקרוא לו ידנית!</div></div>
+        <div class="tip-box"><div class="tip-icon">🗑️</div><div class="tip-title">Destructor אוטומטי</div><div class="tip-desc">רץ כשהאובייקט יוצא מה-scope — בסוף main למשל.</div></div>
+        <div class="tip-box"><div class="tip-icon">📋</div><div class="tip-title">bool בהדפסה</div><div class="tip-desc">cout של bool מדפיס 1 (true) או 0 (false) — זה תקין!</div></div>
+        <div class="tip-box"><div class="tip-icon">🔢</div><div class="tip-title">סדר Destructor</div><div class="tip-desc">Destructors רצים בסדר הפוך — u3 נמחק ראשון, u1 אחרון.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head gold-head"><span class="head-icon">⭐</span><h2>פתרון מלא לדוגמה</h2></div>
+    <div class="card-body">
+      <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> <span class="tp">User</span> {
+<span class="kw">public</span>:
+    <span class="tp">string</span> name;
+    <span class="tp">int</span> age;
+    <span class="tp">bool</span> isLoggedIn;
+
+    <span class="cmt">// Constructor — רץ אוטומטית בעת יצירת אובייקט</span>
+    <span class="fn">User</span>(<span class="tp">string</span> n, <span class="tp">int</span> a) {
+        name = n;
+        age = a;
+        isLoggedIn = <span class="kw">false</span>;
+    }
+
+    <span class="cmt">// פונקציה לעדכון סטטוס התחברות</span>
+    <span class="tp">void</span> <span class="fn">login</span>() {
+        isLoggedIn = <span class="kw">true</span>;
+    }
+
+    <span class="cmt">// Destructor — רץ אוטומטית בעת מחיקת האובייקט</span>
+    ~<span class="fn">User</span>() {
+        cout &lt;&lt; name &lt;&lt; <span class="str">" deleted"</span> &lt;&lt; endl;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="tp">User</span> u1(<span class="str">"Maayan"</span>, <span class="num">18</span>);
+    <span class="tp">User</span> u2(<span class="str">"Dana"</span>, <span class="num">20</span>);
+    <span class="tp">User</span> u3(<span class="str">"Noa"</span>, <span class="num">22</span>);
+
+    u1.<span class="fn">login</span>();   <span class="cmt">// רק מעיין ונועה מתחברות</span>
+    u3.<span class="fn">login</span>();
+
+    cout &lt;&lt; u1.name &lt;&lt; <span class="str">" logged in: "</span> &lt;&lt; u1.isLoggedIn &lt;&lt; endl;
+    cout &lt;&lt; u2.name &lt;&lt; <span class="str">" logged in: "</span> &lt;&lt; u2.isLoggedIn &lt;&lt; endl;
+    cout &lt;&lt; u3.name &lt;&lt; <span class="str">" logged in: "</span> &lt;&lt; u3.isLoggedIn &lt;&lt; endl;
+
+    <span class="kw">return</span> <span class="num">0</span>;
+    <span class="cmt">// כאן Destructors רצים אוטומטית — בסדר הפוך!</span>
+}</div>
+      <br/>
+      <div class="section-label">🖥️ פלט צפוי</div>
+      <div class="output-box">Maayan logged in: 1
+Dana logged in: 0
+Noa logged in: 1
+<span class="output-line del">Noa deleted</span>
+<span class="output-line del">Dana deleted</span>
+<span class="output-line del">Maayan deleted</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="head-icon">🌟</span><h2>אתגר בונוס — למי שרוצה יותר!</h2></div>
+    <div class="card-body">
+      <ul class="goal-list">
+        <li><span class="gdot"></span>הוסיפי פונקציה <strong style="color:var(--pink-deep)">logout()</strong> שמחזירה את isLoggedIn ל-false</li>
+        <li><span class="gdot"></span>הוסיפי פונקציה <strong style="color:var(--pink-deep)">printStatus()</strong> שמדפיסה את כל פרטי המשתמשת בצורה נקייה</li>
+        <li><span class="gdot"></span>צרי מערך של 5 משתמשות ועברי עליהן עם לולאה</li>
+        <li><span class="gdot"></span>הוסיפי בדיקה — אם המשתמשת כבר מחוברת, login() תדפיס "כבר מחוברת!"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="completion-banner">
+    <div class="cb-icon">🎓</div>
+    <div class="cb-title">כל הכבוד על פרויקט Level 7! 🎉🩷</div>
+    <div class="cb-text">
+      בניתן מערכת ניהול משתמשות שלמה עם Classes, Constructors ו-Destructors — הבסיס של תכנות מונחה-עצמים אמיתי!<br/><br/>
+      <strong>עכשיו אתן יודעות לנהל אובייקטים מחיי-מחייתם ועד מחיקתם — זו יכולת של מפתחות מקצועיות! 🏆</strong>
+    </div>
+  </div>
+
+</div>
+<div class="nav-footer">
+  <a href="index.html" class="btn-nav">← חזרה לקורס</a>
+  <a href="index.html" class="btn-nav primary">🏠 לדף הבית</a>
+</div>
+</body>
+</html>
