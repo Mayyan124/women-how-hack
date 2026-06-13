@@ -824,137 +824,137 @@ def c_certificate():
     return send_file(path, mimetype='text/html')
 
 # ─── C++ ──────────────────────────────────────────
-@app.route('/courses/languages/cpp')
+@app.route('/courses/languages/c++')
 def cpp_course():
     path = os.path.join(app.template_folder, 'courses/languages/C++/index.html')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson1')
+@app.route('/courses/languages/C++/lesson1')
 def cpp_lesson1():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson1')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson2')
+@app.route('/courses/languages/C++/lesson2')
 def cpp_lesson2():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson2')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson3')
+@app.route('/courses/languages/C++/lesson3')
 def cpp_lesson3():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson3')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson4')
+@app.route('/courses/languages/C++/lesson4')
 def cpp_lesson4():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson4')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson5')
+@app.route('/courses/languages/C++/lesson5')
 def cpp_lesson5():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson5')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson6')
+@app.route('/courses/languages/C++/lesson6')
 def cpp_lesson6():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson6')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson7')
+@app.route('/courses/languages/C++/lesson7')
 def cpp_lesson7():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson7')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson8')
+@app.route('/courses/languages/C++/lesson8')
 def cpp_lesson8():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson8')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson9')
+@app.route('/courses/languages/C++/lesson9')
 def cpp_lesson9():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson9')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson10')
+@app.route('/courses/languages/C++/lesson10')
 def cpp_lesson10():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson10')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson11')
+@app.route('/courses/languages/C++/lesson11')
 def cpp_lesson11():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson11')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson12')
+@app.route('/courses/languages/C++/lesson12')
 def cpp_lesson12():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson12')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson13')
+@app.route('/courses/languages/C++/lesson13')
 def cpp_lesson13():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson13')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson14')
+@app.route('/courses/languages/C++/lesson14')
 def cpp_lesson14():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson14')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson15')
+@app.route('/courses/languages/C++/lesson15')
 def cpp_lesson15():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson15')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson16')
+@app.route('/courses/languages/C++/lesson16')
 def cpp_lesson16():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson16')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson17')
+@app.route('/courses/languages/C++/lesson17')
 def cpp_lesson17():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson17')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson18')
+@app.route('/courses/languages/C++/lesson18')
 def cpp_lesson18():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson18')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson19')
+@app.route('/courses/languages/C++/lesson19')
 def cpp_lesson19():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson19')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson20')
+@app.route('/courses/languages/C++/lesson20')
 def cpp_lesson20():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson20')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson21')
+@app.route('/courses/languages/C++/lesson21')
 def cpp_lesson21():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson21')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson22')
+@app.route('/courses/languages/C++/lesson22')
 def cpp_lesson22():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson22')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson23')
+@app.route('/courses/languages/C++/lesson23')
 def cpp_lesson23():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson23')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson24')
+@app.route('/courses/languages/C++/lesson24')
 def cpp_lesson24():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson24')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson25')
+@app.route('/courses/languages/C++/lesson25')
 def cpp_lesson25():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson25')
     return send_file(path, mimetype='text/html')
 
-@app.route('/courses/languages/cpp/lesson26')
+@app.route('/courses/languages/C++/esson26')
 def cpp_lesson26():
     path = os.path.join(app.template_folder, 'courses/languages/C++/lesson26')
     return send_file(path, mimetype='text/html')
